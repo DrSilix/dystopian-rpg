@@ -52,8 +52,8 @@ public class EventNodeController : MonoBehaviour
         lr.endColor = lineColor;
         lr.startWidth = lineWidth;
         lr.endWidth = lineWidth;
-        lr.SetPosition(0, startPoint);
-        lr.SetPosition(1, endPoint);
+        lr.SetPosition(0, startPoint + Vector3.forward);
+        lr.SetPosition(1, endPoint + Vector3.forward);
         lineLength = Vector3.Distance(endPoint, startPoint);
         line.transform.parent = this.transform;
     }

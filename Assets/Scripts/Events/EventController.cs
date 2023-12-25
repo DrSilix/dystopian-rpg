@@ -8,8 +8,8 @@ public class EventController : MonoBehaviour
     private HEventType.HType eventType;
     [SerializeField]
     private CrewController possesedCrew;
-    [SerializeField]
-    private CrewController crewController;
+    //[SerializeField]
+    //private CrewController crewController;
 
     private BaseEvent baseEvent;
     
@@ -37,12 +37,14 @@ public class EventController : MonoBehaviour
     {
         Debug.Log("Taking in Crew");
         possesedCrew = Crew;
+        Crew.transform.position = this.gameObject.transform.position;
         nodeController.SetColor(Color.cyan);
     }
 
     public void TransportCrewToNextNode()
     {
         Debug.Log("Crew Moving To Next Node");
+        possesedCrew.moveTo(nodeController.GetDownstreamConnectedNode().transform.position, 3.0f * nodeController.GetLineLength());
         Invoke("CrewPassToNext", 3.0f * nodeController.GetLineLength());
     }
 

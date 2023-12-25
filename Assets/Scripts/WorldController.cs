@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Assets.Data;
 
 public class WorldController : MonoBehaviour
 {
     public GameObject eventNodePrefab;
     public GameObject crewPrefab;
+    public GameObject crewMember1Prefab, crewMember2Prefab, crewMember3Prefab;
     public int numNodes;
     public int gridWidth = 16, gridHeight = 9;
 
@@ -17,6 +19,10 @@ public class WorldController : MonoBehaviour
     void Start()
     {
         GenerateLevel();
+    }
+
+    public void StartLevel()
+    {
         CrewController crew = GenerateCrew();
         InitialEvent.enabled = true;
         InitialEvent.CrewIntake(crew);
@@ -25,8 +31,13 @@ public class WorldController : MonoBehaviour
 
     CrewController GenerateCrew()
     {
-        GameObject temp = Instantiate(crewPrefab);
-        return temp.GetComponent<CrewController>();
+        GameObject crewGO = Instantiate(crewPrefab, InitialEvent.gameObject.transform.position, Quaternion.identity);
+        CrewController crewController = crewGO.GetComponent<CrewController>();
+        GameObject crewMember1 = Instantiate(crewMember1Prefab, crewGO.transform);
+        GameObject crewMember2 = Instantiate(crewMember2Prefab, crewGO.transform);
+        GameObject crewMember3 = Instantiate(crewMember3Prefab, crewGO.transform);
+        crewController.AddCrewMembers(crewMember1, crewMember2, crewMember3);
+        return crewController;
     }
 
     void GenerateLevel()
@@ -35,7 +46,7 @@ public class WorldController : MonoBehaviour
         GameObject previousEventNode = null;
         int[] prevGridPoints = new int[2];
         int gridX, gridY;
-        NodeGrid grid = new NodeGrid(gridWidth, gridHeight);
+        NodeGrid grid = new NodeGrid(gridWidth, gridHeight, 0.25f);
         grid.DrawDebugGrid();
         bool alternate = false;
         for (int i = 0; i < numNodes; i++)
@@ -57,7 +68,8 @@ public class WorldController : MonoBehaviour
             if (i == 0) { alternate = true; }
             if (i == numNodes - 1) gridX = gridWidth - 1;
 
-            Vector3 spawnPos = grid.getGridPointWorldSpace(mainCam, gridX, gridY);
+            // Vector3 spawnPos = grid.getGridPointScreenToWorldSpace(mainCam, gridX, gridY);
+            Vector3 spawnPos = grid.getGridPointToWorldSpace(gridX, gridY);
             GameObject eventNode = Instantiate(eventNodePrefab, spawnPos, Quaternion.identity);
             AssignEvent(eventNode, i, numNodes);
             if (i == 0) { InitialEvent = eventNode.GetComponent<EventController>(); }

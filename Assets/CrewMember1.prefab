@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8464694986278701474
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6909999630385494930}
+  - component: {fileID: 2874425772416204613}
+  m_Layer: 0
+  m_Name: CrewMember1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6909999630385494930
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8464694986278701474}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2874425772416204613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8464694986278701474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa6e1f50f0a90b74fbaf90732ac02c6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attributes:
+    body: 16
+    agility: 8
+    reaction: 9
+    strength: 14
+    willpower: 8
+    logic: 8
+    intuition: 12
+    charisma: 9
+    luck: 12
+    initiative: 11
+  health: 224
+  pistol:
+    name: Gunny Gunnerson
+    accuracy: 7
+    damage: 8
+    armor_penetration: 0
+    modes: 2
+    recoil: 0
+    ammo: 16
+  armor:
+    name: Gold Plated
+    defense: 15
+    weight: 15

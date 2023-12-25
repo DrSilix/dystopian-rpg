@@ -1,0 +1,3 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1; border-top-width: 100px; border-right-width: 100px; border-bottom-width: 100px; border-left-width: 100px; border-left-color: rgb(24, 23, 23); border-right-color: rgb(24, 23, 23); border-top-color: rgb(24, 23, 23); border-bottom-color: rgb(24, 23, 23); border-top-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; border-bottom-left-radius: 0;" />
+</ui:UXML>

@@ -1,3 +1,4 @@
+using Assets.Data;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,9 @@ public class CrewMemberController : MonoBehaviour
     public Attributes attributes;
     [SerializeField]
     private int health;
+    [Header("Equipped")]
+    public Equipped.TestPistol pistol;
+    public Equipped.TestArmor armor;
 
     private void OnValidate()
     {
@@ -49,6 +53,57 @@ public class CrewMemberController : MonoBehaviour
             this.charisma = charisma;
             this.luck = luck;
             this.initiative = initiative;
+        }
+    }
+
+    [System.Serializable]
+    public class Equipped
+    {
+        private Pistol ePistol;
+        private Armor eArmor;
+
+        public Equipped(TestPistol pistol, TestArmor armor)
+        {
+            ePistol = pistol.GetPistol();
+            eArmor = armor.GetArmor();
+        }
+
+        [System.Serializable]
+        public class TestPistol
+        {
+            public string name;
+            public int accuracy;
+            public int damage;
+            public int armor_penetration;
+            public PistolsModes modes;
+            public int recoil;
+            public int ammo;
+
+            private Pistol pistol;
+
+            public TestPistol()
+            {
+                pistol = new Pistol("0135061", name, accuracy, damage, armor_penetration, modes, recoil, ammo);
+            }
+
+            public Pistol GetPistol() { return pistol; }
+        }
+
+        [System.Serializable]
+        public class TestArmor
+        {
+            public string name;
+            public int defense;
+            public int weight;
+
+            private Armor armor;
+
+            public TestArmor()
+            {
+                armor = new Armor("4651668", name, defense, weight);
+            }
+
+            public Armor GetArmor() { return armor; }
         }
     }
 }
