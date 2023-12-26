@@ -1,11 +1,16 @@
+/*
+ * Handles the general non-game related properties and functions of the nodes
+ * contains references to upstream (back towards start) and downstream (towards finish) nodes
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventNodeController : MonoBehaviour
+public class Node : MonoBehaviour
 {
     [SerializeField]
-    private EventNodeController downstreamConnectedNode, upstreamConnectedNode;
+    private Node downstreamConnectedNode, upstreamConnectedNode;
     [SerializeField]
     private GameObject line;
     [SerializeField]
@@ -17,23 +22,11 @@ public class EventNodeController : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public EventController eventController;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Node GetDownstreamNode() { return downstreamConnectedNode; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public Node GetUpstreamNode() { return upstreamConnectedNode; }
 
-    public EventNodeController GetDownstreamConnectedNode() { return downstreamConnectedNode; }
-
-    public EventNodeController GetUpstreamConnectedNode() { return upstreamConnectedNode; }
-
-    public GameObject GetLinePathToNext() { return line; }
+    public GameObject GetLine() { return line; }
 
     public float GetLineLength() { return lineLength; }
 
@@ -59,13 +52,13 @@ public class EventNodeController : MonoBehaviour
     }
 
     // Upstream is back towards the start
-    public void ConnectUpstreamNode(EventNodeController node)
+    public void ConnectUpstreamNode(Node node)
     {
         upstreamConnectedNode = node;
     }
 
     // Downstream is from the start to the end
-    public void ConnectDownstreamNode(EventNodeController node)
+    public void ConnectDownstreamNode(Node node)
     {
         downstreamConnectedNode = node;
     }

@@ -8,12 +8,10 @@ public class EventController : MonoBehaviour
     private HEventType.HType eventType;
     [SerializeField]
     private CrewController possesedCrew;
-    //[SerializeField]
-    //private CrewController crewController;
 
     private BaseEvent baseEvent;
     
-    public EventNodeController nodeController;
+    public Node node;
 
     // Start is called before the first frame update
     void OnEnable()
@@ -38,20 +36,20 @@ public class EventController : MonoBehaviour
         Debug.Log("Taking in Crew");
         possesedCrew = Crew;
         Crew.transform.position = this.gameObject.transform.position;
-        nodeController.SetColor(Color.cyan);
+        node.SetColor(Color.cyan);
     }
 
     public void TransportCrewToNextNode()
     {
         Debug.Log("Crew Moving To Next Node");
-        possesedCrew.moveTo(nodeController.GetDownstreamConnectedNode().transform.position, 3.0f * nodeController.GetLineLength());
-        Invoke("CrewPassToNext", 3.0f * nodeController.GetLineLength());
+        possesedCrew.moveTo(node.GetDownstreamNode().transform.position, 3.0f * node.GetLineLength());
+        Invoke("CrewPassToNext", 3.0f * node.GetLineLength());
     }
 
     public void CrewPassToNext()
     {
         Debug.Log("Crew Moved To Next Node");
-        EventController nextNode = nodeController.GetDownstreamConnectedNode().eventController;
+        EventController nextNode = node.GetDownstreamNode().eventController;
         nextNode.CrewIntake(possesedCrew);
         possesedCrew = null;
         nextNode.enabled = true;
@@ -84,14 +82,15 @@ public class EventController : MonoBehaviour
         if (baseEvent.HasFailed())
         {
             Debug.Log("Heist FAILED!!");
+            node.SetColor(Color.red);
             return;
         }
-        if (nodeController.GetDownstreamConnectedNode() == null)
+        if (node.GetDownstreamNode() == null)
         {
             Debug.Log("Finished Heist");
             return;
         }
-        nodeController.SetColor(Color.grey);
+        node.SetColor(Color.grey);
         TransportCrewToNextNode();
     }
 }

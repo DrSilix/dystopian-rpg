@@ -1,3 +1,4 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement style="flex-grow: 1; border-top-width: 100px; border-right-width: 100px; border-bottom-width: 100px; border-left-width: 100px; border-left-color: rgb(24, 23, 23); border-right-color: rgb(24, 23, 23); border-top-color: rgb(24, 23, 23); border-bottom-color: rgb(24, 23, 23); border-top-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; border-bottom-left-radius: 0;" />
+    <Style src="project://database/Assets/UI/CamFogOWar.uss?fileID=7433441132597879392&amp;guid=5c2185fcd2af24044b62e7dbedf5a2c2&amp;type=3#CamFogOWar" />
+    <ui:VisualElement style="border-left-color: rgb(24, 23, 23); border-right-color: rgb(24, 23, 23); border-top-color: rgb(24, 23, 23); border-bottom-color: rgb(24, 23, 23); border-top-width: 100px; border-right-width: 100px; border-bottom-width: 100px; border-left-width: 100px; flex-grow: 1;" />
 </ui:UXML>

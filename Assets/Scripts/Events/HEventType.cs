@@ -1,3 +1,15 @@
+/*
+ * Stores enums for all valid events
+ * able to be queried for:
+ * the script component type associated
+ * able to return the group an event belongs to
+ * a list of all events
+ * a list of all events of a certain group
+ * able to generate a random event from all events
+ * able to generate a random event from a whitelist of groups
+ * able to generate a random event from a blacklist of groups
+ */
+
 using System;
 using System.Collections;
 using System.Collections.Generic;

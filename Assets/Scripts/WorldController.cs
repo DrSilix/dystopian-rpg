@@ -1,3 +1,32 @@
+/*
+ *      Purpose to build a heist "world" including directing level gen, crew building, event choices, difficulty...
+ *      Is called on menu heist start
+ *      Does not call any other classes
+ *      
+ *      When [heist start] clicked
+ *      takes in:
+ *      level params (doesn't take in number of nodes only events)
+ *      a crew
+ *      heist event progression params (how does mother want me to layout events)
+ *      player director params (watches over players and decides next steps on paradigm change)
+ *      enemy director params (oblivious, gets fed events (alarms, etc.) triggers reactions)
+ *      loot?
+ *      objective? win/fail conditions?
+ *           
+ *      (some of these could have already been done with recon)
+ *      determines what events go where, start, objective, end, enemy count,
+ *          loot, objective and general placement (call game design gen class)
+ *      generates a world and places events (call level gen class)
+ *      initializes crew and places them at start (call crew initialization class)
+ *      initializes protagonist director
+ *      initializes antagonist director
+ *      
+ *      NOTE: should be generic / able to build a sub heist (from a failed event)
+ *      
+ *      Has a finished generating event that others can subscribe to
+ */
+
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +36,7 @@ using Assets.Data;
 
 public class WorldController : MonoBehaviour
 {
-    public GameObject eventNodePrefab;
+    public GameObject nodePrefab;
     public GameObject crewPrefab;
     public GameObject crewMember1Prefab, crewMember2Prefab, crewMember3Prefab;
     public int numNodes;
@@ -21,6 +50,7 @@ public class WorldController : MonoBehaviour
         GenerateLevel();
     }
 
+    // TODO: remove - replace functionality with a subscribable world gen finished method
     public void StartLevel()
     {
         CrewController crew = GenerateCrew();
@@ -29,6 +59,7 @@ public class WorldController : MonoBehaviour
         InitialEvent.BeginHeistEvent();
     }
 
+    // TODO: remove - separate out into a separate class that handles only this type of stuff
     CrewController GenerateCrew()
     {
         GameObject crewGO = Instantiate(crewPrefab, InitialEvent.gameObject.transform.position, Quaternion.identity);
@@ -40,10 +71,11 @@ public class WorldController : MonoBehaviour
         return crewController;
     }
 
+    // TODO: remove - separate out to a level gen class
     void GenerateLevel()
     {
         Camera mainCam = Camera.main;
-        GameObject previousEventNode = null;
+        GameObject previousNode = null;
         int[] prevGridPoints = new int[2];
         int gridX, gridY;
         NodeGrid grid = new NodeGrid(gridWidth, gridHeight, 0.25f);
@@ -62,23 +94,22 @@ public class WorldController : MonoBehaviour
             else
             {
                 gridX = prevGridPoints[0];
-                gridY = UnityEngine.Random.Range(0, gridHeight-1);
+                gridY = Random.Range(0, gridHeight-1);
                 if (gridY == prevGridPoints[1]) gridY++;
             }
             if (i == 0) { alternate = true; }
             if (i == numNodes - 1) gridX = gridWidth - 1;
 
-            // Vector3 spawnPos = grid.getGridPointScreenToWorldSpace(mainCam, gridX, gridY);
             Vector3 spawnPos = grid.getGridPointToWorldSpace(gridX, gridY);
-            GameObject eventNode = Instantiate(eventNodePrefab, spawnPos, Quaternion.identity);
-            AssignEvent(eventNode, i, numNodes);
-            if (i == 0) { InitialEvent = eventNode.GetComponent<EventController>(); }
-            eventNode.name += i;
+            GameObject node = Instantiate(nodePrefab, spawnPos, Quaternion.identity);
+            AssignEvent(node, i, numNodes);
+            if (i == 0) { InitialEvent = node.GetComponent<EventController>(); }
+            node.name += i;
             if (i > 0)
             {
-                ConnectNodes(previousEventNode, eventNode);
+                ConnectNodes(previousNode, node);
             }
-            previousEventNode = eventNode;
+            previousNode = node;
             prevGridPoints[0] = gridX;
             prevGridPoints[1] = gridY;
             if (i > 0) alternate = !alternate;
@@ -105,7 +136,8 @@ public class WorldController : MonoBehaviour
         }*/
     }
 
-    private void AssignEvent(GameObject eventNode, int nodeNumber, int numNodes)
+    // TODO: mostly for debug, 
+    private void AssignEvent(GameObject node, int nodeNumber, int numNodes)
     {
         HEventType.HType[] eTypes = new HEventType.HType[] {
             HEventType.HType.Pre_Navigating,
@@ -115,7 +147,7 @@ public class WorldController : MonoBehaviour
             HEventType.HType.Obj_StealData,
             HEventType.HType.Pst_ReturnHome};
 
-        EventController eventController = eventNode.gameObject.GetComponent<EventController>();
+        EventController eventController = node.gameObject.GetComponent<EventController>();
         eventController.enabled = false;
 
         if (nodeNumber == 0)
@@ -139,13 +171,14 @@ public class WorldController : MonoBehaviour
         eventController.AssociateEvent(eTypes[Random.Range(1,4)]);
     }
 
+    // TODO: remove - separate out to the level gen class
     void ConnectNodes(GameObject prev, GameObject curr)
     {
-        EventNodeController currEventNodeController = curr.GetComponent<EventNodeController>();
-        EventNodeController prevEventController = prev.GetComponent<EventNodeController>();
-        currEventNodeController.ConnectUpstreamNode(prevEventController);
-        prevEventController.ConnectDownstreamNode(currEventNodeController);
-        prevEventController.BuildConnectingLine(curr.transform.position);
+        Node currentNode = curr.GetComponent<Node>();
+        Node previousNode = prev.GetComponent<Node>();
+        currentNode.ConnectUpstreamNode(previousNode);
+        previousNode.ConnectDownstreamNode(currentNode);
+        previousNode.BuildConnectingLine(curr.transform.position);
     }
 
     // Update is called once per frame

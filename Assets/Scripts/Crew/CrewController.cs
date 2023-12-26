@@ -12,10 +12,9 @@ public class CrewController : MonoBehaviour
     private CrewMemberController crewMember1, crewMember2, crewMember3;
 
     private bool isMoving = false;
-    private Vector3 destination;
-    private float moveStartTime;
+    private Vector3 origin, destination;
+    private float moveStartTime, moveEndTime;
     private float currentMoveTime;
-    private float moveDuration;
 
     void OnEnable()
     {
@@ -30,19 +29,19 @@ public class CrewController : MonoBehaviour
     void Update()
     {
         if (!isMoving) return;
-        // currentMoveTime = Time.time - moveStartTime;
-        // if (currentMoveTime > moveDuration) currentMoveTime = moveDuration;
-        transform.position = Vector3.Lerp(transform.position, destination, currentMoveTime / moveDuration);
         currentMoveTime += Time.deltaTime;
-        if (currentMoveTime >= moveDuration) isMoving = false;
+        // if (currentMoveTime > moveEndTime) currentMoveTime = moveEndTime;
+        transform.position = Vector3.Lerp(origin, destination, currentMoveTime / moveEndTime);
+        if (currentMoveTime >= moveEndTime) isMoving = false;
     }
 
     public void moveTo(Vector3 pos, float seconds)
     {
         isMoving = true;
+        origin = transform.position;
         destination = pos;
         moveStartTime = Time.time;
-        moveDuration = seconds * 3f;
+        moveEndTime = seconds;
         currentMoveTime = 0f;
     }
 

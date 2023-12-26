@@ -18,6 +18,7 @@ public class NodeGrid
         gridHeight = height;
         screenWidth = Screen.safeArea.width;
         screenHeight = Screen.safeArea.height;
+        distanceBetweenPoints = 0.5f;
     }
 
     public NodeGrid(int width, int height, float worldDistanceBetweenPoints)
@@ -44,6 +45,13 @@ public class NodeGrid
         return new Vector2(x, y);
     }
 
+    /// <summary>
+    /// Converts an abstract grid coord to a world space coordinate bounded by the screen
+    /// </summary>
+    /// <param name="cam">Camera to bound the grid</param>
+    /// <param name="gridX">Abstract grid x value [0, xMax)</param>
+    /// <param name="gridY">Abstract grid y value [0, yMax)</param>
+    /// <returns>World space Vector3</returns>
     public Vector3 getGridPointScreenToWorldSpace(Camera cam, int gridX, int gridY)
     {
         Vector3 result = cam.ScreenToWorldPoint(getGridPointScreenSpace(gridX, gridY));
@@ -51,6 +59,12 @@ public class NodeGrid
         return result;
     }
 
+    /// <summary>
+    /// Converts an abstract grid coord to a world space coordinate bounded by the screen of Camera.main
+    /// </summary>
+    /// <param name="gridX">Abstract grid x value [0, xMax)</param>
+    /// <param name="gridY">Abstract grid y value [0, yMax)</param>
+    /// <returns>World space Vector3</returns>
     public Vector3 getGridPointScreenToWorldSpace(int gridX, int gridY)
     {
         Camera cam = Camera.main;
@@ -59,6 +73,13 @@ public class NodeGrid
         return result;
     }
 
+    /// <summary>
+    /// Converts an abstract grid coord to a world space coordinate using the worldDistanceBetweenPoints
+    /// provided at construction. Origin is zero and points are int the positive quadrant
+    /// </summary>
+    /// <param name="gridX">Abstract grid x value [0, xMax)</param>
+    /// <param name="gridY">Abstract grid y value [0, yMax)</param>
+    /// <returns>World space Vector3</returns>
     public Vector3 getGridPointToWorldSpace(int gridX, int gridY)
     {
         float xCoord = (gridX * distanceBetweenPoints) + worldOrigin.x;
@@ -66,6 +87,9 @@ public class NodeGrid
         return new Vector3(xCoord, yCoord, zValue);
     }
 
+    /// <summary>
+    /// Draws the lines of the grid to Debug
+    /// </summary>
     public void DrawDebugGrid()
     {
         // Gizmos.color = Color.yellow;
