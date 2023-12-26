@@ -1,3 +1,25 @@
+/*
+ * Stores the heist event and calls basic generic functions on a clock to simulate turns and progress
+ * 
+ * associate an event of a specific type with a node
+ * handles beginning an event and ending
+ * Handles event clock, stepping the event at interval
+ * fascilitates the transport of a "crew" (immigration, travelling to, and emmigration)
+ * NO > Make decisions about a failed event, morph to a new event, start extraction, generate an alternate path .. storyteller handles this
+ * TODO: Contains subscribable events to gain status updates (storyteller)
+ * TODO: triggers success and failure of a heist event (subscribed event, storyteller)
+ * NO > Able to handle resolution actions (distribute loot, xp, etc.) ... the storytell will handle this
+ * way to handle a redirected crew transfer (alternate evac) currently transfer is from>to (generalize transfer to)
+ * TODO: holding place for enemies
+ * 
+ * I think i've decided the event controller should be encapsulated/isolated. It doesn't need to know
+ * what other events are doing, it just puts it's head down and trudges along on it's one job.
+ * 
+ * The other idea I had was to have an eventcontrollermanager (lol) that handled all events, but I think the
+ * storyteller/protagonist will fill that role. It's better that one thing does one thing really good
+ * 
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

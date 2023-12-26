@@ -1,3 +1,13 @@
+/*
+ * Overall control of the crew, handles anything crew related that isn't individualistic.
+ * contains a health/cohesion state (general group failure)
+ * holds same stats as crew but maintains the best for each among the crew
+ * handles the macro state of the game object within the game mechanics (where is the crew in world coords, etc..)
+ * provides a generic interface for the individual crew members
+ * holds variable amound of crew members
+ * holds inventory type things for movement between events
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

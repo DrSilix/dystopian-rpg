@@ -8,18 +8,16 @@
  *      level params (doesn't take in number of nodes only events)
  *      a crew
  *      heist event progression params (how does mother want me to layout events)
- *      player director params (watches over players and decides next steps on paradigm change)
- *      enemy director params (oblivious, gets fed events (alarms, etc.) triggers reactions)
  *      loot?
  *      objective? win/fail conditions?
  *           
  *      (some of these could have already been done with recon)
- *      determines what events go where, start, objective, end, enemy count,
+ *      TODO: determines what events go where, start, objective, end, enemy count, ...
  *          loot, objective and general placement (call game design gen class)
- *      generates a world and places events (call level gen class)
- *      initializes crew and places them at start (call crew initialization class)
- *      initializes protagonist director
- *      initializes antagonist director
+ *      TODO: generates a world and places events (call level gen class)
+ *      TODO: initializes crew and places them at start (call crew initialization class)
+ *      NO > initializes protagonist director (Storyteller)  .. storyteller persists, an individual "world"/heist does not
+ *      NO > initializes antagonist director .. persists outside of "world"
  *      
  *      NOTE: should be generic / able to build a sub heist (from a failed event)
  *      
