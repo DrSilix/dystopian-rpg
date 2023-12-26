@@ -45,17 +45,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attributes:
-    body: 16
-    agility: 8
-    reaction: 9
-    strength: 14
-    willpower: 8
-    logic: 8
-    intuition: 12
-    charisma: 9
+    body: 5
+    agility: 2
+    reaction: 3
+    strength: 6
+    willpower: 1
+    logic: 1
+    intuition: 2
+    charisma: 2
     luck: 12
     initiative: 11
-  health: 224
+    health: 0
   pistol:
     name: Gunny Gunnerson
     accuracy: 7

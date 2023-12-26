@@ -46,6 +46,7 @@ public class WorldController : MonoBehaviour
     void Start()
     {
         GenerateLevel();
+        StartLevel();
     }
 
     // TODO: remove - replace functionality with a subscribable world gen finished method

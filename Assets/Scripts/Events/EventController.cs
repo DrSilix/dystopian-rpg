@@ -53,11 +53,11 @@ public class EventController : MonoBehaviour
         baseEvent = this.gameObject.AddComponent(HEventType.GetEventComponentType(eventType)) as BaseEvent;
     }
 
-    public void CrewIntake(CrewController Crew)
+    public void CrewIntake(CrewController crew)
     {
         Debug.Log("Taking in Crew");
-        possesedCrew = Crew;
-        Crew.transform.position = this.gameObject.transform.position;
+        possesedCrew = crew;
+        crew.transform.position = this.gameObject.transform.position;
         node.SetColor(Color.cyan);
     }
 
@@ -110,6 +110,7 @@ public class EventController : MonoBehaviour
         if (node.GetDownstreamNode() == null)
         {
             Debug.Log("Finished Heist");
+            node.SetColor(Color.green);
             return;
         }
         node.SetColor(Color.grey);

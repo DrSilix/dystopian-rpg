@@ -45,17 +45,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attributes:
-    body: 8
-    agility: 14
-    reaction: 16
-    strength: 9
-    willpower: 11
-    logic: 15
-    intuition: 10
-    charisma: 8
+    body: 3
+    agility: 4
+    reaction: 4
+    strength: 1
+    willpower: 3
+    logic: 6
+    intuition: 5
+    charisma: 4
     luck: 10
     initiative: 16
-  health: 72
+    health: 0
   pistol:
     name: Pip Squeak
     accuracy: 6

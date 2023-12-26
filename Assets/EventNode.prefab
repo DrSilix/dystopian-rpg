@@ -121,5 +121,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventType: 0
   possesedCrew: {fileID: 0}
-  crewController: {fileID: 0}
-  nodeController: {fileID: -6088634111893793221}
+  node: {fileID: -6088634111893793221}

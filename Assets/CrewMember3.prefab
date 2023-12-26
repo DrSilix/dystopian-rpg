@@ -45,17 +45,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attributes:
-    body: 12
-    agility: 10
-    reaction: 10
-    strength: 9
-    willpower: 15
-    logic: 9
-    intuition: 15
-    charisma: 18
+    body: 4
+    agility: 3
+    reaction: 5
+    strength: 3
+    willpower: 2
+    logic: 2
+    intuition: 4
+    charisma: 6
     luck: 13
     initiative: 11
-  health: 108
+    health: 0
   pistol:
     name: Brrrt Machine
     accuracy: 5

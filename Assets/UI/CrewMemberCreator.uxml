@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/CrewMemberCreator.uss?fileID=7433441132597879392&amp;guid=677841805c3c22244a411df21c6f9b79&amp;type=3#CrewMemberCreator" />
+    <Style src="project://database/Assets/UI/CrewBuilder.uss?fileID=7433441132597879392&amp;guid=1d554e6af65d4c24d8bb65b8b6adb86a&amp;type=3#CrewBuilder" />
+    <ui:VisualElement class="main-container" style="flex-grow: 1;">
+        <ui:VisualElement class="main-container-sub" style="flex-grow: 1;" />
+    </ui:VisualElement>
+</ui:UXML>
