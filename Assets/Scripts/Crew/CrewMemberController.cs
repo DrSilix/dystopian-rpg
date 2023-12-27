@@ -21,6 +21,7 @@ public class CrewMemberController : MonoBehaviour
         //if (testTemplate == 3) BuildCrewMember(4, 3, 5, 3, 2, 2, 5, 6);
     }
 
+    // TODO: this is a debugging hack, possible params will be attributes, skills, and equipment objects
     private void BuildCrewMember(int bod, int agi, int rea, int str, int wil, int log, int itn, int cha)
     {
         attributes = new Attributes(bod, agi, rea, str, wil, log, itn, cha);
@@ -30,6 +31,15 @@ public class CrewMemberController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public int GetAttribute(Attribute attribute) { return attributes.Get(attribute); }
+
+    // public int GetSkillRoll(int skill) { }
+    public int GetAttributeRoll (Attribute attribute, int modifier = 0)
+    {
+        int attributeValue = attributes.Get(attribute);
+        return Roll.Basic(attributeValue + modifier);
     }
 
     [System.Serializable]

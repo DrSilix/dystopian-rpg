@@ -77,23 +77,23 @@ public abstract class BaseEvent : MonoBehaviour
     [SerializeField]
     private int difficulty;
     [SerializeField]
-    private int neededSuccesses;
+    private int targetSuccesses;
     [SerializeField]
     private int maxFails;
     [SerializeField]
     private int successes;
     [SerializeField]
-    private int failures;
+    private int fails;
     [SerializeField]
     private int progress;
     [SerializeField]
     private CrewController crew;
 
     public int Difficulty { get => difficulty; set => difficulty = value; }
-    public int NeededSuccesses { get => neededSuccesses; set => neededSuccesses = value; }
+    public int NeededSuccesses { get => targetSuccesses; set => targetSuccesses = value; }
     public int MaxFails { get => maxFails; set => maxFails = value; }
     public int Successes { get => successes; set => successes = value; }
-    public int Failures { get => failures; set => failures = value; }
+    public int Failures { get => fails; set => fails = value; }
     public int Progress
     {
         get
@@ -112,9 +112,9 @@ public abstract class BaseEvent : MonoBehaviour
     {
         progress = 0;
         successes = 0;
-        failures = 0;
+        fails = 0;
         difficulty = Random.Range(8, crew.GetLuck() + ((20 - crew.GetLuck()) / 2));
-        neededSuccesses = Random.Range(2, 7);
+        targetSuccesses = Random.Range(2, 7);
         MaxFails = Random.Range(5, 10);
         this.crew = crew;
     }

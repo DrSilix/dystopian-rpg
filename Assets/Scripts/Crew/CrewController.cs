@@ -10,7 +10,12 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.Controls;
+
+// Aggregates are primarily used here so far...
+public enum Aggregate { min, max, avg, sum }
 
 public class CrewController : MonoBehaviour
 {
@@ -68,6 +73,29 @@ public class CrewController : MonoBehaviour
         crewMember2 = member2.GetComponent<CrewMemberController>();
         crewMember3 = member3.GetComponent<CrewMemberController>();
     }
+
+    public int GetCrewAttribute(Attribute attribute, Aggregate aggregate = Aggregate.max)
+    {
+        switch (aggregate) {
+            case Aggregate.max:
+                return Mathf.Max(crewMember1.GetAttribute(attribute), crewMember1.GetAttribute(attribute), crewMember1.GetAttribute(attribute));
+            case Aggregate.min:
+                return Mathf.Min(crewMember1.GetAttribute(attribute), crewMember1.GetAttribute(attribute), crewMember1.GetAttribute(attribute));
+            case Aggregate.sum:
+                return (crewMember1.GetAttribute(attribute) +
+                        crewMember2.GetAttribute(attribute) +
+                        crewMember3.GetAttribute(attribute));
+            case Aggregate.avg:
+                return Mathf.CeilToInt((float)GetCrewAttribute(attribute, Aggregate.sum) / 3);
+        }
+        return -1;
+    }
+
+    public int GetCrewRoll (Attribute attribute, int modifier = 0, Aggregate aggregate = Aggregate.max) {
+        return Roll.Basic(GetCrewAttribute(attribute, aggregate) + modifier);
+    }
+
+    // TODO: add the ability to ask all crew members to roll
 
     public int GetLuckRoll() { return Random.Range(0, 20) + crewLuck; }
 
