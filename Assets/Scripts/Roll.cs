@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 
 public static class Roll
 {
-    public static (int successes, int fails) Adv(int dice)
+    public static (int successes, int crit) Adv(int dice)
     {
         int successes = 0, fails = 0;
         for (int i = 0; i < dice; i++)
@@ -13,7 +14,12 @@ public static class Roll
             if (roll >= 5) successes++;
             if (roll == 1) fails++;
         }
-        return (successes, fails);
+
+        int crit = 0;
+        if (fails > dice/2 + 1 && successes == 0) { crit = -1; }
+        if (successes > dice / 2) { crit = 1; }
+
+        return (successes, crit);
     }
 
     public static int Basic(int dice)

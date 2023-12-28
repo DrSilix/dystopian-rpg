@@ -38,8 +38,15 @@ public class CrewMemberController : MonoBehaviour
     // public int GetSkillRoll(int skill) { }
     public int GetAttributeRoll (Attribute attribute, int modifier = 0)
     {
-        int attributeValue = attributes.Get(attribute);
-        return Roll.Basic(attributeValue + modifier);
+        return Roll.Basic(attributes.Get(attribute) + modifier);
+    }
+    public int GetAttributeRoll(Attribute attribute1, Attribute attribute2, int modifier = 0)
+    {
+        return Roll.Basic(attributes.Get(attribute1) + attributes.Get(attribute2) + modifier);
+    }
+    public (int successes, int crit) GetAttributeAdvancedRoll(Attribute attribute1, Attribute attribute2, int modifier = 0)
+    {
+        return Roll.Adv(attributes.Get(attribute1) + attributes.Get(attribute2) + modifier);
     }
 
     [System.Serializable]

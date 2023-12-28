@@ -8,11 +8,13 @@
  * holds inventory type things for movement between events
  */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
+using Random = UnityEngine.Random;
 
 // Aggregates are primarily used here so far...
 public enum Aggregate { min, max, avg, sum }
@@ -91,8 +93,53 @@ public class CrewController : MonoBehaviour
         return -1;
     }
 
-    public int GetCrewRoll (Attribute attribute, int modifier = 0, Aggregate aggregate = Aggregate.max) {
-        return Roll.Basic(GetCrewAttribute(attribute, aggregate) + modifier);
+    public int GetCrewAttribute(Attribute attribute, int crewMember)
+    {
+        if (crewMember == 1) return crewMember1.GetAttribute(attribute);
+        if (crewMember == 2) return crewMember2.GetAttribute(attribute);
+        return crewMember3.GetAttribute(attribute);
+    }
+
+    public CrewMemberController GetCrewMember(int crewMember)
+    {
+        if (crewMember == 1) return crewMember1;
+        if (crewMember == 2) return crewMember2;
+        return crewMember3;
+    }
+
+    // crew members (1, 2, 3)
+    private int GetCrewMemberWithAttributeByAggregate(Attribute attribute1, Attribute attribute2, Aggregate aggregate = Aggregate.max)
+    {
+        if (aggregate == Aggregate.sum || aggregate == Aggregate.avg) return -1;
+        
+        int[] crewAttributes = new int[] {crewMember1.GetAttribute(attribute1) + crewMember1.GetAttribute(attribute2),
+                                          crewMember2.GetAttribute(attribute1) + crewMember2.GetAttribute(attribute2),
+                                          crewMember3.GetAttribute(attribute1) + crewMember3.GetAttribute(attribute2)};
+        int max = -1, min = -1;
+        for (int i = 0; i < 3; i++ )
+        {
+            if (max == -1 || crewAttributes[i] > crewAttributes[max]) max = i;
+            if (min == -1 || crewAttributes[i] < crewAttributes[min]) min = i;
+        }
+
+        if (aggregate == Aggregate.max) return max;
+        return min;
+    }
+
+    public (CrewMemberController crewMember, int result) GetCrewRoll (Attribute attribute1, Attribute attribute2, int modifier = 0, Aggregate aggregate = Aggregate.avg) {
+        if (aggregate == Aggregate.avg || aggregate == Aggregate.sum)
+        {
+            return (null, Roll.Basic(GetCrewAttribute(attribute1, aggregate) + GetCrewAttribute(attribute2, aggregate) + modifier));
+        }
+        else
+        {
+            int crewMember = GetCrewMemberWithAttributeByAggregate(attribute1, attribute2, aggregate);
+            CrewMemberController crewMemberController = null;
+            if (crewMember == 1) crewMemberController = crewMember1;
+            if (crewMember == 2) crewMemberController = crewMember2;
+            if (crewMember == 3) crewMemberController = crewMember3;
+            return (crewMemberController, Roll.Basic(GetCrewAttribute(attribute1, crewMember) + GetCrewAttribute(attribute2, crewMember) + modifier));
+        }
     }
 
     // TODO: add the ability to ask all crew members to roll
