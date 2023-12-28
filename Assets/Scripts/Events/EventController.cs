@@ -81,6 +81,7 @@ public class EventController : MonoBehaviour
 
     public void BeginHeistEvent()
     {
+        Debug.Log("-----------------------");
         Debug.Log("Begin Heist Event");
         baseEvent.EventStart(possesedCrew);
         baseEvent.MyNameIs();
@@ -101,6 +102,7 @@ public class EventController : MonoBehaviour
     {
         Debug.Log("End Heist Event");
         CancelInvoke();
+        baseEvent.EventEnd();
         if (baseEvent.HasFailed())
         {
             Debug.Log("Heist FAILED!!");

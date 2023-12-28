@@ -4,37 +4,19 @@ using UnityEngine;
 
 public class BreachingEvent : BaseEvent
 {
-
-    // Start is called before the first frame update
-    void Start()
+    public override void EventStart(CrewController crew)
     {
-
+        base.EventStart(crew);
+        TargetAttribute1 = Attribute.body;
+        TargetAttribute2 = Attribute.strength;
+        RollAggregate = Aggregate.max;
+        DifficultyRating = Random.Range(1, 3);
+        TargetSuccesses = 1;
+        MaxFails = DifficultyRating+2;
+        Debug.Log("\"Maybe if I can spike into the finger print sensor I can ... \" \"Step aside I'll clober this door off it's hinges!\" \"Won't that attract attention .. \" *SMASH*");
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public override void EventEnd()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override bool StepEvent()
-    {
-        SetProgress(GetProgress() + 20);
-		return true;
-    }
-
     public override void MyNameIs()
     {
         Debug.Log("BreachingEvent");
-    }
-
-    public override bool HasFailed()
-    {
-        return false;
     }
 }

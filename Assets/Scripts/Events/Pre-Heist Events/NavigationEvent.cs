@@ -5,28 +5,16 @@ using UnityEngine;
 
 public class NavigationEvent : BaseEvent
 {
-
-    // Start is called before the first frame update
-    void Start()
+    public override void EventStart(CrewController crew)
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public override void EventEnd()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override bool StepEvent()
-    {
-        SetProgress(GetProgress() + 20);
-        return true;
+        base.EventStart(crew);
+        TargetAttribute1 = Attribute.reaction;
+        TargetAttribute2 = Attribute.agility;
+        RollAggregate = Aggregate.max;
+        DifficultyRating = 1;
+        TargetSuccesses = 6;
+        MaxFails = 16;
+        Debug.Log("\"We have the destination in navigation, let's hit the road boys!!\"");
     }
 
     public override void MyNameIs()
@@ -34,8 +22,9 @@ public class NavigationEvent : BaseEvent
         Debug.Log("NavigationEvent");
     }
 
-    public override bool HasFailed()
+    public override void EventEnd()
     {
-        return false;
+        base.EventEnd();
+        Debug.Log("\"We've arrived at Texico plant. We'll go in, brains here will steal the who-sa-ma-what-sit, and we'll get out. Quick and clean\"");
     }
 }

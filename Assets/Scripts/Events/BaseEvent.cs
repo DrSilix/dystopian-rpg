@@ -4,16 +4,16 @@
  * Handles the inner pre- and post- of an event (event start, end)
  * Handles individual stepping of event
  * Maintains event status metadata
- * Handles abstract calculation of the progress of event
+ * Handles abstract calculation of the Progress of event
  * Provides success/failure state of event
  * Provides provides a way to invoke a twist in the event (traps, environmental)
  * Can invoke a setback
  * Can invoke a breakthrough
- * Handles criticals and critical fails
+ * Handles criticals and critical Fails
  * crew status
  * enemy status
  * environmental sub-event
- * morph-out-of and morph-into interface (able to pass information e.g. recon successful, lower difficulty)
+ * morph-out-of and morph-into interface (able to pass information e.g. recon successful, lower Difficulty)
  * handle death/dieing (with storyteller assistance)
  * communication with storyteller and antagonist (did a camera capture the crew...)
  * contains non-entity stats (doors HP, terminals)
@@ -68,72 +68,93 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public abstract class BaseEvent : MonoBehaviour
 {
-
-    [SerializeField]
-    private int difficulty;
-    [SerializeField]
-    private int targetSuccesses;
-    [SerializeField]
+    private int difficultyRating;
     private int maxFails;
-    [SerializeField]
-    private int successes;
-    [SerializeField]
-    private int fails;
-    [SerializeField]
-    private int progress;
-    [SerializeField]
-    private CrewController crew;
 
-    public int Difficulty { get => difficulty; set => difficulty = value; }
-    public int NeededSuccesses { get => targetSuccesses; set => targetSuccesses = value; }
-    public int MaxFails { get => maxFails; set => maxFails = value; }
-    public int Successes { get => successes; set => successes = value; }
-    public int Failures { get => fails; set => fails = value; }
-    public int Progress
-    {
-        get
-        {
-            return progress;
-        }
-        set
-        {
-            progress = value;
-            if (progress > 100) progress = 100;
-        }
-    }
-    public CrewController Crew { get => crew; set => crew = value; }
+    public int DifficultyRating { get => difficultyRating; set { difficultyRating = (value >= 1) ? value : 1; } }
+    public int TargetSuccesses { get; set; }
+    public int MaxFails { get => maxFails; set { maxFails = (value >= 1) ? value : 1; } }
+    public int Successes { get; set; } = 0;
+    public int Fails { get; set; } = 0;
+    public int Progress { get; set; } = 0;
 
-    public void EventStart(CrewController crew)
+    public Attribute TargetAttribute1 { get; set; }
+    public Attribute TargetAttribute2 { get; set; }
+    public int Modifier { get; set; }
+    public Aggregate RollAggregate { get; set; }
+
+    public CrewController Crew { get; set; }
+
+    public virtual void EventStart(CrewController crew)
     {
-        progress = 0;
-        successes = 0;
-        fails = 0;
-        difficulty = Random.Range(8, crew.GetLuck() + ((20 - crew.GetLuck()) / 2));
-        targetSuccesses = Random.Range(2, 7);
-        MaxFails = Random.Range(5, 10);
-        this.crew = crew;
+        TargetAttribute1 = Attribute.luck;
+        TargetAttribute2 = Attribute.luck;
+        Modifier = 0;
+        RollAggregate = Aggregate.avg;
+        DifficultyRating = Random.Range(1, (crew.GetCrewAttribute(TargetAttribute1) * 2)/4);
+        TargetSuccesses = Random.Range(1, 7);
+        if (TargetSuccesses == 1) TargetSuccesses = Random.Range(1, 7);
+        if (TargetSuccesses > 1) { DifficultyRating -= 2; }
+        if (TargetSuccesses > 3) { DifficultyRating -= 1; }
+        MaxFails = DifficultyRating;
+        if (MaxFails < 3) MaxFails = 3;
+        this.Crew = crew;
     }
 
     // TODO: remove - why did I think this was necessary??
-    public CrewController GetCrew() { return crew; }
+    public CrewController GetCrew() { return Crew; }
 
-    public void SetProgress(int p){ progress = p; }
+    public void SetProgress(int p){ Progress = p; }
 
-    public abstract void EventEnd();
+    public virtual void EventEnd() { }
+    
+    public virtual bool StepEvent()
+    {
+        int crewRoll;
+        CrewMemberController responsibleCrew;
+        (responsibleCrew, crewRoll) = Crew.GetCrewRoll(TargetAttribute1, TargetAttribute2, Modifier, RollAggregate);
+        if (responsibleCrew != null) { Debug.Log(responsibleCrew.name + " is taking action! Their stats are " + TargetAttribute1 + ":" + responsibleCrew.GetAttribute(TargetAttribute1) + " and " + TargetAttribute2 + ":" + responsibleCrew.GetAttribute(TargetAttribute2)); }
+        Debug.Log(crewRoll + " Successes, Difficulty Rating: " + DifficultyRating +
+            " - " + ((crewRoll>=DifficultyRating) ? "SUCCESS!" : "FAILURE!!!"));
+        if (crewRoll >= DifficultyRating)
+        {
+            Successes++;
+            Debug.Log("Success #" + Successes + " out of " + TargetSuccesses);
+            Progress = Mathf.RoundToInt((float)(Successes * 100) / TargetSuccesses);
+            return true;
+        }
+        Fails++;
+        Debug.Log("FAILURE! #" + Fails + " out of " + MaxFails);
+        return false;
+    }
 
-    public abstract bool StepEvent();
+    public virtual void SubStepOne()
+    {
+
+    }
+
+    public virtual void SubStepTwo()
+    {
+
+    }
+
+    public virtual void SubStepThree()
+    {
+
+    }
 
     public abstract void MyNameIs();
 
-    public int GetProgress() { return progress; }
+    public int GetProgress() { return Mathf.RoundToInt(((float)Successes / TargetSuccesses) * 100); }
 
-    public virtual bool HasSucceeded() { return progress >= 100; }
-    public abstract bool HasFailed();
+    public virtual bool HasSucceeded() { return Successes >= TargetSuccesses; }
+    public virtual bool HasFailed() { return Fails >= MaxFails; }
 
     public void MyBaseNameIs()
     {
