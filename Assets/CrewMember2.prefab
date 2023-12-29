@@ -55,7 +55,7 @@ MonoBehaviour:
     charisma: 4
     luck: 10
     initiative: 16
-    health: 0
+    maxHealth: 0
   pistol:
     name: Pip Squeak
     accuracy: 6

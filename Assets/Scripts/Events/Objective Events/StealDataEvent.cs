@@ -8,6 +8,8 @@ public class StealDataEvent : BaseEvent
     private int randomEventRound;
     public override void EventStart(CrewController crew)
     {
+        this.Crew = crew;
+        Modifier = 0;
         TargetSuccesses = Random.Range(5, 12);
         MaxFails = TargetSuccesses + 8;
         DifficultyRating = 2;

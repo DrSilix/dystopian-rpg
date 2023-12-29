@@ -55,7 +55,7 @@ MonoBehaviour:
     charisma: 2
     luck: 12
     initiative: 11
-    health: 0
+    maxHealth: 0
   pistol:
     name: Gunny Gunnerson
     accuracy: 7

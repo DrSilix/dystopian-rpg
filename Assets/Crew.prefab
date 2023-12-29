@@ -44,3 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2759f860c9871264687ddc7b84cf0fa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crewHealth: 0
+  crewLuck: 0
+  crewMember1: {fileID: 0}
+  crewMember2: {fileID: 0}
+  crewMember3: {fileID: 0}
