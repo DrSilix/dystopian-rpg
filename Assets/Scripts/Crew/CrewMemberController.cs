@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class CrewMemberController : MonoBehaviour
 {
+    public string alias;
     [SerializeField]
     public Attributes attributes;
     [Header("Equipped")]

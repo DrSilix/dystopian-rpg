@@ -46,7 +46,7 @@ public class WorldController : MonoBehaviour
     void Start()
     {
         GenerateLevel();
-        StartLevel();
+        // StartLevel();
     }
 
     // TODO: remove - replace functionality with a subscribable world gen finished method
@@ -143,6 +143,7 @@ public class WorldController : MonoBehaviour
             HEventType.HType.Hst_Sneaking,
             HEventType.HType.Hst_Masquerading,
             HEventType.HType.Hst_Breaching,
+            HEventType.HType.Hst_Hacking,
             HEventType.HType.Obj_StealData,
             HEventType.HType.Pst_ReturnHome};
 
@@ -157,17 +158,18 @@ public class WorldController : MonoBehaviour
 
         if (nodeNumber == numNodes - 1)
         {
+            eventController.AssociateEvent(eTypes[6]);
+            return;
+        }
+
+        if (nodeNumber == numNodes - 3)
+        {
             eventController.AssociateEvent(eTypes[5]);
             return;
         }
 
-        if (nodeNumber == numNodes - 2)
-        {
-            eventController.AssociateEvent(eTypes[4]);
-            return;
-        }
-
-        eventController.AssociateEvent(eTypes[Random.Range(1,4)]);
+        //eventController.AssociateEvent(eTypes[Random.Range(1,5)]);
+        eventController.AssociateEvent(eTypes[(nodeNumber % 4 + 1)]);
     }
 
     // TODO: remove - separate out to the level gen class

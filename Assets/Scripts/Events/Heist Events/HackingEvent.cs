@@ -14,8 +14,11 @@ public class HackingEvent : BaseEvent
         TargetSuccesses = (5 - DifficultyRating) + 1;
         MaxFails = DifficultyRating + 2;
         int rand = Random.Range(0, 2);
-        if (rand == 0) Debug.Log("\"Maybe if I can spike into and recombobulate the door pad, I can jam it open...\"");
-        else Debug.Log("\"We can't sneak past this " + ((Random.Range(0,2) == 1) ? "trip wire" : "motion sensor") + " I'll have to spike in and zap it\"");
+        string msg;
+        if (rand == 0) msg = "\"Maybe if I can spike into and recombobulate the door pad, I can jam it open...\"";
+        else msg = "\"We can't sneak past this " + ((Random.Range(0,2) == 1) ? "trip wire" : "motion sensor") + " I'll have to spike in and zap it\"";
+        Debug.Log(msg);
+        GameLog.Instance.PostMessageToLog(msg);
     }
 
     public override void MyNameIs()

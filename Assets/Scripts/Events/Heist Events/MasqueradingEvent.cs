@@ -13,7 +13,9 @@ public class MasqueradingEvent : BaseEvent
         DifficultyRating = Random.Range(1, 4);
         TargetSuccesses = (3 - DifficultyRating) + 1;
         MaxFails = DifficultyRating + 3;
-        Debug.Log("\"Some worker bees drudging along. Act natural boys we'll slip right by\"");
+        string msg = "\"Some worker bees drudging along. Act natural boys we'll slip right by\"";
+        Debug.Log(msg);
+        GameLog.Instance.PostMessageToLog(msg);
     }
 
     public override void MyNameIs()

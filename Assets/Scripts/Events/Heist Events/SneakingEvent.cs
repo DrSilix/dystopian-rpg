@@ -14,8 +14,12 @@ public class SneakingEvent : BaseEvent
         TargetSuccesses = (5 - DifficultyRating) + 1;
         MaxFails = DifficultyRating + 2;
         int rand = Random.Range(0, 2);
-        if (rand == 0) Debug.Log("*A guard is spotted, they'll need to sneak quietly*");
-        else Debug.Log("*A camera is watching this hall, stick to the shadows*");
+        string msg;
+        if (rand == 0) msg = "\"A guard is patrolling, keep quiet.\"";
+        else msg = "A camera is watching this hall, stick to the shadows";
+
+        Debug.Log(msg);
+        GameLog.Instance.PostMessageToLog(msg);
     }
 
     public override void MyNameIs()

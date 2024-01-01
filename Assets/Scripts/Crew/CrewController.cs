@@ -122,8 +122,8 @@ public class CrewController : MonoBehaviour
             if (min == -1 || crewAttributes[i] < crewAttributes[min]) min = i;
         }
 
-        if (aggregate == Aggregate.max) return max;
-        return min;
+        if (aggregate == Aggregate.max) return max + 1;
+        return min + 1;
     }
 
     public (CrewMemberController crewMember, int result) GetCrewRoll (Attribute attribute1, Attribute attribute2, int modifier = 0, Aggregate aggregate = Aggregate.avg) {

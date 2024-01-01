@@ -35,6 +35,8 @@ public class EventController : MonoBehaviour
     
     public Node node;
 
+    // private GameObject skyscraperBG;
+
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -83,10 +85,12 @@ public class EventController : MonoBehaviour
     {
         Debug.Log("-----------------------");
         Debug.Log("Begin Heist Event");
+        // skyscraperBG = Camera.main.transform.GetChild(1).gameObject;
+        // skyscraperBG.SetActive(true);
         baseEvent.EventStart(possesedCrew);
         baseEvent.MyNameIs();
         Debug.Log("Event Progress: " + baseEvent.GetProgress() + "%");
-        Invoke("HeistEventLoop", 2f);
+        Invoke("HeistEventLoop", 7f);
     }
 
     public void HeistEventLoop()
@@ -94,13 +98,14 @@ public class EventController : MonoBehaviour
         baseEvent.StepEvent();
         Debug.Log("Event Progress: " + baseEvent.GetProgress() + "%");
         if (baseEvent.HasSucceeded() || baseEvent.HasFailed()) { EndHeistEvent(); }
-        else { Invoke("HeistEventLoop", 2f);  }
+        else { Invoke("HeistEventLoop", 3f);  }
     }
 
 
     public void EndHeistEvent()
     {
         Debug.Log("End Heist Event");
+        // skyscraperBG.SetActive(false);
         CancelInvoke();
         baseEvent.EventEnd();
         if (baseEvent.HasFailed())
@@ -113,9 +118,10 @@ public class EventController : MonoBehaviour
         {
             Debug.Log("Finished Heist");
             node.SetColor(Color.green);
+            GameLog.Instance.PostMessageToLog("Finished Heist");
             return;
         }
         node.SetColor(Color.grey);
-        TransportCrewToNextNode();
+        Invoke("TransportCrewToNextNode", 2f);
     }
 }

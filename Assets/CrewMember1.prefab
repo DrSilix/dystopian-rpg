@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa6e1f50f0a90b74fbaf90732ac02c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alias: Big Guy
   attributes:
     body: 5
     agility: 2

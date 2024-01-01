@@ -11,9 +11,12 @@ public class BreachingEvent : BaseEvent
         TargetAttribute2 = Attribute.strength;
         RollAggregate = Aggregate.max;
         DifficultyRating = Random.Range(1, 3);
-        TargetSuccesses = 1;
+        TargetSuccesses = DifficultyRating;
         MaxFails = DifficultyRating+2;
-        Debug.Log("\"Maybe if I can spike into the finger print sensor I can ... \" \"Step aside I'll clober this door off it's hinges!\" \"Won't that attract attention .. \" *SMASH*");
+
+        string msg = "\"Maybe if I can spike into the finger print sensor I can ... \" \"Step aside I'll clober this door off it's hinges!\" \"Won't that attract attention .. \" *SMASH*";
+        Debug.Log(msg);
+        GameLog.Instance.PostMessageToLog(msg);
     }
     public override void MyNameIs()
     {
