@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/MainMenu.uss?fileID=7433441132597879392&amp;guid=c6e5f4806a5c7d146b84749f9f00a041&amp;type=3#MainMenu" />
+    <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Art/UI_plain_interesting_purple_bg.png?fileID=2800000&amp;guid=9cdbfb1f712814d4ca82e72c4de1945d&amp;type=3#UI_plain_interesting_purple_bg&apos;);">
+        <ui:VisualElement style="flex-grow: 1; padding-top: 550px; padding-bottom: 467px;">
+            <ui:Label tabindex="-1" text="Solipsia" parse-escape-sequences="true" display-tooltip-when-elided="true" style="position: absolute; font-size: 185px; text-shadow: 5px 0 28.6px rgb(255, 14, 229); color: rgb(226, 161, 220); -unity-font: url(&apos;project://database/Assets/Art/BebasNeue-Regular.ttf?fileID=12800000&amp;guid=43d81a96ae3b98041a9be49bf3a3d641&amp;type=3#BebasNeue-Regular&apos;); -unity-font-definition: url(&apos;project://database/Assets/Art/BebasNeue-Regular%20SDF.asset?fileID=11400000&amp;guid=4d325f0aea308394f9d47df33fadc3e9&amp;type=2#BebasNeue-Regular SDF&apos;); -unity-font-style: bold; -unity-text-outline-color: rgb(255, 14, 229); -unity-text-outline-width: 2px; top: 588px; left: 280px;" />
+            <ui:Label tabindex="-1" text="Solipsia" parse-escape-sequences="true" display-tooltip-when-elided="true" class="title menu-title menu-title-accent" />
+            <ui:VisualElement style="flex-grow: 1; padding-top: 224px;">
+                <ui:Label tabindex="-1" text="Start game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="game-start" class="menu-label" />
+                <ui:Label tabindex="-1" text="Load Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="game-load" class="menu-label" />
+                <ui:Label tabindex="-1" text="Options" parse-escape-sequences="true" display-tooltip-when-elided="true" name="game-options" class="menu-label" />
+                <ui:Label tabindex="-1" text="Exit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="game-exit" class="menu-label" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

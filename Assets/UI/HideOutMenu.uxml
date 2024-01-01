@@ -1,0 +1,27 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/HideOutMenu.uss?fileID=7433441132597879392&amp;guid=2b49829e15ba40a429e269a013bdb5e6&amp;type=3#HideOutMenu" />
+    <ui:VisualElement style="flex-grow: 0; flex-shrink: 0; height: 15%; border-bottom-width: 15px; border-bottom-color: rgb(255, 14, 229); background-image: url(&apos;project://database/Assets/Art/UI_plain_interesting_purple_bg.png?fileID=2800000&amp;guid=9cdbfb1f712814d4ca82e72c4de1945d&amp;type=3#UI_plain_interesting_purple_bg&apos;); -unity-background-scale-mode: scale-and-crop;">
+        <ui:VisualElement style="flex-grow: 1; padding-top: 100px; padding-right: 50px; padding-bottom: 50px; padding-left: 50px;">
+            <ui:Label tabindex="-1" text="Safe House - Carrion Heights" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-font: url(&apos;project://database/Assets/Art/BebasNeue-Regular.ttf?fileID=12800000&amp;guid=43d81a96ae3b98041a9be49bf3a3d641&amp;type=3#BebasNeue-Regular&apos;); -unity-font-definition: url(&apos;project://database/Assets/Art/BebasNeue-Regular%20SDF.asset?fileID=11400000&amp;guid=4d325f0aea308394f9d47df33fadc3e9&amp;type=2#BebasNeue-Regular SDF&apos;); font-size: 49px; color: rgb(167, 228, 228); -unity-text-outline-color: rgb(33, 255, 255); -unity-text-outline-width: 2px; text-shadow: 3px 0 12px rgb(33, 255, 255);" />
+            <ui:Label tabindex="-1" text="Status ... ... active" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-font: url(&apos;project://database/Assets/Art/BebasNeue-Regular.ttf?fileID=12800000&amp;guid=43d81a96ae3b98041a9be49bf3a3d641&amp;type=3#BebasNeue-Regular&apos;); -unity-font-definition: url(&apos;project://database/Assets/Art/BebasNeue-Regular%20SDF.asset?fileID=11400000&amp;guid=4d325f0aea308394f9d47df33fadc3e9&amp;type=2#BebasNeue-Regular SDF&apos;); font-size: 49px; color: rgb(167, 228, 228); -unity-text-outline-color: rgb(33, 255, 255); -unity-text-outline-width: 2px; text-shadow: 3px 0 12px rgb(33, 255, 255);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement style="flex-grow: 1; flex-shrink: 0; height: 50%;">
+        <ui:VisualElement style="flex-grow: 1;" />
+    </ui:VisualElement>
+    <ui:VisualElement style="flex-grow: 0; flex-shrink: 0; height: 35%; border-top-color: rgb(255, 14, 229); border-top-width: 15px; background-image: url(&apos;project://database/Assets/Art/UI_plain_interesting_purple_bg.png?fileID=2800000&amp;guid=9cdbfb1f712814d4ca82e72c4de1945d&amp;type=3#UI_plain_interesting_purple_bg&apos;); -unity-background-scale-mode: scale-and-crop;">
+        <ui:VisualElement style="flex-grow: 1; padding-left: 120px; padding-right: 120px; padding-top: 154px; padding-bottom: 80px; flex-wrap: wrap; flex-direction: column; justify-content: space-between; align-items: stretch; align-self: auto; flex-shrink: 1;">
+            <ui:VisualElement style="flex-grow: 1;">
+                <ui:Button text="Begin" name="game-begin" display-tooltip-when-elided="true" parse-escape-sequences="true" class="button" style="width: 840px; height: 200px; font-size: 91px; text-shadow: 3px 3px 15px rgb(255, 14, 229); display: flex; visibility: visible;" />
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
+                <ui:Button text="Contacts" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" />
+                <ui:Button text="Crew" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" />
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: space-between; align-self: auto; align-items: flex-end;">
+                <ui:Button text="Actions" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" />
+                <ui:Button text="History" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,23 @@
+.button {
+    background-image: url('project://database/Assets/Art/Textures/button_normal.png?fileID=2800000&guid=2c708e2600060104fa24b3f2c342d2e0&type=3#button_normal');
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    width: 400px;
+    height: 150px;
+    background-color: rgba(188, 188, 188, 0);
+    font-size: 53px;
+    -unity-font: url('project://database/Assets/Art/BebasNeue-Regular.ttf?fileID=12800000&guid=43d81a96ae3b98041a9be49bf3a3d641&type=3#BebasNeue-Regular');
+    -unity-font-definition: url('project://database/Assets/Art/BebasNeue-Regular%20SDF.asset?fileID=11400000&guid=4d325f0aea308394f9d47df33fadc3e9&type=2#BebasNeue-Regular SDF');
+    color: rgb(255, 25, 252);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.button:active {
+    background-image: url('project://database/Assets/Art/Textures/button_pressed.png?fileID=2800000&guid=95d77c8d0b75b334da2b637518f9dfea&type=3#button_pressed');
+    color: rgb(25, 254, 254);
+}

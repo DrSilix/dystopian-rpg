@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/GameBottomBar.uss?fileID=7433441132597879392&amp;guid=8fa5abd270ddfdb4390e767bc39e57c0&amp;type=3#GameBottomBar" />
+    <ui:VisualElement class="test main-container" style="flex-grow: 1;">
+        <ui:VisualElement class="scroll-view">
+            <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="game-log" class="game-log" />
+        </ui:VisualElement>
+        <ui:VisualElement class="button-container" style="flex-grow: 1;">
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+            <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement style="flex-grow: 1; position: absolute; width: 1080px; height: 351px; border-bottom-color: rgb(255, 14, 229); border-bottom-width: 20px; background-image: url(&apos;project://database/Assets/Art/UI_plain_interesting_purple_bg.png?fileID=2800000&amp;guid=9cdbfb1f712814d4ca82e72c4de1945d&amp;type=3#UI_plain_interesting_purple_bg&apos;); -unity-background-scale-mode: scale-and-crop;" />
+</ui:UXML>

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 19101, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: MainMenuPanelSettings
+  m_Name: Game
   m_EditorClassIdentifier: 
   themeUss: {fileID: -4733365628477956816, guid: 3119d17813b452a4595c8d77181c6d7f, type: 3}
   m_TargetTexture: {fileID: 0}
@@ -21,8 +21,8 @@ MonoBehaviour:
   m_FallbackDpi: 96
   m_ReferenceResolution: {x: 1080, y: 2340}
   m_ScreenMatchMode: 0
-  m_Match: 1
-  m_SortingOrder: 1
+  m_Match: 0
+  m_SortingOrder: 0
   m_TargetDisplay: 0
   m_ClearDepthStencil: 1
   m_ClearColor: 0

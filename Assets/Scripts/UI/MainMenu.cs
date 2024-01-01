@@ -5,32 +5,32 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class MainMenuController : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
     public UIDocument uiDoc;
     public EventSystem eventSystem;
-    public WorldController worldController;
+    public GameObject safeHouseMenu;
 
-    private characterUIElements character1, character2, character3;
-    private Button continueButton;
+    // private characterUIElements character1, character2, character3;
+    private VisualElement startButton;
 
 
     // Start is called before the first frame update
     void Start()
     {
         VisualElement rootElem = uiDoc.rootVisualElement;
-        character1 = new characterUIElements("container-character-1", rootElem);
+        /*character1 = new characterUIElements("container-character-1", rootElem);
         character2 = new characterUIElements("container-character-2", rootElem);
         character3 = new characterUIElements("container-character-3", rootElem);
 
         character1.RegisterCallbacks();
         character2.RegisterCallbacks();
-        character3.RegisterCallbacks();
+        character3.RegisterCallbacks();*/
 
-        continueButton = rootElem.Q("button-continue") as Button;
-        continueButton.RegisterCallback<ClickEvent>(OnContinueClick);
+        startButton = rootElem.Q("game-start");
+        startButton.RegisterCallback<ClickEvent>(OnStartClick);
 
-        List<string> names = new List<string>();
+        /*List<string> names = new List<string>();
         var stream = new StreamReader("Assets\\Data\\names.txt");
         while (!stream.EndOfStream)
         {
@@ -39,24 +39,24 @@ public class MainMenuController : MonoBehaviour
 
         character1.name.value = names[Random.Range(0, names.Count)];
         character2.name.value = names[Random.Range(0, names.Count)];
-        character3.name.value = names[Random.Range(0, names.Count)];
+        character3.name.value = names[Random.Range(0, names.Count)];*/
 
 
     }
 
-    private void OnContinueClick(ClickEvent e)
+    private void OnStartClick(ClickEvent e)
     {
-        continueButton.UnregisterCallback<ClickEvent>(OnContinueClick);
+        startButton.UnregisterCallback<ClickEvent>(OnStartClick);
         this.gameObject.SetActive(false);
-        worldController.StartLevel();
+        //safeHouseMenu.SetActive(true);
     }
 
-    private void OnDisable()
+    /*private void OnDisable()
     {
         character1.DeregisterCallbacks();
         character2.DeregisterCallbacks();
         character3.DeregisterCallbacks();
-    }
+    }*/
 
     // Update is called once per frame
     void Update()
@@ -64,7 +64,7 @@ public class MainMenuController : MonoBehaviour
         
     }
 
-    public class characterUIElements
+    /*public class characterUIElements
     {
         public VisualElement root;
 
@@ -162,7 +162,7 @@ public class MainMenuController : MonoBehaviour
         {
             Debug.Log($"{e.newValue} -> {e.target}");
         }
-    }
+    }*/
 
     public enum Race { Human, Elf, Orc, Dwarf, Troll};
     public enum GameClass { Enforcer, Hacker, Face }

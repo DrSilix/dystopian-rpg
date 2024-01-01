@@ -1,0 +1,25 @@
+.menu-title {
+    font-size: 185px;
+    color: rgb(167, 228, 228);
+    text-shadow: 5px 0 28.9px rgb(33, 255, 255);
+    -unity-font: url('project://database/Assets/Art/BebasNeue-Regular.ttf?fileID=12800000&guid=43d81a96ae3b98041a9be49bf3a3d641&type=3#BebasNeue-Regular');
+    -unity-font-style: bold;
+    -unity-font-definition: url('project://database/Assets/Art/BebasNeue-Regular%20SDF.asset?fileID=11400000&guid=4d325f0aea308394f9d47df33fadc3e9&type=2#BebasNeue-Regular SDF');
+    -unity-text-align: upper-center;
+    -unity-text-outline-color: rgb(167, 228, 228);
+    -unity-text-outline-width: 2px;
+}
+
+.menu-title-accent {
+}
+
+.menu-label {
+    font-size: 107px;
+    -unity-text-align: upper-center;
+    color: rgb(185, 253, 253);
+    text-shadow: 8.2px 0 38.8px rgb(33, 255, 255);
+    -unity-text-outline-color: rgb(33, 255, 255);
+    -unity-text-outline-width: 1px;
+    -unity-font: url('project://database/Assets/Art/BebasNeue-Regular.ttf?fileID=12800000&guid=43d81a96ae3b98041a9be49bf3a3d641&type=3#BebasNeue-Regular');
+    -unity-font-definition: url('project://database/Assets/Art/BebasNeue-Regular%20SDF.asset?fileID=11400000&guid=4d325f0aea308394f9d47df33fadc3e9&type=2#BebasNeue-Regular SDF');
+}
