@@ -7,11 +7,14 @@ using UnityEngine.UIElements;
 public class SafeHouseMenu : MonoBehaviour
 {
     public UIDocument uiDoc;
+    public UIDocument crewUIDoc;
     public EventSystem eventSystem;
     public WorldController worldController;
     public GameObject hideoutImage;
 
+
     private Button beginButton;
+    private Button crewButton;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +22,6 @@ public class SafeHouseMenu : MonoBehaviour
         VisualElement rootElem = uiDoc.rootVisualElement;
 
         beginButton = rootElem.Q("game-begin") as Button;
-        beginButton.SetEnabled(false);
         beginButton.RegisterCallback<ClickEvent>(OnBeginClick);
     }
 

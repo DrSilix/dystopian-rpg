@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5913988305402959568}
-  - component: {fileID: 8942268042698136887}
+  - component: {fileID: 7748591349535624310}
   m_Layer: 0
-  m_Name: Crew
+  m_Name: CrewController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8942268042698136887
+--- !u!114 &7748591349535624310
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,6 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crewHealth: 0
   crewLuck: 0
-  crewMember1: {fileID: 0}
-  crewMember2: {fileID: 0}
-  crewMember3: {fileID: 0}
+  crewMember1: {fileID: 2874425772416204613, guid: eec6391fb6d9d1244af2bcbeea196300, type: 3}
+  crewMember2: {fileID: 6754971942279967501, guid: 6fc43b9a84b2d1041824caa8e6081914, type: 3}
+  crewMember3: {fileID: 2409443881896183804, guid: 87206496ccfec264b8f98586c5781b36, type: 3}

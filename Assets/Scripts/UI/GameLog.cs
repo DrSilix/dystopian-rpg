@@ -32,7 +32,6 @@ public class GameLog : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(this);
     }
 
     public void PostMessageToLog(string message)

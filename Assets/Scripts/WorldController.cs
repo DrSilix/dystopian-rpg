@@ -35,8 +35,6 @@ using Assets.Data;
 public class WorldController : MonoBehaviour
 {
     public GameObject nodePrefab;
-    public GameObject crewPrefab;
-    public GameObject crewMember1Prefab, crewMember2Prefab, crewMember3Prefab;
     public int numNodes;
     public int gridWidth = 16, gridHeight = 9;
 
@@ -52,22 +50,17 @@ public class WorldController : MonoBehaviour
     // TODO: remove - replace functionality with a subscribable world gen finished method
     public void StartLevel()
     {
-        CrewController crew = GenerateCrew();
+        PlaceCrew();
         InitialEvent.enabled = true;
-        InitialEvent.CrewIntake(crew);
+        InitialEvent.CrewIntake(Storyteller.Instance.Crew);
         InitialEvent.BeginHeistEvent();
     }
 
     // TODO: remove - separate out into a separate class that handles only this type of stuff
-    CrewController GenerateCrew()
+    void PlaceCrew()
     {
-        GameObject crewGO = Instantiate(crewPrefab, InitialEvent.gameObject.transform.position, Quaternion.identity);
-        CrewController crewController = crewGO.GetComponent<CrewController>();
-        GameObject crewMember1 = Instantiate(crewMember1Prefab, crewGO.transform);
-        GameObject crewMember2 = Instantiate(crewMember2Prefab, crewGO.transform);
-        GameObject crewMember3 = Instantiate(crewMember3Prefab, crewGO.transform);
-        crewController.AddCrewMembers(crewMember1, crewMember2, crewMember3);
-        return crewController;
+        GameObject crewGO = Storyteller.Instance.Crew.gameObject;
+        crewGO.transform.position = InitialEvent.gameObject.transform.position;
     }
 
     // TODO: remove - separate out to a level gen class

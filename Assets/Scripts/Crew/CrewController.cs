@@ -14,6 +14,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.UIElements;
+using static Unity.Collections.AllocatorManager;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 using Random = UnityEngine.Random;
 
 // Aggregates are primarily used here so far...
@@ -70,7 +73,7 @@ public class CrewController : MonoBehaviour
     }
 
     public void AddCrewMembers(GameObject member1, GameObject member2, GameObject member3)
-    {        
+    {
         crewMember1 = member1.GetComponent<CrewMemberController>();
         crewMember2 = member2.GetComponent<CrewMemberController>();
         crewMember3 = member3.GetComponent<CrewMemberController>();
@@ -93,6 +96,12 @@ public class CrewController : MonoBehaviour
         return -1;
     }
 
+    /// <summary>
+    /// Gets the integer value of the indicated crew members attribute
+    /// </summary>
+    /// <param name="attribute">The attribute to get the value of</param>
+    /// <param name="crewMember">The integer [1-3] representation of the crew member</param>
+    /// <returns></returns>
     public int GetCrewAttribute(Attribute attribute, int crewMember)
     {
         if (crewMember == 1) return crewMember1.GetAttribute(attribute);

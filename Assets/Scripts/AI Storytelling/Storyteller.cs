@@ -15,19 +15,46 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Storyteller : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject crewPrefab;
+    [SerializeField] private GameObject crewMember1Prefab, crewMember2Prefab, crewMember3Prefab;
+    
+    
+    public CrewController Crew {  get; private set; }
+    
+    
+    public static Storyteller Instance { get; private set; }
+
+    private void Awake()
     {
-        
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(this);
+        InitializeInstance();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void InitializeInstance()
     {
-        
+        GenerateCrew();
+    }
+
+    private void GenerateCrew()
+    {
+        GameObject crewGO = Instantiate(crewPrefab, Vector3.zero, Quaternion.identity);
+        Crew = crewGO.GetComponent<CrewController>();
+        GameObject crewMember1 = Instantiate(crewMember1Prefab, crewGO.transform);
+        GameObject crewMember2 = Instantiate(crewMember2Prefab, crewGO.transform);
+        GameObject crewMember3 = Instantiate(crewMember3Prefab, crewGO.transform);
+        Crew.AddCrewMembers(crewMember1, crewMember2, crewMember3);
     }
 }

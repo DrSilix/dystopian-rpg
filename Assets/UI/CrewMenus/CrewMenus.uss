@@ -2,10 +2,10 @@
     flex-grow: 1;
     border-right-width: 10px;
     border-bottom-width: 10px;
-    border-left-color: rgba(0, 0, 0, 0.57);
-    border-right-color: rgba(0, 0, 0, 0.57);
-    border-top-color: rgba(0, 0, 0, 0.57);
-    border-bottom-color: rgba(0, 0, 0, 0.57);
+    border-left-color: rgba(0, 0, 0, 0.93);
+    border-right-color: rgba(0, 0, 0, 0.93);
+    border-top-color: rgba(0, 0, 0, 0.93);
+    border-bottom-color: rgba(0, 0, 0, 0.93);
     margin-top: 100px;
     margin-right: 90px;
     margin-bottom: 90px;
