@@ -13,24 +13,24 @@ public class CrewMenu : MonoBehaviour
     private VisualElement crewMember1, crewMember2, crewMember3;
     private Button doneButton;
 
-    public void OnEnable()
+    /*public void OnEnable()
     {
         InitializeMenu();
-    }
+    }*/
 
     public void InitializeMenu()
     {
         VisualElement rootElem = uiDoc.rootVisualElement;
 
         doneButton = rootElem.Q("done-button") as Button;
-        doneButton.RegisterCallback<ClickEvent>(OnDoneClick);
+        doneButton.RegisterCallback<ClickEvent>(OnClick);
 
         crewMember1 = rootElem.Q("crew-member-1");
-        crewMember1.RegisterCallback<ClickEvent>(OnCrewMemberClick);
+        crewMember1.RegisterCallback<ClickEvent>(OnClick);
         crewMember2 = rootElem.Q("crew-member-2");
-        crewMember2.RegisterCallback<ClickEvent>(OnCrewMemberClick);
+        crewMember2.RegisterCallback<ClickEvent>(OnClick);
         crewMember3 = rootElem.Q("crew-member-3");
-        crewMember3.RegisterCallback<ClickEvent>(OnCrewMemberClick);
+        crewMember3.RegisterCallback<ClickEvent>(OnClick);
 
         UpdateCrewMemberInfo(crewMember1, 1);
         UpdateCrewMemberInfo(crewMember2, 2);
@@ -55,23 +55,36 @@ public class CrewMenu : MonoBehaviour
         }
     }
 
-    private void OnCrewMemberClick(ClickEvent e)
+    private void OnClick(ClickEvent e)
     {
-        UnregisterCallbacks();
-    }
-
-    private void OnDoneClick(ClickEvent e)
-    {
-        UnregisterCallbacks();
-        uiDoc.enabled = false;
+        Debug.Log(((VisualElement)e.currentTarget).name);
+        switch (((VisualElement)e.currentTarget).name)
+        {
+            case "crew-member-1":
+                crewMemberOptionsDoc.enabled = true;
+                crewMemberOptionsDoc.gameObject.GetComponent<CrewMemberOptions>().InitializeMenu();
+                break;
+            case "crew-member-2":
+                crewMemberOptionsDoc.enabled = true;
+                crewMemberOptionsDoc.gameObject.GetComponent<CrewMemberOptions>().InitializeMenu();
+                break;
+            case "crew-member-3":
+                crewMemberOptionsDoc.enabled = true;
+                crewMemberOptionsDoc.gameObject.GetComponent<CrewMemberOptions>().InitializeMenu();
+                break;
+            case "done-button":
+                UnregisterCallbacks();
+                uiDoc.enabled = false;
+                break;
+        }
     }
 
     private void UnregisterCallbacks()
     {
-        doneButton.UnregisterCallback<ClickEvent>(OnDoneClick);
-        crewMember1.UnregisterCallback<ClickEvent>(OnCrewMemberClick);
-        crewMember2.UnregisterCallback<ClickEvent>(OnCrewMemberClick);
-        crewMember3.UnregisterCallback<ClickEvent>(OnCrewMemberClick);
+        doneButton.UnregisterCallback<ClickEvent>(OnClick);
+        crewMember1.UnregisterCallback<ClickEvent>(OnClick);
+        crewMember2.UnregisterCallback<ClickEvent>(OnClick);
+        crewMember3.UnregisterCallback<ClickEvent>(OnClick);
     }
 
     // Update is called once per frame

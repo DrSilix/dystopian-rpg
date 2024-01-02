@@ -70,6 +70,25 @@ public class Attributes
         }
     }
 
+    public int Get(string attribute)
+    {
+        switch (attribute)
+        {
+            case "body": return body;
+            case "agility": return agility;
+            case "reaction": return reaction;
+            case "strength": return strength;
+            case "willpower": return willpower;
+            case "logic": return logic;
+            case "intuition": return intuition;
+            case "charisma": return charisma;
+            case "luck": return luck;
+            case "initiative": return initiative;
+            case "health": return maxHealth;
+            default: return 0;
+        }
+    }
+
     public void Set(Attribute attribute, int value)
     {
         switch (attribute)

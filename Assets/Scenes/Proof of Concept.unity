@@ -711,13 +711,14 @@ GameObject:
   m_Component:
   - component: {fileID: 559983051}
   - component: {fileID: 559983052}
+  - component: {fileID: 559983053}
   m_Layer: 0
   m_Name: CrewMemAttrib
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &559983051
 Transform:
   m_ObjectHideFlags: 0
@@ -740,7 +741,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 559983050}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
@@ -748,7 +749,20 @@ MonoBehaviour:
   m_PanelSettings: {fileID: 11400000, guid: b0a8b2adc7e6f0945b9b06026562455f, type: 2}
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 1fbee8601551d134598cb321b78db404, type: 3}
-  m_SortingOrder: 4
+  m_SortingOrder: 5
+--- !u!114 &559983053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 559983050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a77d19abd487d6049a112881a04d4006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDoc: {fileID: 559983052}
 --- !u!1 &618792690
 GameObject:
   m_ObjectHideFlags: 0
@@ -955,13 +969,14 @@ GameObject:
   m_Component:
   - component: {fileID: 706049507}
   - component: {fileID: 706049508}
+  - component: {fileID: 706049509}
   m_Layer: 0
   m_Name: CrewMemOptions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &706049507
 Transform:
   m_ObjectHideFlags: 0
@@ -984,7 +999,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 706049506}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
@@ -993,6 +1008,20 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: a02a89fbe07c9624c977438256d45f9d, type: 3}
   m_SortingOrder: 4
+--- !u!114 &706049509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706049506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ea357ecbd64174593b35353b6e1570, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDoc: {fileID: 706049508}
+  attributesDoc: {fileID: 559983052}
 --- !u!1 &844052103
 GameObject:
   m_ObjectHideFlags: 0
@@ -2595,10 +2624,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9fba29471a3e524296f23078452c177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crewPrefab: {fileID: 0}
-  crewMember1Prefab: {fileID: 0}
-  crewMember2Prefab: {fileID: 0}
-  crewMember3Prefab: {fileID: 0}
+  crewPrefab: {fileID: 2710483946860328104, guid: 39930a5d6a6e3554fbfc45e71ec12dd8, type: 3}
+  crewMember1Prefab: {fileID: 8464694986278701474, guid: eec6391fb6d9d1244af2bcbeea196300, type: 3}
+  crewMember2Prefab: {fileID: 8512946586223883271, guid: 6fc43b9a84b2d1041824caa8e6081914, type: 3}
+  crewMember3Prefab: {fileID: 4284562609061926150, guid: 87206496ccfec264b8f98586c5781b36, type: 3}
 --- !u!4 &1899153410
 Transform:
   m_ObjectHideFlags: 0
@@ -3052,7 +3081,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2134315120}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
@@ -3074,7 +3103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiDoc: {fileID: 2134315122}
-  crewMemberOptionsDoc: {fileID: 0}
+  crewMemberOptionsDoc: {fileID: 706049508}
 --- !u!1001 &2156635058430711076
 PrefabInstance:
   m_ObjectHideFlags: 0

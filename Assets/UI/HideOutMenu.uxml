@@ -16,7 +16,7 @@
             </ui:VisualElement>
             <ui:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: space-between;">
                 <ui:Button text="Contacts" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" />
-                <ui:Button text="Crew" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" />
+                <ui:Button text="Crew" parse-escape-sequences="true" display-tooltip-when-elided="true" name="crew" class="button" />
             </ui:VisualElement>
             <ui:VisualElement style="flex-grow: 1; flex-direction: row; justify-content: space-between; align-self: auto; align-items: flex-end;">
                 <ui:Button text="Actions" parse-escape-sequences="true" display-tooltip-when-elided="true" class="button" />
