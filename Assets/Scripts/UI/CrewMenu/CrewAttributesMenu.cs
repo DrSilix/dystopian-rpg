@@ -104,10 +104,4 @@ public class CrewAttributesMenu : MonoBehaviour
             attributeButtons[i].UnregisterCallback<ClickEvent>(OnClick);
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

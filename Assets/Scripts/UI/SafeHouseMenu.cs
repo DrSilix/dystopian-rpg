@@ -11,13 +11,17 @@ public class SafeHouseMenu : MonoBehaviour
     public EventSystem eventSystem;
     public WorldController worldController;
     public GameObject hideoutImage;
+    public float speed = 1;
 
 
     private Button beginButton;
     private Button crewButton;
 
-    // Start is called before the first frame update
-    void Start()
+    private VisualElement bgImage;
+    private bool _initialized;
+    private int initWait;
+
+    void InitializeMenu()
     {
         VisualElement rootElem = uiDoc.rootVisualElement;
 
@@ -26,6 +30,14 @@ public class SafeHouseMenu : MonoBehaviour
 
         crewButton = rootElem.Q("crew") as Button;
         crewButton.RegisterCallback<ClickEvent>(OnClick);
+
+        bgImage = rootElem.Q("bg-image");
+        bgImage.transform.position += Vector3.left;
+        Debug.Log(bgImage.resolvedStyle.width);
+
+        speed *= -1;
+
+        _initialized = true;
     }
 
     private void OnClick(ClickEvent e)
@@ -46,9 +58,20 @@ public class SafeHouseMenu : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if (initWait < 1)
+        {
+            initWait++;
+            return;
+        }
+        if (!_initialized) InitializeMenu();
+        Vector3 prevOffset = bgImage.transform.position;
+        float width = bgImage.resolvedStyle.width;
+        float parentWidth = bgImage.parent.resolvedStyle.width;
+
+        if (prevOffset.x < -(width - parentWidth) || prevOffset.x > 0) speed = -speed;
+        bgImage.transform.position = prevOffset + (Vector3.left * speed * Time.deltaTime);
+        //material.SetTextureOffset("_MainTex", prevOffset + (Vector2.right * speed * Time.deltaTime));
     }
 }
