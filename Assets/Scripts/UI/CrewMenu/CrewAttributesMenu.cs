@@ -1,14 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering.Universal.Internal;
 using UnityEngine.UIElements;
 
-public class CrewAttributesMenu : MonoBehaviour
+public class CrewAttributesMenu : IMenu
 {
     private static readonly int MAX_ATTRIBUTE_VALUE = 6;
-    
-    public UIDocument uiDoc;
 
     private Button doneButton;
     private int crewMemberId;
@@ -22,9 +22,10 @@ public class CrewAttributesMenu : MonoBehaviour
     private int unspentPoints;
     private int startingPoints;
 
-    public void InitializeMenu(int crewMemberId)
+    public void InitializeMenu(UIDocument uiDoc, object passInfo)
     {
-        this.crewMemberId = crewMemberId;
+        crewMemberId = 0;
+        if (passInfo.GetType() == typeof(int)) crewMemberId = (int)passInfo;
 
         crewMember = Storyteller.Instance.Crew.GetCrewMember(crewMemberId);
         attributes = crewMember.attributes;
@@ -32,7 +33,6 @@ public class CrewAttributesMenu : MonoBehaviour
         VisualElement rootElem = uiDoc.rootVisualElement;
 
         doneButton = rootElem.Q("done") as Button;
-        doneButton.RegisterCallback<ClickEvent>(OnClick);
 
         unspentLabel = rootElem.Q("unspent-points") as Label;
 
@@ -43,16 +43,22 @@ public class CrewAttributesMenu : MonoBehaviour
             attributeLabels[i].text = crewMember.GetAttribute((Attribute)i).ToString();
             attributeButtons[i * 2] = attributeRootElem.Q("button-plus") as Button;
             attributeButtons[(i * 2) + 1] = attributeRootElem.Q("button-minus") as Button;
-
-            attributeButtons[i * 2].RegisterCallback<ClickEvent>(OnClick);
-            attributeButtons[(i * 2) + 1].RegisterCallback<ClickEvent>(OnClick);
         }
 
         startingPoints = 9;
         unspentPoints = 9;
     }
 
-    private void OnClick(ClickEvent e)
+    public void RegisterCallbacks()
+    {
+        doneButton.RegisterCallback<ClickEvent>(OnClick);
+        for (int i = 0; i < attributeButtons.Length; i++)
+        {
+            attributeButtons[i].RegisterCallback<ClickEvent>(OnClick);
+        }
+    }
+
+    /*private void OnClick(ClickEvent e)
     {
         Debug.Log(((VisualElement)e.currentTarget).name);
         switch (((VisualElement)e.currentTarget).name)
@@ -66,6 +72,23 @@ public class CrewAttributesMenu : MonoBehaviour
             case "done":
                 UnregisterCallbacks();
                 uiDoc.enabled = false;
+                break;
+        }
+    }*/
+
+    private void OnClick(ClickEvent e)
+    {
+        Debug.Log(((VisualElement)e.currentTarget).name);
+        switch (((VisualElement)e.currentTarget).name)
+        {
+            case "button-plus":
+                ModifyValue((VisualElement)e.currentTarget);
+                break;
+            case "button-minus":
+                ModifyValue((VisualElement)e.currentTarget);
+                break;
+            case "done":
+                CallUnloadMenu(null);
                 break;
         }
     }
@@ -96,7 +119,21 @@ public class CrewAttributesMenu : MonoBehaviour
         unspentLabel.text = unspentPoints.ToString();
     }
 
-    private void UnregisterCallbacks()
+    public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
+
+    private void CallLoadMenu(string menuName, bool isChild, object passInfo)
+    {
+        LoadMenu.Invoke(this, (menuName, isChild, passInfo));
+    }
+
+    public event EventHandler<object> UnloadMenu;
+
+    private void CallUnloadMenu(object passInfo)
+    {
+        UnloadMenu.Invoke(this, passInfo);
+    }
+
+    public void UnregisterCallbacks()
     {
         doneButton.UnregisterCallback<ClickEvent>(OnClick);
         for (int i = 0; i < attributeButtons.Length; i++)

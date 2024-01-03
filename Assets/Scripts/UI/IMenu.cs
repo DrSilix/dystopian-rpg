@@ -7,15 +7,13 @@ using UnityEngine.UIElements;
 public interface IMenu
 {
     
-    public void InitializeMenu();
+    public void InitializeMenu(UIDocument uiDoc, object passInfo);
 
-    public void OnClick(ClickEvent e);
+    public void RegisterCallbacks();
+    
+    public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
 
-    public event EventHandler LoadMenu;
-    public void CallLoadMenu(string menuName, int childNum);
-
-    public string GetMenuName();
-    public int GetChildNum();
+    public event EventHandler<object> UnloadMenu;
 
     public void UnregisterCallbacks();
 }

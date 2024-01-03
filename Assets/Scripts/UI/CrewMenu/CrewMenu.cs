@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -5,11 +6,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class CrewMenu : MonoBehaviour
+public class CrewMenu : IMenu
 {
-    public UIDocument uiDoc;
-    public UIDocument crewMemberOptionsDoc;
-
     private VisualElement crewMember1, crewMember2, crewMember3;
     private Button doneButton;
 
@@ -18,23 +16,27 @@ public class CrewMenu : MonoBehaviour
         InitializeMenu();
     }*/
 
-    public void InitializeMenu()
+    public void InitializeMenu(UIDocument uiDoc, object passInfo)
     {
         VisualElement rootElem = uiDoc.rootVisualElement;
 
         doneButton = rootElem.Q("done-button") as Button;
-        doneButton.RegisterCallback<ClickEvent>(OnClick);
 
         crewMember1 = rootElem.Q("crew-member-1");
-        crewMember1.RegisterCallback<ClickEvent>(OnClick);
         crewMember2 = rootElem.Q("crew-member-2");
-        crewMember2.RegisterCallback<ClickEvent>(OnClick);
         crewMember3 = rootElem.Q("crew-member-3");
-        crewMember3.RegisterCallback<ClickEvent>(OnClick);
 
         UpdateCrewMemberInfo(crewMember1, 1);
         UpdateCrewMemberInfo(crewMember2, 2);
         UpdateCrewMemberInfo(crewMember3, 3);
+    }
+
+    public void RegisterCallbacks()
+    {
+        doneButton.RegisterCallback<ClickEvent>(OnClick);
+        crewMember1.RegisterCallback<ClickEvent>(OnClick);
+        crewMember2.RegisterCallback<ClickEvent>(OnClick);
+        crewMember3.RegisterCallback<ClickEvent>(OnClick);
     }
 
     private void UpdateCrewMemberInfo(VisualElement crewMember, int crewId)
@@ -55,7 +57,7 @@ public class CrewMenu : MonoBehaviour
         }
     }
 
-    private void OnClick(ClickEvent e)
+    /*private void OnClick(ClickEvent e)
     {
         Debug.Log(((VisualElement)e.currentTarget).name);
         switch (((VisualElement)e.currentTarget).name)
@@ -77,9 +79,43 @@ public class CrewMenu : MonoBehaviour
                 uiDoc.enabled = false;
                 break;
         }
+    }*/
+
+    private void OnClick(ClickEvent e)
+    {
+        Debug.Log(((VisualElement)e.currentTarget).name);
+        switch (((VisualElement)e.currentTarget).name)
+        {
+            case "crew-member-1":
+                CallLoadMenu("CrewMemberOptions", true, 1);
+                break;
+            case "crew-member-2":
+                CallLoadMenu("CrewMemberOptions", true, 2);
+                break;
+            case "crew-member-3":
+                CallLoadMenu("CrewMemberOptions", true, 3);
+                break;
+            case "done-button":
+                CallUnloadMenu(null);
+                break;
+        }
     }
 
-    private void UnregisterCallbacks()
+    public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
+
+    private void CallLoadMenu(string menuName, bool isChild, object passInfo)
+    {
+        LoadMenu.Invoke(this, (menuName, isChild, passInfo));
+    }
+
+    public event EventHandler<object> UnloadMenu;
+
+    private void CallUnloadMenu(object passInfo)
+    {
+        UnloadMenu.Invoke(this, passInfo);
+    }
+
+    public void UnregisterCallbacks()
     {
         doneButton.UnregisterCallback<ClickEvent>(OnClick);
         crewMember1.UnregisterCallback<ClickEvent>(OnClick);

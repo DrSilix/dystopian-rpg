@@ -52,8 +52,8 @@ public class SafeHouseMenu : MonoBehaviour
                 worldController.StartLevel();
                 break;
             case "crew":
-                crewUIDoc.enabled = true;
-                crewUIDoc.gameObject.GetComponent<CrewMenu>().InitializeMenu();
+                //crewUIDoc.enabled = true;
+                //crewUIDoc.gameObject.GetComponent<CrewMenu>().InitializeMenu();
                 break;
         }
     }
