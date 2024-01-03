@@ -78,4 +78,6 @@ public class CrewMemberOptions : IMenu
         returnButton.UnregisterCallback<ClickEvent>(OnClick);
         attributesButton.UnregisterCallback<ClickEvent>(OnClick);
     }
+
+    public void Update() { }
 }

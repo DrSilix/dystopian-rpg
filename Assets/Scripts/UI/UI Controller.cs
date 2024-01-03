@@ -15,6 +15,7 @@ public class UIController : MonoBehaviour
 
     private List<IMenu> uiScripts;
     private int currentMenu;
+    private int currentMenuContainerSize;
 
     // Start is called before the first frame update
     void Start()
@@ -26,23 +27,31 @@ public class UIController : MonoBehaviour
             uiAssets.Add(asset.name, asset.asset);
         }
 
+        uiAssetsList = null;
+
         uiDocs = new List<UIDocument>();
         uiScripts = new List<IMenu>();
 
         for (int i = 0; i < 3; i++)
         {
-            GameObject newGO = new GameObject();
-            newGO.name = "UI Level " + (i + 1);
-            newGO.transform.parent = transform;
-            UIDocument newDoc = newGO.AddComponent<UIDocument>();
-            newDoc.panelSettings = panelSettings;
-            newDoc.sortingOrder = i + 10;
-            uiDocs.Add(newDoc);
-            uiScripts.Add(null);
+            BuildMenuGameObject(i);
         }
         currentMenu = 0;
+        currentMenuContainerSize = 3;
 
-        LoadMenu("CrewMenu", false, null);
+        LoadMenu("SafeHouseMenu", false, null);
+    }
+
+    private void BuildMenuGameObject(int id)
+    {
+        GameObject newGO = new GameObject();
+        newGO.name = "UI Level " + (id + 1);
+        newGO.transform.parent = transform;
+        UIDocument newDoc = newGO.AddComponent<UIDocument>();
+        newDoc.panelSettings = panelSettings;
+        newDoc.sortingOrder = id + 10;
+        uiDocs.Add(newDoc);
+        uiScripts.Add(null);
     }
 
     public void LoadMenu(string menuName, bool isChild, object passInfo)
@@ -53,6 +62,7 @@ public class UIController : MonoBehaviour
             uiScripts[currentMenu].UnloadMenu -= UnloadMenu;
         }
         if (isChild) currentMenu++;
+        if (currentMenu >= currentMenuContainerSize) BuildMenuGameObject(currentMenu);
         uiDocs[currentMenu].visualTreeAsset = uiAssets[menuName];
         Type script = Type.GetType(menuName);
         IMenu menu = Activator.CreateInstance(script) as IMenu;
@@ -75,6 +85,7 @@ public class UIController : MonoBehaviour
         uiScripts[currentMenu].UnregisterCallbacks();
         uiScripts[currentMenu].LoadMenu -= LoadMenu;
         uiScripts[currentMenu].UnloadMenu -= UnloadMenu;
+        uiScripts[currentMenu] = null;
         uiDocs[currentMenu].visualTreeAsset = null;
         currentMenu--;
         uiScripts[currentMenu].InitializeMenu(uiDocs[currentMenu], passInfo);
@@ -83,6 +94,12 @@ public class UIController : MonoBehaviour
     private void UnloadMenu(object sender, object e)
     {
         UnloadMenu(e);
+    }
+
+    private void Update()
+    {
+        if (uiScripts == null || uiScripts[currentMenu] == null) return;
+        uiScripts[currentMenu].Update();
     }
 
     [Serializable]

@@ -88,7 +88,7 @@ public class CrewAttributesMenu : IMenu
                 ModifyValue((VisualElement)e.currentTarget);
                 break;
             case "done":
-                CallUnloadMenu(null);
+                CallUnloadMenu(crewMemberId);
                 break;
         }
     }
@@ -141,4 +141,6 @@ public class CrewAttributesMenu : IMenu
             attributeButtons[i].UnregisterCallback<ClickEvent>(OnClick);
         }
     }
+
+    public void Update() { }
 }

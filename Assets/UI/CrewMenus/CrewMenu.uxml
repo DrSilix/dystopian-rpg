@@ -103,7 +103,7 @@
                                         </ui:VisualElement>
                                     </ui:VisualElement>
                                     <ui:VisualElement name="armor" style="flex-grow: 1; flex-direction: column;">
-                                        <ui:Label tabindex="-1" text="Weapon" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); font-size: 30px;" />
+                                        <ui:Label tabindex="-1" text="Armor" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); font-size: 30px;" />
                                         <ui:VisualElement style="flex-grow: 1; flex-direction: row; min-height: 80px;">
                                             <ui:VisualElement name="armor-icon" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Art/Sprite%20Tile%20Packs/Sci-Fi-Item-and-Armor-Icons/PNG/9.png?fileID=2800000&amp;guid=0c7008ee04f481b42af2fe3f05778036&amp;type=3#9&apos;); -unity-background-scale-mode: scale-to-fit; min-width: 80px; min-height: 80px;" />
                                             <ui:VisualElement style="flex-grow: 1;">
@@ -124,7 +124,7 @@
                                         </ui:VisualElement>
                                     </ui:VisualElement>
                                     <ui:VisualElement name="throwable" style="flex-grow: 1; flex-direction: column;">
-                                        <ui:Label tabindex="-1" text="Weapon" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); font-size: 30px;" />
+                                        <ui:Label tabindex="-1" text="Item" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); font-size: 30px;" />
                                         <ui:VisualElement style="flex-grow: 1; flex-direction: row; min-height: 80px;">
                                             <ui:VisualElement name="throwable-icon" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Art/Sprite%20Tile%20Packs/cyberpunk-weapons-and-ammo-pixel-art-3232-icon-pack/1%20Icons/Icon1_32.png?fileID=2800000&amp;guid=4488cd3a6b54b1c45883d538adfea822&amp;type=3#Icon1_32&apos;); -unity-background-scale-mode: scale-to-fit; min-width: 80px; min-height: 80px;" />
                                             <ui:VisualElement style="flex-grow: 1;">
@@ -245,7 +245,7 @@
                                         </ui:VisualElement>
                                     </ui:VisualElement>
                                     <ui:VisualElement name="armor" style="flex-grow: 1; flex-direction: column;">
-                                        <ui:Label tabindex="-1" text="Weapon" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); font-size: 30px;" />
+                                        <ui:Label tabindex="-1" text="Armor" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); font-size: 30px;" />
                                         <ui:VisualElement style="flex-grow: 1; flex-direction: row; min-height: 80px;">
                                             <ui:VisualElement name="armor-icon" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Art/Sprite%20Tile%20Packs/Sci-Fi-Item-and-Armor-Icons/PNG/9.png?fileID=2800000&amp;guid=0c7008ee04f481b42af2fe3f05778036&amp;type=3#9&apos;); -unity-background-scale-mode: scale-to-fit; min-width: 80px; min-height: 80px;" />
                                             <ui:VisualElement style="flex-grow: 1;">
@@ -266,7 +266,7 @@
                                         </ui:VisualElement>
                                     </ui:VisualElement>
                                     <ui:VisualElement name="throwable" style="flex-grow: 1; flex-direction: column;">
-                                        <ui:Label tabindex="-1" text="Weapon" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); font-size: 30px;" />
+                                        <ui:Label tabindex="-1" text="Item" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); font-size: 30px;" />
                                         <ui:VisualElement style="flex-grow: 1; flex-direction: row; min-height: 80px;">
                                             <ui:VisualElement name="throwable-icon" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Art/Sprite%20Tile%20Packs/cyberpunk-weapons-and-ammo-pixel-art-3232-icon-pack/1%20Icons/Icon1_32.png?fileID=2800000&amp;guid=4488cd3a6b54b1c45883d538adfea822&amp;type=3#Icon1_32&apos;); -unity-background-scale-mode: scale-to-fit; min-width: 80px; min-height: 80px;" />
                                             <ui:VisualElement style="flex-grow: 1;">
@@ -387,7 +387,7 @@
                                         </ui:VisualElement>
                                     </ui:VisualElement>
                                     <ui:VisualElement name="armor" style="flex-grow: 1; flex-direction: column;">
-                                        <ui:Label tabindex="-1" text="Weapon" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); font-size: 30px;" />
+                                        <ui:Label tabindex="-1" text="Armor" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); font-size: 30px;" />
                                         <ui:VisualElement style="flex-grow: 1; flex-direction: row; min-height: 80px;">
                                             <ui:VisualElement name="armor-icon" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Art/Sprite%20Tile%20Packs/Sci-Fi-Item-and-Armor-Icons/PNG/9.png?fileID=2800000&amp;guid=0c7008ee04f481b42af2fe3f05778036&amp;type=3#9&apos;); -unity-background-scale-mode: scale-to-fit; min-width: 80px; min-height: 80px;" />
                                             <ui:VisualElement style="flex-grow: 1;">
@@ -408,7 +408,7 @@
                                         </ui:VisualElement>
                                     </ui:VisualElement>
                                     <ui:VisualElement name="throwable" style="flex-grow: 1; flex-direction: column;">
-                                        <ui:Label tabindex="-1" text="Weapon" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); font-size: 30px;" />
+                                        <ui:Label tabindex="-1" text="Item" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); font-size: 30px;" />
                                         <ui:VisualElement style="flex-grow: 1; flex-direction: row; min-height: 80px;">
                                             <ui:VisualElement name="throwable-icon" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Art/Sprite%20Tile%20Packs/cyberpunk-weapons-and-ammo-pixel-art-3232-icon-pack/1%20Icons/Icon1_32.png?fileID=2800000&amp;guid=4488cd3a6b54b1c45883d538adfea822&amp;type=3#Icon1_32&apos;); -unity-background-scale-mode: scale-to-fit; min-width: 80px; min-height: 80px;" />
                                             <ui:VisualElement style="flex-grow: 1;">

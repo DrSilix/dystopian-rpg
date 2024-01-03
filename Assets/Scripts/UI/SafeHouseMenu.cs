@@ -1,46 +1,49 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class SafeHouseMenu : MonoBehaviour
+public class SafeHouseMenu : IMenu
 {
-    public UIDocument uiDoc;
-    public UIDocument crewUIDoc;
     public EventSystem eventSystem;
     public WorldController worldController;
     public GameObject hideoutImage;
-    public float speed = 1;
-
 
     private Button beginButton;
     private Button crewButton;
 
     private VisualElement bgImage;
-    private bool _initialized;
+    private float bgScrollSpeed = -4;
+    private bool initialized;
     private int initWait;
 
-    void InitializeMenu()
+    public void InitializeMenu(UIDocument uiDoc, object passInfo)
     {
         VisualElement rootElem = uiDoc.rootVisualElement;
 
         beginButton = rootElem.Q("game-begin") as Button;
-        beginButton.RegisterCallback<ClickEvent>(OnClick);
-
         crewButton = rootElem.Q("crew") as Button;
-        crewButton.RegisterCallback<ClickEvent>(OnClick);
 
         bgImage = rootElem.Q("bg-image");
-        bgImage.transform.position += Vector3.left;
-        Debug.Log(bgImage.resolvedStyle.width);
 
-        speed *= -1;
-
-        _initialized = true;
+        initialized = true;
     }
 
-    private void OnClick(ClickEvent e)
+    public void RegisterCallbacks()
+    {
+        beginButton.RegisterCallback<ClickEvent>(OnClick);
+        crewButton.RegisterCallback<ClickEvent>(OnClick);
+    }
+
+    public void UnregisterCallbacks()
+    {
+        beginButton.UnregisterCallback<ClickEvent>(OnClick);
+        crewButton.UnregisterCallback<ClickEvent>(OnClick);
+    }
+
+    /*private void OnClick(ClickEvent e)
     {
         Debug.Log(((VisualElement)e.currentTarget).name);
         switch (((VisualElement)e.currentTarget).name)
@@ -56,22 +59,48 @@ public class SafeHouseMenu : MonoBehaviour
                 //crewUIDoc.gameObject.GetComponent<CrewMenu>().InitializeMenu();
                 break;
         }
+    }*/
+
+    private void OnClick(ClickEvent e)
+    {
+        Debug.Log(((VisualElement)e.currentTarget).name);
+        switch (((VisualElement)e.currentTarget).name)
+        {
+            case "game-begin":
+                // begin the game somehow, possibly pass an enum to the UI controller
+                // Actually possibly tell the storyteller to begin
+                // I don't think I want this menu to have that much control and stored info
+                CallLoadMenu("HeistHUD", false, null);
+                //worldController.StartLevel();
+                break;
+            case "crew":
+                CallLoadMenu("CrewMenu", true, null);
+                break;
+        }
     }
 
-    void FixedUpdate()
+    public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
+
+    private void CallLoadMenu(string menuName, bool isChild, object passInfo)
     {
-        if (initWait < 1)
-        {
-            initWait++;
-            return;
-        }
-        if (!_initialized) InitializeMenu();
+        LoadMenu.Invoke(this, (menuName, isChild, passInfo));
+    }
+
+    public event EventHandler<object> UnloadMenu;
+
+    private void CallUnloadMenu(object passInfo)
+    {
+        UnloadMenu.Invoke(this, passInfo);
+    }
+
+    public void Update()
+    {
+        if (!initialized) return;
         Vector3 prevOffset = bgImage.transform.position;
         float width = bgImage.resolvedStyle.width;
         float parentWidth = bgImage.parent.resolvedStyle.width;
 
-        if (prevOffset.x < -(width - parentWidth) || prevOffset.x > 0) speed = -speed;
-        bgImage.transform.position = prevOffset + (Vector3.left * speed * Time.deltaTime);
-        //material.SetTextureOffset("_MainTex", prevOffset + (Vector2.right * speed * Time.deltaTime));
+        if (prevOffset.x < -(width - parentWidth) || prevOffset.x > 0) bgScrollSpeed = -bgScrollSpeed;
+        bgImage.transform.position = prevOffset + (Vector3.left * bgScrollSpeed * Time.deltaTime);
     }
 }
