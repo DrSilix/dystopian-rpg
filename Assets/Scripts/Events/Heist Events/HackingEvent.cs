@@ -21,8 +21,9 @@ public class HackingEvent : BaseEvent
         GameLog.Instance.PostMessageToLog(msg);
     }
 
-    public override void MyNameIs()
+    public override string MyNameIs()
     {
         Debug.Log("HackingEvent");
+        return "HackingEvent";
     }
 }

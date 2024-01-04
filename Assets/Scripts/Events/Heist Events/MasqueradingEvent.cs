@@ -18,8 +18,9 @@ public class MasqueradingEvent : BaseEvent
         GameLog.Instance.PostMessageToLog(msg);
     }
 
-    public override void MyNameIs()
+    public override string MyNameIs()
     {
         Debug.Log("MasqueradingEvent");
+        return "MasqueradingEvent";
     }
 }

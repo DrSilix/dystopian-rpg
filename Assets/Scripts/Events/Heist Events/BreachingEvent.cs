@@ -18,8 +18,9 @@ public class BreachingEvent : BaseEvent
         Debug.Log(msg);
         GameLog.Instance.PostMessageToLog(msg);
     }
-    public override void MyNameIs()
+    public override string MyNameIs()
     {
         Debug.Log("BreachingEvent");
+        return "BreachingEvent";
     }
 }

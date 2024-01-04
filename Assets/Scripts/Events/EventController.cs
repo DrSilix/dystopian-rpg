@@ -30,30 +30,30 @@ public class EventController : MonoBehaviour
     private HEventType.HType eventType;
     [SerializeField]
     private CrewController possesedCrew;
+    [SerializeField]
+    private HEventState eventState;
 
     private BaseEvent baseEvent;
     
     public Node node;
 
-    // private GameObject skyscraperBG;
-
-    // Start is called before the first frame update
-    void OnEnable()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void AssociateEvent(HEventType.HType eventType)
     {
         this.eventType = eventType;
         baseEvent = this.gameObject.AddComponent(HEventType.GetEventComponentType(eventType)) as BaseEvent;
+        eventState = HEventState.IdleUnfinished;
     }
+
+    public void ChangeHeistEventState(HEventState state)
+    {
+        //if (eventState == state) return; //I don't actually want to do this, Event though the state isn't changing the properties are
+        eventState = state;
+        Storyteller.Instance.heistEventStateChanged.Invoke(this);
+    }
+
+    public BaseEvent GetBaseEvent() { return baseEvent; }
+    public HEventType.HType GetEventType() { return eventType; }
+    public HEventState GetEventState() {  return eventState; }
 
     public void CrewIntake(CrewController crew)
     {
@@ -83,6 +83,7 @@ public class EventController : MonoBehaviour
 
     public void BeginHeistEvent()
     {
+        ChangeHeistEventState(HEventState.Begin);
         Debug.Log("-----------------------");
         Debug.Log("Begin Heist Event");
         // skyscraperBG = Camera.main.transform.GetChild(1).gameObject;
@@ -95,6 +96,7 @@ public class EventController : MonoBehaviour
 
     public void HeistEventLoop()
     {
+        ChangeHeistEventState(HEventState.Running);
         baseEvent.StepEvent();
         Debug.Log("Event Progress: " + baseEvent.GetProgress() + "%");
         if (baseEvent.HasSucceeded() || baseEvent.HasFailed()) { EndHeistEvent(); }
@@ -111,6 +113,7 @@ public class EventController : MonoBehaviour
         if (baseEvent.HasFailed())
         {
             Debug.Log("Heist FAILED!!");
+            ChangeHeistEventState(HEventState.DoneFailure);
             node.SetColor(Color.red);
             return;
         }
@@ -119,8 +122,10 @@ public class EventController : MonoBehaviour
             Debug.Log("Finished Heist");
             node.SetColor(Color.green);
             GameLog.Instance.PostMessageToLog("Finished Heist");
+            ChangeHeistEventState(HEventState.DoneSuccess);
             return;
         }
+        ChangeHeistEventState(HEventState.DoneSuccess);
         node.SetColor(Color.grey);
         Invoke("TransportCrewToNextNode", 2f);
     }

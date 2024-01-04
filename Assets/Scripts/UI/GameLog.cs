@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 
 public class GameLog
 {        
-    public int linesToKeep = 4;
+    public int linesToKeep = 8;
 
     private Queue<string> logList = new Queue<string>();
 

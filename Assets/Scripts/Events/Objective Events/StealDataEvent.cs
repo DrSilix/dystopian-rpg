@@ -84,8 +84,9 @@ public class StealDataEvent : BaseEvent
         return "";
     }
 
-    public override void MyNameIs()
+    public override string MyNameIs()
     {
         Debug.Log("StealDataEvent");
+        return "StealDataEvent";
     }
 }

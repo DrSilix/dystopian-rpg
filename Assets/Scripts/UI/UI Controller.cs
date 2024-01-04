@@ -39,9 +39,21 @@ public class UIController : MonoBehaviour
         currentMenu = 0;
         currentMenuContainerSize = 3;
 
+        Storyteller.Instance.heistEventStateChanged += HeistEventStateChange;
+        
         new GameLog();
 
         LoadMenu("SafeHouseMenu", false, null);
+    }
+
+    private void HeistEventStateChange(EventController e)
+    {
+        passCurrentMenuNewInfo(e);
+    }
+
+    private void passCurrentMenuNewInfo(object info)
+    {
+        uiScripts[currentMenu].SendMenuNewInfo(info);
     }
 
     private void BuildMenuGameObject(int id)

@@ -163,7 +163,7 @@ public abstract class BaseEvent : MonoBehaviour
 
     }
 
-    public abstract void MyNameIs();
+    public abstract string MyNameIs();
 
     public int GetProgress() { return Mathf.RoundToInt(((float)Successes / TargetSuccesses) * 100); }
 

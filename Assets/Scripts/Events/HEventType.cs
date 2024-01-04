@@ -20,6 +20,7 @@ using UnityEngine;
 
 public static class HEventType
 {
+    //TODO: should probably figure out a better way to do this enum but with a method thing
     public enum HType {
         //Pre-Heist Events
         Pre_InfoGathering,

@@ -100,4 +100,6 @@ public class SafeHouseMenu : IMenu
         if (prevOffset.x < -(width - parentWidth) || prevOffset.x > 0) bgScrollSpeed = -bgScrollSpeed;
         bgImage.transform.position = prevOffset + (Vector3.left * bgScrollSpeed * Time.deltaTime);
     }
+
+    public void SendMenuNewInfo(object info) { }
 }

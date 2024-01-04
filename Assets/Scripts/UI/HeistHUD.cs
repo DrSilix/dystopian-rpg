@@ -8,11 +8,17 @@ public class HeistHUD : IMenu
 {
     private Label logDisplay;
 
+    private GameObject skyscraperBG;
+    private GameObject travellingBG;
+
     public void InitializeMenu(UIDocument uiDoc, object passInfo)
     {
         VisualElement rootElem = uiDoc.rootVisualElement;
 
         logDisplay = rootElem.Q("game-log") as Label;
+
+        skyscraperBG = Camera.main.transform.GetChild(0).GetChild(0).gameObject;
+        travellingBG = Camera.main.transform.GetChild(0).GetChild(1).gameObject;
     }
 
     public void RegisterCallbacks()
@@ -57,4 +63,38 @@ public class HeistHUD : IMenu
     }
 
     public void Update() { }
+
+    public void SendMenuNewInfo(object info) {
+        if (info.GetType() != typeof(EventController)) return;
+        EventController heistEvent = info as EventController;
+        switch (heistEvent.GetEventType())
+        {
+            case HEventType.HType.Pre_Navigating:
+                switch (heistEvent.GetEventState())
+                {
+                    case HEventState.Begin:
+                        travellingBG.SetActive(true);
+                        break;
+                    case HEventState.DoneFailure:
+                    case HEventState.DoneSuccess:
+                        skyscraperBG.SetActive(true);
+                        travellingBG.SetActive(false);
+                        break;
+                }
+                break;
+            case HEventType.HType.Pst_ReturnHome:
+                switch (heistEvent.GetEventState())
+                {
+                    case HEventState.Begin:
+                        travellingBG.SetActive(true);
+                        skyscraperBG.SetActive(false);
+                        break;
+                    case HEventState.DoneFailure:
+                    case HEventState.DoneSuccess:
+                        CallLoadMenu("SafeHouseMenu", false, heistEvent.GetEventState());
+                        break;
+                }
+                break;
+        }
+    }
 }

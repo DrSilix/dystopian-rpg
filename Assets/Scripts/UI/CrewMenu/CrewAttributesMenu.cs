@@ -143,4 +143,5 @@ public class CrewAttributesMenu : IMenu
     }
 
     public void Update() { }
+    public void SendMenuNewInfo(object info) { }
 }

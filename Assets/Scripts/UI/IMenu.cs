@@ -22,5 +22,7 @@ public interface IMenu
 
     public void UnregisterCallbacks();
 
+    public void SendMenuNewInfo(object info);
+
     public void Update();
 }

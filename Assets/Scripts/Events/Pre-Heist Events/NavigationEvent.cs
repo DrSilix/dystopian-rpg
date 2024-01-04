@@ -5,12 +5,8 @@ using UnityEngine;
 
 public class NavigationEvent : BaseEvent
 {
-    private GameObject background;
     public override void EventStart(CrewController crew)
     {
-        background = Camera.main.transform.GetChild(0).gameObject;
-        background.SetActive(true);
-        
         base.EventStart(crew);
         TargetAttribute1 = Attribute.reaction;
         TargetAttribute2 = Attribute.agility;
@@ -22,9 +18,10 @@ public class NavigationEvent : BaseEvent
         GameLog.Instance.PostMessageToLog("\"We have the destination in navigation, let's hit the road boys!!\"");
     }
 
-    public override void MyNameIs()
+    public override string MyNameIs()
     {
         Debug.Log("NavigationEvent");
+        return "NavigationEvent";
     }
 
     public override void EventEnd()
@@ -32,6 +29,5 @@ public class NavigationEvent : BaseEvent
         base.EventEnd();
         Debug.Log("\"We've arrived at Texico plant. We'll go in, brains here will steal the who-sa-ma-what-sit, and we'll get out. Quick and clean\"");
         GameLog.Instance.PostMessageToLog("\"We've arrived at Texico plant. We'll go in, brains here will steal the who-sa-ma-what-sit, and we'll get out. Quick and clean\"");
-        background.SetActive(false);
     }
 }

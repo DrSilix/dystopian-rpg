@@ -123,9 +123,6 @@ public class CrewMenu : IMenu
         crewMember3.UnregisterCallback<ClickEvent>(OnClick);
     }
 
-    // Update is called once per frame
-    public void Update()
-    {
-        
-    }
+    public void Update() { }
+    public void SendMenuNewInfo(object info) { }
 }

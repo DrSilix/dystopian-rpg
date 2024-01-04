@@ -54,6 +54,12 @@ public class Storyteller : MonoBehaviour
         worldController.StartLevel();
     }
 
+    // TODO: subscribable event HeistEventStateChange
+    // TODO: public get for current running event name
+
+    public delegate void HeistEventStateChanged(EventController baseEvent);
+    public HeistEventStateChanged heistEventStateChanged;
+
     private void GenerateCrew()
     {
         GameObject crewGO = Instantiate(crewPrefab, Vector3.zero, Quaternion.identity);

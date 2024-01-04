@@ -22,8 +22,9 @@ public class SneakingEvent : BaseEvent
         GameLog.Instance.PostMessageToLog(msg);
     }
 
-    public override void MyNameIs()
+    public override string MyNameIs()
     {
         Debug.Log("SneakingEvent");
+        return "SneakingEvent";
     }
 }

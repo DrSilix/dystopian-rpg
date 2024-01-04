@@ -80,4 +80,5 @@ public class CrewMemberOptions : IMenu
     }
 
     public void Update() { }
+    public void SendMenuNewInfo(object info) { }
 }
