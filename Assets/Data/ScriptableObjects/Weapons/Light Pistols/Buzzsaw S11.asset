@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53bf2717a4142cd489bd68cdd97f2234, type: 3}
+  m_Name: Buzzsaw S11
+  m_EditorClassIdentifier: 
+  UUID: 107382346
+  generateID: 0
+  weaponType: 5
+  displayName: Buzzsaw S11
+  sprite: {fileID: -1608845894, guid: 663bd30d014f47644ad634991a12344f, type: 3}
+  manufacturer: CS Industries
+  shortDescription: Packs a punch you don't want to take
+  longDescription: Developed by SunSys militech division the Vyner 722 is the successor
+    to the wildly popular Vyner 652. Sporting a larger caliber and smoother feed
+    rails.
+  accuracy: 6
+  range: 2
+  damage: 5
+  armorPiercing: 0
+  firingMode: 3
+  recoil: 1
+  ammoCapacity: 36
+  ammunition: {fileID: 0}
+  reloadTime: 1
+  baseCost: 1600
+  availability: 2
+  Illegality: 1
+  attachPoints: 010101

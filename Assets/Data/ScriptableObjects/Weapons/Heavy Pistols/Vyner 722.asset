@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53bf2717a4142cd489bd68cdd97f2234, type: 3}
+  m_Name: Vyner 722
+  m_EditorClassIdentifier: 
+  UUID: 1479427998
+  generateID: 0
+  weaponType: 6
+  displayName: Vyner 722
+  sprite: {fileID: -1870407917, guid: 663bd30d014f47644ad634991a12344f, type: 3}
+  manufacturer: SunSys
+  shortDescription: Packs a punch you don't want to take
+  longDescription: Developed by SunSys militech division the Vyner 722 is the successor
+    to the wildly popular Vyner 652. Sporting a larger caliber and smoother feed
+    rails.
+  accuracy: 5
+  range: 2
+  damage: 8
+  armorPiercing: -1
+  firingMode: 2
+  recoil: 1
+  ammoCapacity: 12
+  ammunition: {fileID: 0}
+  reloadTime: 1
+  baseCost: 1200
+  availability: 1
+  Illegality: 0
+  attachPoints: 010101
