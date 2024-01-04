@@ -43,7 +43,7 @@ public class UIController : MonoBehaviour
         
         new GameLog();
 
-        LoadMenu("SafeHouseMenu", false, null);
+        LoadMenu("MainMenu", false, null);
     }
 
     private void HeistEventStateChange(EventController e)
