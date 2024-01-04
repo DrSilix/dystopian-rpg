@@ -23,6 +23,7 @@ public class Storyteller : MonoBehaviour
 {
     [SerializeField] private GameObject crewPrefab;
     [SerializeField] private GameObject crewMember1Prefab, crewMember2Prefab, crewMember3Prefab;
+    [SerializeField] private WorldController worldController;
     
     
     public CrewController Crew {  get; private set; }
@@ -46,6 +47,11 @@ public class Storyteller : MonoBehaviour
     private void InitializeInstance()
     {
         GenerateCrew();
+    }
+
+    public void StartHeist()
+    {
+        worldController.StartLevel();
     }
 
     private void GenerateCrew()

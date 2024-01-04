@@ -67,11 +67,8 @@ public class SafeHouseMenu : IMenu
         switch (((VisualElement)e.currentTarget).name)
         {
             case "game-begin":
-                // begin the game somehow, possibly pass an enum to the UI controller
-                // Actually possibly tell the storyteller to begin
-                // I don't think I want this menu to have that much control and stored info
                 CallLoadMenu("HeistHUD", false, null);
-                //worldController.StartLevel();
+                Storyteller.Instance.StartHeist();
                 break;
             case "crew":
                 CallLoadMenu("CrewMenu", true, null);

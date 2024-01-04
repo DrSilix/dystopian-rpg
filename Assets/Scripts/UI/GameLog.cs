@@ -7,32 +7,24 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class GameLog : MonoBehaviour
+public class GameLog
 {        
     public int linesToKeep = 4;
-    
-    private UIDocument doc;
-    private VisualElement root;
-    private Label log;
 
-    private Queue<string> logList;
+    private Queue<string> logList = new Queue<string>();
 
     public static GameLog Instance { get; private set; }
 
-    private void Awake()
-    {
-        doc = this.GetComponent<UIDocument>();
-        root = doc.rootVisualElement;
-        log = root.Q("game-log") as Label;
-        logList = new Queue<string>();
-
+    public GameLog()
+    {        
         if (Instance != null && Instance != this)
         {
-            Destroy(this);
             return;
         }
         Instance = this;
     }
+
+    public event EventHandler LogUpdated;
 
     public void PostMessageToLog(string message)
     {
@@ -41,11 +33,16 @@ public class GameLog : MonoBehaviour
             logList.Dequeue();
             Debug.Log("DEQUEUED MESSAGE");
         }
+        LogUpdated.Invoke(this, null);
+    }
+
+    public string GetGameLog()
+    {
         StringBuilder stringBuilder = new StringBuilder();
         foreach (string line in logList)
         {
             stringBuilder.Insert(0, line + "\n");
         }
-        log.text = stringBuilder.ToString();
+        return stringBuilder.ToString();
     }
 }

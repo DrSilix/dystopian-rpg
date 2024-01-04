@@ -39,6 +39,8 @@ public class UIController : MonoBehaviour
         currentMenu = 0;
         currentMenuContainerSize = 3;
 
+        new GameLog();
+
         LoadMenu("SafeHouseMenu", false, null);
     }
 
