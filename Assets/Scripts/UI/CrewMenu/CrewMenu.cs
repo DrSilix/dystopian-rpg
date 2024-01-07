@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -68,6 +69,14 @@ public class CrewMenu : IMenu
         ((Label)crewMember.Q("weapon-stats2")).text = (equippedWeapon.CurrentAmmoCount + equippedWeapon.AmmoHeld).ToString() + "/" +
                                                         equippedWeapon.AmmoCapacity.ToString() + " - " +
                                                         equippedWeapon.AmmunitionSO.displayName;
+
+        Armor equippedArmor = memberController.EquippedItems.EquippedArmor;
+
+        crewMember.Q("armor-icon").style.backgroundImage = new StyleBackground(equippedArmor.Sprite);
+        ((Label)crewMember.Q("armor-name")).text = "Name: " + equippedArmor.DisplayName;
+        ((Label)crewMember.Q("armor-type").parent.Children().First()).text = "Manf:";
+        ((Label)crewMember.Q("armor-type")).text = equippedArmor.Manufacturer;
+        ((Label)crewMember.Q("armor-stats1")).text = equippedArmor.ArmorRating.ToString();
     }
 
     /*private void OnClick(ClickEvent e)

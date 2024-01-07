@@ -22,8 +22,9 @@ public class ImportFromCSV
         Debug.Log(folderPath);
 
 
-        foreach (var type in scriptableObjectTypes)
+        foreach (Type type in scriptableObjectTypes)
         {
+            if (type.ToString() != "ArmorSO") continue;
             Debug.Log(type.ToString());
             WriteDataToSOs(type, soPath, folderPath);
         }
@@ -47,18 +48,18 @@ public class ImportFromCSV
         }
 
         StreamReader reader = new StreamReader(filePath);
-        string line = reader.ReadLine().Trim('"');
-        string[] headers = line.Split("\",\"");
+        string line = reader.ReadLine();
+        string[] headers = line.Split(",").Select(entry => entry.Trim('"')).ToArray();
 
         while (!reader.EndOfStream) {
-            line = reader.ReadLine().Trim('"');
+            line = reader.ReadLine();
             if (line.Length < 2)
             {
                 Debug.Log("empty line length was " + line.Length);
                 continue;
             }
             Debug.Log(line);
-            string[] data = line.Split("\",\"");
+            string[] data = line.Split(",").Select(entry => entry.Trim('"')).ToArray();
             if (!soDictionary.ContainsKey(data[0]))
             {
                 Debug.Log("no scriptable object associated with " + data[0]);
@@ -68,7 +69,7 @@ public class ImportFromCSV
             SerializedProperty serializedProperty = serializedObject.GetIterator();
             serializedProperty.NextVisible(true);
 
-            int i = 1;
+            int i = 2;
             while (serializedProperty.NextVisible(false))
             {
                 serializedProperty.SetUnderlyingValue(ConvertValueToType(data[i], serializedProperty));
@@ -76,9 +77,18 @@ public class ImportFromCSV
             }
             serializedObject.ApplyModifiedProperties();
             serializedObject.Update();
+            if (data[1] != soDictionary[data[0]].name) RenameAsset(soDictionary[data[0]], data[1]);
         }
 
         reader.Close();
+    }
+
+    private static void RenameAsset(ScriptableObject scriptableObject, string newName)
+    {
+
+        string assetPath = AssetDatabase.GetAssetPath(scriptableObject);
+        AssetDatabase.RenameAsset(assetPath, newName);
+        AssetDatabase.Refresh();
     }
 
     private static object ConvertValueToType(string value, SerializedProperty property)
@@ -89,6 +99,8 @@ public class ImportFromCSV
                 return Enum.Parse(typeof(WeaponType), value);
             case FiringMode firingModeValue:
                 return Enum.Parse(typeof(FiringMode), value);
+            case Attribute attributeValue:
+                return Enum.Parse(typeof(Attribute), value);
             case Sprite spriteValue:
                 return spriteValue;
             default:

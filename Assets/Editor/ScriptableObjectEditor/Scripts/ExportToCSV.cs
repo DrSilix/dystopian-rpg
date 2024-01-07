@@ -37,7 +37,7 @@ public static class ExportToCSV
         SerializedProperty serializedProperty = serializedObject.GetIterator();
         serializedProperty.NextVisible(true);
         StringBuilder header = new StringBuilder();
-        header.Append("\"GUID\",");
+        header.Append("\"GUID\",\"AssetName\",");
         while (serializedProperty.NextVisible(false))
         {
             header.Append("\"" + serializedProperty.name + "\",");
@@ -46,8 +46,8 @@ public static class ExportToCSV
         Debug.Log(header.ToString());
         writer.WriteLine(header.ToString());
 
-        writer.Close();
-        writer = new StreamWriter(filePath, true);
+        //writer.Close();
+        //writer = new StreamWriter(filePath, true);
 
         foreach (var item in scriptableObjects)
         {
@@ -57,6 +57,7 @@ public static class ExportToCSV
 
             StringBuilder entry = new StringBuilder();
             entry.Append("\"" + item.GetInstanceID() + "\",");
+            entry.Append("\"" + item.name + "\",");
             while (serializedProperty.NextVisible(false))
             {
                 entry.Append("\"" + serializedProperty.GetUnderlyingValue().ToString() + "\",");

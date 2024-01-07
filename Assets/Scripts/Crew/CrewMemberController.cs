@@ -11,12 +11,13 @@ public class CrewMemberController : MonoBehaviour
     public Attributes attributes;
     [Header("DefaultEquipment")]
     public WeaponSO defaultWeapon;
+    public ArmorSO defaultArmor;
 
     public Equipped EquippedItems { get; private set; }
 
     void Start()
     {
-        EquippedItems = new Equipped(new Weapon(defaultWeapon));
+        EquippedItems = new Equipped(new Weapon(defaultWeapon), new Armor(defaultArmor));
     }
 
     // TODO: this is a debugging hack, possible params will be attributes, skills, and equipment objects
@@ -45,23 +46,29 @@ public class CrewMemberController : MonoBehaviour
     public class Equipped
     {
         public Weapon EquippedWeapon { get; private set; }
-        //private Armor eArmor;
+        public Armor EquippedArmor { get; private set; }
 
-        public Equipped(Weapon weapon)//, TestArmor armor)
+        public Equipped(Weapon weapon, Armor armor)
         {
             EquippedWeapon = weapon;
-            //eArmor = armor.GetArmor();
+            EquippedArmor = armor;
         }
 
-        public bool Equip(object item)
+        public object Equip(object item)
         {
+            object oldEquipped;
             switch (item)
             {
                 case Weapon weaponValue:
+                    oldEquipped = EquippedWeapon;
                     EquippedWeapon = weaponValue;
-                    break;
+                    return oldEquipped;
+                case Armor armorValue:
+                    oldEquipped = EquippedArmor;
+                    EquippedArmor = armorValue;
+                    return oldEquipped;
             }
-            return true;
+            return null;
         }
     }
 }

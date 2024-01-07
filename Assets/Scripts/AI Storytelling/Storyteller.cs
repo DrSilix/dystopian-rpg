@@ -30,6 +30,7 @@ public class Storyteller : MonoBehaviour
     [SerializeField] private AssetLabelReference assetLabelRef;
 
     [SerializeField] public Dictionary<string, WeaponSO> WeaponSOs {  get; private set; } = new Dictionary<string, WeaponSO>();
+    [SerializeField] public Dictionary<string, ArmorSO> ArmorSOs { get; private set; } = new Dictionary<string, ArmorSO>();
     [SerializeField] public Dictionary<string, AmmunitionSO> AmmunitionSOs { get; private set; } = new Dictionary<string, AmmunitionSO>();
     
     public CrewController Crew {  get; private set; }
@@ -61,6 +62,9 @@ public class Storyteller : MonoBehaviour
                     break;
                 case AmmunitionSO s:
                     AmmunitionSOs.Add(s.displayName, s);
+                    break;
+                case ArmorSO s:
+                    ArmorSOs.Add(s.displayName, s);
                     break;
             }
         }).Task;

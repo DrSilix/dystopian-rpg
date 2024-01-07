@@ -58,3 +58,4 @@ MonoBehaviour:
     initiative: 16
     maxHealth: 0
   defaultWeapon: {fileID: 11400000, guid: 4e6897227a2463741a5f0e227d55f0f5, type: 2}
+  defaultArmor: {fileID: 11400000, guid: 85ae664db14ced443ac0f61028319125, type: 2}

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4e16ae36df62c147808ebe5e3671e5d, type: 3}
+  m_Name: Street Clothes
+  m_EditorClassIdentifier: 
+  ID: 0
+  displayName: Armor1
+  sprite: {fileID: 0}
+  manufacturer: 
+  shortDescription: 
+  longDescription: 
+  requiredAttribute: 0
+  requiredAttributeMinValue: -1
+  requiredAttributeMaxValue: -1
+  isModifyingPiece: 0
+  modifyingPieceDescription: 
+  armorRating: 0
+  modifiedAttribute: 0
+  modifiedAttributeValue: 0
+  stealthiness: 0
+  notability: 0
+  intimidation: 0
+  itemCapacity: 0
+  baseCost: 0
+  availability: 0
+  illegal: 0
