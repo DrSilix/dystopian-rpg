@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ammunition : ScriptableObject
+[CreateAssetMenu(menuName = "Database/Item/Ammunition")]
+public class AmmunitionSO : ScriptableObject
 {
     //UniqueID
-    public int UUID;
+    public int ID;
     //weapon type
     public WeaponType weaponType;
     //display name
@@ -32,7 +33,7 @@ public class Ammunition : ScriptableObject
     //availability
     public int availability;
     //legality
-    public int legality;
+    public int illegality;
     //list of special effects
     //public WeaponEffect weaponEffect;
 }

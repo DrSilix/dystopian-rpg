@@ -17,6 +17,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceLocations;
 using UnityEngine.UIElements;
 
 public class Storyteller : MonoBehaviour
@@ -24,7 +27,10 @@ public class Storyteller : MonoBehaviour
     [SerializeField] private GameObject crewPrefab;
     [SerializeField] private GameObject crewMember1Prefab, crewMember2Prefab, crewMember3Prefab;
     [SerializeField] private WorldController worldController;
-    
+    [SerializeField] private AssetLabelReference assetLabelRef;
+
+    [SerializeField] public List<WeaponSO> WeaponSOs {  get; private set; } = new List<WeaponSO>();
+    [SerializeField] public List<AmmunitionSO> AmmunitionSOs { get; private set; } = new List<AmmunitionSO>();
     
     public CrewController Crew {  get; private set; }
     
@@ -47,6 +53,19 @@ public class Storyteller : MonoBehaviour
     private void InitializeInstance()
     {
         GenerateCrew();
+        Addressables.LoadAssetsAsync<object>(assetLabelRef, (a) =>
+        {
+            switch (a)
+            {
+                case WeaponSO s:
+                    WeaponSOs.Add(s);
+                    break;
+                case AmmunitionSO s:
+                    AmmunitionSOs.Add(s);
+                    break;
+            }
+        });
+        Debug.Log("breakpoint");
     }
 
     public void StartHeist()

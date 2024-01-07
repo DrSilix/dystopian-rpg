@@ -1,0 +1,2 @@
+"GUID","ID","weaponType","displayName","sprite","manufacturer","shortDescription","longDescription","accuracyModifier","rangeModifier","damageModifier","armorPiercingModifier","baseCost","availability","illegality"
+"-26292","0","HeavyPistol","Regular Ammunition","Icon1_02 (UnityEngine.Sprite)","Farts","short desc","long descrip","0","0","0","0","1","0","0"

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53bf2717a4142cd489bd68cdd97f2234, type: 3}
-  m_Name: Cobalt Enforcer
+  m_Name: Cobalt Defender
   m_EditorClassIdentifier: 
-  UUID: 915765856
+  UUID: 1953072544
   generateID: 0
   weaponType: 5
   displayName: Cobalt Defender

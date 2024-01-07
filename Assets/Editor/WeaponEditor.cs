@@ -3,18 +3,18 @@ using UnityEditor;
 using UnityEngine;
 
 //We connect the editor with the Weapon SO class
-[CustomEditor(typeof(Weapon))]
+[CustomEditor(typeof(WeaponSO))]
 //We need to extend the Editor
 public class WeaponEditor : Editor
 {
     //Here we grab a reference to our Weapon SO
-    Weapon weapon;
+    WeaponSO weapon;
 
     private void OnEnable()
     {
         //target is by default available for you
         //because we inherite Editor
-        weapon = target as Weapon;
+        weapon = target as WeaponSO;
     }
 
     //Here is the meat of the script

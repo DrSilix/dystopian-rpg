@@ -1,6 +1,7 @@
 {
-	"ToolsVersion": "2023.4.22.0",
-	"RevisionHash": "6587d20b8fc56a00013a2ec9",
+	"ToolsVersion": "2024.1.0.0",
+	"RevisionHash": "65978ebafdfebd55d4123457",
+	"ChangeNumber": 18,
 	"Collections": {
 		"Schema": [
 			{
@@ -113,7 +114,8 @@
 						"Uniqueness": 0,
 						"Requirement": 2,
 						"ReferenceType": {
-							"Id": "d40d8eb1a23248b69b252eea"
+							"Id": "d40d8eb1a23248b69b252eea",
+							"DisplayName": "Properties"
 						},
 						"Size": 0,
 						"Specification": null
@@ -510,7 +512,8 @@
 						"Uniqueness": 0,
 						"Requirement": 0,
 						"ReferenceType": {
-							"Id": "18d4bf318f3c49688087dbed"
+							"Id": "18d4bf318f3c49688087dbed",
+							"DisplayName": "Schemas"
 						},
 						"Size": 0,
 						"Specification": null
@@ -649,8 +652,6 @@
 				"Recoil": 0,
 				"Ammo": 21
 			}
-		],
-		"SchemaProperty": [
 		]
 	}
 }
