@@ -16,7 +16,6 @@ using UnityEngine;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.UIElements;
 using static Unity.Collections.AllocatorManager;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 using Random = UnityEngine.Random;
 
 // Aggregates are primarily used here so far...

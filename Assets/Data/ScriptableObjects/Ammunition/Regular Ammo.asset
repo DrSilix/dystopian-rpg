@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 602015a05e39f944b80d432f78678a2f, type: 3}
   m_Name: Regular Ammo
   m_EditorClassIdentifier: 
-  UUID: 0
-  weaponType: 0
-  displayName: 
-  sprite: {fileID: 0}
-  manufacturer: 
-  shortDescription: 
-  longDescription: 
+  ID: 0
+  weaponType: 6
+  displayName: Regular Ammunition
+  sprite: {fileID: 21300000, guid: 8b2514eba37259e4c8043f5ed188ed69, type: 3}
+  manufacturer: Farts
+  shortDescription: short desc
+  longDescription: long descrip
   accuracyModifier: 0
   rangeModifier: 0
   damageModifier: 0
   armorPiercingModifier: 0
-  baseCost: 0
+  baseCost: 1
   availability: 0
-  legality: 0
+  illegality: 0

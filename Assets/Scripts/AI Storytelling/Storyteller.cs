@@ -29,8 +29,8 @@ public class Storyteller : MonoBehaviour
     [SerializeField] private WorldController worldController;
     [SerializeField] private AssetLabelReference assetLabelRef;
 
-    [SerializeField] public List<WeaponSO> WeaponSOs {  get; private set; } = new List<WeaponSO>();
-    [SerializeField] public List<AmmunitionSO> AmmunitionSOs { get; private set; } = new List<AmmunitionSO>();
+    [SerializeField] public Dictionary<string, WeaponSO> WeaponSOs {  get; private set; } = new Dictionary<string, WeaponSO>();
+    [SerializeField] public Dictionary<string, AmmunitionSO> AmmunitionSOs { get; private set; } = new Dictionary<string, AmmunitionSO>();
     
     public CrewController Crew {  get; private set; }
     
@@ -50,22 +50,21 @@ public class Storyteller : MonoBehaviour
         InitializeInstance();
     }
 
-    private void InitializeInstance()
+    private async void InitializeInstance()
     {
-        GenerateCrew();
-        Addressables.LoadAssetsAsync<object>(assetLabelRef, (a) =>
+        await Addressables.LoadAssetsAsync<object>(assetLabelRef, (a) =>
         {
             switch (a)
             {
                 case WeaponSO s:
-                    WeaponSOs.Add(s);
+                    WeaponSOs.Add(s.displayName, s);
                     break;
                 case AmmunitionSO s:
-                    AmmunitionSOs.Add(s);
+                    AmmunitionSOs.Add(s.displayName, s);
                     break;
             }
-        });
-        Debug.Log("breakpoint");
+        }).Task;
+        GenerateCrew();
     }
 
     public void StartHeist()

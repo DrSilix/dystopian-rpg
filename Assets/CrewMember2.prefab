@@ -57,15 +57,4 @@ MonoBehaviour:
     luck: 10
     initiative: 16
     maxHealth: 0
-  pistol:
-    name: Pip Squeak
-    accuracy: 6
-    damage: 6
-    armor_penetration: 0
-    modes: 2
-    recoil: 0
-    ammo: 16
-  armor:
-    name: Light Dregs
-    defense: 6
-    weight: 6
+  defaultWeapon: {fileID: 11400000, guid: 4e6897227a2463741a5f0e227d55f0f5, type: 2}

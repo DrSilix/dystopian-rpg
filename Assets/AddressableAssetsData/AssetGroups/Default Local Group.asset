@@ -16,7 +16,41 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: f075cfee55e6a7545aec3a83f3c7b339
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 32d1616873fc39448bb349cdd2364e9a
+    m_Address: Assets/Data/ScriptableObjects/Ammunition
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Ammunition
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5cbd01eac01b8cc4a8adb208cfcf3b7a
+    m_Address: Assets/Data/ScriptableObjects/Weapons/Heavy Pistols
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Weapons
+    - Pistols
+    - HeavyPistol
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d583b4c5a554ca94eaa4b7f5dadbe359
+    m_Address: Assets/Data/ScriptableObjects/Weapons/Light Pistols
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Weapons
+    - Pistols
+    - LightPistol
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bff96ac9a7144144f839431dd9449fec
+    m_Address: Assets/Data/ScriptableObjects/Weapons/Machine Pistols
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Weapons
+    - Pistols
+    - MachinePistol
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e5c3509057ec7824c911d02e413653d2, type: 2}
   m_SchemaSet:

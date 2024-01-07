@@ -55,6 +55,19 @@ public class CrewMenu : IMenu
             attributes[i] = crewMember.Q(((Attribute)i).ToString() + "-value") as Label;
             attributes[i].text = memberController.GetAttribute((Attribute)i).ToString();
         }
+
+        Weapon equippedWeapon = memberController.EquippedItems.EquippedWeapon;
+
+        crewMember.Q("weapon-icon").style.backgroundImage = new StyleBackground(equippedWeapon.Sprite);
+        ((Label)crewMember.Q("weapon-name")).text = "Name: " + equippedWeapon.DisplayName;
+        ((Label)crewMember.Q("weapon-type")).text = equippedWeapon.WeaponType.ToString();
+        ((Label)crewMember.Q("weapon-stats1")).text = equippedWeapon.Accuracy.ToString() + "/" +
+                                                      equippedWeapon.Damage.ToString() + "/" +
+                                                      equippedWeapon.ArmorPiercing.ToString() + "/" +
+                                                      equippedWeapon.Recoil.ToString();
+        ((Label)crewMember.Q("weapon-stats2")).text = (equippedWeapon.CurrentAmmoCount + equippedWeapon.AmmoHeld).ToString() + "/" +
+                                                        equippedWeapon.AmmoCapacity.ToString() + " - " +
+                                                        equippedWeapon.AmmunitionSO.displayName;
     }
 
     /*private void OnClick(ClickEvent e)

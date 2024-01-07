@@ -57,15 +57,4 @@ MonoBehaviour:
     luck: 12
     initiative: 11
     maxHealth: 0
-  pistol:
-    name: Gunny Gunnerson
-    accuracy: 7
-    damage: 8
-    armor_penetration: 0
-    modes: 2
-    recoil: 0
-    ammo: 16
-  armor:
-    name: Gold Plated
-    defense: 15
-    weight: 15
+  defaultWeapon: {fileID: 11400000, guid: e1ece79a7de57934e9a0cf1ca31a6009, type: 2}

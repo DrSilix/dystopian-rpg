@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: f075cfee55e6a7545aec3a83f3c7b339
   m_currentHash:
     serializedVersion: 2
-    Hash: 00000000000000000000000000000000
+    Hash: d6a140275730e9b3f1f69e2d4555389e
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
@@ -35,10 +35,10 @@ MonoBehaviour:
   m_CheckForContentUpdateRestrictionsOption: 0
   m_MonoScriptBundleCustomNaming: 
   m_RemoteCatalogBuildPath:
-    m_Id: 
+    m_Id: eded7943f2200124e85f2fb83c36e0e9
   m_RemoteCatalogLoadPath:
-    m_Id: 
-  m_ContentStateBuildPathProfileVariableName: 
+    m_Id: fd4a848b3d3bc264d9ebb3801633d3ff
+  m_ContentStateBuildPathProfileVariableName: <default settings path>
   m_CustomContentStateBuildPath: 
   m_ContentStateBuildPath: 
   m_BuildAddressablesWithPlayerBuild: 0
@@ -87,6 +87,12 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - Ammunition
+    - Weapons
+    - Pistols
+    - HeavyPistol
+    - LightPistol
+    - MachinePistol
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: fbaea7a7e0e6d814b98257843e74d74c, type: 2}

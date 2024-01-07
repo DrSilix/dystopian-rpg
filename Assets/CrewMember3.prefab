@@ -57,15 +57,4 @@ MonoBehaviour:
     luck: 13
     initiative: 11
     maxHealth: 0
-  pistol:
-    name: Brrrt Machine
-    accuracy: 5
-    damage: 8
-    armor_penetration: 0
-    modes: 4
-    recoil: 1
-    ammo: 24
-  armor:
-    name: Armored Coat
-    defense: 9
-    weight: 9
+  defaultWeapon: {fileID: 11400000, guid: 84a183ad8d176a14b9ec28f8c394fce0, type: 2}

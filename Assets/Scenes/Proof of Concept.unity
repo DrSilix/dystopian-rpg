@@ -2173,6 +2173,8 @@ MonoBehaviour:
   crewMember2Prefab: {fileID: 8512946586223883271, guid: 6fc43b9a84b2d1041824caa8e6081914, type: 3}
   crewMember3Prefab: {fileID: 4284562609061926150, guid: 87206496ccfec264b8f98586c5781b36, type: 3}
   worldController: {fileID: 1616297426}
+  assetLabelRef:
+    m_LabelString: default
 --- !u!4 &1899153410
 Transform:
   m_ObjectHideFlags: 0
@@ -2629,6 +2631,8 @@ MonoBehaviour:
     asset: {fileID: 9197481963319205126, guid: 343c627e557e2424ea3e0dc97ebd293a, type: 3}
   - name: MainMenu
     asset: {fileID: 9197481963319205126, guid: 1823ee64eae1cc54b9dd7fe8f5eb05f2, type: 3}
+  - name: GearMenu
+    asset: {fileID: 9197481963319205126, guid: 898fe6aab51d2624999a93d1e1c1e3f1, type: 3}
 --- !u!4 &2110539168
 Transform:
   m_ObjectHideFlags: 0

@@ -1,0 +1,11 @@
+:root {
+    --text-color: rgb(255, 255, 255);
+    --bg-color-dark: rgb(26, 26, 26);
+    --bg-color-medium: rgb(51, 51, 51);
+    --bg-color-light: rgb(77, 77, 77);
+    --accent-color: #FF0EE5;
+}
+
+* {
+    color: var(--text-color);
+}

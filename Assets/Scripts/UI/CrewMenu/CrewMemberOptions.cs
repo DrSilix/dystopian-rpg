@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 public class CrewMemberOptions : IMenu
 {
     private Button attributesButton;
+    private Button gearButton;
     private Button returnButton;
 
     private int crewMemberId;
@@ -21,12 +22,14 @@ public class CrewMemberOptions : IMenu
         returnButton = rootElem.Q("return") as Button;
 
         attributesButton = rootElem.Q("attributes") as Button;
+        gearButton = rootElem.Q("gear") as Button;
     }
 
     public void RegisterCallbacks()
     {
         returnButton.RegisterCallback<ClickEvent>(OnClick);
         attributesButton.RegisterCallback<ClickEvent>(OnClick);
+        gearButton.RegisterCallback<ClickEvent>(OnClick);
     }
 
     /*private void OnClick(ClickEvent e)
@@ -53,6 +56,9 @@ public class CrewMemberOptions : IMenu
             case "attributes":
                 CallLoadMenu("CrewAttributesMenu", true, crewMemberId);
                 break;
+            case "gear":
+                CallLoadMenu("GearMenu", true, crewMemberId);
+                break;
             case "return":
                 CallUnloadMenu(null);
                 break;
@@ -77,6 +83,7 @@ public class CrewMemberOptions : IMenu
     {
         returnButton.UnregisterCallback<ClickEvent>(OnClick);
         attributesButton.UnregisterCallback<ClickEvent>(OnClick);
+        gearButton.UnregisterCallback<ClickEvent>(OnClick);
     }
 
     public void Update() { }
