@@ -12,24 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4e16ae36df62c147808ebe5e3671e5d, type: 3}
   m_Name: Armored ExoSuit
   m_EditorClassIdentifier: 
-  ID: 0
-  displayName: Armor1
-  sprite: {fileID: 0}
-  manufacturer: 
-  shortDescription: 
-  longDescription: 
+  ID: 8
+  displayName: Armored ExoSuit
+  sprite: {fileID: 21300000, guid: b686b0f69950b4b4c8f18f7abee69fb6, type: 3}
+  manufacturer: Tukiyo Dynamics
+  shortDescription: Armor plated SynthLeather jumpsuit with Nano SteelSilk tendons
+    weaved into the fabric to provide enhanced strength and reflexes
+  longDescription: Armor plated SynthLeather jumpsuit with Nano SteelSilk tendons
+    weaved into the fabric to provide enhanced strength and reflexes
   requiredAttribute: 0
   requiredAttributeMinValue: -1
   requiredAttributeMaxValue: -1
   isModifyingPiece: 0
   modifyingPieceDescription: 
-  armorRating: 0
-  modifiedAttribute: 0
-  modifiedAttributeValue: 0
-  stealthiness: 0
-  notability: 0
-  intimidation: 0
-  itemCapacity: 0
-  baseCost: 0
-  availability: 0
-  illegal: 0
+  armorRating: 13
+  modifiedAttribute: 3
+  modifiedAttributeValue: 1
+  stealthiness: -2
+  notability: 2
+  intimidation: 1
+  itemCapacity: 4
+  baseCost: 4800
+  availability: 3
+  illegal: 1

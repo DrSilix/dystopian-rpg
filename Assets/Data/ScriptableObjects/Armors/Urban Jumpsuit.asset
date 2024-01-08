@@ -12,24 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4e16ae36df62c147808ebe5e3671e5d, type: 3}
   m_Name: Urban Jumpsuit
   m_EditorClassIdentifier: 
-  ID: 0
-  displayName: Armor1
-  sprite: {fileID: 0}
-  manufacturer: 
-  shortDescription: 
-  longDescription: 
+  ID: 5
+  displayName: Urban Jumpsuit
+  sprite: {fileID: 21300000, guid: 854627046e576ac43bdbafa1f00e371a, type: 3}
+  manufacturer: NorthPulse Dynamics
+  shortDescription: SynthLeather armored jumpsuit for urban protection
+  longDescription: SynthLeather armored jumpsuit for urban protection
   requiredAttribute: 0
   requiredAttributeMinValue: -1
   requiredAttributeMaxValue: -1
   isModifyingPiece: 0
   modifyingPieceDescription: 
-  armorRating: 0
+  armorRating: 8
   modifiedAttribute: 0
   modifiedAttributeValue: 0
   stealthiness: 0
-  notability: 0
+  notability: 1
   intimidation: 0
-  itemCapacity: 0
-  baseCost: 0
+  itemCapacity: 4
+  baseCost: 1000
   availability: 0
   illegal: 0

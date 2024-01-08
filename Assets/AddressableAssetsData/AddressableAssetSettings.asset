@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: f075cfee55e6a7545aec3a83f3c7b339
   m_currentHash:
     serializedVersion: 2
-    Hash: d6a140275730e9b3f1f69e2d4555389e
+    Hash: 7b19963421045bfaf4ceca823a6e776d
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
@@ -93,6 +93,7 @@ MonoBehaviour:
     - HeavyPistol
     - LightPistol
     - MachinePistol
+    - Armor
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: fbaea7a7e0e6d814b98257843e74d74c, type: 2}

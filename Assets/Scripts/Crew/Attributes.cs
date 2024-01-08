@@ -12,9 +12,7 @@ public enum Attribute
     logic,
     intuition,
     charisma,
-    luck,
-    initiative,
-    health
+    luck
 }
 
 
@@ -29,8 +27,6 @@ public class Attributes
     public int willpower, logic, intuition, charisma;
 
     public int luck;
-    public int initiative;
-    public int maxHealth;
 
     public Attributes(int body, int agility, int reaction, int strength, int willpower, int logic, int intuition, int charisma)
     {
@@ -43,13 +39,9 @@ public class Attributes
         this.intuition = intuition;
         this.charisma = charisma;
         CalculateLuck();
-        CalculateInitiative();
-        CalculateMaxHealth();
     }
 
-    private void CalculateLuck() { luck = charisma + intuition - logic; }
-    private void CalculateInitiative() { initiative = reaction + intuition; }
-    private void CalculateMaxHealth() { maxHealth = Mathf.CeilToInt((float)8 + ((float)body / 2)); }
+    private void CalculateLuck() { luck = Mathf.CeilToInt(((float)(agility + reaction + intuition)) / 3); }
 
     public int Get(Attribute attribute)
     {
@@ -64,8 +56,6 @@ public class Attributes
             case Attribute.intuition: return intuition;
             case Attribute.charisma: return charisma;
             case Attribute.luck: return luck;
-            case Attribute.initiative: return initiative;
-            case Attribute.health: return maxHealth;
             default: return 0;
         }
     }
@@ -83,8 +73,6 @@ public class Attributes
             case "intuition": return intuition;
             case "charisma": return charisma;
             case "luck": return luck;
-            case "initiative": return initiative;
-            case "health": return maxHealth;
             default: return 0;
         }
     }
@@ -95,14 +83,12 @@ public class Attributes
         {
             case Attribute.body:
                 body = value;
-                CalculateMaxHealth();
                 break;
             case Attribute.agility:
                 agility = value;
                 break;
             case Attribute.reaction:
                 reaction = value;
-                CalculateInitiative();
                 break;
             case Attribute.strength:
                 strength = value;
@@ -117,7 +103,6 @@ public class Attributes
             case Attribute.intuition:
                 intuition = value;
                 CalculateLuck();
-                CalculateInitiative();
                 break;
             case Attribute.charisma:
                 charisma = value;

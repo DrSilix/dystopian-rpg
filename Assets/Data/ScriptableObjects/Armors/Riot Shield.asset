@@ -12,24 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4e16ae36df62c147808ebe5e3671e5d, type: 3}
   m_Name: Riot Shield
   m_EditorClassIdentifier: 
-  ID: 0
-  displayName: Armor1
-  sprite: {fileID: 0}
-  manufacturer: 
-  shortDescription: 
-  longDescription: 
-  requiredAttribute: 0
-  requiredAttributeMinValue: -1
+  ID: 10
+  displayName: Riot Shield
+  sprite: {fileID: 21300000, guid: 35ff1acdc8d08304a8dc793312f1c8d0, type: 3}
+  manufacturer: Peacekeeper Innovations
+  shortDescription: Clear PlasSynth shield capable of taking a bullet for the wielder
+  longDescription: Clear PlasSynth shield capable of taking a bullet for the wielder
+  requiredAttribute: 3
+  requiredAttributeMinValue: 2
   requiredAttributeMaxValue: -1
-  isModifyingPiece: 0
-  modifyingPieceDescription: 
-  armorRating: 0
+  isModifyingPiece: 1
+  modifyingPieceDescription: Shield
+  armorRating: 3
   modifiedAttribute: 0
   modifiedAttributeValue: 0
-  stealthiness: 0
-  notability: 0
-  intimidation: 0
+  stealthiness: -1
+  notability: 1
+  intimidation: 1
   itemCapacity: 0
-  baseCost: 0
-  availability: 0
+  baseCost: 400
+  availability: 1
   illegal: 0

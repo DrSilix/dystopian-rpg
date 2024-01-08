@@ -11,6 +11,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
@@ -28,7 +29,7 @@ public class CrewController : MonoBehaviour
     [SerializeField]
     private int crewLuck;
     [SerializeField]
-    private CrewMemberController crewMember1, crewMember2, crewMember3;
+    public List<CrewMemberController> CrewMembers { get; private set; }
 
     private bool isMoving = false;
     private Vector3 origin, destination;
@@ -64,33 +65,27 @@ public class CrewController : MonoBehaviour
         currentMoveTime = 0f;
     }
 
-    public void AddCrewMembers(CrewMemberController member1, CrewMemberController member2, CrewMemberController member3)
+    public void AddCrewMember(CrewMemberController member)
     {
-        crewMember1 = member1;
-        crewMember2 = member2;
-        crewMember3 = member3;
+        CrewMembers.Add(member);
     }
 
-    public void AddCrewMembers(GameObject member1, GameObject member2, GameObject member3)
+    public void AddCrewMember(GameObject member)
     {
-        crewMember1 = member1.GetComponent<CrewMemberController>();
-        crewMember2 = member2.GetComponent<CrewMemberController>();
-        crewMember3 = member3.GetComponent<CrewMemberController>();
+        CrewMembers.Add(member.GetComponent<CrewMemberController>());
     }
 
     public int GetCrewAttribute(Attribute attribute, Aggregate aggregate = Aggregate.max)
     {
         switch (aggregate) {
             case Aggregate.max:
-                return Mathf.Max(crewMember1.GetAttribute(attribute), crewMember1.GetAttribute(attribute), crewMember1.GetAttribute(attribute));
+                return CrewMembers.Select(m => m.GetAttribute(attribute)).ToArray().Max();
             case Aggregate.min:
-                return Mathf.Min(crewMember1.GetAttribute(attribute), crewMember1.GetAttribute(attribute), crewMember1.GetAttribute(attribute));
+                return CrewMembers.Select(m => m.GetAttribute(attribute)).ToArray().Min();
             case Aggregate.sum:
-                return (crewMember1.GetAttribute(attribute) +
-                        crewMember2.GetAttribute(attribute) +
-                        crewMember3.GetAttribute(attribute));
+                return CrewMembers.Select(m => m.GetAttribute(attribute)).ToArray().Sum();
             case Aggregate.avg:
-                return Mathf.CeilToInt((float)GetCrewAttribute(attribute, Aggregate.sum) / 3);
+                return Mathf.CeilToInt((float)CrewMembers.Select(m => m.GetAttribute(attribute)).ToArray().Average());
         }
         return -1;
     }
@@ -103,28 +98,23 @@ public class CrewController : MonoBehaviour
     /// <returns></returns>
     public int GetCrewAttribute(Attribute attribute, int crewMember)
     {
-        if (crewMember == 1) return crewMember1.GetAttribute(attribute);
-        if (crewMember == 2) return crewMember2.GetAttribute(attribute);
-        return crewMember3.GetAttribute(attribute);
+        return CrewMembers[crewMember].GetAttribute(attribute);
     }
 
     public CrewMemberController GetCrewMember(int crewMember)
     {
-        if (crewMember == 1) return crewMember1;
-        if (crewMember == 2) return crewMember2;
-        return crewMember3;
+        return CrewMembers[crewMember];
     }
 
     // crew members (1, 2, 3)
     private int GetCrewMemberWithAttributeByAggregate(Attribute attribute1, Attribute attribute2, Aggregate aggregate = Aggregate.max)
     {
         if (aggregate == Aggregate.sum || aggregate == Aggregate.avg) return -1;
+
+        int[] crewAttributes = CrewMembers.Select(m => m.GetAttribute(attribute1) + m.GetAttribute(attribute2)).ToArray();
         
-        int[] crewAttributes = new int[] {crewMember1.GetAttribute(attribute1) + crewMember1.GetAttribute(attribute2),
-                                          crewMember2.GetAttribute(attribute1) + crewMember2.GetAttribute(attribute2),
-                                          crewMember3.GetAttribute(attribute1) + crewMember3.GetAttribute(attribute2)};
         int max = -1, min = -1;
-        for (int i = 0; i < 3; i++ )
+        for (int i = 0; i < crewAttributes.Length; i++ )
         {
             if (max == -1 || crewAttributes[i] > crewAttributes[max]) max = i;
             if (min == -1 || crewAttributes[i] < crewAttributes[min]) min = i;
@@ -141,12 +131,8 @@ public class CrewController : MonoBehaviour
         }
         else
         {
-            int crewMember = GetCrewMemberWithAttributeByAggregate(attribute1, attribute2, aggregate);
-            CrewMemberController crewMemberController = null;
-            if (crewMember == 1) crewMemberController = crewMember1;
-            if (crewMember == 2) crewMemberController = crewMember2;
-            if (crewMember == 3) crewMemberController = crewMember3;
-            return (crewMemberController, Roll.Basic(GetCrewAttribute(attribute1, crewMember) + GetCrewAttribute(attribute2, crewMember) + modifier));
+            int memberID = GetCrewMemberWithAttributeByAggregate(attribute1, attribute2, aggregate);
+            return (CrewMembers[memberID], Roll.Basic(GetCrewAttribute(attribute1, memberID) + GetCrewAttribute(attribute2, memberID) + modifier));
         }
     }
 

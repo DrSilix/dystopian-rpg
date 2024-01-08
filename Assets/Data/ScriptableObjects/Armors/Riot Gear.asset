@@ -12,24 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4e16ae36df62c147808ebe5e3671e5d, type: 3}
   m_Name: Riot Gear
   m_EditorClassIdentifier: 
-  ID: 0
-  displayName: Armor1
-  sprite: {fileID: 0}
-  manufacturer: 
-  shortDescription: 
-  longDescription: 
-  requiredAttribute: 0
-  requiredAttributeMinValue: -1
+  ID: 7
+  displayName: Riot Gear
+  sprite: {fileID: 21300000, guid: fcbd9f7f8c1f72743b7749d1f040c839, type: 3}
+  manufacturer: Peacekeeper Innovations
+  shortDescription: Set of light SynthCloth covered in ballistic plates
+  longDescription: Set of light SynthCloth covered in ballistic plates
+  requiredAttribute: 3
+  requiredAttributeMinValue: 3
   requiredAttributeMaxValue: -1
   isModifyingPiece: 0
   modifyingPieceDescription: 
-  armorRating: 0
+  armorRating: 12
   modifiedAttribute: 0
   modifiedAttributeValue: 0
-  stealthiness: 0
-  notability: 0
-  intimidation: 0
-  itemCapacity: 0
-  baseCost: 0
-  availability: 0
+  stealthiness: -1
+  notability: 2
+  intimidation: 2
+  itemCapacity: 5
+  baseCost: 1800
+  availability: 2
   illegal: 0

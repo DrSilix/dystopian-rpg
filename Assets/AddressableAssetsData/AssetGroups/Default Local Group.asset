@@ -51,6 +51,13 @@ MonoBehaviour:
     - MachinePistol
     - default
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 19101b251f77ac1419c9e57c09dde2df
+    m_Address: Assets/Data/ScriptableObjects/Armors
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    - Armor
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e5c3509057ec7824c911d02e413653d2, type: 2}
   m_SchemaSet:
