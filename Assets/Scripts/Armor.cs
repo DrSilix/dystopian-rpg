@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
+using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 public class Armor
 {
@@ -53,5 +55,12 @@ public class Armor
         Cost = armorSO.baseCost;
         Availability = armorSO.availability;
         Illegal = armorSO.illegal;
+    }
+
+    public override string ToString()
+    {
+        StringBuilder sb = new();
+        sb.Append($"{DisplayName}|{ArmorRating}");
+        return sb.ToString();
     }
 }

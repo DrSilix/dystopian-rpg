@@ -31,4 +31,14 @@ public static class Roll
         }
         return successes;
     }
+
+    public static int Initiative(int dice)
+    {
+        int result = 0;
+        for(int i = 0;i < dice; i++)
+        {
+            result += Random.Range(1, (6 + 1));
+        }
+        return result;
+    }
 }

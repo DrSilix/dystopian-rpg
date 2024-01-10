@@ -12,9 +12,9 @@ public class StealDataEvent : BaseEvent
         Modifier = 0;
         TargetSuccesses = Random.Range(5, 12);
         MaxFails = TargetSuccesses + 8;
-        DifficultyRating = 2;
+        DifficultyRating = 3;
         roundNumber = 0;
-        randomEventRound = Random.Range(12, 18);
+        randomEventRound = Random.Range(3, TargetSuccesses + 1);
         string msg = "\"Finally!! Get the data smarty pants and let's jolt\" \"Alright I'm on it but it's going to take me about 10 minutes. Big guy stand watch over there. Slick can you help me with this\"";
         Debug.Log(msg);
         GameLog.Instance.PostMessageToLog(msg);
@@ -26,9 +26,9 @@ public class StealDataEvent : BaseEvent
         // hacker attempts to steal data
         // face assists
         // enforcer keeps watch
-        CrewMemberController hacker = Crew.GetCrewMember(2);
-        CrewMemberController face = Crew.GetCrewMember(3);
-        CrewMemberController enforcer = Crew.GetCrewMember(1);
+        CrewMemberController hacker = Crew.GetCrewMember(1);
+        CrewMemberController face = Crew.GetCrewMember(2);
+        CrewMemberController enforcer = Crew.GetCrewMember(0);
         
         
         (int faceRoll, int faceCrit) = face.GetAttributeAdvancedRoll(Attribute.logic, Attribute.charisma, 0);
@@ -41,7 +41,7 @@ public class StealDataEvent : BaseEvent
         Debug.Log("Enforcer keeps watch with " + enforceRoll + " successes - \"Everythings clear, no one in sight.\"");
         GameLog.Instance.PostMessageToLog("Enforcer keeps watch with " + enforceRoll + " successes - \"Everythings clear, no one in sight.\"");
 
-        if (roundNumber == randomEventRound && enforceRoll < DifficultyRating + 1)
+        if (roundNumber == randomEventRound && enforceRoll < DifficultyRating + 33)
         {
             Debug.Log("\"INTRUDER!!! OVER THERE!\" \"Shit! we've been spotted, let's jolt!\"");
             GameLog.Instance.PostMessageToLog("\"INTRUDER!!! OVER THERE!\" \"Shit! we've been spotted, let's jolt!\"");

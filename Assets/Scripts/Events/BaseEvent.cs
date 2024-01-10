@@ -79,7 +79,7 @@ public abstract class BaseEvent : MonoBehaviour
     private int maxFails;
 
     public int DifficultyRating { get => difficultyRating; set { difficultyRating = (value >= 1) ? value : 1; } }
-    public int TargetSuccesses { get; set; }
+    public int TargetSuccesses { get; set; } = 1;
     public int MaxFails { get => maxFails; set { maxFails = (value >= 1) ? value : 1; } }
     public int Successes { get; set; } = 0;
     public int Fails { get; set; } = 0;
@@ -91,6 +91,7 @@ public abstract class BaseEvent : MonoBehaviour
     public Aggregate RollAggregate { get; set; }
 
     public CrewController Crew { get; set; }
+    public CrewController EnemyCrew { get; set; }
 
     public virtual void EventStart(CrewController crew)
     {

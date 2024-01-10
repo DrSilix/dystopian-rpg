@@ -25,54 +25,14 @@ public enum Aggregate { min, max, avg, sum }
 public class CrewController : MonoBehaviour
 {
     [SerializeField]
-    private int crewHealth;
-    [SerializeField]
-    private int crewLuck;
-    [SerializeField]
-    public List<CrewMemberController> CrewMembers { get; private set; }
+    public List<CrewMemberController> CrewMembers { get; private set; } = new();
 
-    private bool isMoving = false;
-    private Vector3 origin, destination;
-    private float moveStartTime, moveEndTime;
-    private float currentMoveTime;
-
-    void OnEnable()
+    public void AddCrewMember(CrewMemberController member) { CrewMembers.Add(member); }
+    public void AddCrewMembers(params CrewMemberController[] members) { foreach(CrewMemberController c in members) AddCrewMember(c); }
+    public void AddCrewMember(GameObject member) { CrewMembers.Add(member.GetComponent<CrewMemberController>()); }
+    public void AddCrewMembers(params GameObject[] members)
     {
-        crewHealth = 100;
-        crewLuck = 12;
-        Camera mainCam = Camera.main;
-        mainCam.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, mainCam.transform.position.z);
-        mainCam.transform.parent = transform;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (!isMoving) return;
-        currentMoveTime += Time.deltaTime;
-        // if (currentMoveTime > moveEndTime) currentMoveTime = moveEndTime;
-        transform.position = Vector3.Lerp(origin, destination, currentMoveTime / moveEndTime);
-        if (currentMoveTime >= moveEndTime) isMoving = false;
-    }
-
-    public void moveTo(Vector3 pos, float seconds)
-    {
-        isMoving = true;
-        origin = transform.position;
-        destination = pos;
-        moveStartTime = Time.time;
-        moveEndTime = seconds;
-        currentMoveTime = 0f;
-    }
-
-    public void AddCrewMember(CrewMemberController member)
-    {
-        CrewMembers.Add(member);
-    }
-
-    public void AddCrewMember(GameObject member)
-    {
-        CrewMembers.Add(member.GetComponent<CrewMemberController>());
+        foreach (GameObject c in members) AddCrewMember(c.GetComponent<CrewMemberController>());
     }
 
     public int GetCrewAttribute(Attribute attribute, Aggregate aggregate = Aggregate.max)
@@ -94,7 +54,7 @@ public class CrewController : MonoBehaviour
     /// Gets the integer value of the indicated crew members attribute
     /// </summary>
     /// <param name="attribute">The attribute to get the value of</param>
-    /// <param name="crewMember">The integer [1-3] representation of the crew member</param>
+    /// <param name="crewMember">The integer [0-n] representation of the crew member</param>
     /// <returns></returns>
     public int GetCrewAttribute(Attribute attribute, int crewMember)
     {
@@ -120,8 +80,8 @@ public class CrewController : MonoBehaviour
             if (min == -1 || crewAttributes[i] < crewAttributes[min]) min = i;
         }
 
-        if (aggregate == Aggregate.max) return max + 1;
-        return min + 1;
+        if (aggregate == Aggregate.max) return max;
+        return min;
     }
 
     public (CrewMemberController crewMember, int result) GetCrewRoll (Attribute attribute1, Attribute attribute2, int modifier = 0, Aggregate aggregate = Aggregate.avg) {
@@ -135,14 +95,4 @@ public class CrewController : MonoBehaviour
             return (CrewMembers[memberID], Roll.Basic(GetCrewAttribute(attribute1, memberID) + GetCrewAttribute(attribute2, memberID) + modifier));
         }
     }
-
-    // TODO: add the ability to ask all crew members to roll
-
-    public int GetLuckRoll() { return Random.Range(0, 20) + crewLuck; }
-
-    public int GetLuck() { return crewLuck; }
-
-    public int TakeDamage(int damage) { return crewHealth -= damage; }
-
-    public int GetHealth() { return crewHealth; }
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5913988305402959568}
   - component: {fileID: 7748591349535624310}
+  - component: {fileID: -886999698087382891}
   m_Layer: 0
   m_Name: CrewController
   m_TagString: Untagged
@@ -44,8 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2759f860c9871264687ddc7b84cf0fa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crewHealth: 0
-  crewLuck: 0
-  crewMember1: {fileID: 2874425772416204613, guid: eec6391fb6d9d1244af2bcbeea196300, type: 3}
-  crewMember2: {fileID: 6754971942279967501, guid: 6fc43b9a84b2d1041824caa8e6081914, type: 3}
-  crewMember3: {fileID: 2409443881896183804, guid: 87206496ccfec264b8f98586c5781b36, type: 3}
+--- !u!114 &-886999698087382891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2710483946860328104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b669f9935eb6b148bb4bc99dae4242b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

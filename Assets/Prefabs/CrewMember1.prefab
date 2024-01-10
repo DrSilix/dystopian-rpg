@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4284562609061926150
+--- !u!1 &8464694986278701474
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4857354607439365693}
-  - component: {fileID: 2409443881896183804}
+  - component: {fileID: 6909999630385494930}
+  - component: {fileID: 2874425772416204613}
   m_Layer: 0
-  m_Name: CrewMember3
+  m_Name: CrewMember1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4857354607439365693
+--- !u!4 &6909999630385494930
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4284562609061926150}
+  m_GameObject: {fileID: 8464694986278701474}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,30 +32,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2409443881896183804
+--- !u!114 &2874425772416204613
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4284562609061926150}
+  m_GameObject: {fileID: 8464694986278701474}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa6e1f50f0a90b74fbaf90732ac02c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alias: Slick
+  alias: Big Guy
   attributes:
-    body: 4
-    agility: 3
+    body: 6
+    agility: 4
     reaction: 5
-    strength: 3
-    willpower: 2
+    strength: 6
+    willpower: 4
     logic: 2
-    intuition: 4
-    charisma: 6
-    luck: 13
-    initiative: 11
-    maxHealth: 0
-  defaultWeapon: {fileID: 11400000, guid: 84a183ad8d176a14b9ec28f8c394fce0, type: 2}
-  defaultArmor: {fileID: 11400000, guid: 6b97873e028a40e4bb1679ede03eabe4, type: 2}
+    intuition: 3
+    charisma: 3
+    luck: 17
+  initiativeModifier: 0
+  initiativeDice: 1
+  isEnemy: 0
+  defaultWeapon: {fileID: 11400000, guid: e1ece79a7de57934e9a0cf1ca31a6009, type: 2}
+  defaultArmor: {fileID: 11400000, guid: 7383d364bdcad72439a60867acd59f89, type: 2}
+  tempWeaponSkillValue: 12

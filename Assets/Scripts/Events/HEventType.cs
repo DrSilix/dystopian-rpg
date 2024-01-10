@@ -104,7 +104,7 @@ public static class HEventType
             case HType.Obj_SearchHostages:
                 break;
             case HType.Cmbt_Combat:
-                break;
+                return Type.GetType("CombatEvent");
             case HType.Cmbt_Chase:
                 break;
             case HType.Pst_Escape:

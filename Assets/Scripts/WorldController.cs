@@ -43,7 +43,7 @@ public class WorldController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GenerateLevel();
+        // GenerateLevel();
         // StartLevel();
     }
 
@@ -64,7 +64,7 @@ public class WorldController : MonoBehaviour
     }
 
     // TODO: remove - separate out to a level gen class
-    void GenerateLevel()
+    public void GenerateLevel()
     {
         Camera mainCam = Camera.main;
         GameObject previousNode = null;
@@ -155,14 +155,22 @@ public class WorldController : MonoBehaviour
             return;
         }
 
+        CrewController enemies;
+
         if (nodeNumber == numNodes - 3)
         {
             eventController.AssociateEvent(eTypes[5]);
+            enemies = Storyteller.Instance.GenerateEnemies(Random.Range(2, 4));
+            enemies.gameObject.transform.parent = node.transform;
+            eventController.EnemyIntake(enemies);
             return;
         }
 
         //eventController.AssociateEvent(eTypes[Random.Range(1,5)]);
         eventController.AssociateEvent(eTypes[(nodeNumber % 4 + 1)]);
+        enemies = Storyteller.Instance.GenerateEnemies(Random.Range(1, 3));
+        enemies.gameObject.transform.parent = node.transform;
+        eventController.EnemyIntake(enemies);
     }
 
     // TODO: remove - separate out to the level gen class

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8464694986278701474
+--- !u!1 &4128607691574317174
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6909999630385494930}
-  - component: {fileID: 2874425772416204613}
+  - component: {fileID: 5468939851996163132}
+  - component: {fileID: 4543983290814756621}
   m_Layer: 0
-  m_Name: CrewMember1
+  m_Name: WorldController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6909999630385494930
+--- !u!4 &5468939851996163132
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8464694986278701474}
+  m_GameObject: {fileID: 4128607691574317174}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,30 +32,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2874425772416204613
+--- !u!114 &4543983290814756621
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8464694986278701474}
+  m_GameObject: {fileID: 4128607691574317174}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa6e1f50f0a90b74fbaf90732ac02c6d, type: 3}
+  m_Script: {fileID: 11500000, guid: 31cd8bec0de62504fad29132a9d2f24b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  alias: Big Guy
-  attributes:
-    body: 5
-    agility: 2
-    reaction: 3
-    strength: 6
-    willpower: 1
-    logic: 1
-    intuition: 2
-    charisma: 2
-    luck: 12
-    initiative: 11
-    maxHealth: 0
-  defaultWeapon: {fileID: 11400000, guid: e1ece79a7de57934e9a0cf1ca31a6009, type: 2}
-  defaultArmor: {fileID: 11400000, guid: 7383d364bdcad72439a60867acd59f89, type: 2}
+  nodePrefab: {fileID: 749612166763531413, guid: c84987f1101dff34db2c7f811a3eaa65, type: 3}
+  numNodes: 9
+  gridWidth: 16
+  gridHeight: 9

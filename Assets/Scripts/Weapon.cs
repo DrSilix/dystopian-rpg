@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class Weapon
@@ -61,9 +62,15 @@ public class Weapon
         LoadAmmunition(Storyteller.Instance.AmmunitionSOs["Regular Ammunition"], AmmoCapacity);
     }
 
+    public override string ToString()
+    {
+        StringBuilder sb = new();
+        sb.Append($"{DisplayName}|A:{Accuracy}|R:{Range}|D:{Damage}|AP:{ArmorPiercing}|{FiringMode}|Re:{Recoil}|{CurrentAmmoCount}/{AmmoCapacity}");
+        return sb.ToString();
+    }
+
     public void LoadAmmunition(AmmunitionSO ammunitionSO, int amount)
     {
-        //if (AmmunitionSO != null || ammunitionSO != AmmunitionSO) Debug.LogError("Different ammo type used " + ammunitionSO.displayName + "/" + AmmunitionSO.displayName);
         AmmunitionSO = ammunitionSO;
         amount += CurrentAmmoCount;
         if (amount <= AmmoCapacity) CurrentAmmoCount = amount;
@@ -72,6 +79,13 @@ public class Weapon
             CurrentAmmoCount = AmmoCapacity;
             AmmoHeld += amount - AmmoCapacity;
         }
+    }
+
+    public void FireRounds(int amount) { CurrentAmmoCount -= amount; }
+
+    public void Reload()
+    {
+        LoadAmmunition(Storyteller.Instance.AmmunitionSOs["Regular Ammunition"], AmmoCapacity - CurrentAmmoCount);
     }
 
 }

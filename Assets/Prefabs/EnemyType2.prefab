@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6712304376985699709
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5499246747087282542}
+  - component: {fileID: 6213559444809575283}
+  m_Layer: 0
+  m_Name: EnemyType2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5499246747087282542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6712304376985699709}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6213559444809575283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6712304376985699709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa6e1f50f0a90b74fbaf90732ac02c6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alias: Guard B
+  attributes:
+    body: 4
+    agility: 4
+    reaction: 4
+    strength: 5
+    willpower: 3
+    logic: 3
+    intuition: 3
+    charisma: 2
+    luck: 12
+  initiativeModifier: 0
+  initiativeDice: 1
+  isEnemy: 1
+  defaultWeapon: {fileID: 11400000, guid: 1509180488786c640a49bd3c5110c9b8, type: 2}
+  defaultArmor: {fileID: 11400000, guid: 85ae664db14ced443ac0f61028319125, type: 2}
+  tempWeaponSkillValue: 9

@@ -27,9 +27,9 @@ public class CrewMenu : IMenu
         crewMember2 = rootElem.Q("crew-member-2");
         crewMember3 = rootElem.Q("crew-member-3");
 
-        UpdateCrewMemberInfo(crewMember1, 1);
-        UpdateCrewMemberInfo(crewMember2, 2);
-        UpdateCrewMemberInfo(crewMember3, 3);
+        UpdateCrewMemberInfo(crewMember1, 0);
+        UpdateCrewMemberInfo(crewMember2, 1);
+        UpdateCrewMemberInfo(crewMember3, 2);
     }
 
     public void RegisterCallbacks()
@@ -109,13 +109,13 @@ public class CrewMenu : IMenu
         switch (((VisualElement)e.currentTarget).name)
         {
             case "crew-member-1":
-                CallLoadMenu("CrewMemberOptions", true, 1);
+                CallLoadMenu("CrewMemberOptions", true, 0);
                 break;
             case "crew-member-2":
-                CallLoadMenu("CrewMemberOptions", true, 2);
+                CallLoadMenu("CrewMemberOptions", true, 1);
                 break;
             case "crew-member-3":
-                CallLoadMenu("CrewMemberOptions", true, 3);
+                CallLoadMenu("CrewMemberOptions", true, 2);
                 break;
             case "done-button":
                 CallUnloadMenu(null);

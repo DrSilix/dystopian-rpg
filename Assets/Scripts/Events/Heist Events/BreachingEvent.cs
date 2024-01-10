@@ -10,7 +10,7 @@ public class BreachingEvent : BaseEvent
         TargetAttribute1 = Attribute.body;
         TargetAttribute2 = Attribute.strength;
         RollAggregate = Aggregate.max;
-        DifficultyRating = Random.Range(1, 3);
+        DifficultyRating = Random.Range(2, 6) + 1;
         TargetSuccesses = DifficultyRating;
         MaxFails = DifficultyRating+2;
 

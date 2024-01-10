@@ -2172,6 +2172,9 @@ MonoBehaviour:
   crewMember1Prefab: {fileID: 8464694986278701474, guid: eec6391fb6d9d1244af2bcbeea196300, type: 3}
   crewMember2Prefab: {fileID: 8512946586223883271, guid: 6fc43b9a84b2d1041824caa8e6081914, type: 3}
   crewMember3Prefab: {fileID: 4284562609061926150, guid: 87206496ccfec264b8f98586c5781b36, type: 3}
+  enemyCrewPrefab: {fileID: 6338637185380700622, guid: 4350e227306ed3a47814ac841fc22204, type: 3}
+  enemyCrewMember1Prefab: {fileID: 6712304376985699709, guid: 39801a396bac8a34d8708b09e20d4a18, type: 3}
+  enemyCrewMember2Prefab: {fileID: 6712304376985699709, guid: d07c95449b58a24459abb9328d87edd9, type: 3}
   worldController: {fileID: 1616297426}
   assetLabelRef:
     m_LabelString: default

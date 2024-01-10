@@ -10,8 +10,8 @@ public class SneakingEvent : BaseEvent
         TargetAttribute1 = Attribute.agility;
         TargetAttribute2 = Attribute.luck;
         RollAggregate = Aggregate.avg;
-        DifficultyRating = Random.Range(1, 5);
-        TargetSuccesses = (5 - DifficultyRating) + 1;
+        DifficultyRating = Random.Range(3, 7) + 1;
+        TargetSuccesses = (9 - DifficultyRating);
         MaxFails = DifficultyRating + 2;
         int rand = Random.Range(0, 2);
         string msg;

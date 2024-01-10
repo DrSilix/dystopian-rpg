@@ -10,8 +10,8 @@ public class HackingEvent : BaseEvent
         TargetAttribute1 = Attribute.logic;
         TargetAttribute2 = Attribute.logic;
         RollAggregate = Aggregate.max;
-        DifficultyRating = Random.Range(2,5);
-        TargetSuccesses = (5 - DifficultyRating) + 1;
+        DifficultyRating = Random.Range(4,8) + 1;
+        TargetSuccesses = (10 - DifficultyRating) + 1;
         MaxFails = DifficultyRating + 2;
         int rand = Random.Range(0, 2);
         string msg;

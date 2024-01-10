@@ -26,6 +26,8 @@ public class Storyteller : MonoBehaviour
 {
     [SerializeField] private GameObject crewPrefab;
     [SerializeField] private GameObject crewMember1Prefab, crewMember2Prefab, crewMember3Prefab;
+    [SerializeField] private GameObject enemyCrewPrefab;
+    [SerializeField] private GameObject enemyCrewMember1Prefab, enemyCrewMember2Prefab;
     [SerializeField] private WorldController worldController;
     [SerializeField] private AssetLabelReference assetLabelRef;
 
@@ -69,6 +71,7 @@ public class Storyteller : MonoBehaviour
             }
         }).Task;
         GenerateCrew();
+        worldController.GenerateLevel();
     }
 
     public void StartHeist()
@@ -90,5 +93,27 @@ public class Storyteller : MonoBehaviour
         GameObject crewMember2 = Instantiate(crewMember2Prefab, crewGO.transform);
         GameObject crewMember3 = Instantiate(crewMember3Prefab, crewGO.transform);
         Crew.AddCrewMembers(crewMember1, crewMember2, crewMember3);
+    }
+
+    public CrewController GenerateEnemies(int numberOfEnemies)
+    {
+        GameObject crewGO = Instantiate(enemyCrewPrefab, Vector3.zero, Quaternion.identity);
+        CrewController crew = crewGO.GetComponent<CrewController>();
+        for (int i = 0; i < numberOfEnemies; i++)
+        {
+            GameObject crewMember = Instantiate(enemyCrewMember1Prefab, crewGO.transform);
+            char letter = 'A';
+            CrewMemberController enemy = crewMember.GetComponent<CrewMemberController>();
+            enemy.alias = $"Guard {(char)(letter + i)}";
+            int temp = enemy.attributes.Set(Attribute.body, Random.Range(4, 7));
+            enemy.attributes.Set(Attribute.agility, 6 - temp + 4);
+            enemy.tempWeaponSkillValue = Random.Range(8, 13);
+            Weapon weapon = (Random.Range(1, 3) == 1) ? new Weapon(WeaponSOs["Vyner S-12"]) : new Weapon(WeaponSOs["Cobalt Defender"]);
+            enemy.EquippedItems.Equip(weapon);
+            Armor armor = (Random.Range(1, 3) == 1) ? new Armor(ArmorSOs["Guard Outfit"]) : new Armor(ArmorSOs["Bullet Proof Vest"]);
+            enemy.EquippedItems.Equip(armor);
+            crew.AddCrewMember(crewMember);
+        }
+        return crew;
     }
 }

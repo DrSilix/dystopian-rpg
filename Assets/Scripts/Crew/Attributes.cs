@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum Attribute
@@ -18,7 +19,7 @@ public enum Attribute
 
 
 [System.Serializable]
-public class Attributes
+public class Attributes : IEnumerable
 {
     [Range(1, 6)]
     public int body, agility, reaction, strength;
@@ -39,6 +40,42 @@ public class Attributes
         this.intuition = intuition;
         this.charisma = charisma;
         CalculateLuck();
+    }
+
+    public IEnumerator<int> GetEnumerable()
+    {
+        List<int> enumerator = new()
+        {
+            body,
+            agility,
+            reaction,
+            strength,
+            willpower,
+            logic,
+            intuition,
+            charisma
+        };
+
+        return enumerator.GetEnumerator();
+    }
+
+    public IEnumerator GetEnumerator()
+    {
+        return GetEnumerable();
+    }
+
+    public override string ToString()
+    {
+        string result = new string(
+            $"{body}/" +
+            $"{agility}/" +
+            $"{reaction}/" +
+            $"{strength}/" +
+            $"{willpower}/" +
+            $"{logic}/" +
+            $"{intuition}/" +
+            $"{charisma}");
+        return result;
     }
 
     private void CalculateLuck() { luck = Mathf.CeilToInt(((float)(agility + reaction + intuition)) / 3); }
@@ -77,7 +114,7 @@ public class Attributes
         }
     }
 
-    public void Set(Attribute attribute, int value)
+    public int Set(Attribute attribute, int value)
     {
         switch (attribute)
         {
@@ -109,5 +146,6 @@ public class Attributes
                 CalculateLuck();
                 break;
         }
+        return value;
     }
 }

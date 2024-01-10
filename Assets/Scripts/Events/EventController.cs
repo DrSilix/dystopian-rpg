@@ -22,6 +22,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EventController : MonoBehaviour
@@ -30,6 +31,8 @@ public class EventController : MonoBehaviour
     private HEventType.HType eventType;
     [SerializeField]
     private CrewController possesedCrew;
+    [SerializeField]
+    private CrewController possesedEnemies;
     [SerializeField]
     private HEventState eventState;
 
@@ -44,6 +47,16 @@ public class EventController : MonoBehaviour
         eventState = HEventState.IdleUnfinished;
     }
 
+    public void MutateEvent(HEventType.HType eventType)
+    {
+        Destroy(baseEvent);
+        this.eventType = eventType;
+        baseEvent = this.gameObject.AddComponent(HEventType.GetEventComponentType(eventType)) as BaseEvent;
+        baseEvent.EnemyCrew = possesedEnemies;
+        eventState = HEventState.IdleUnfinished;
+        Invoke("BeginHeistEvent", 3f);
+    }
+
     public void ChangeHeistEventState(HEventState state)
     {
         //if (eventState == state) return; //I don't actually want to do this, Event though the state isn't changing the properties are
@@ -54,6 +67,11 @@ public class EventController : MonoBehaviour
     public BaseEvent GetBaseEvent() { return baseEvent; }
     public HEventType.HType GetEventType() { return eventType; }
     public HEventState GetEventState() {  return eventState; }
+
+    public void EnemyIntake(CrewController enemyCrew)
+    {
+        possesedEnemies = enemyCrew;
+    }
 
     public void CrewIntake(CrewController crew)
     {
@@ -66,7 +84,7 @@ public class EventController : MonoBehaviour
     public void TransportCrewToNextNode()
     {
         Debug.Log("Crew Moving To Next Node");
-        possesedCrew.moveTo(node.GetDownstreamNode().transform.position, 3.0f * node.GetLineLength());
+        possesedCrew.GetComponentInParent<MovePlayerCrew>().moveTo(node.GetDownstreamNode().transform.position, 3.0f * node.GetLineLength());
         Invoke("CrewPassToNext", 3.0f * node.GetLineLength());
     }
 
@@ -91,7 +109,7 @@ public class EventController : MonoBehaviour
         baseEvent.EventStart(possesedCrew);
         baseEvent.MyNameIs();
         Debug.Log("Event Progress: " + baseEvent.GetProgress() + "%");
-        Invoke("HeistEventLoop", 7f);
+        Invoke("HeistEventLoop", 0.5f);
     }
 
     public void HeistEventLoop()
@@ -100,7 +118,7 @@ public class EventController : MonoBehaviour
         baseEvent.StepEvent();
         Debug.Log("Event Progress: " + baseEvent.GetProgress() + "%");
         if (baseEvent.HasSucceeded() || baseEvent.HasFailed()) { EndHeistEvent(); }
-        else { Invoke("HeistEventLoop", 3f);  }
+        else { Invoke("HeistEventLoop", 0.5f);  }
     }
 
 
@@ -112,7 +130,19 @@ public class EventController : MonoBehaviour
         baseEvent.EventEnd();
         if (baseEvent.HasFailed())
         {
+            // TODO: FIX event node with no enemies, ?get lucky? phew
+            if (eventType != HEventType.HType.Cmbt_Combat)
+            {
+                Debug.Log("Enemy Spotted!!");
+                GameLog.Instance.PostMessageToLog("You've been spotted! Get ready for combat!");
+                ChangeHeistEventState(HEventState.DoneFailure);
+                node.SetColor(Color.red);
+                MutateEvent(HEventType.HType.Cmbt_Combat);
+                Debug.Log("Curiously the mutated event has ended now.");
+                return;
+            }
             Debug.Log("Heist FAILED!!");
+            GameLog.Instance.PostMessageToLog("You're crew is dead or captured. Failed!");
             ChangeHeistEventState(HEventState.DoneFailure);
             node.SetColor(Color.red);
             return;

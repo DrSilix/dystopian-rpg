@@ -10,9 +10,9 @@ public class MasqueradingEvent : BaseEvent
         TargetAttribute1 = Attribute.charisma;
         TargetAttribute2 = Attribute.intuition;
         RollAggregate = Aggregate.avg;
-        DifficultyRating = Random.Range(1, 4);
-        TargetSuccesses = (3 - DifficultyRating) + 1;
-        MaxFails = DifficultyRating + 3;
+        DifficultyRating = Random.Range(3, 5) + 1;
+        TargetSuccesses = (7 - DifficultyRating) + 1;
+        MaxFails = DifficultyRating + 2;
         string msg = "\"Some worker bees drudging along. Act natural boys we'll slip right by\"";
         Debug.Log(msg);
         GameLog.Instance.PostMessageToLog(msg);
