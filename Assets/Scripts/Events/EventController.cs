@@ -10,7 +10,7 @@
  * TODO: triggers success and failure of a heist event (subscribed event, storyteller)
  * NO > Able to handle resolution actions (distribute loot, xp, etc.) ... the storytell will handle this
  * way to handle a redirected crew transfer (alternate evac) currently transfer is from>to (generalize transfer to)
- * TODO: holding place for enemies
+ * holding place for enemies
  * 
  * I think i've decided the event controller should be encapsulated/isolated. It doesn't need to know
  * what other events are doing, it just puts it's head down and trudges along on it's one job.

@@ -109,11 +109,6 @@ public abstract class BaseEvent : MonoBehaviour
         this.Crew = crew;
     }
 
-    // TODO: remove - why did I think this was necessary??
-    public CrewController GetCrew() { return Crew; }
-
-    public void SetProgress(int p){ Progress = p; }
-
     public virtual void EventEnd() { }
     
     public virtual bool StepEvent()

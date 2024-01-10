@@ -36,7 +36,6 @@ public class CombatRound
     private int modifiedDamageValue;
     private int enemyDamageToTake;
 
-    // TODO: should this handle more than 1 enemy crew??
     // TODO: handle no enemies or dead enemies
     public CombatRound(CrewController crew, CrewController enemyCrew, int roundNumber)
     {
@@ -115,8 +114,7 @@ public class CombatRound
                 turnState = TurnState.EndTurn;
                 break;
             case TurnState.EndTurn:
-                // TODO: check for death???
-                // addto initiative end
+                // add to initiative end
                 if (currentActor.CurrentDamagedState < DamagedState.BleedingOut) combatInitiative.SubtractInitiativeAndAddToEnd(10);
                 FinishedTurnNextInitiative();
                 break;

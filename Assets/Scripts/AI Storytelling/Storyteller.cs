@@ -10,7 +10,6 @@
  * player director (watches over players and decides next steps on paradigm change)
  * enemy director (oblivious, gets fed events (alarms, etc.) triggers reactions)
  * 
- * TODO: make storyteller!
  */
 
 using System.Collections;

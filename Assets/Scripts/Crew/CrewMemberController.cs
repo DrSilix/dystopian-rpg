@@ -59,12 +59,6 @@ public class CrewMemberController : MonoBehaviour
         return sb.ToString();
     }
 
-    // TODO: this is a debugging hack, possible params will be attributes, skills, and equipment objects
-    private void BuildCrewMember(int bod, int agi, int rea, int str, int wil, int log, int itn, int cha)
-    {
-        attributes = new Attributes(bod, agi, rea, str, wil, log, itn, cha);
-    }
-
     public int GetAttribute(Attribute attribute) { return attributes.Get(attribute); }
 
     // public int GetSkillRoll(int skill) { }
@@ -195,27 +189,29 @@ public class CrewMemberController : MonoBehaviour
 
     public (int, int) FireWeaponToHit(int modifier = 0)
     {
-        // TODO: add recoil and other stuff
         Weapon weapon = EquippedItems.EquippedWeapon;
         int recoil = 1 + Mathf.CeilToInt((float)attributes.strength / 3) + weapon.Recoil;
         int defenseModifier = 0;
+        int roundsToFire;
         switch (weapon.FiringMode)
         {
-            // TODO: handle partial ammo left
             case FiringMode.SingleShot:
             case FiringMode.SemiAuto:
-                weapon.FireRounds(1);
+                roundsToFire = 1;
+                weapon.FireRounds(roundsToFire);
                 recoil -= 1;
                 break;
             case FiringMode.BurstFire:
-                weapon.FireRounds(3);
-                recoil -= 3;
-                defenseModifier = -2;
+                roundsToFire = Mathf.Min(weapon.CurrentAmmoCount, 3);
+                weapon.FireRounds(roundsToFire);
+                recoil -= roundsToFire;
+                defenseModifier = -(roundsToFire - 1);
                 break;
             case FiringMode.FullAuto:
-                weapon.FireRounds(6);
-                recoil -= 6;
-                defenseModifier = -5;
+                roundsToFire = Mathf.Min(weapon.CurrentAmmoCount, 6);
+                weapon.FireRounds(roundsToFire);
+                recoil -= roundsToFire;
+                defenseModifier = -(roundsToFire - 1);
                 break;
         }
         if (recoil > 0) recoil = 0;

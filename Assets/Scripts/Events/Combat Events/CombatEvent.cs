@@ -51,6 +51,7 @@ public class CombatEvent : BaseEvent
     {
         if (combatRound.RoundComplete())
         {
+            // TODO: handle another enemy crew joining in
             roundNumber++;
             GameLog.Instance.PostMessageToLog($"Round {roundNumber} has begun");
             combatRound = new CombatRound(Crew, EnemyCrew, roundNumber);
