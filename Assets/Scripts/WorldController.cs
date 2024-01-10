@@ -25,12 +25,8 @@
  */
 
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
-using Assets.Data;
 
 public class WorldController : MonoBehaviour
 {
@@ -39,13 +35,6 @@ public class WorldController : MonoBehaviour
     public int gridWidth = 16, gridHeight = 9;
 
     private EventController InitialEvent;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        // GenerateLevel();
-        // StartLevel();
-    }
 
     // TODO: remove - replace functionality with a subscribable world gen finished method
     public void StartLevel()
@@ -66,11 +55,10 @@ public class WorldController : MonoBehaviour
     // TODO: remove - separate out to a level gen class
     public void GenerateLevel()
     {
-        Camera mainCam = Camera.main;
         GameObject previousNode = null;
         int[] prevGridPoints = new int[2];
         int gridX, gridY;
-        NodeGrid grid = new NodeGrid(gridWidth, gridHeight, 0.25f);
+        NodeGrid grid = new(gridWidth, gridHeight, 0.25f);
         grid.DrawDebugGrid();
         bool alternate = false;
         for (int i = 0; i < numNodes; i++)
@@ -80,13 +68,13 @@ public class WorldController : MonoBehaviour
             {
                 int maxNumForward = (gridWidth - prevGridPoints[0]) - (numNodes - i);
                 if (maxNumForward < 1) maxNumForward = 1;
-                gridX = prevGridPoints[0] + UnityEngine.Random.Range(1,maxNumForward);
+                gridX = prevGridPoints[0] + Random.Range(1, maxNumForward);
                 gridY = prevGridPoints[1];
             }
             else
             {
                 gridX = prevGridPoints[0];
-                gridY = Random.Range(0, gridHeight-1);
+                gridY = Random.Range(0, gridHeight - 1);
                 if (gridY == prevGridPoints[1]) gridY++;
             }
             if (i == 0) { alternate = true; }
@@ -140,7 +128,7 @@ public class WorldController : MonoBehaviour
             HEventType.HType.Obj_StealData,
             HEventType.HType.Pst_ReturnHome};
 
-        EventController eventController = node.gameObject.GetComponent<EventController>();
+        EventController eventController = node.GetComponent<EventController>();
         eventController.enabled = false;
 
         if (nodeNumber == 0)
@@ -181,11 +169,5 @@ public class WorldController : MonoBehaviour
         currentNode.ConnectUpstreamNode(previousNode);
         previousNode.ConnectDownstreamNode(currentNode);
         previousNode.BuildConnectingLine(curr.transform.position);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

@@ -37,7 +37,7 @@ public class StealDataEvent : BaseEvent
         if (faceCrit == 1) faceRoll += faceRoll;
         if (faceCrit == -1) { Successes--; faceRoll = -1; }
         (int hackerRoll, int hackerCrit) = hacker.GetAttributeAdvancedRoll(Attribute.logic, Attribute.logic, faceRoll);
-        (int enforceRoll, int enforceCrit) = enforcer.GetAttributeAdvancedRoll(Attribute.intuition, Attribute.luck, 2);
+        (int enforceRoll, _) = enforcer.GetAttributeAdvancedRoll(Attribute.intuition, Attribute.luck, 2);
         Debug.Log("Enforcer keeps watch with " + enforceRoll + " successes - \"Everythings clear, no one in sight.\"");
         GameLog.Instance.PostMessageToLog("Enforcer keeps watch with " + enforceRoll + " successes - \"Everythings clear, no one in sight.\"");
 

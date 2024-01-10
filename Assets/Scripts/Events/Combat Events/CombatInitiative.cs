@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class CombatInitiative
 {
-    List<InitiativeIndividual> initiativeIndividuals;
+    readonly List<InitiativeIndividual> initiativeIndividuals;
     // FIX: possible bug when the first two have the same initiative. it skipped the second guy
     private int currentPointer = -1;
 
@@ -21,13 +21,15 @@ public class CombatInitiative
 
     public void AddCrewToInitiativeOrder(CrewController crewController, bool isEnemy)
     {
-        foreach (CrewMemberController member in crewController.CrewMembers)
+        foreach (CrewMemberController actor in crewController.CrewMembers)
         {
-            if (member.CurrentDamagedState == DamagedState.Dead) return;
-            InitiativeIndividual guy = new InitiativeIndividual();
-            guy.Member = member;
-            guy.Initiative = member.RollInitiative();
-            guy.IsEnemy = isEnemy;
+            if (actor.CurrentDamagedState == DamagedState.Dead) return;
+            InitiativeIndividual guy = new()
+            {
+                Actor = actor,
+                Initiative = actor.RollInitiative(),
+                IsEnemy = isEnemy
+            };
             initiativeIndividuals.Add(guy);
         }
     }
@@ -36,29 +38,39 @@ public class CombatInitiative
     {
         initiativeIndividuals?.Sort((x, y) => {
             var result = x.Initiative.CompareTo(y.Initiative);
-            if (result == 0) result = x.Member.attributes.reaction.CompareTo(y.Member.attributes.reaction);
+            if (result == 0) result = x.Actor.attributes.reaction.CompareTo(y.Actor.attributes.reaction);
             while (result == 0) result = Random.Range(0, 7).CompareTo(Random.Range(0, 7));
             return -result;
         });
-        StringBuilder displayInitiative = new StringBuilder();
+        StringBuilder displayInitiative = new();
         displayInitiative.Append("Turn Order: ");
         foreach (var individual in initiativeIndividuals)
         {
-            displayInitiative.Append($"{individual.Member.alias}-{individual.Initiative}/");
+            displayInitiative.Append($"{individual.Actor.alias}-{individual.Initiative}/");
         }
         displayInitiative.Remove(displayInitiative.Length - 1, 1);
         GameLog.Instance.PostMessageToLog(displayInitiative.ToString());
     }
 
+    public List<CrewMemberController> GetAllInitiativeActors()
+    {
+        return initiativeIndividuals.Select(a => a.Actor).ToList();
+    }
+
+    public List<InitiativeIndividual> GetAllInitiativeIndividuals()
+    {
+        return initiativeIndividuals;
+    }
+
     public override string ToString()
     {
-        StringBuilder displayInitiative = new StringBuilder();
+        StringBuilder displayInitiative = new();
         displayInitiative.Append($"{currentPointer}|");
         int i = 0;
         foreach (var individual in initiativeIndividuals)
         {
             if(i == currentPointer) displayInitiative.Append("[[");
-            displayInitiative.Append($"{individual.Member.alias}-{individual.Initiative}/");
+            displayInitiative.Append($"{individual.Actor.alias}-{individual.Initiative}/");
             if (i == currentPointer) displayInitiative.Append("]]");
             i++;
         }
@@ -90,7 +102,7 @@ public class CombatInitiative
     {
         foreach (var item in initiativeIndividuals)
         {
-            if (item.Member.CurrentDamagedState == DamagedState.Dead) return;
+            if (item.Actor.CurrentDamagedState == DamagedState.Dead) return;
             item.Initiative -= amountToSubtract;
             if (item.Initiative <= 0) initiativeIndividuals.Remove(item);
         }
@@ -102,25 +114,15 @@ public class CombatInitiative
         List<CrewMemberController> deadList = new();
         foreach(var item in initiativeIndividuals)
         {
-            if (item.Member.CurrentDamagedState == DamagedState.Dead) initiativeIndividuals.Remove(item); deadList.Add(item.Member);
+            if (item.Actor.CurrentDamagedState == DamagedState.Dead) initiativeIndividuals.Remove(item); deadList.Add(item.Actor);
         }
         return deadList;
-    }
-
-    public List<CrewMemberController> GetAllInitiativeActors()
-    {
-        return initiativeIndividuals.Select( a => a.Member ).ToList();
-    }
-
-    public List<InitiativeIndividual> GetAllInitiativeIndividuals()
-    {
-        return initiativeIndividuals;
     }
 }
 
 public class InitiativeIndividual
 {
     public int Initiative { get; set; }
-    public CrewMemberController Member { get; set; }
+    public CrewMemberController Actor { get; set; }
     public bool IsEnemy { get; set; }
 }

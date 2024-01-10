@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Weapon
 {
-    private WeaponSO weaponSO;
+    public WeaponSO WeaponBase { get; private set; }
     
     public WeaponType WeaponType { get; private set; }
     public string DisplayName { get; private set; }
@@ -36,7 +36,7 @@ public class Weapon
 
     public Weapon (WeaponSO weaponSO)
     {
-        this.weaponSO = weaponSO;
+        WeaponBase = weaponSO;
 
         WeaponType = weaponSO.weaponType;
         DisplayName = weaponSO.displayName;

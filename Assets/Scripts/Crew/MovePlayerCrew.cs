@@ -7,7 +7,7 @@ public class MovePlayerCrew : MonoBehaviour
 {
     private bool isMoving = false;
     private Vector3 origin, destination;
-    private float moveStartTime, moveEndTime;
+    private float moveEndTime;
     private float currentMoveTime;
     void OnEnable()
     {
@@ -25,12 +25,11 @@ public class MovePlayerCrew : MonoBehaviour
         if (currentMoveTime >= moveEndTime) isMoving = false;
     }
 
-    public void moveTo(Vector3 pos, float seconds)
+    public void MoveTo(Vector3 pos, float seconds)
     {
         isMoving = true;
         origin = transform.position;
         destination = pos;
-        moveStartTime = Time.time;
         moveEndTime = seconds;
         currentMoveTime = 0f;
     }

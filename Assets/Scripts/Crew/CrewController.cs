@@ -24,7 +24,6 @@ public enum Aggregate { min, max, avg, sum }
 
 public class CrewController : MonoBehaviour
 {
-    [SerializeField]
     public List<CrewMemberController> CrewMembers { get; private set; } = new();
 
     public void AddCrewMember(CrewMemberController member) { CrewMembers.Add(member); }

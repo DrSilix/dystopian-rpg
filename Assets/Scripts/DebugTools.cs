@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DebugTools
 {
-    public static bool inBounds(int index, int arrayLen)
+    public static bool InBounds(int index, int arrayLen)
     {
         return (index >= 0) && (index < arrayLen);
     }

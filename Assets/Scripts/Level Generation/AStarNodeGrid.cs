@@ -22,7 +22,7 @@ public class AStarNodeGrid
 
         occupied = new bool[width, height];
         for (int i = 0; i < nodes.Length && nodes[i] != null; i++) {
-            if (!DebugTools.inBounds(i, nodes.Length)) throw new Exception("AStarNodeGrid-Main-i-bounds");
+            if (!DebugTools.InBounds(i, nodes.Length)) throw new Exception("AStarNodeGrid-Main-i-bounds");
             if (nodes[i] == null) throw new Exception("AStarNodeGrid-Main-i");
             this.nodes[i] = nodes[i];
             currentNode = i;
@@ -36,7 +36,7 @@ public class AStarNodeGrid
                     if (j < nodes[i].x) j++;
                     if (j > nodes[i].x) j--;
                     if (j == nodes[i].x) break;
-                    if (!DebugTools.inBounds(j, occupied.GetLength(0))) throw new Exception("AStarNodeGrid-Main-xj-bounds");
+                    if (!DebugTools.InBounds(j, occupied.GetLength(0))) throw new Exception("AStarNodeGrid-Main-xj-bounds");
                     occupied[j, nodes[i].y] = true;
                 }
             }
@@ -47,7 +47,7 @@ public class AStarNodeGrid
                     if (j < nodes[i].y) j++;
                     if (j > nodes[i].y) j--;
                     if (j == nodes[i].y) break;
-                    if (!DebugTools.inBounds(j, occupied.GetLength(1))) throw new Exception("AStarNodeGrid-Main-xj-bounds");
+                    if (!DebugTools.InBounds(j, occupied.GetLength(1))) throw new Exception("AStarNodeGrid-Main-xj-bounds");
                     occupied[nodes[i].x, j] = true;
                 }
             }
@@ -91,7 +91,7 @@ public class AStarNodeGrid
         if (occupied[moved.x, moved.y]) return result;
         for (int i = 0; i < max && !occupied[moved.x, moved.y]; i++)
         {
-            if (!DebugTools.inBounds(currentNode + 1, nodes.Length)) throw new Exception("GetDirectionsMoves");
+            if (!DebugTools.InBounds(currentNode + 1, nodes.Length)) throw new Exception("GetDirectionsMoves");
             nodes[currentNode + 1] = moved;
             result.Add(new AStarNodeGrid(width, height, nodes));
             moved += dir;
@@ -123,7 +123,7 @@ public class AStarNodeGrid
         int hash = 17;
         for (int i = 0; i < nodes.Length && nodes[i] != null; i++)
         {
-            if (!DebugTools.inBounds(i, nodes.Length)) throw new Exception("GetHashCode");
+            if (!DebugTools.InBounds(i, nodes.Length)) throw new Exception("GetHashCode");
             hash = unchecked((hash * 31) ^ nodes[i].GetHashCode());
         }
         return hash;

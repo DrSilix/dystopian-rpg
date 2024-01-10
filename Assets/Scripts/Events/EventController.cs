@@ -54,7 +54,7 @@ public class EventController : MonoBehaviour
         baseEvent = this.gameObject.AddComponent(HEventType.GetEventComponentType(eventType)) as BaseEvent;
         baseEvent.EnemyCrew = possesedEnemies;
         eventState = HEventState.IdleUnfinished;
-        Invoke("BeginHeistEvent", 3f);
+        Invoke(nameof(BeginHeistEvent), 3f);
     }
 
     public void ChangeHeistEventState(HEventState state)
@@ -84,8 +84,8 @@ public class EventController : MonoBehaviour
     public void TransportCrewToNextNode()
     {
         Debug.Log("Crew Moving To Next Node");
-        possesedCrew.GetComponentInParent<MovePlayerCrew>().moveTo(node.GetDownstreamNode().transform.position, 3.0f * node.GetLineLength());
-        Invoke("CrewPassToNext", 3.0f * node.GetLineLength());
+        possesedCrew.GetComponentInParent<MovePlayerCrew>().MoveTo(node.GetDownstreamNode().transform.position, 3.0f * node.GetLineLength());
+        Invoke(nameof(CrewPassToNext), 3.0f * node.GetLineLength());
     }
 
     public void CrewPassToNext()
@@ -108,17 +108,17 @@ public class EventController : MonoBehaviour
         // skyscraperBG.SetActive(true);
         baseEvent.EventStart(possesedCrew);
         baseEvent.MyNameIs();
-        Debug.Log("Event Progress: " + baseEvent.GetProgress() + "%");
-        Invoke("HeistEventLoop", 0.5f);
+        Debug.Log($"Event Progress: {baseEvent.GetProgress()}%");
+        Invoke(nameof(HeistEventLoop), 0.5f);
     }
 
     public void HeistEventLoop()
     {
         ChangeHeistEventState(HEventState.Running);
         baseEvent.StepEvent();
-        Debug.Log("Event Progress: " + baseEvent.GetProgress() + "%");
+        Debug.Log($"Event Progress: {baseEvent.GetProgress()}%");
         if (baseEvent.HasSucceeded() || baseEvent.HasFailed()) { EndHeistEvent(); }
-        else { Invoke("HeistEventLoop", 0.5f);  }
+        else { Invoke(nameof(HeistEventLoop), 0.5f);  }
     }
 
 
@@ -157,6 +157,6 @@ public class EventController : MonoBehaviour
         }
         ChangeHeistEventState(HEventState.DoneSuccess);
         node.SetColor(Color.grey);
-        Invoke("TransportCrewToNextNode", 2f);
+        Invoke(nameof(TransportCrewToNextNode), 2f);
     }
 }

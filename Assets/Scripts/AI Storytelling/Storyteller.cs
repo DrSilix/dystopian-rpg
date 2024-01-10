@@ -30,9 +30,9 @@ public class Storyteller : MonoBehaviour
     [SerializeField] private WorldController worldController;
     [SerializeField] private AssetLabelReference assetLabelRef;
 
-    [SerializeField] public Dictionary<string, WeaponSO> WeaponSOs {  get; private set; } = new Dictionary<string, WeaponSO>();
-    [SerializeField] public Dictionary<string, ArmorSO> ArmorSOs { get; private set; } = new Dictionary<string, ArmorSO>();
-    [SerializeField] public Dictionary<string, AmmunitionSO> AmmunitionSOs { get; private set; } = new Dictionary<string, AmmunitionSO>();
+    public Dictionary<string, WeaponSO> WeaponSOs {  get; private set; } = new Dictionary<string, WeaponSO>();
+    public Dictionary<string, ArmorSO> ArmorSOs { get; private set; } = new Dictionary<string, ArmorSO>();
+    public Dictionary<string, AmmunitionSO> AmmunitionSOs { get; private set; } = new Dictionary<string, AmmunitionSO>();
     
     public CrewController Crew {  get; private set; }
     

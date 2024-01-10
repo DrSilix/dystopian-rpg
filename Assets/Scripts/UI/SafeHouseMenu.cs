@@ -17,7 +17,6 @@ public class SafeHouseMenu : IMenu
     private VisualElement bgImage;
     private float bgScrollSpeed = -4;
     private bool initialized;
-    private int initWait;
 
     public void InitializeMenu(UIDocument uiDoc, object passInfo)
     {
@@ -42,24 +41,6 @@ public class SafeHouseMenu : IMenu
         beginButton.UnregisterCallback<ClickEvent>(OnClick);
         crewButton.UnregisterCallback<ClickEvent>(OnClick);
     }
-
-    /*private void OnClick(ClickEvent e)
-    {
-        Debug.Log(((VisualElement)e.currentTarget).name);
-        switch (((VisualElement)e.currentTarget).name)
-        {
-            case "game-begin":
-                beginButton.UnregisterCallback<ClickEvent>(OnClick);
-                this.gameObject.SetActive(false);
-                hideoutImage.SetActive(false);
-                worldController.StartLevel();
-                break;
-            case "crew":
-                //crewUIDoc.enabled = true;
-                //crewUIDoc.gameObject.GetComponent<CrewMenu>().InitializeMenu();
-                break;
-        }
-    }*/
 
     private void OnClick(ClickEvent e)
     {
@@ -98,7 +79,7 @@ public class SafeHouseMenu : IMenu
         float parentWidth = bgImage.parent.resolvedStyle.width;
 
         if (prevOffset.x < -(width - parentWidth) || prevOffset.x > 0) bgScrollSpeed = -bgScrollSpeed;
-        bgImage.transform.position = prevOffset + (Vector3.left * bgScrollSpeed * Time.deltaTime);
+        bgImage.transform.position = prevOffset + (bgScrollSpeed * Time.deltaTime * Vector3.left);
     }
 
     public void SendMenuNewInfo(object info) { }

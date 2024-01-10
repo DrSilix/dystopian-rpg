@@ -7,16 +7,16 @@ using UnityEngine;
 
 public class CombatRound
 {
-    private CombatInitiative combatInitiative;
+    private readonly CombatInitiative combatInitiative;
     private CrewMemberController currentActor;
     private object combatTarget;
     private CombatAction combatAction;
 
     public List<CrewMemberController> AllCombatActors { get; private set; } = new();
-    private int playerCrewSize;
-    private int enemyCrewSize;
+    private readonly int playerCrewSize;
+    private readonly int enemyCrewSize;
 
-    private int roundNumber;
+    private readonly int roundNumber;
 
     public enum TurnState
     {
@@ -31,11 +31,6 @@ public class CombatRound
 
     private TurnState turnState;
 
-    private int shotToHitValue;
-    private int targetToEvadeValue;
-    private int modifiedDamageValue;
-    private int enemyDamageToTake;
-
     // TODO: handle no enemies or dead enemies
     public CombatRound(CrewController crew, CrewController enemyCrew, int roundNumber)
     {
@@ -46,7 +41,7 @@ public class CombatRound
         combatInitiative = new CombatInitiative(crew, enemyCrew);
         combatInitiative.SortInitiative();
         if (combatInitiative.HasNextInitiative() != true) throw new ArgumentException();
-        currentActor = combatInitiative.NextInitiative().Member;
+        currentActor = combatInitiative.NextInitiative().Actor;
         turnState = TurnState.FirstActionReadying;
     }
 
@@ -60,7 +55,7 @@ public class CombatRound
         foreach (var actor in combatInitiative.GetAllInitiativeIndividuals())
         {
             if (actor.Initiative < combatInitiative.GetCurrentInitiative().Initiative)
-                sb.Append($"{actor.Initiative}|{actor.Member.alias}:{actor.Member.CurrentDamagedState}:{actor.Member.DamageTaken}/{actor.Member.MaxDamage}###");
+                sb.Append($"{actor.Initiative}|{actor.Actor.alias}:{actor.Actor.CurrentDamagedState}:{actor.Actor.DamageTaken}/{actor.Actor.MaxDamage}###");
         }
         sb.Remove(sb.Length - 3, 3);
         return sb.ToString();
@@ -122,15 +117,28 @@ public class CombatRound
         return true;
     }
 
+    private void FinishedTurnNextInitiative()
+    {
+        if (!combatInitiative.HasNextInitiative())
+        {
+            RoundComplete();
+            return;
+        }
+        currentActor = combatInitiative.NextInitiative().Actor;
+        turnState = TurnState.FirstActionReadying;
+    }
+
+    public bool RoundComplete() { return !combatInitiative.HasNextInitiative(); }
+
     public int HasSomeoneWon()
     {
         int numberOfPlayersLeft = 0;
         int numberOfEnemiesLeft = 0;
         
-        foreach(CrewMemberController member in AllCombatActors)
+        foreach(CrewMemberController actor in AllCombatActors)
         {
-            if (member.CurrentDamagedState >= DamagedState.BleedingOut) continue;
-            if (member.IsEnemy) numberOfEnemiesLeft++;
+            if (actor.CurrentDamagedState >= DamagedState.BleedingOut) continue;
+            if (actor.IsEnemy) numberOfEnemiesLeft++;
             else numberOfPlayersLeft++;
         }
 
@@ -139,17 +147,4 @@ public class CombatRound
 
         return 0;
     }
-
-    private void FinishedTurnNextInitiative()
-    {
-        if(!combatInitiative.HasNextInitiative())
-        {
-            RoundComplete();
-            return;
-        }
-        currentActor = combatInitiative.NextInitiative().Member;
-        turnState = TurnState.FirstActionReadying;
-    }
-
-    public bool RoundComplete() { return !combatInitiative.HasNextInitiative(); }
 }

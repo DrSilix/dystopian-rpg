@@ -12,7 +12,6 @@ public class CrewMemberController : MonoBehaviour
 {
     public string alias;
     public int MaxDamage { get; private set; }
-    [SerializeField]
     public Attributes attributes;
     [SerializeField] private int initiativeModifier;
     [SerializeField] private int initiativeDice = 1;
@@ -24,7 +23,7 @@ public class CrewMemberController : MonoBehaviour
     public Equipped EquippedItems { get; private set; }
     public bool IsEnemy { get { return isEnemy; } private set { isEnemy = value; } }
 
-    [SerializeField] public int tempWeaponSkillValue;
+    public int tempWeaponSkillValue;
 
     //public int CurrentDamagedAmount { get; private set; }
     public CombatState CurrentCombatState { get; private set; }

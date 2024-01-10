@@ -114,32 +114,30 @@ public abstract class BaseEvent : MonoBehaviour
     public virtual bool StepEvent()
     {
         int crewRoll;
-        StringBuilder logMessage = new StringBuilder();
+        StringBuilder logMessage = new();
         CrewMemberController responsibleCrew;
         (responsibleCrew, crewRoll) = Crew.GetCrewRoll(TargetAttribute1, TargetAttribute2, Modifier, RollAggregate);
         if (responsibleCrew != null) {
-            Debug.Log(responsibleCrew.alias + " is taking action! Their stats are " + TargetAttribute1 + ":" + responsibleCrew.GetAttribute(TargetAttribute1) + " and " + TargetAttribute2 + ":" + responsibleCrew.GetAttribute(TargetAttribute2));
-            logMessage.Append(responsibleCrew.alias + " acts " + TargetAttribute1.ToString().Substring(0, 3) + ":" + responsibleCrew.GetAttribute(TargetAttribute1) + " and " + TargetAttribute2.ToString().Substring(0, 3) + ":" + responsibleCrew.GetAttribute(TargetAttribute2) + " | ");
+            Debug.Log($"{responsibleCrew.alias} is taking action! Their stats are {TargetAttribute1}:{responsibleCrew.GetAttribute(TargetAttribute1)} and {TargetAttribute2}:{responsibleCrew.GetAttribute(TargetAttribute2)}");
+            logMessage.Append($"{responsibleCrew.alias} acts {TargetAttribute1.ToString()[..3]}:{responsibleCrew.GetAttribute(TargetAttribute1)} and {TargetAttribute2.ToString()[..3]}:{responsibleCrew.GetAttribute(TargetAttribute2)} | ");
         } else
         {
             logMessage.Append("The crew makes an attempt - ");
         }
-        Debug.Log(crewRoll + " Successes, DR: " + DifficultyRating +
-            " - " + ((crewRoll>=DifficultyRating) ? "SUCCESS!" : "FAILURE!!!"));
-        logMessage.Append(crewRoll + " Vs. " + DifficultyRating +
-            " - " + ((crewRoll >= DifficultyRating) ? "WIN!" : "LOSS!"));
+        Debug.Log($"{crewRoll} Successes, DR: {DifficultyRating} - {((crewRoll>=DifficultyRating) ? "SUCCESS!" : "FAILURE!!!")}");
+        logMessage.Append($"{crewRoll} Vs. {DifficultyRating} - {((crewRoll >= DifficultyRating) ? "WIN!" : "LOSS!")}");
         if (crewRoll >= DifficultyRating)
         {
             Successes++;
-            Debug.Log(" #" + Successes + " out of " + TargetSuccesses);
-            logMessage.Append(" " + Successes + "/" + TargetSuccesses);
+            Debug.Log($" #{Successes} out of {TargetSuccesses}");
+            logMessage.Append($" {Successes}/{TargetSuccesses}");
             GameLog.Instance.PostMessageToLog(logMessage.ToString());
             Progress = Mathf.RoundToInt((float)(Successes * 100) / TargetSuccesses);
             return true;
         }
         Fails++;
-        Debug.Log(" #" + Fails + " out of " + MaxFails);
-        logMessage.Append(" " + Fails + "/" + MaxFails);
+        Debug.Log($" #{Fails} out of {MaxFails}");
+        logMessage.Append($" {Fails}/{MaxFails}");
         GameLog.Instance.PostMessageToLog(logMessage.ToString());
         return false;
     }

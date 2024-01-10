@@ -66,7 +66,7 @@ public class Attributes : IEnumerable
 
     public override string ToString()
     {
-        string result = new string(
+        string result = new(
             $"{body}/" +
             $"{agility}/" +
             $"{reaction}/" +
