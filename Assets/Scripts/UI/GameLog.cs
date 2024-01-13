@@ -31,7 +31,7 @@ public class GameLog
         logList.Enqueue(message);
         if(logList.Count > linesToKeep ) {
             logList.Dequeue();
-            Debug.Log("DEQUEUED MESSAGE");
+            //Debug.Log("DEQUEUED MESSAGE");
         }
         LogUpdated.Invoke(this, null);
     }

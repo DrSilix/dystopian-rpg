@@ -48,10 +48,14 @@ public class CombatRound
     public override string ToString()
     {
         CrewMemberController targetActor = ((CrewMemberController)combatTarget);
-        (string currentType, int currentCrewSize) = currentActor.IsEnemy ? ("Enemy",enemyCrewSize) : ("Player",playerCrewSize);
-        (string targetType, int targetCrewSize) = targetActor.IsEnemy ? ("Enemy", enemyCrewSize) : ("Player", playerCrewSize);
         StringBuilder sb = new();
-        sb.Append($"{roundNumber}|{combatInitiative.GetCurrentInitiative().Initiative}|{currentType}:{currentActor.alias}/{currentCrewSize} > {targetType}:{targetActor.alias}/{targetCrewSize} @{combatAction}@###");
+        (string currentType, int currentCrewSize) = currentActor.IsEnemy ? ("Enemy",enemyCrewSize) : ("Player",playerCrewSize);
+        if (targetActor != null)
+        {
+            (string targetType, int targetCrewSize) = targetActor.IsEnemy ? ("Enemy", enemyCrewSize) : ("Player", playerCrewSize);
+            sb.Append($"{roundNumber}|{combatInitiative.GetCurrentInitiative().Initiative}|{currentType}:{currentActor.alias}/{currentCrewSize} > {targetType}:{targetActor.alias}/{targetCrewSize} @{combatAction}@###");
+        } else
+            sb.Append($"{roundNumber}|{combatInitiative.GetCurrentInitiative().Initiative}|{currentType}:{currentActor.alias}/{currentCrewSize} > null:null/null @null@###");
         foreach (var actor in combatInitiative.GetAllInitiativeIndividuals())
         {
             if (actor.Initiative < combatInitiative.GetCurrentInitiative().Initiative)
@@ -86,6 +90,7 @@ public class CombatRound
                 isEnemyValue = combatInitiative.GetCurrentInitiative().IsEnemy;
                 (combatAction, combatTarget) = currentActor.ChooseActionAndTarget(AllCombatActors, isEnemyValue);
                 turnState = TurnState.FirstActionBegin;
+                Debug.Log(currentActor.ToString());
                 break;
             case TurnState.FirstActionBegin:
                 currentActor.BeginPerformCombatActionOnTarget(combatAction, combatTarget);
@@ -94,11 +99,13 @@ public class CombatRound
             case TurnState.FirstActionResolution:
                 currentActor.ResolvePerformCombatActionOnTarget(combatAction, combatTarget);
                 turnState = TurnState.SecondActionReadying;
+                Debug.Log(combatTarget.ToString());
                 break;
             case TurnState.SecondActionReadying:
                 isEnemyValue = combatInitiative.GetCurrentInitiative().IsEnemy;
                 (combatAction, combatTarget) = currentActor.ChooseActionAndTarget(AllCombatActors, isEnemyValue);
                 turnState = TurnState.SecondActionBegin;
+                Debug.Log(currentActor.ToString());
                 break;
             case TurnState.SecondActionBegin:
                 currentActor.BeginPerformCombatActionOnTarget(combatAction, combatTarget);
@@ -107,11 +114,17 @@ public class CombatRound
             case TurnState.SecondActionResolution:
                 currentActor.ResolvePerformCombatActionOnTarget(combatAction, combatTarget);
                 turnState = TurnState.EndTurn;
+                Debug.Log(combatTarget.ToString());
                 break;
             case TurnState.EndTurn:
                 // add to initiative end
                 if (currentActor.CurrentDamagedState < DamagedState.BleedingOut) combatInitiative.SubtractInitiativeAndAddToEnd(10);
                 FinishedTurnNextInitiative();
+                Debug.Log(combatInitiative.ToString());
+                /*foreach (var target in AllCombatActors)
+                {
+                    Debug.Log(target.ToString());
+                }*/
                 break;
         }
         return true;
@@ -142,8 +155,8 @@ public class CombatRound
             else numberOfPlayersLeft++;
         }
 
-        if (numberOfEnemiesLeft <= Mathf.FloorToInt((float)enemyCrewSize / 2)) return 1;
-        if (numberOfPlayersLeft <= Mathf.FloorToInt((float)playerCrewSize / 2)) return 1;
+        if (numberOfEnemiesLeft <= 0) return 1; //Mathf.FloorToInt((float)enemyCrewSize / 2)) return 1;
+        if (numberOfPlayersLeft <= Mathf.FloorToInt((float)playerCrewSize / 2)) return 2;
 
         return 0;
     }

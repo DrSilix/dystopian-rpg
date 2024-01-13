@@ -63,4 +63,11 @@ public class Armor
         sb.Append($"{DisplayName}|{ArmorRating}");
         return sb.ToString();
     }
+
+    public string ToShortString()
+    {
+        StringBuilder sb = new();
+        sb.Append($"{DisplayName[..Mathf.Min(DisplayName.Length, 10)]}|{ArmorRating}");
+        return sb.ToString();
+    }
 }

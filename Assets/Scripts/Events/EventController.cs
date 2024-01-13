@@ -36,23 +36,25 @@ public class EventController : MonoBehaviour
     [SerializeField]
     private HEventState eventState;
 
-    private BaseEvent baseEvent;
+    public float StepDelayTime = 3f;
+
+    public BaseEvent BaseEvent { get; private set; }
     
     public Node node;
 
     public void AssociateEvent(HEventType.HType eventType)
     {
         this.eventType = eventType;
-        baseEvent = this.gameObject.AddComponent(HEventType.GetEventComponentType(eventType)) as BaseEvent;
+        BaseEvent = this.gameObject.AddComponent(HEventType.GetEventComponentType(eventType)) as BaseEvent;
         eventState = HEventState.IdleUnfinished;
     }
 
     public void MutateEvent(HEventType.HType eventType)
     {
-        Destroy(baseEvent);
+        Destroy(BaseEvent);
         this.eventType = eventType;
-        baseEvent = this.gameObject.AddComponent(HEventType.GetEventComponentType(eventType)) as BaseEvent;
-        baseEvent.EnemyCrew = possesedEnemies;
+        BaseEvent = this.gameObject.AddComponent(HEventType.GetEventComponentType(eventType)) as BaseEvent;
+        BaseEvent.EnemyCrew = possesedEnemies;
         eventState = HEventState.IdleUnfinished;
         Invoke(nameof(BeginHeistEvent), 3f);
     }
@@ -64,7 +66,7 @@ public class EventController : MonoBehaviour
         Storyteller.Instance.heistEventStateChanged.Invoke(this);
     }
 
-    public BaseEvent GetBaseEvent() { return baseEvent; }
+    public BaseEvent GetBaseEvent() { return BaseEvent; }
     public HEventType.HType GetEventType() { return eventType; }
     public HEventState GetEventState() {  return eventState; }
 
@@ -106,19 +108,19 @@ public class EventController : MonoBehaviour
         Debug.Log("Begin Heist Event");
         // skyscraperBG = Camera.main.transform.GetChild(1).gameObject;
         // skyscraperBG.SetActive(true);
-        baseEvent.EventStart(possesedCrew);
-        baseEvent.MyNameIs();
-        Debug.Log($"Event Progress: {baseEvent.GetProgress()}%");
-        Invoke(nameof(HeistEventLoop), 0.5f);
+        BaseEvent.EventStart(possesedCrew);
+        BaseEvent.MyNameIs();
+        Debug.Log($"Event Progress: {BaseEvent.GetProgress()}%");
+        Invoke(nameof(HeistEventLoop), 7f);
     }
 
     public void HeistEventLoop()
     {
         ChangeHeistEventState(HEventState.Running);
-        baseEvent.StepEvent();
-        Debug.Log($"Event Progress: {baseEvent.GetProgress()}%");
-        if (baseEvent.HasSucceeded() || baseEvent.HasFailed()) { EndHeistEvent(); }
-        else { Invoke(nameof(HeistEventLoop), 0.5f);  }
+        BaseEvent.StepEvent();
+        //Debug.Log($"Event Progress: {baseEvent.GetProgress()}%");
+        if (BaseEvent.HasSucceeded() || BaseEvent.HasFailed()) { EndHeistEvent(); }
+        else { Invoke(nameof(HeistEventLoop), StepDelayTime);  }
     }
 
 
@@ -127,8 +129,8 @@ public class EventController : MonoBehaviour
         Debug.Log("End Heist Event");
         // skyscraperBG.SetActive(false);
         CancelInvoke();
-        baseEvent.EventEnd();
-        if (baseEvent.HasFailed())
+        BaseEvent.EventEnd();
+        if (BaseEvent.HasFailed())
         {
             // TODO: FIX event node with no enemies, ?get lucky? phew
             if (eventType != HEventType.HType.Cmbt_Combat)
@@ -138,7 +140,7 @@ public class EventController : MonoBehaviour
                 ChangeHeistEventState(HEventState.DoneFailure);
                 node.SetColor(Color.red);
                 MutateEvent(HEventType.HType.Cmbt_Combat);
-                Debug.Log("Curiously the mutated event has ended now.");
+                //Debug.Log("Curiously the mutated event has ended now.");
                 return;
             }
             Debug.Log("Heist FAILED!!");

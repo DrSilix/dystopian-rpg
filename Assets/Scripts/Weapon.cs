@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using Utils;
 
 public class Weapon
 {
@@ -66,6 +67,13 @@ public class Weapon
     {
         StringBuilder sb = new();
         sb.Append($"{DisplayName}|A:{Accuracy}|R:{Range}|D:{Damage}|AP:{ArmorPiercing}|{FiringMode}|Re:{Recoil}|{CurrentAmmoCount}/{AmmoCapacity}");
+        return sb.ToString();
+    }
+
+    public string ToShortString()
+    {
+        StringBuilder sb = new();
+        sb.Append($"{DisplayName[..Mathf.Min(DisplayName.Length, 10)]}|A:{Accuracy}|D:{Damage}|AP:{ArmorPiercing}|{FiringMode}|{CurrentAmmoCount}/{AmmoCapacity}");
         return sb.ToString();
     }
 

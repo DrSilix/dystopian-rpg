@@ -46,15 +46,17 @@ public class CrewMemberController : MonoBehaviour
     {
         StringBuilder sb = new();
         sb.Append($"{alias}|{CurrentDamagedState}|{DamageTaken}/{MaxDamage}|{(isEnemy ? "Enemy" : "Player")}###");
-        /*foreach(int combatVal in combatStoredValues)
-        {
-            sb.Append($"{combatVal}/");
-        }
-        sb.Remove(sb.Length - 1,sb.Length);
-        sb.Append("\n");*/
         sb.Append($"{attributes}###");
         sb.Append($"{EquippedItems.EquippedWeapon}###");
         sb.Append($"{EquippedItems.EquippedArmor}");
+        return sb.ToString();
+    }
+    public string ToShortString()
+    {
+        StringBuilder sb = new();
+        sb.Append($"{alias}|{CurrentDamagedState}|{DamageTaken}/{MaxDamage}##");
+        sb.Append($"{EquippedItems.EquippedWeapon.ToShortString()}##");
+        sb.Append($"{EquippedItems.EquippedArmor.ToShortString()}");
         return sb.ToString();
     }
 

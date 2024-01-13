@@ -5,14 +5,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
 public class CombatEvent : BaseEvent
 {
-    private CombatRound combatRound;
+    public CombatRound CombatRound { get; private set; }
     private bool hasFailedFleeing;
     private bool hasSucceededRouting;
     private int roundNumber;
@@ -25,7 +24,7 @@ public class CombatEvent : BaseEvent
     {
         Crew = crew;
         roundNumber = 1;
-        combatRound = new CombatRound(Crew, EnemyCrew, roundNumber);
+        CombatRound = new CombatRound(Crew, EnemyCrew, roundNumber);
 
         // TODO: handle no or dead enemies
 
@@ -49,17 +48,24 @@ public class CombatEvent : BaseEvent
 
     public override bool StepEvent()
     {
-        if (combatRound.RoundComplete())
+        if (CombatRound.RoundComplete())
         {
             // TODO: handle another enemy crew joining in
             roundNumber++;
             GameLog.Instance.PostMessageToLog($"Round {roundNumber} has begun");
-            combatRound = new CombatRound(Crew, EnemyCrew, roundNumber);
+            CombatRound = new CombatRound(Crew, EnemyCrew, roundNumber);
         }
-        combatRound.StepRound();
-        int status = combatRound.HasSomeoneWon();
-        if (status == 1) hasSucceededRouting = true;
-        if (status == 2) hasFailedFleeing = true;
+        CombatRound.StepRound();
+        int status = CombatRound.HasSomeoneWon();
+        if (status == 1) {
+            //GameLog.Instance.PostMessageToLog($"Any remaining enemies are fleeing");
+            hasSucceededRouting = true;
+        }
+        if (status == 2)
+        {
+            GameLog.Instance.PostMessageToLog($"The remaining members of your crew are running away");
+            hasFailedFleeing = true;
+        }
         return true;
     }
 

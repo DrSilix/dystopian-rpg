@@ -35,7 +35,7 @@ public class ZzzLog : MonoBehaviour
         GUIStyle temp = new GUIStyle();
         temp.fontSize = 26;
         temp.normal.textColor = Color.white;
-        GUILayout.BeginArea(new Rect(Screen.width - 600, 0, 600, Screen.height));
+        GUILayout.BeginArea(new Rect(100, (Screen.height * 0.15f + 50), Screen.width - 150, Screen.height));
         GUILayout.Label("\n" + string.Join("\n", myLogQueue.ToArray()),temp);
         GUILayout.EndArea();
     }

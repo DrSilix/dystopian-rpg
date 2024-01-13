@@ -148,7 +148,7 @@ public class WorldController : MonoBehaviour
         if (nodeNumber == numNodes - 3)
         {
             eventController.AssociateEvent(eTypes[5]);
-            enemies = Storyteller.Instance.GenerateEnemies(Random.Range(2, 4));
+            enemies = Storyteller.Instance.GenerateEnemies(Random.Range(2, 5));
             enemies.gameObject.transform.parent = node.transform;
             eventController.EnemyIntake(enemies);
             return;

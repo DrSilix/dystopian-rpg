@@ -4,17 +4,40 @@ using UnityEngine;
 
 public class StealDataEvent : BaseEvent
 {
+    public enum StepNumber
+    {
+        One,
+        Two,
+        Three
+    }
+    
     private int roundNumber;
     private int randomEventRound;
+
+    private int faceRoll, faceCrit;
+    private int enforcerRoll;
+    //private int hackerRoll, hackerCrit;
+
+    private StepNumber stepNumber;
+
+    private CrewMemberController hacker;
+    private CrewMemberController face;
+    private CrewMemberController enforcer;
     public override void EventStart(CrewController crew)
     {
         this.Crew = crew;
+
+        hacker = Crew.GetCrewMember(1);
+        face = Crew.GetCrewMember(2);
+        enforcer = Crew.GetCrewMember(0);
+
         Modifier = 0;
         TargetSuccesses = Random.Range(5, 12);
         MaxFails = TargetSuccesses + 8;
         DifficultyRating = 3;
         roundNumber = 0;
-        randomEventRound = Random.Range(3, TargetSuccesses + 1);
+        stepNumber = StepNumber.One;
+        randomEventRound = Random.Range(3, TargetSuccesses);
         string msg = "\"Finally!! Get the data smarty pants and let's jolt\" \"Alright I'm on it but it's going to take me about 10 minutes. Big guy stand watch over there. Slick can you help me with this\"";
         Debug.Log(msg);
         GameLog.Instance.PostMessageToLog(msg);
@@ -22,51 +45,55 @@ public class StealDataEvent : BaseEvent
 
     public override bool StepEvent()
     {
-        roundNumber++;
-        // hacker attempts to steal data
-        // face assists
-        // enforcer keeps watch
-        CrewMemberController hacker = Crew.GetCrewMember(1);
-        CrewMemberController face = Crew.GetCrewMember(2);
-        CrewMemberController enforcer = Crew.GetCrewMember(0);
-        
-        
-        (int faceRoll, int faceCrit) = face.GetAttributeAdvancedRoll(Attribute.logic, Attribute.charisma, 0);
-        Debug.Log("Face rolls " + faceRoll + " successes to help the hacker" + CriticalMessage(faceCrit));
-        GameLog.Instance.PostMessageToLog("Face rolls " + faceRoll + " successes to help the hacker" + CriticalMessage(faceCrit));
-        if (faceCrit == 1) faceRoll += faceRoll;
-        if (faceCrit == -1) { Successes--; faceRoll = -1; }
-        (int hackerRoll, int hackerCrit) = hacker.GetAttributeAdvancedRoll(Attribute.logic, Attribute.logic, faceRoll);
-        (int enforceRoll, _) = enforcer.GetAttributeAdvancedRoll(Attribute.intuition, Attribute.luck, 2);
-        Debug.Log("Enforcer keeps watch with " + enforceRoll + " successes - \"Everythings clear, no one in sight.\"");
-        GameLog.Instance.PostMessageToLog("Enforcer keeps watch with " + enforceRoll + " successes - \"Everythings clear, no one in sight.\"");
-
-        if (roundNumber == randomEventRound && enforceRoll < DifficultyRating + 33)
+        switch (stepNumber)
         {
-            Debug.Log("\"INTRUDER!!! OVER THERE!\" \"Shit! we've been spotted, let's jolt!\"");
-            GameLog.Instance.PostMessageToLog("\"INTRUDER!!! OVER THERE!\" \"Shit! we've been spotted, let's jolt!\"");
-            Fails = MaxFails;
-            return false;
-        }
+            case StepNumber.One:
+                roundNumber++;
+                (faceRoll, faceCrit) = face.GetAttributeAdvancedRoll(Attribute.logic, Attribute.charisma, 0);
+                Debug.Log($"{face.alias} rolls {faceRoll} successes to help {hacker.alias}{CriticalMessage(faceCrit)}");
+                GameLog.Instance.PostMessageToLog($"{face.alias} rolls {faceRoll} successes to help {hacker.alias} find the data {CriticalMessage(faceCrit)}");
+                if (faceCrit == 1) faceRoll += faceRoll;
+                if (faceCrit == -1) { Successes--; faceRoll = -1; }
+                stepNumber = StepNumber.Two;
+                return false;
+            case StepNumber.Two:
+                (enforcerRoll, _) = enforcer.GetAttributeAdvancedRoll(Attribute.intuition, Attribute.luck, 2);
+                Debug.Log($"{enforcer.alias} keeps watch with {enforcerRoll} successes - \"Everythings clear, no one in sight.\"");
+                GameLog.Instance.PostMessageToLog($"{enforcer.alias} keeps watch with {enforcerRoll} successes - \"Everythings clear, no one in sight.\"");
 
-        string msg = "With the Face's help the hacker rolls " + hackerRoll + " DR: " + DifficultyRating +
-            " - " + ((hackerRoll >= DifficultyRating) ? "SUCCESS!" : "FAILURE!!!") + CriticalMessage(hackerRoll);
-        Debug.Log(msg);
-        GameLog.Instance.PostMessageToLog(msg);
-        if (hackerRoll >= DifficultyRating)
-        {
-            Successes++;
-            if (hackerCrit == 1) { Successes++; }
-            Debug.Log("\"Okay " + Successes + " down " + (TargetSuccesses - Successes) + " to go.\"");
-            GameLog.Instance.PostMessageToLog("\"Okay " + Successes + " down " + (TargetSuccesses - Successes) + " to go.\"");
-            Debug.Log("Success #" + Successes + " out of " + TargetSuccesses);
-            Progress = Mathf.RoundToInt((float)(Successes * 100) / TargetSuccesses);
-            return true;
+                if (roundNumber == randomEventRound && enforcerRoll< 7)
+                {
+                    Debug.Log("\"INTRUDER!!! OVER THERE!\" \"Shit! we've been spotted, let's jolt!\"");
+                    GameLog.Instance.PostMessageToLog("\"INTRUDER!!! OVER THERE!\" \"Shit! we've been spotted, let's jolt!\"");
+                    Fails = MaxFails;
+                    return false;
+                }
+                stepNumber = StepNumber.Three;
+                return false;
+            case StepNumber.Three:
+                (int hackerRoll, int hackerCrit) = hacker.GetAttributeAdvancedRoll(Attribute.logic, Attribute.logic, faceRoll);
+                string msg = $"With the {face.alias}'s help {hacker.alias} rolls {hackerRoll} DR: {DifficultyRating} - {((hackerRoll >= DifficultyRating) ? "SUCCESS!" : "FAILURE!!!")}{CriticalMessage(hackerRoll)}";
+                Debug.Log(msg);
+                GameLog.Instance.PostMessageToLog(msg);
+
+                stepNumber = StepNumber.One;
+
+                if (hackerRoll >= DifficultyRating)
+                {
+                    Successes++;
+                    if (hackerCrit == 1) { Successes++; }
+                    Debug.Log($"\"Okay {Successes} down {TargetSuccesses - Successes} to go.\"");
+                    GameLog.Instance.PostMessageToLog($"\"Okay {Successes} down {TargetSuccesses - Successes} to go.\"");
+                    Debug.Log($"Success #{Successes} out of {TargetSuccesses}");
+                    Progress = Mathf.RoundToInt((float)(Successes * 100) / TargetSuccesses);
+                    return true;
+                }
+                Fails++;
+                Debug.Log("\"Shit!...\"");
+                GameLog.Instance.PostMessageToLog($"\"Shit!... I've only got {Fails} out of {MaxFails} tries left before the alarms trigger");
+                Debug.Log($"FAILURE! #{Fails} out of {MaxFails}");
+                return false;
         }
-        Fails++;
-        Debug.Log("\"Shit!...\"");
-        GameLog.Instance.PostMessageToLog("\"Shit!... I've only got " + Fails + " out of " + MaxFails + " tries left before the alarms trigger");
-        Debug.Log("FAILURE! #" + Fails + " out of " + MaxFails);
         return false;
     }
 
@@ -80,7 +107,7 @@ public class StealDataEvent : BaseEvent
     private string CriticalMessage(int crit)
     {
         if (crit == 1) return " - CRITICAL SUCCESS!!!";
-        if (crit == -1) return " - CRITICAL FAILURE!!!!!!";
+        if (crit == -1) return " - CRITICAL FAILURE!!!";
         return "";
     }
 
