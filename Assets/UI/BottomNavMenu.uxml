@@ -1,0 +1,24 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/DarkBoxSimpleMenu.uss?fileID=7433441132597879392&amp;guid=428d266981b529f4ba5b44ddd9095d83&amp;type=3#DarkBoxSimpleMenu" />
+    <Style src="project://database/Assets/UI/BottomNavMenu.uss?fileID=7433441132597879392&amp;guid=caf9e3004f6526241b49ea1e3312907c&amp;type=3#BottomNavMenu" />
+    <ui:VisualElement style="flex-grow: 1; position: relative; bottom: 0; width: 100%; height: 188px; background-color: rgb(108, 33, 100);">
+        <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" class="button-default">
+                <ui:VisualElement name="safehouse" style="flex-grow: 1; position: absolute; width: 100%; height: 100%;" />
+                <ui:Label tabindex="-1" text="Safe&#10;House" parse-escape-sequences="true" display-tooltip-when-elided="true" style="flex-shrink: 1; flex-grow: 1; -unity-text-align: middle-center;" />
+            </ui:Button>
+            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" class="asdf">
+                <ui:VisualElement name="travel" style="flex-grow: 1; position: absolute; width: 100%; height: 100%;" />
+                <ui:Label tabindex="-1" text="Travel" parse-escape-sequences="true" display-tooltip-when-elided="true" style="flex-shrink: 1; flex-grow: 1; -unity-text-align: middle-center;" />
+            </ui:Button>
+            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" class="asdf">
+                <ui:VisualElement name="contacts" style="flex-grow: 1; position: absolute; width: 100%; height: 100%;" />
+                <ui:Label tabindex="-1" text="Contacts" parse-escape-sequences="true" display-tooltip-when-elided="true" style="flex-shrink: 1; flex-grow: 1; -unity-text-align: middle-center;" />
+            </ui:Button>
+            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" class="asdf">
+                <ui:VisualElement name="options" style="flex-grow: 1; position: absolute; width: 100%; height: 100%;" />
+                <ui:Label tabindex="-1" text="Options" parse-escape-sequences="true" display-tooltip-when-elided="true" style="flex-shrink: 1; flex-grow: 1; -unity-text-align: middle-center;" />
+            </ui:Button>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

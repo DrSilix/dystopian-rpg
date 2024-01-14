@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alias: Slick
+  <Icon>k__BackingField: {fileID: 21300000, guid: 31d2b47c0c2670c47abb50699fa6da75, type: 3}
+  <MaxDamage>k__BackingField: 0
   attributes:
     body: 4
     agility: 4
@@ -55,8 +57,8 @@ MonoBehaviour:
     intuition: 4
     charisma: 6
     luck: 15
-  initiativeModifier: 0
-  initiativeDice: 1
+  <InitiativeModifier>k__BackingField: 0
+  <InitiativeDice>k__BackingField: 1
   isEnemy: 0
   defaultWeapon: {fileID: 11400000, guid: 84a183ad8d176a14b9ec28f8c394fce0, type: 2}
   defaultArmor: {fileID: 11400000, guid: 6b97873e028a40e4bb1679ede03eabe4, type: 2}

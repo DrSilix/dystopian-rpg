@@ -1,0 +1,80 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="BottomNavMenu" src="project://database/Assets/UI/BottomNavMenu.uxml?fileID=9197481963319205126&amp;guid=6c51eca918cdc5e4bac13c6f01785214&amp;type=3#BottomNavMenu" />
+    <Style src="project://database/Assets/UI/DarkBoxSimpleMenu.uss?fileID=7433441132597879392&amp;guid=428d266981b529f4ba5b44ddd9095d83&amp;type=3#DarkBoxSimpleMenu" />
+    <Style src="project://database/Assets/UI/SafehouseMenu.uss?fileID=7433441132597879392&amp;guid=87bd6b5b58a20b94080632d4bd3ab55f&amp;type=3#SafehouseMenu" />
+    <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Art/purple_background.psd?fileID=2800000&amp;guid=6b500c6761573134782b16c5c99db476&amp;type=3#purple_background&apos;);">
+        <ui:VisualElement style="flex-grow: 0; height: 15%; flex-shrink: 0; background-color: rgba(108, 33, 100, 0.8);">
+            <ui:VisualElement style="flex-grow: 1; margin-top: 98px; padding-left: 25px; padding-right: 25px; padding-bottom: 10px;">
+                <ui:Label tabindex="-1" text="Safe House" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 50px; -unity-font: url(&apos;project://database/Assets/Art/BebasNeue-Regular.ttf?fileID=12800000&amp;guid=43d81a96ae3b98041a9be49bf3a3d641&amp;type=3#BebasNeue-Regular&apos;); -unity-font-definition: url(&apos;project://database/Assets/Art/BebasNeue-Regular%20SDF.asset?fileID=11400000&amp;guid=4d325f0aea308394f9d47df33fadc3e9&amp;type=2#BebasNeue-Regular SDF&apos;);" />
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                    <ui:Label tabindex="-1" text="&lt;b&gt;Name:&lt;/b&gt; Carrion-Heights&#10;&lt;b&gt;Region:&lt;/b&gt; Bedlang - Refugee ZONE F&#10;&lt;b&gt;Location:&lt;/b&gt; New Cleveland, NCA" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="true" style="width: 50%;" />
+                    <ui:Label tabindex="-1" text="&lt;b&gt;Status:&lt;/b&gt; Uncompromised&#10;&lt;b&gt;Facilities:&lt;/b&gt; Armor, Garage, Lab, Living Quarters" parse-escape-sequences="true" display-tooltip-when-elided="true" style="padding-left: 25px; white-space: normal; width: 50%;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 0; height: 77%; flex-shrink: 0; padding-top: 35px; padding-right: 35px; padding-bottom: 35px; padding-left: 35px;">
+            <ui:VisualElement style="flex-grow: 1; height: 20%; margin-top: 20px; margin-right: 0; margin-bottom: 20px; margin-left: 0; background-color: rgba(108, 33, 100, 0.8); padding-left: 25px; padding-right: 25px; padding-bottom: 10px; padding-top: 20px;">
+                <ui:Label tabindex="-1" text="Crew Status" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 50px; -unity-font: url(&apos;project://database/Assets/Art/BebasNeue-Regular.ttf?fileID=12800000&amp;guid=43d81a96ae3b98041a9be49bf3a3d641&amp;type=3#BebasNeue-Regular&apos;); -unity-font-definition: url(&apos;project://database/Assets/Art/BebasNeue-Regular%20SDF.asset?fileID=11400000&amp;guid=4d325f0aea308394f9d47df33fadc3e9&amp;type=2#BebasNeue-Regular SDF&apos;);" />
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                    <ui:Label tabindex="-1" text="&lt;b&gt;Street Renown:&lt;/b&gt; 1&#10;&lt;b&gt;Notoriety:&lt;/b&gt; 0&#10;&lt;b&gt;Wanted By:&lt;/b&gt; -&#10;&lt;b&gt;Time to Incognito&lt;/b&gt; -&#10;&lt;b&gt;Money:&lt;/b&gt; 1780" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 50%;" />
+                    <ui:Label tabindex="-1" text="&lt;b&gt;Current Job:&lt;/b&gt; Texico Plant 39 - Data Steal&#10;&lt;b&gt;Status:&lt;/b&gt; Preparing...&#10;&lt;b&gt;Difficulty:&lt;/b&gt; X - - - -&#10;&lt;b&gt;Est. Completion Time:&lt;/b&gt; -" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 50%; white-space: normal;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; height: 57%; margin-top: 20px; margin-right: 0; margin-bottom: 20px; margin-left: 0; background-color: rgba(108, 33, 100, 0.8);">
+                <ui:VisualElement name="crewmember1" style="flex-grow: 1; margin-top: 18px; margin-right: 18px; margin-bottom: 18px; margin-left: 18px; background-color: rgba(41, 11, 62, 0.5); flex-direction: row; height: 32%;">
+                    <ui:VisualElement style="flex-grow: 1; width: 30%; border-left-color: rgb(161, 253, 253); border-right-color: rgb(33, 255, 255); border-top-color: rgb(177, 245, 245); border-bottom-color: rgb(33, 255, 255); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px;">
+                        <ui:VisualElement name="portrait" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Art/face_portrait__male_muscular_and_brutish_mercenary__cyberpunk__pink_hair_in_a_mohawk_style__sunglasses__cybernetic_augmentat.jpg?fileID=2800000&amp;guid=202ce515abc72a449bc09db24101b486&amp;type=3#face_portrait__male_muscular_and_brutish_mercenary__cyberpunk__pink_hair_in_a_mohawk_style__sunglasses__cybernetic_augmentat&apos;); -unity-background-scale-mode: scale-to-fit;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement style="flex-grow: 1; width: 70%; padding-left: 30px;">
+                        <ui:Label tabindex="-1" text="Big Guy - Lvl 4 - Human - Enforcer&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title" style="font-size: 35px; height: 58px;" />
+                        <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                            <ui:VisualElement style="flex-grow: 1;">
+                                <ui:Label tabindex="-1" text="&lt;b&gt;Dmg:&lt;/b&gt; 8/11&#10;&lt;b&gt;Init:&lt;/b&gt; 1d6 + 8&#10;&lt;b&gt;State:&lt;/b&gt; Aggresive&#10;&lt;b&gt;Item:&lt;/b&gt; HE Grenade" parse-escape-sequences="true" display-tooltip-when-elided="true" name="info-column-1" />
+                            </ui:VisualElement>
+                            <ui:VisualElement style="flex-grow: 1;">
+                                <ui:Label tabindex="-1" text="&lt;b&gt;Weap:&lt;/b&gt; Revolver S-12&lt;/b&gt; &#10;Acc: 8&#x9;Mode: SemiAuto&#10;Dam: 5&#x9;Ammo: 32/32&#10;&lt;b&gt;Wear:&lt;/b&gt; Synth Leather Jacket&#10;Armor: 12" parse-escape-sequences="true" display-tooltip-when-elided="true" name="info-column-2" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="crewmember2" style="flex-grow: 1; margin-top: 18px; margin-right: 18px; margin-bottom: 18px; margin-left: 18px; background-color: rgba(41, 11, 62, 0.5); flex-direction: row; height: 32%;">
+                    <ui:VisualElement style="flex-grow: 1; width: 30%; border-left-color: rgb(161, 253, 253); border-right-color: rgb(33, 255, 255); border-top-color: rgb(177, 245, 245); border-bottom-color: rgb(33, 255, 255); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px;">
+                        <ui:VisualElement name="portrait" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Art/face_portrait__male_muscular_and_brutish_mercenary__cyberpunk__pink_hair_in_a_mohawk_style__sunglasses__cybernetic_augmentat.jpg?fileID=2800000&amp;guid=202ce515abc72a449bc09db24101b486&amp;type=3#face_portrait__male_muscular_and_brutish_mercenary__cyberpunk__pink_hair_in_a_mohawk_style__sunglasses__cybernetic_augmentat&apos;); -unity-background-scale-mode: scale-to-fit;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement style="flex-grow: 1; width: 70%; padding-left: 30px;">
+                        <ui:Label tabindex="-1" text="Big Guy - Lvl 4 - Human - Enforcer&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title" style="font-size: 35px; height: 58px;" />
+                        <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                            <ui:VisualElement style="flex-grow: 1;">
+                                <ui:Label tabindex="-1" text="&lt;b&gt;Dmg:&lt;/b&gt; 8/11&#10;&lt;b&gt;Init:&lt;/b&gt; 1d6 + 8&#10;&lt;b&gt;State:&lt;/b&gt; Aggresive&#10;&lt;b&gt;Item:&lt;/b&gt; HE Grenade" parse-escape-sequences="true" display-tooltip-when-elided="true" name="info-column-1" />
+                            </ui:VisualElement>
+                            <ui:VisualElement style="flex-grow: 1;">
+                                <ui:Label tabindex="-1" text="&lt;b&gt;Weap:&lt;/b&gt; Revolver S-12&lt;/b&gt; &#10;Acc: 8&#x9;Mode: SemiAuto&#10;Dam: 5&#x9;Ammo: 32/32&#10;&lt;b&gt;Wear:&lt;/b&gt; Synth Leather Jacket&#10;Armor: 12" parse-escape-sequences="true" display-tooltip-when-elided="true" name="info-column-2" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:VisualElement name="crewmember3" style="flex-grow: 1; margin-top: 18px; margin-right: 18px; margin-bottom: 18px; margin-left: 18px; background-color: rgba(41, 11, 62, 0.5); flex-direction: row; height: 32%;">
+                    <ui:VisualElement style="flex-grow: 1; width: 30%; border-left-color: rgb(161, 253, 253); border-right-color: rgb(33, 255, 255); border-top-color: rgb(177, 245, 245); border-bottom-color: rgb(33, 255, 255); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px;">
+                        <ui:VisualElement name="portrait" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Art/face_portrait__male_muscular_and_brutish_mercenary__cyberpunk__pink_hair_in_a_mohawk_style__sunglasses__cybernetic_augmentat.jpg?fileID=2800000&amp;guid=202ce515abc72a449bc09db24101b486&amp;type=3#face_portrait__male_muscular_and_brutish_mercenary__cyberpunk__pink_hair_in_a_mohawk_style__sunglasses__cybernetic_augmentat&apos;); -unity-background-scale-mode: scale-to-fit;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement style="flex-grow: 1; width: 70%; padding-left: 30px;">
+                        <ui:Label tabindex="-1" text="Big Guy - Lvl 4 - Human - Enforcer&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title" style="font-size: 35px; height: 58px;" />
+                        <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                            <ui:VisualElement style="flex-grow: 1;">
+                                <ui:Label tabindex="-1" text="&lt;b&gt;Dmg:&lt;/b&gt; 8/11&#10;&lt;b&gt;Init:&lt;/b&gt; 1d6 + 8&#10;&lt;b&gt;State:&lt;/b&gt; Aggresive&#10;&lt;b&gt;Item:&lt;/b&gt; HE Grenade" parse-escape-sequences="true" display-tooltip-when-elided="true" name="info-column-1" />
+                            </ui:VisualElement>
+                            <ui:VisualElement style="flex-grow: 1;">
+                                <ui:Label tabindex="-1" text="&lt;b&gt;Weap:&lt;/b&gt; Revolver S-12&lt;/b&gt; &#10;Acc: 8&#x9;Mode: SemiAuto&#10;Dam: 5&#x9;Ammo: 32/32&#10;&lt;b&gt;Wear:&lt;/b&gt; Synth Leather Jacket&#10;Armor: 12" parse-escape-sequences="true" display-tooltip-when-elided="true" name="info-column-2" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement style="flex-grow: 1; height: 22%; margin-top: 20px; margin-right: 0; margin-bottom: 20px; margin-left: 0; background-color: rgba(108, 33, 100, 0.8); flex-direction: row; padding-top: 40px; padding-right: 20px; padding-bottom: 40px; padding-left: 20px;">
+                <ui:Button text="Plan Job" parse-escape-sequences="true" display-tooltip-when-elided="true" style="background-color: rgba(41, 11, 62, 0.5); flex-grow: 1; width: 32%; -unity-font: url(&apos;project://database/Assets/Art/BebasNeue-Regular.ttf?fileID=12800000&amp;guid=43d81a96ae3b98041a9be49bf3a3d641&amp;type=3#BebasNeue-Regular&apos;); -unity-font-definition: url(&apos;project://database/Assets/Art/BebasNeue-Regular%20SDF.asset?fileID=11400000&amp;guid=4d325f0aea308394f9d47df33fadc3e9&amp;type=2#BebasNeue-Regular SDF&apos;); font-size: 130px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 0; height: 188px; flex-shrink: 0; background-color: rgba(108, 33, 100, 0);" />
+    </ui:VisualElement>
+    <ui:Instance template="BottomNavMenu" name="BottomNavMenu" style="position: absolute; width: 100%; height: 188px; bottom: 0;" />
+</ui:UXML>

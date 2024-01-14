@@ -5,41 +5,66 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class SafeHouseMenu : IMenu
+public class SafehouseMenu : IMenu
 {
     public EventSystem eventSystem;
-    public WorldController worldController;
     public GameObject hideoutImage;
+
+    public VisualElement[] crewMemberElement;
+
+    public CrewController crewController;
 
     private Button beginButton;
     private Button crewButton;
-
-    private VisualElement bgImage;
-    private float bgScrollSpeed = -4;
-    private bool initialized;
 
     public void InitializeMenu(UIDocument uiDoc, object passInfo)
     {
         VisualElement rootElem = uiDoc.rootVisualElement;
 
-        beginButton = rootElem.Q("game-begin") as Button;
-        crewButton = rootElem.Q("crew") as Button;
+        crewController = Storyteller.Instance.Crew;
 
-        bgImage = rootElem.Q("bg-image");
+        crewMemberElement = new VisualElement[]
+        {
+            rootElem.Q("crewmember1"),
+            rootElem.Q("crewmember2"),
+            rootElem.Q("crewmember3")
+        };
 
-        initialized = true;
+        for (int i = 0; i < crewMemberElement.Length; i++)
+        {
+            FillInCrewMemberInfo(crewMemberElement[i], i);
+        }
+    }
+
+    public void FillInCrewMemberInfo(VisualElement crewMemberElement, int crewMemberID)
+    {
+        if (crewMemberID + 1 <= crewController.CrewMembers.Count)
+        {
+            CrewMemberController crewMember = crewController.GetCrewMember(crewMemberID);
+            crewMemberElement.Q("portrait").style.backgroundImage = new StyleBackground(crewMember.Icon);
+            ((Label)crewMemberElement.Q("title")).text = $"{crewMember.alias} - Lvl 4 - Human - Enforcer";
+            Label info1 = crewMemberElement.Q("info-column-1") as Label;
+            info1.text = $"<b>Dmg:</b> {crewMember.DamageTaken}/{crewMember.MaxDamage}\n" +
+                            $"<b>Init:</b> {crewMember.InitiativeDice}D6 + {crewMember.InitiativeModifier}\n" +
+                            $"<b>State:</b> Aggressive\n" +
+                            $"<b>Item:</b> HE Grenade";
+            Label info2 = crewMemberElement.Q("info-column-2") as Label;
+            Weapon weapon = crewMember.EquippedItems.EquippedWeapon;
+            Armor armor = crewMember.EquippedItems.EquippedArmor;
+            info2.text = $"<b>Weap:</b> {weapon.DisplayName}\n" +
+                            $"Acc: {weapon.Accuracy}\tMode: {weapon.FiringMode}\n" +
+                            $"Dmg: {weapon.Damage}\tAmmo: {weapon.CurrentAmmoCount}/{weapon.AmmoCapacity}\n" +
+                            $"<b>Wear:</b> {armor.DisplayName}\n" +
+                            $"Armor: {armor.ArmorRating}";
+        }
     }
 
     public void RegisterCallbacks()
     {
-        beginButton.RegisterCallback<ClickEvent>(OnClick);
-        crewButton.RegisterCallback<ClickEvent>(OnClick);
     }
 
     public void UnregisterCallbacks()
     {
-        beginButton.UnregisterCallback<ClickEvent>(OnClick);
-        crewButton.UnregisterCallback<ClickEvent>(OnClick);
     }
 
     private void OnClick(ClickEvent e)
@@ -71,16 +96,7 @@ public class SafeHouseMenu : IMenu
         UnloadMenu.Invoke(this, passInfo);
     }
 
-    public void Update()
-    {
-        if (!initialized) return;
-        Vector3 prevOffset = bgImage.transform.position;
-        float width = bgImage.resolvedStyle.width;
-        float parentWidth = bgImage.parent.resolvedStyle.width;
-
-        if (prevOffset.x < -(width - parentWidth) || prevOffset.x > 0) bgScrollSpeed = -bgScrollSpeed;
-        bgImage.transform.position = prevOffset + (bgScrollSpeed * Time.deltaTime * Vector3.left);
-    }
+    public void Update() { }
 
     public void SendMenuNewInfo(object info) { }
 }

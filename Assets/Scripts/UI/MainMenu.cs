@@ -35,7 +35,7 @@ public class MainMenu : IMenu
         switch (((VisualElement)e.currentTarget).name)
         {
             case "game-start":
-                CallLoadMenu("SafeHouseMenu", false, null);
+                CallLoadMenu("SafehouseMenu", false, null);
                 break;
         }
     }

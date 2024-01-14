@@ -1,0 +1,94 @@
+.main-container {
+    flex-grow: 1;
+    border-right-width: 10px;
+    border-bottom-width: 10px;
+    border-left-color: rgba(0, 0, 0, 0.93);
+    border-right-color: rgba(0, 0, 0, 0.93);
+    border-top-color: rgba(0, 0, 0, 0.93);
+    border-bottom-color: rgba(0, 0, 0, 0.93);
+    margin-top: 100px;
+    margin-right: 90px;
+    margin-bottom: 90px;
+    margin-left: 100px;
+}
+
+.sub-container {
+    flex-grow: 1;
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    background-color: rgb(26, 26, 26);
+}
+
+.title {
+    flex-grow: 0;
+    margin-bottom: 69px;
+}
+
+.title-text {
+    color: rgb(255, 255, 255);
+    font-size: 86px;
+    -unity-font: url('project://database/Assets/Art/BebasNeue-Regular.ttf?fileID=12800000&guid=43d81a96ae3b98041a9be49bf3a3d641&type=3#BebasNeue-Regular');
+    -unity-font-definition: url('project://database/Assets/Art/BebasNeue-Regular%20SDF.asset?fileID=11400000&guid=4d325f0aea308394f9d47df33fadc3e9&type=2#BebasNeue-Regular SDF');
+    -unity-text-align: upper-center;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    background-color: rgb(51, 51, 51);
+}
+
+.sub-title {
+    color: rgb(255, 255, 255);
+    font-size: 28px;
+}
+
+.attribute-label {
+    color: rgb(255, 255, 255);
+    font-size: 60px;
+    width: 290px;
+    -unity-text-align: upper-right;
+}
+
+.button-minus {
+    flex-grow: 0;
+    color: rgb(255, 255, 255);
+    border-left-color: rgba(149, 149, 149, 0);
+    border-right-color: rgba(149, 149, 149, 0);
+    border-top-color: rgba(149, 149, 149, 0);
+    border-bottom-color: rgba(149, 149, 149, 0);
+    background-color: rgb(77, 77, 77);
+    font-size: 160px;
+    width: 100px;
+    height: 100px;
+    -unity-text-align: middle-center;
+    padding-bottom: 28px;
+}
+
+.button-plus {
+    flex-grow: 0;
+    color: rgb(255, 255, 255);
+    border-left-color: rgba(149, 149, 149, 0);
+    border-right-color: rgba(149, 149, 149, 0);
+    border-top-color: rgba(149, 149, 149, 0);
+    border-bottom-color: rgba(149, 149, 149, 0);
+    background-color: rgb(77, 77, 77);
+    font-size: 160px;
+    width: 100px;
+    height: 100px;
+    -unity-text-align: middle-center;
+    padding-bottom: 37px;
+}
+
+.attribute-container {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.attribute-label {
+    color: rgb(255, 255, 255);
+    font-size: 60px;
+    width: 290px;
+    -unity-text-align: upper-right;
+}

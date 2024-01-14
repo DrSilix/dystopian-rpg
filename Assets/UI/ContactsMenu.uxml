@@ -1,0 +1,31 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="BottomNavMenu" src="project://database/Assets/UI/BottomNavMenu.uxml?fileID=9197481963319205126&amp;guid=6c51eca918cdc5e4bac13c6f01785214&amp;type=3#BottomNavMenu" />
+    <Style src="project://database/Assets/UI/DarkBoxSimpleMenu.uss?fileID=7433441132597879392&amp;guid=428d266981b529f4ba5b44ddd9095d83&amp;type=3#DarkBoxSimpleMenu" />
+    <Style src="project://database/Assets/UI/ContactsMenu.uss?fileID=7433441132597879392&amp;guid=f056b0550a00b3b4ca0b69204c898f6a&amp;type=3#ContactsMenu" />
+    <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Art/purple_background.psd?fileID=2800000&amp;guid=6b500c6761573134782b16c5c99db476&amp;type=3#purple_background&apos;);">
+        <ui:VisualElement style="flex-grow: 0; height: 15%; flex-shrink: 0; background-color: rgba(108, 33, 100, 0.8);">
+            <ui:VisualElement style="flex-grow: 1; margin-top: 98px; padding-left: 25px; padding-right: 25px; padding-bottom: 10px;">
+                <ui:Label tabindex="-1" text="Contacts" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 50px; -unity-font: url(&apos;project://database/Assets/Art/BebasNeue-Regular.ttf?fileID=12800000&amp;guid=43d81a96ae3b98041a9be49bf3a3d641&amp;type=3#BebasNeue-Regular&apos;); -unity-font-definition: url(&apos;project://database/Assets/Art/BebasNeue-Regular%20SDF.asset?fileID=11400000&amp;guid=4d325f0aea308394f9d47df33fadc3e9&amp;type=2#BebasNeue-Regular SDF&apos;);" />
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                    <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="true" style="width: 50%;" />
+                    <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" style="padding-left: 25px; white-space: normal; width: 50%;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 0; height: 77%; flex-shrink: 0; padding-top: 35px; padding-right: 35px; padding-bottom: 35px; padding-left: 35px;">
+            <ui:ScrollView>
+                <ui:VisualElement name="contact-container" style="flex-grow: 1; height: 182px; flex-direction: row; border-left-color: rgb(204, 204, 204); border-right-color: rgb(204, 204, 204); border-top-color: rgb(204, 204, 204); border-bottom-color: rgb(204, 204, 204); border-top-width: 0; border-bottom-width: 2px; padding-top: 15px; padding-bottom: 15px;">
+                    <ui:VisualElement style="height: 152px; width: 152px; justify-content: center; align-items: center;">
+                        <ui:Label tabindex="-1" text="✆" parse-escape-sequences="true" display-tooltip-when-elided="true" name="phone-icon" style="font-size: 149px; margin-top: -10px; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-text-align: upper-center; color: rgb(255, 255, 255);" />
+                    </ui:VisualElement>
+                    <ui:VisualElement style="flex-grow: 1; padding-left: 56px; justify-content: center;">
+                        <ui:Label tabindex="-1" text="Jezzabelle Lightning" parse-escape-sequences="true" display-tooltip-when-elided="true" name="name" style="-unity-text-align: middle-left; font-size: 50px;" />
+                        <ui:Label tabindex="-1" text="&lt;b&gt;Type:&lt;/b&gt; Fixer&#x9;&lt;b&gt;Relation:&lt;/b&gt; 3   &lt;b&gt;Favors:&lt;/b&gt; 1   &lt;b&gt;influence:&lt;/b&gt; 1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="info" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:ScrollView>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 0; height: 188px; flex-shrink: 0; background-color: rgba(108, 33, 100, 0);" />
+    </ui:VisualElement>
+    <ui:Instance template="BottomNavMenu" name="BottomNavMenu" style="position: absolute; width: 100%; height: 188px; display: flex; bottom: 0;" />
+</ui:UXML>

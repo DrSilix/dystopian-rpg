@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alias: Big Guy
+  <Icon>k__BackingField: {fileID: 21300000, guid: 202ce515abc72a449bc09db24101b486, type: 3}
+  <MaxDamage>k__BackingField: 0
   attributes:
     body: 6
     agility: 4
@@ -55,8 +57,8 @@ MonoBehaviour:
     intuition: 3
     charisma: 3
     luck: 17
-  initiativeModifier: 0
-  initiativeDice: 1
+  <InitiativeModifier>k__BackingField: 0
+  <InitiativeDice>k__BackingField: 1
   isEnemy: 0
   defaultWeapon: {fileID: 11400000, guid: e1ece79a7de57934e9a0cf1ca31a6009, type: 2}
   defaultArmor: {fileID: 11400000, guid: 7383d364bdcad72439a60867acd59f89, type: 2}

@@ -1,0 +1,15 @@
+#unity-low-button {
+    visibility: hidden;
+}
+
+#unity-high-button {
+    visibility: hidden;
+}
+
+#unity-slider {
+    visibility: hidden;
+}
+
+#contacts {
+    background-color: rgb(255, 14, 229);
+}

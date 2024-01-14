@@ -11,10 +11,11 @@ using Random = UnityEngine.Random;
 public class CrewMemberController : MonoBehaviour
 {
     public string alias;
-    public int MaxDamage { get; private set; }
+    [field: SerializeField] public Sprite Icon {  get; set; }
+    [field: SerializeField] public int MaxDamage { get; private set; }
     public Attributes attributes;
-    [SerializeField] private int initiativeModifier;
-    [SerializeField] private int initiativeDice = 1;
+    [field: SerializeField] public int InitiativeModifier { get; private set; }
+    [field: SerializeField] public int InitiativeDice { get; private set; } = 1;
     [SerializeField] private bool isEnemy;
     [Header("DefaultEquipment")]
     public WeaponSO defaultWeapon;
@@ -38,7 +39,7 @@ public class CrewMemberController : MonoBehaviour
     void OnEnable()
     {
         EquippedItems = new Equipped(new Weapon(defaultWeapon), new Armor(defaultArmor));
-        initiativeModifier = attributes.intuition + attributes.reaction;
+        InitiativeModifier = attributes.intuition + attributes.reaction;
         MaxDamage = 8 + Mathf.CeilToInt((float)attributes.body / 2);
     }
 
@@ -78,7 +79,7 @@ public class CrewMemberController : MonoBehaviour
 
     public int RollInitiative()
     {
-        return initiativeModifier + Roll.Initiative(initiativeDice);
+        return InitiativeModifier + Roll.Initiative(InitiativeDice);
     }
 
     #region Combat
