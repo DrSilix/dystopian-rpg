@@ -44,7 +44,7 @@ public class WeaponSO : ScriptableObject
     //availability
     public int availability;
     //legality
-    public int Illegality;
+    public bool illegal;
     //list of special effects
     //public WeaponEffect weaponEffect;
     //list of available attach points (top, under, barrel)

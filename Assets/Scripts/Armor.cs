@@ -5,10 +5,10 @@ using System.Text;
 using UnityEngine;
 using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
-public class Armor
+public class Armor : IInventoryItem
 {
     public ArmorSO ArmorBase { get; private set; }
-
+    public InventoryItemType InventoryItemType { get; } = InventoryItemType.Armor;
     public string DisplayName { get; private set; }
     public Sprite Sprite { get; private set; }
     public string Manufacturer { get; private set; }

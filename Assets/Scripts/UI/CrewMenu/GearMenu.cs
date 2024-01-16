@@ -54,7 +54,7 @@ public class GearMenu : IMenu
         descColumn[1].text = "Reload Time"; valueColumn[1].text = equippedWeapon.ReloadTime.ToString();
         descColumn[2].text = "Cost"; valueColumn[2].text = equippedWeapon.Cost.ToString();
         descColumn[3].text = "Availability"; valueColumn[3].text = equippedWeapon.Availability.ToString();
-        descColumn[4].text = "Illegal"; valueColumn[4].text = (equippedWeapon.Illegality > 0).ToString();
+        //descColumn[4].text = "Illegal"; valueColumn[4].text = (equippedWeapon.Illegality > 0).ToString();
         descColumn[5].text = "Upper Attachment"; valueColumn[5].text = equippedWeapon.HasUpperAttachPoint.ToString();
         descColumn[6].text = "Lower Attachment"; valueColumn[6].text = equippedWeapon.HasLowerAttachPoint.ToString();
         descColumn[7].text = "Barrel Attachment"; valueColumn[7].text = equippedWeapon.HasBarrelAttachPoint.ToString();

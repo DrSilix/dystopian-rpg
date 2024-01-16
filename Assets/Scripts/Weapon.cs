@@ -4,10 +4,11 @@ using System.Text;
 using UnityEngine;
 using Utils;
 
-public class Weapon
+public class Weapon : IInventoryItem
 {
     public WeaponSO WeaponBase { get; private set; }
     
+    public InventoryItemType InventoryItemType { get; } = InventoryItemType.Weapon;
     public WeaponType WeaponType { get; private set; }
     public string DisplayName { get; private set; }
     public Sprite Sprite { get; private set; }
@@ -29,7 +30,7 @@ public class Weapon
     public int ReloadTime { get; private set; }
     public int Cost { get; private set; }
     public int Availability { get; private set; }
-    public int Illegality { get; private set; }
+    public bool Illegal { get; private set; }
     public bool HasUpperAttachPoint { get; private set; }
     public bool HasLowerAttachPoint { get; private set; }
     public bool HasBarrelAttachPoint { get; private set; }
@@ -55,7 +56,7 @@ public class Weapon
         ReloadTime = weaponSO.reloadTime;
         Cost = weaponSO.baseCost; //TODO: update
         Availability = weaponSO.availability;
-        Illegality = weaponSO.Illegality;
+        Illegal = weaponSO.illegal;
         HasUpperAttachPoint = weaponSO.hasUpperAttachPoint;
         HasLowerAttachPoint = weaponSO.hasLowerAttachPoint;
         HasBarrelAttachPoint = weaponSO.hasBarrelAttachPoint;
