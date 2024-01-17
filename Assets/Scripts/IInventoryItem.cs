@@ -5,6 +5,7 @@ using UnityEngine;
 public interface IInventoryItem
 {
     public InventoryItemType InventoryItemType { get; }
+    public bool CanStack { get; }
     public string DisplayName { get; }
     public Sprite Sprite { get; }
     public string Manufacturer { get; }

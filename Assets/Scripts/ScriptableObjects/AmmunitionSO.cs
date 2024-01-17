@@ -33,7 +33,7 @@ public class AmmunitionSO : ScriptableObject
     //availability
     public int availability;
     //legality
-    public int illegality;
+    public bool illegal;
     //list of special effects
     //public WeaponEffect weaponEffect;
 }

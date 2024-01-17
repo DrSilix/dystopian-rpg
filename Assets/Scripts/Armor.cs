@@ -9,6 +9,7 @@ public class Armor : IInventoryItem
 {
     public ArmorSO ArmorBase { get; private set; }
     public InventoryItemType InventoryItemType { get; } = InventoryItemType.Armor;
+    public bool CanStack { get; } = false;
     public string DisplayName { get; private set; }
     public Sprite Sprite { get; private set; }
     public string Manufacturer { get; private set; }

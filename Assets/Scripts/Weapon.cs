@@ -10,6 +10,7 @@ public class Weapon : IInventoryItem
     
     public InventoryItemType InventoryItemType { get; } = InventoryItemType.Weapon;
     public WeaponType WeaponType { get; private set; }
+    public bool CanStack { get; } = false;
     public string DisplayName { get; private set; }
     public Sprite Sprite { get; private set; }
     public string Manufacturer { get; private set; }
