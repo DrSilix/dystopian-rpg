@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28c8800bf888afa4fa215c033196d06c, type: 3}
-  m_Name: New Contact SO
+  m_Name: James
   m_EditorClassIdentifier: 
-  displayName: Jezzabelle Lightning
-  relation: 3
-  favors: 1
-  influence: 1
-  isKnown: 1
-  shopInventorySO: {fileID: 11400000, guid: 0638379870fa2f6428ab059961217618, type: 2}
-  buyMultiplier: 1
-  sellMultiplier: 0.2
-  cashOnHand: 1200
+  displayName: James Gunnerson
+  relation: 2
+  favors: 0
+  influence: 2
+  isKnown: 0
+  shopInventorySO: {fileID: 0}
+  buyMultiplier: 1.2
+  sellMultiplier: 0.1
+  cashOnHand: 4300

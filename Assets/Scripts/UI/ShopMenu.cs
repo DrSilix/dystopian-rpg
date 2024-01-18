@@ -85,6 +85,7 @@ public class ShopMenu : IMenu
         {
             element.RegisterCallback<ClickEvent>(OnClick);
         }
+        confirmButton.RegisterCallback<ClickEvent>(OnClick);
     }
 
     public void SendMenuNewInfo(object info) { }
@@ -95,6 +96,7 @@ public class ShopMenu : IMenu
         {
             element.UnregisterCallback<ClickEvent>(OnClick);
         }
+        confirmButton.UnregisterCallback<ClickEvent>(OnClick);
     }
 
     private void OnClick(ClickEvent e)

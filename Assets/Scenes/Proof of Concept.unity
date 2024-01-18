@@ -2001,6 +2001,8 @@ MonoBehaviour:
     asset: {fileID: 9197481963319205126, guid: 2d4d72b58b983e54e8cce3998f92ce2a, type: 3}
   - name: ShopMenu
     asset: {fileID: 9197481963319205126, guid: fe91ed7737ac9044aaed93439a3b1bc5, type: 3}
+  - name: HeistHUD
+    asset: {fileID: 9197481963319205126, guid: 343c627e557e2424ea3e0dc97ebd293a, type: 3}
 --- !u!4 &2110539168
 Transform:
   m_ObjectHideFlags: 0

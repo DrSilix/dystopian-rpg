@@ -23,7 +23,7 @@ public class CombatInitiative
     {
         foreach (CrewMemberController actor in crewController.CrewMembers)
         {
-            if (actor.CurrentDamagedState == DamagedState.Dead) return;
+            if (actor.CurrentDamagedState == DamagedState.Dead) continue;
             InitiativeIndividual guy = new()
             {
                 Actor = actor,
