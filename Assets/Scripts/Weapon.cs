@@ -79,6 +79,13 @@ public class Weapon : IInventoryItem
         return sb.ToString();
     }
 
+    public string ToInventoryString()
+    {
+        StringBuilder sb = new();
+        sb.Append($"<b>Type:</b> {WeaponType}\tAcc:{Accuracy} Dmg:{Damage} AP:{ArmorPiercing} {FiringMode} Ammo:{CurrentAmmoCount}/{AmmoCapacity}");
+        return sb.ToString();
+    }
+
     public void LoadAmmunition(AmmunitionSO ammunitionSO, int amount)
     {
         AmmunitionSO = ammunitionSO;

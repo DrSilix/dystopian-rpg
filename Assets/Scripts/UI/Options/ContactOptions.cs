@@ -4,32 +4,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class CrewMemberOptions : IMenu
+public class ContactOptions : IMenu
 {
-    private Button attributesButton;
-    private Button gearButton;
+    private Button shopButton;
     private Button returnButton;
 
-    private int crewMemberId;
+    private object passInfo;
 
     public void InitializeMenu(UIDocument uiDoc, object passInfo)
     {
-        crewMemberId = 0;
-        if (passInfo.GetType() == typeof(int)) crewMemberId = (int)passInfo;
-        
+        this.passInfo = passInfo;
+
         VisualElement rootElem = uiDoc.rootVisualElement;
 
         returnButton = rootElem.Q("return") as Button;
 
-        attributesButton = rootElem.Q("attributes") as Button;
-        gearButton = rootElem.Q("gear") as Button;
+        shopButton = rootElem.Q("shop") as Button;
     }
 
     public void RegisterCallbacks()
     {
         returnButton.RegisterCallback<ClickEvent>(OnClick);
-        attributesButton.RegisterCallback<ClickEvent>(OnClick);
-        gearButton.RegisterCallback<ClickEvent>(OnClick);
+        shopButton.RegisterCallback<ClickEvent>(OnClick);
     }
 
     private void OnClick(ClickEvent e)
@@ -37,11 +33,8 @@ public class CrewMemberOptions : IMenu
         Debug.Log(((VisualElement)e.currentTarget).name);
         switch (((VisualElement)e.currentTarget).name)
         {
-            case "attributes":
-                CallLoadMenu("CrewAttributesMenu", true, crewMemberId);
-                break;
-            case "gear":
-                CallLoadMenu("GearMenu", true, crewMemberId);
+            case "shop":
+                CallLoadMenu("ShopMenu", true, passInfo);
                 break;
             case "return":
                 CallUnloadMenu(null);
@@ -66,8 +59,7 @@ public class CrewMemberOptions : IMenu
     public void UnregisterCallbacks()
     {
         returnButton.UnregisterCallback<ClickEvent>(OnClick);
-        attributesButton.UnregisterCallback<ClickEvent>(OnClick);
-        gearButton.UnregisterCallback<ClickEvent>(OnClick);
+        shopButton.UnregisterCallback<ClickEvent>(OnClick);
     }
 
     public void Update() { }

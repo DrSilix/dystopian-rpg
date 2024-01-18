@@ -1,20 +1,4 @@
-#unity-low-button {
-    visibility: hidden;
-}
-
-#unity-high-button {
-    visibility: hidden;
-}
-
-#unity-slider {
-    visibility: hidden;
-}
-
-#contacts {
-    background-color: rgb(255, 14, 229);
-}
-
-.contact-container {
+.item-container {
     flex-grow: 1;
     height: 182px;
     flex-direction: row;
@@ -26,28 +10,14 @@
     border-bottom-width: 2px;
     padding-top: 15px;
     padding-bottom: 15px;
-    display: flex;
 }
 
-.phone-icon-container {
+.icon {
     height: 152px;
     width: 152px;
     justify-content: center;
     align-items: center;
-}
-
-.phone-icon {
-    font-size: 149px;
-    margin-top: -10px;
-    margin-right: 0;
-    margin-bottom: 0;
-    margin-left: 0;
-    padding-top: 0;
-    padding-right: 0;
-    padding-bottom: 0;
-    padding-left: 0;
-    -unity-text-align: upper-center;
-    color: rgb(255, 255, 255);
+    -unity-background-scale-mode: scale-to-fit;
 }
 
 .info-container {
@@ -56,7 +26,25 @@
     justify-content: center;
 }
 
-.contact-name {
+.name {
     -unity-text-align: middle-left;
     font-size: 50px;
+}
+
+.price {
+    -unity-text-align: middle-right;
+    font-size: 50px;
+    flex-grow: 1;
+}
+
+#unity-low-button {
+    visibility: hidden;
+}
+
+#unity-high-button {
+    visibility: hidden;
+}
+
+#unity-slider {
+    visibility: hidden;
 }

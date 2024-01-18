@@ -14,4 +14,6 @@ public interface IInventoryItem
     public int Cost {  get; }
     public int Availability { get; }
     public bool Illegal { get; }
+
+    public string ToInventoryString();
 }

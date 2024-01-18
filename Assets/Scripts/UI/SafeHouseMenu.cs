@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
+using static UnityEditor.Rendering.FilterWindow;
 
 public class SafehouseMenu : IMenu
 {
@@ -14,12 +15,16 @@ public class SafehouseMenu : IMenu
 
     public CrewController crewController;
 
-    private Button beginButton;
-    private Button crewButton;
+    private Button planJobButton;
+    private Button contactsButton;
 
     public void InitializeMenu(UIDocument uiDoc, object passInfo)
     {
         VisualElement rootElem = uiDoc.rootVisualElement;
+        VisualElement BottomNavMenu = uiDoc.rootVisualElement.parent.Q("BottomNavMenu");
+
+        planJobButton = rootElem.Q("planjob") as Button;
+        contactsButton = rootElem.Q("contacts") as Button;
 
         crewController = Storyteller.Instance.Crew;
 
@@ -61,10 +66,14 @@ public class SafehouseMenu : IMenu
 
     public void RegisterCallbacks()
     {
+        planJobButton.RegisterCallback<ClickEvent>(OnClick);
+        contactsButton.RegisterCallback<ClickEvent>(OnClick);
     }
 
     public void UnregisterCallbacks()
     {
+        planJobButton.UnregisterCallback<ClickEvent>(OnClick);
+        contactsButton.UnregisterCallback<ClickEvent>(OnClick);
     }
 
     private void OnClick(ClickEvent e)
@@ -72,12 +81,12 @@ public class SafehouseMenu : IMenu
         Debug.Log(((VisualElement)e.currentTarget).name);
         switch (((VisualElement)e.currentTarget).name)
         {
-            case "game-begin":
+            case "planjob":
                 CallLoadMenu("HeistHUD", false, null);
                 Storyteller.Instance.StartHeist();
                 break;
-            case "crew":
-                CallLoadMenu("CrewMenu", true, null);
+            case "contacts":
+                CallLoadMenu("ContactsMenu", false, null);
                 break;
         }
     }

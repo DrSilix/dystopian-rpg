@@ -71,4 +71,11 @@ public class Armor : IInventoryItem
         sb.Append($"{DisplayName[..Mathf.Min(DisplayName.Length, 10)]}|{ArmorRating}");
         return sb.ToString();
     }
+
+    public string ToInventoryString()
+    {
+        StringBuilder sb = new();
+        sb.Append($"<b>Armor Rating:</b> {ArmorRating}");
+        return sb.ToString();
+    }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class Ammunition : IInventoryItem
@@ -31,5 +32,12 @@ public class Ammunition : IInventoryItem
         Cost = ammunitionSO.baseCost; //TODO: update
         Availability = ammunitionSO.availability;
         Illegal = ammunitionSO.illegal;
+    }
+
+    public string ToInventoryString()
+    {
+        StringBuilder sb = new();
+        sb.Append($"<b>Weapon Type:</b> {WeaponType}\t<b>Dmg Modifier:</b>{AmmunitionBase.damageModifier}");
+        return sb.ToString();
     }
 }

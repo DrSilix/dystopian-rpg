@@ -71,7 +71,7 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement style="flex-grow: 1; height: 22%; margin-top: 20px; margin-right: 0; margin-bottom: 20px; margin-left: 0; background-color: rgba(108, 33, 100, 0.8); flex-direction: row; padding-top: 40px; padding-right: 20px; padding-bottom: 40px; padding-left: 20px;">
-                <ui:Button text="Plan Job" parse-escape-sequences="true" display-tooltip-when-elided="true" style="background-color: rgba(41, 11, 62, 0.5); flex-grow: 1; width: 32%; -unity-font: url(&apos;project://database/Assets/Art/BebasNeue-Regular.ttf?fileID=12800000&amp;guid=43d81a96ae3b98041a9be49bf3a3d641&amp;type=3#BebasNeue-Regular&apos;); -unity-font-definition: url(&apos;project://database/Assets/Art/BebasNeue-Regular%20SDF.asset?fileID=11400000&amp;guid=4d325f0aea308394f9d47df33fadc3e9&amp;type=2#BebasNeue-Regular SDF&apos;); font-size: 130px;" />
+                <ui:Button text="Plan Job" parse-escape-sequences="true" display-tooltip-when-elided="true" name="planjob" style="background-color: rgba(41, 11, 62, 0.5); flex-grow: 1; width: 32%; -unity-font: url(&apos;project://database/Assets/Art/BebasNeue-Regular.ttf?fileID=12800000&amp;guid=43d81a96ae3b98041a9be49bf3a3d641&amp;type=3#BebasNeue-Regular&apos;); -unity-font-definition: url(&apos;project://database/Assets/Art/BebasNeue-Regular%20SDF.asset?fileID=11400000&amp;guid=4d325f0aea308394f9d47df33fadc3e9&amp;type=2#BebasNeue-Regular SDF&apos;); font-size: 130px;" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement style="flex-grow: 0; height: 188px; flex-shrink: 0; background-color: rgba(108, 33, 100, 0);" />

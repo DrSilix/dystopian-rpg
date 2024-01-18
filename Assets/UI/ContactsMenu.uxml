@@ -14,13 +14,13 @@
         </ui:VisualElement>
         <ui:VisualElement style="flex-grow: 0; height: 77%; flex-shrink: 0; padding-top: 35px; padding-right: 35px; padding-bottom: 35px; padding-left: 35px;">
             <ui:ScrollView>
-                <ui:VisualElement name="contact-container" style="flex-grow: 1; height: 182px; flex-direction: row; border-left-color: rgb(204, 204, 204); border-right-color: rgb(204, 204, 204); border-top-color: rgb(204, 204, 204); border-bottom-color: rgb(204, 204, 204); border-top-width: 0; border-bottom-width: 2px; padding-top: 15px; padding-bottom: 15px;">
-                    <ui:VisualElement style="height: 152px; width: 152px; justify-content: center; align-items: center;">
-                        <ui:Label tabindex="-1" text="✆" parse-escape-sequences="true" display-tooltip-when-elided="true" name="phone-icon" style="font-size: 149px; margin-top: -10px; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-text-align: upper-center; color: rgb(255, 255, 255);" />
+                <ui:VisualElement name="contact-container" class="contact-container" style="display: none;">
+                    <ui:VisualElement class="phone-icon-container">
+                        <ui:Label tabindex="-1" text="✆" parse-escape-sequences="true" display-tooltip-when-elided="true" name="phone-icon" class="phone-icon" />
                     </ui:VisualElement>
-                    <ui:VisualElement style="flex-grow: 1; padding-left: 56px; justify-content: center;">
-                        <ui:Label tabindex="-1" text="Jezzabelle Lightning" parse-escape-sequences="true" display-tooltip-when-elided="true" name="name" style="-unity-text-align: middle-left; font-size: 50px;" />
-                        <ui:Label tabindex="-1" text="&lt;b&gt;Type:&lt;/b&gt; Fixer&#x9;&lt;b&gt;Relation:&lt;/b&gt; 3   &lt;b&gt;Favors:&lt;/b&gt; 1   &lt;b&gt;influence:&lt;/b&gt; 1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="info" />
+                    <ui:VisualElement class="info-container">
+                        <ui:Label tabindex="-1" text="Jezzabelle Lightning" parse-escape-sequences="true" display-tooltip-when-elided="true" name="name" class="contact-name" />
+                        <ui:Label tabindex="-1" text="&lt;b&gt;Type:&lt;/b&gt; Fixer&#x9;&lt;b&gt;Relation:&lt;/b&gt; 3   &lt;b&gt;Favors:&lt;/b&gt; 1   &lt;b&gt;influence:&lt;/b&gt; 1" name="info" />
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:ScrollView>

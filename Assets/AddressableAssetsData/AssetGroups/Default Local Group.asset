@@ -58,6 +58,20 @@ MonoBehaviour:
     - default
     - Armor
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8972e95a3cc215b40a56192a060abbb3
+    m_Address: Assets/Data/ScriptableObjects/New Contact SO.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Contacts
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0638379870fa2f6428ab059961217618
+    m_Address: Assets/Data/ScriptableObjects/New Shop Inventory SO.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Shops
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e5c3509057ec7824c911d02e413653d2, type: 2}
   m_SchemaSet:

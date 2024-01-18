@@ -33,6 +33,8 @@ public class Storyteller : MonoBehaviour
     public Dictionary<string, WeaponSO> WeaponSOs {  get; private set; } = new Dictionary<string, WeaponSO>();
     public Dictionary<string, ArmorSO> ArmorSOs { get; private set; } = new Dictionary<string, ArmorSO>();
     public Dictionary<string, AmmunitionSO> AmmunitionSOs { get; private set; } = new Dictionary<string, AmmunitionSO>();
+    public List<ContactSO> ContactSOs { get; private set; } = new List<ContactSO>();
+    public List<ShopInventorySO> ShopInventorySOs { get; private set; } = new List<ShopInventorySO>();
     
     public CrewController Crew {  get; private set; }
     
@@ -66,6 +68,12 @@ public class Storyteller : MonoBehaviour
                     break;
                 case ArmorSO s:
                     ArmorSOs.Add(s.displayName, s);
+                    break;
+                case ContactSO s:
+                    ContactSOs.Add(s);
+                    break;
+                case ShopInventorySO s:
+                    ShopInventorySOs.Add(s);
                     break;
             }
         }).Task;

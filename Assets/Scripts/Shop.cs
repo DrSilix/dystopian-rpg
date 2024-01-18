@@ -13,7 +13,7 @@ public class ShopItemWithQuantity<T>
 public class Shop
 {
     public Inventory Inventory { get; private set; }
-    public float costMultiplier = 1f;
+    public float buyMultiplier = 1f;
 
     public Shop (Inventory inventory) { Inventory = inventory; }
     public Shop(List<IInventoryItem> items) { Inventory = new Inventory(items); }
