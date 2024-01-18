@@ -102,7 +102,9 @@ public class UIController : MonoBehaviour
         uiScripts[currentMenu] = null;
         uiDocs[currentMenu].visualTreeAsset = null;
         currentMenu--;
+        uiScripts[currentMenu].UnregisterCallbacks();
         uiScripts[currentMenu].InitializeMenu(uiDocs[currentMenu], passInfo);
+        uiScripts[currentMenu].RegisterCallbacks();
     }
 
     private void UnloadMenu(object sender, object e)

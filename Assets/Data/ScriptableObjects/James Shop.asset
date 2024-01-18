@@ -13,19 +13,16 @@ MonoBehaviour:
   m_Name: James Shop
   m_EditorClassIdentifier: 
   weapons:
-  - {fileID: 11400000, guid: 4e6897227a2463741a5f0e227d55f0f5, type: 2}
-  - {fileID: 11400000, guid: cf44859ab3deb8b4d810d429d14806d3, type: 2}
+  - {fileID: 11400000, guid: ebf75c1ebc47b704bbce507b175107f5, type: 2}
+  - {fileID: 11400000, guid: 84a183ad8d176a14b9ec28f8c394fce0, type: 2}
   - {fileID: 11400000, guid: 1123a72b9e859c14ea2964d252f57014, type: 2}
-  - {fileID: 11400000, guid: d329be6ba5558d14290217c41cc2dc2b, type: 2}
-  - {fileID: 11400000, guid: 957eb2cc5a24df246872ff3f1978d1fc, type: 2}
-  - {fileID: 11400000, guid: e1ece79a7de57934e9a0cf1ca31a6009, type: 2}
   armors:
   - {fileID: 11400000, guid: 7f8e88dc1662aef45bc2be7b1b50692a, type: 2}
-  - {fileID: 11400000, guid: 6237af6ed6570ec44818099a30496118, type: 2}
-  - {fileID: 11400000, guid: 7383d364bdcad72439a60867acd59f89, type: 2}
-  - {fileID: 11400000, guid: 227864de619dff94b988ab6547b04f96, type: 2}
-  - {fileID: 11400000, guid: 85ae664db14ced443ac0f61028319125, type: 2}
-  - {fileID: 11400000, guid: c392a12bb92d56d43abdd9deca756361, type: 2}
+  - {fileID: 11400000, guid: 549ed4800cf59354b91a1975cccf9596, type: 2}
+  - {fileID: 11400000, guid: 6b97873e028a40e4bb1679ede03eabe4, type: 2}
+  - {fileID: 11400000, guid: f512806f55b54794897c05b0ea61d1cd, type: 2}
+  - {fileID: 11400000, guid: f0fbc45cfefb46f459a8663c8a3dab3c, type: 2}
+  - {fileID: 11400000, guid: 638891bef10b09d4f8d704496a3c85ee, type: 2}
   ammuntion:
   - item: {fileID: 11400000, guid: 586150d0ee764b14099b1100fee9da3a, type: 2}
-    quantity: 450
+    quantity: 1430

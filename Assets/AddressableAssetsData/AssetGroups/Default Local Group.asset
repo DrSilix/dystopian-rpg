@@ -59,18 +59,32 @@ MonoBehaviour:
     - Armor
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8972e95a3cc215b40a56192a060abbb3
-    m_Address: Assets/Data/ScriptableObjects/New Contact SO.asset
+    m_Address: Assets/Data/ScriptableObjects/Jezz.asset
     m_ReadOnly: 0
     m_SerializedLabels:
-    - Contacts
     - default
+    - Contacts
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0638379870fa2f6428ab059961217618
-    m_Address: Assets/Data/ScriptableObjects/New Shop Inventory SO.asset
+    m_Address: Assets/Data/ScriptableObjects/Jezz Shop.asset
     m_ReadOnly: 0
     m_SerializedLabels:
-    - Shops
     - default
+    - Shops
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 834dc9a021ca18d45af3d9ed9c16bf72
+    m_Address: Assets/Data/ScriptableObjects/James Shop.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    - Shops
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8dc2116846601f2498e3d1285d391ea1
+    m_Address: Assets/Data/ScriptableObjects/James.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    - Contacts
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e5c3509057ec7824c911d02e413653d2, type: 2}

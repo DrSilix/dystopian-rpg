@@ -16,8 +16,8 @@ MonoBehaviour:
   relation: 2
   favors: 0
   influence: 2
-  isKnown: 0
-  shopInventorySO: {fileID: 0}
+  isKnown: 1
+  shopInventorySO: {fileID: 11400000, guid: 834dc9a021ca18d45af3d9ed9c16bf72, type: 2}
   buyMultiplier: 1.2
   sellMultiplier: 0.1
   cashOnHand: 4300

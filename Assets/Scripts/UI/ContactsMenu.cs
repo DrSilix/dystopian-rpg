@@ -98,7 +98,6 @@ public class ContactsMenu : IMenu
         {
             case "contact-container":
                 CallLoadMenu("ContactOptions", true, target.tooltip);
-                Storyteller.Instance.StartHeist();
                 break;
             case "safe-house-button":
                 CallLoadMenu("SafehouseMenu", false, null);
