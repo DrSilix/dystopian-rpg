@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 
 public class ShopMenu : IMenu
 {
+    private string contactName;
     private Shop shop;
     private Inventory inventory;
 
@@ -15,8 +16,9 @@ public class ShopMenu : IMenu
     private Button confirmButton;
     public void InitializeMenu(UIDocument uiDoc, object passInfo)
     {
+        contactName = passInfo as string;
         List<ContactSO> contacts = Storyteller.Instance.ContactSOs;
-        ContactSO contact = contacts.Find(x => x.displayName == (string)passInfo);
+        ContactSO contact = contacts.Find(x => x.displayName == contactName);
         shop = new Shop(contact.shopInventorySO);
 
         VisualElement rootElem = uiDoc.rootVisualElement;
@@ -109,7 +111,7 @@ public class ShopMenu : IMenu
                 Debug.Log(target.tooltip);
                 break;
             case "confirm":
-                CallUnloadMenu(null);
+                CallUnloadMenu(contactName);
                 break;
         }
     }
