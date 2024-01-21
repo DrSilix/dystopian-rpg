@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 
 [System.Serializable]
@@ -13,10 +14,13 @@ public class EquippedItems
     {
         get
         {
-            if (equippedWeapon == null || equippedWeapon.Id != equipment[ItemSlot.MainWeapon].Id)
+            if (equipment[ItemSlot.MainWeapon] != null)
             {
-                equippedWeapon = (Weapon)equipment[ItemSlot.MainWeapon].Item;
+                if (equippedWeapon == null || equippedWeapon.Id != equipment[ItemSlot.MainWeapon].Id)
+                    equippedWeapon = (Weapon)equipment[ItemSlot.MainWeapon].Item;
             }
+            else equippedWeapon = null;
+
             return equippedWeapon;
         }
         private set { equippedWeapon = value; }
@@ -26,10 +30,13 @@ public class EquippedItems
     {
         get
         {
-            if (equippedArmor == null || equippedArmor.Id != equipment[ItemSlot.MainArmor].Id)
+            if (equipment[ItemSlot.MainArmor] != null)
             {
-                equippedArmor = (Armor)equipment[ItemSlot.MainArmor].Item;
+                if (equippedArmor == null || equippedArmor.Id != equipment[ItemSlot.MainArmor].Id)
+                    equippedArmor = (Armor)equipment[ItemSlot.MainArmor].Item;
             }
+            else equippedArmor = null;
+
             return equippedArmor;
         }
         private set { equippedArmor = value; }
@@ -63,5 +70,21 @@ public class EquippedItems
         equipment[slot] = null;
         result.CurrentlyEquippedBy = null;
         return result;
+    }
+
+    public InventoryItem Unequip(InventoryItem item)
+    {
+        ItemSlot slot;
+        foreach (ItemSlot s in equipment.Keys)
+        {
+            if (equipment[s]?.Id == item.Id)
+            {
+                slot = s;
+                equipment[slot] = null;
+                item.CurrentlyEquippedBy = null;
+                return item;
+            }
+        }
+        return null;
     }
 }

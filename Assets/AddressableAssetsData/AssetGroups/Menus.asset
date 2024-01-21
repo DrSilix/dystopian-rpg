@@ -80,6 +80,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - MenuDoc
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 343c627e557e2424ea3e0dc97ebd293a
+    m_Address: Assets/UI Toolkit/Heist Job UI/HeistHUD.uxml
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MenuDoc
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e5c3509057ec7824c911d02e413653d2, type: 2}
   m_SchemaSet:

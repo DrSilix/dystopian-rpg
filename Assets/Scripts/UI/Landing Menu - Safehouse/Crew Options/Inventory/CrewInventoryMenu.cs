@@ -30,7 +30,7 @@ public class CrewInventoryMenu : IMenu
         foreach (InventoryItem inventoryItem in inventory.GetAllItems())
         {
             VisualElement[] itemElement = GetBlankItemTemplate();
-            itemElement[0].tooltip = inventoryItem.Item.DisplayName;
+            itemElement[0].tooltip = inventoryItem.Id.ToString();
             if (inventoryItem.Item.Sprite != null) itemElement[1].style.backgroundImage = new StyleBackground(inventoryItem.Item.Sprite);
             ((Label)itemElement[2]).text = inventoryItem.Item.DisplayName;
             if (inventoryItem.CurrentlyEquippedBy != null) ((Label)itemElement[3]).text = $"Equipped by: {inventoryItem.CurrentlyEquippedBy.alias}";
@@ -103,7 +103,7 @@ public class CrewInventoryMenu : IMenu
         switch (target.name)
         {
             case "item-container":
-                Debug.Log(target.tooltip);
+                CallLoadMenu("InventoryItemOptions", true, (target.tooltip, inventory));
                 break;
             case "confirm":
                 CallUnloadMenu(null);

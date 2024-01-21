@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
-using static UnityEditor.Rendering.FilterWindow;
 
 public class SafehouseMenu : IMenu
 {
@@ -57,11 +56,18 @@ public class SafehouseMenu : IMenu
             Label info2 = crewMemberElement.Q("info-column-2") as Label;
             Weapon weapon = crewMember.EquippedItems.EquippedWeapon;
             Armor armor = crewMember.EquippedItems.EquippedArmor;
-            info2.text = $"<b>Weap:</b> {weapon.DisplayName}\n" +
-                            $"Acc: {weapon.Accuracy}\tMode: {weapon.FiringMode}\n" +
-                            $"Dmg: {weapon.Damage}\tAmmo: {weapon.CurrentAmmoCount}/{weapon.AmmoCapacity}\n" +
-                            $"<b>Wear:</b> {armor.DisplayName}\n" +
-                            $"Armor: {armor.ArmorRating}";
+            info2.text = "";
+            if (weapon != null)
+            {
+                info2.text += $"<b>Weap:</b> {weapon.DisplayName}\n" +
+                              $"Acc: {weapon.Accuracy}\tMode: {weapon.FiringMode}\n" +
+                              $"Dmg: {weapon.Damage}\tAmmo: {weapon.CurrentAmmoCount}/{weapon.AmmoCapacity}\n";
+            }
+            if (armor != null)
+            {
+                info2.text += $"<b>Wear:</b> {armor.DisplayName}\n" +
+                              $"Armor: {armor.ArmorRating}";
+            }
         }
     }
 

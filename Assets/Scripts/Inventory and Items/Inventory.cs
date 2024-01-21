@@ -4,7 +4,6 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public enum InventoryItemType
 {
@@ -84,4 +83,5 @@ public class Inventory
     public List<InventoryItem> GetAllItems() { return items; }
     public List<InventoryItem> GetItems(IInventoryItem item) { return items.FindAll(x => x.Item.Id == item.Id); }
     public List<InventoryItem> GetItems(string displayName) { return items.FindAll(x => x.Item.DisplayName == displayName); }
+    public InventoryItem GetItemByInventoryItemId(int id) { return items.Find(x => x.Id == id); }
 }

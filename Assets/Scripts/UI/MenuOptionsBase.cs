@@ -10,11 +10,11 @@ public abstract class MenuOptionsBase : IMenu
 {
     public List<VisualElement> Buttons { get; set; }
 
-    private object passInfo;
+    public object PassInfo { get; set; }
 
     public virtual void InitializeMenu(UIDocument uiDoc, object passInfo)
     {
-        this.passInfo = passInfo;
+        PassInfo = passInfo;
 
         VisualElement rootElem = uiDoc.rootVisualElement;
         VisualElement buttonContainer = rootElem.Q("button-container");
@@ -39,19 +39,19 @@ public abstract class MenuOptionsBase : IMenu
             CallUnloadMenu(null);
             return;
         }
-        CallLoadMenu(targetName, true, passInfo);
+        CallLoadMenu(targetName, true, PassInfo);
     }
 
     public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
 
-    private void CallLoadMenu(string menuName, bool isChild, object passInfo)
+    public void CallLoadMenu(string menuName, bool isChild, object passInfo)
     {
         LoadMenu.Invoke(this, (menuName, isChild, passInfo));
     }
 
     public event EventHandler<object> UnloadMenu;
 
-    private void CallUnloadMenu(object passInfo)
+    public void CallUnloadMenu(object passInfo)
     {
         UnloadMenu.Invoke(this, passInfo);
     }
