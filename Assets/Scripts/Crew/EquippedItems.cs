@@ -7,30 +7,32 @@ public class EquippedItems
     public enum ItemSlot { MainWeapon, OffhandWeapon, MainArmor, SubArmor, ItemOne, ItemTwo, Ammunition}
     private Dictionary<ItemSlot, InventoryItem> equipment = new();
     private CrewMemberController linkedCrewMemberController;
-        
+
+    private Weapon equippedWeapon;
     public Weapon EquippedWeapon
     {
         get
         {
-            if (EquippedWeapon == null || EquippedWeapon.Id != equipment[ItemSlot.MainWeapon].Id)
+            if (equippedWeapon == null || equippedWeapon.Id != equipment[ItemSlot.MainWeapon].Id)
             {
-                EquippedWeapon = (Weapon)equipment[ItemSlot.MainWeapon].Item;
+                equippedWeapon = (Weapon)equipment[ItemSlot.MainWeapon].Item;
             }
-            return EquippedWeapon;
+            return equippedWeapon;
         }
-        private set { EquippedWeapon = value; }
+        private set { equippedWeapon = value; }
     }
+    private Armor equippedArmor;
     public Armor EquippedArmor
     {
         get
         {
-            if (EquippedArmor == null || EquippedArmor.Id != equipment[ItemSlot.MainArmor].Id)
+            if (equippedArmor == null || equippedArmor.Id != equipment[ItemSlot.MainArmor].Id)
             {
-                EquippedArmor = (Armor)equipment[ItemSlot.MainArmor].Item;
+                equippedArmor = (Armor)equipment[ItemSlot.MainArmor].Item;
             }
-            return EquippedArmor;
+            return equippedArmor;
         }
-        private set { EquippedArmor = value; }
+        private set { equippedArmor = value; }
     }
 
     /*public Equipped(Weapon weapon, Armor armor)

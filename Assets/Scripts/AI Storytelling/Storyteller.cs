@@ -77,6 +77,7 @@ public class Storyteller : MonoBehaviour
                     break;
             }
         }).Task;
+        Debug.Log("Items Loaded");
         GenerateCrew();
         worldController.GenerateLevel();
     }

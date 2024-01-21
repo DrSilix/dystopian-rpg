@@ -2,13 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
 
 public class UIController : MonoBehaviour
 {
     public PanelSettings panelSettings;
-    public List<uiAsset> uiAssetsList;
-
+    //public List<uiAsset> uiAssetsList;
+    public VisualTreeAsset mainMenu;
+    public AssetLabelReference assetLabelRef;
 
     private Dictionary<string, VisualTreeAsset> uiAssets;
     private List<UIDocument> uiDocs;
@@ -21,13 +23,10 @@ public class UIController : MonoBehaviour
     void Start()
     {
         uiAssets = new Dictionary<string, VisualTreeAsset>();
-        
-        foreach (uiAsset asset in uiAssetsList)
-        {
-            uiAssets.Add(asset.name, asset.asset);
-        }
 
-        uiAssetsList = null;
+        uiAssets.Add(mainMenu.name, mainMenu);
+
+        LoadMenuList();
 
         uiDocs = new List<UIDocument>();
         uiScripts = new List<IMenu>();
@@ -44,6 +43,20 @@ public class UIController : MonoBehaviour
         new GameLog();
 
         LoadMenu("MainMenu", false, null);
+    }
+
+    private async void LoadMenuList()
+    {
+        await Addressables.LoadAssetsAsync<object>(assetLabelRef, (a) =>
+        {
+            switch (a)
+            {
+                case VisualTreeAsset s:
+                    uiAssets.Add(s.name, s);
+                    break;
+            }
+        }).Task;
+        Debug.Log("UI Loaded");
     }
 
     private void HeistEventStateChange(EventController e)

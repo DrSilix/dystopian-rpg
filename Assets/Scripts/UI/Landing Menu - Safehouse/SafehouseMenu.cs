@@ -15,14 +15,15 @@ public class SafehouseMenu : IMenu
 
     public CrewController crewController;
 
+    private VisualElement crewStatusButton;
     private Button planJobButton;
     private Button contactsButton;
 
     public void InitializeMenu(UIDocument uiDoc, object passInfo)
     {
         VisualElement rootElem = uiDoc.rootVisualElement;
-        VisualElement BottomNavMenu = uiDoc.rootVisualElement.parent.Q("BottomNavMenu");
 
+        crewStatusButton = rootElem.Q("crewstatus");
         planJobButton = rootElem.Q("planjob") as Button;
         contactsButton = rootElem.Q("contacts") as Button;
 
@@ -66,12 +67,14 @@ public class SafehouseMenu : IMenu
 
     public void RegisterCallbacks()
     {
+        crewStatusButton.RegisterCallback<ClickEvent>(OnClick);
         planJobButton.RegisterCallback<ClickEvent>(OnClick);
         contactsButton.RegisterCallback<ClickEvent>(OnClick);
     }
 
     public void UnregisterCallbacks()
     {
+        crewStatusButton.UnregisterCallback<ClickEvent>(OnClick);
         planJobButton.UnregisterCallback<ClickEvent>(OnClick);
         contactsButton.UnregisterCallback<ClickEvent>(OnClick);
     }
@@ -81,6 +84,9 @@ public class SafehouseMenu : IMenu
         Debug.Log(((VisualElement)e.currentTarget).name);
         switch (((VisualElement)e.currentTarget).name)
         {
+            case "crewstatus":
+                CallLoadMenu("CrewOptions", true, null);
+                break;
             case "planjob":
                 CallLoadMenu("HeistHUD", false, null);
                 Storyteller.Instance.StartHeist();

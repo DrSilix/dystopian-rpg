@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:Template name="BottomNavMenu" src="project://database/Assets/UI/BottomNavMenu.uxml?fileID=9197481963319205126&amp;guid=6c51eca918cdc5e4bac13c6f01785214&amp;type=3#BottomNavMenu" />
-    <Style src="project://database/Assets/UI/DarkBoxSimpleMenu.uss?fileID=7433441132597879392&amp;guid=428d266981b529f4ba5b44ddd9095d83&amp;type=3#DarkBoxSimpleMenu" />
-    <Style src="project://database/Assets/UI/SafehouseMenu.uss?fileID=7433441132597879392&amp;guid=87bd6b5b58a20b94080632d4bd3ab55f&amp;type=3#SafehouseMenu" />
+    <ui:Template name="BottomNavMenu" src="project://database/Assets/UI%20Toolkit/Landing%20Menu%20-%20Safehouse/BottomNavMenu.uxml?fileID=9197481963319205126&amp;guid=6c51eca918cdc5e4bac13c6f01785214&amp;type=3#BottomNavMenu" />
+    <Style src="project://database/Assets/UI%20Toolkit/DarkBoxSimpleMenu.uss?fileID=7433441132597879392&amp;guid=428d266981b529f4ba5b44ddd9095d83&amp;type=3#DarkBoxSimpleMenu" />
+    <Style src="project://database/Assets/UI%20Toolkit/Landing%20Menu%20-%20Safehouse/SafehouseMenu.uss?fileID=7433441132597879392&amp;guid=87bd6b5b58a20b94080632d4bd3ab55f&amp;type=3#SafehouseMenu" />
     <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Art/purple_background.psd?fileID=2800000&amp;guid=6b500c6761573134782b16c5c99db476&amp;type=3#purple_background&apos;);">
         <ui:VisualElement style="flex-grow: 0; height: 15%; flex-shrink: 0; background-color: rgba(108, 33, 100, 0.8);">
             <ui:VisualElement style="flex-grow: 1; margin-top: 98px; padding-left: 25px; padding-right: 25px; padding-bottom: 10px;">
@@ -76,5 +76,5 @@
         </ui:VisualElement>
         <ui:VisualElement style="flex-grow: 0; height: 188px; flex-shrink: 0; background-color: rgba(108, 33, 100, 0);" />
     </ui:VisualElement>
-    <ui:Instance template="BottomNavMenu" name="BottomNavMenu" style="position: absolute; width: 100%; height: 188px; bottom: 0;" />
+    <ui:Instance template="BottomNavMenu" name="BottomNavMenu" />
 </ui:UXML>
