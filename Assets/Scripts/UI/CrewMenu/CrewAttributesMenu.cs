@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal.Internal;
 using UnityEngine.UIElements;
 
-public class CrewAttributesMenu : IMenu
+public class CrewAttributesMenu : DefaultLoadUnloadMenuBehaviour, IMenu
 {
     private static readonly int MAX_ATTRIBUTE_VALUE = 6;
 
@@ -119,7 +119,7 @@ public class CrewAttributesMenu : IMenu
         unspentLabel.text = unspentPoints.ToString();
     }
 
-    public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
+    /*public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
 
     private void CallLoadMenu(string menuName, bool isChild, object passInfo)
     {
@@ -131,7 +131,7 @@ public class CrewAttributesMenu : IMenu
     private void CallUnloadMenu(object passInfo)
     {
         UnloadMenu.Invoke(this, passInfo);
-    }
+    }*/
 
     public void UnregisterCallbacks()
     {

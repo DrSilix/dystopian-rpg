@@ -107,7 +107,7 @@ public class UIController : MonoBehaviour
 
     // can we assume the current menu is the one being unloaded?
     // should be the user is clicking the "return" button on the current menu
-    public void UnloadMenu(object passInfo)
+    public void UnloadMenu(object passInfo, bool resetParentMenu = true)
     {
         uiScripts[currentMenu].UnregisterCallbacks();
         uiScripts[currentMenu].LoadMenu -= LoadMenu;
@@ -115,14 +115,21 @@ public class UIController : MonoBehaviour
         uiScripts[currentMenu] = null;
         uiDocs[currentMenu].visualTreeAsset = null;
         currentMenu--;
-        uiScripts[currentMenu].UnregisterCallbacks();
-        uiScripts[currentMenu].InitializeMenu(uiDocs[currentMenu], passInfo);
-        uiScripts[currentMenu].RegisterCallbacks();
+        if (resetParentMenu)
+        {
+            uiScripts[currentMenu].UnregisterCallbacks();
+            uiScripts[currentMenu].InitializeMenu(uiDocs[currentMenu], passInfo);
+            uiScripts[currentMenu].RegisterCallbacks();
+        }
+        else
+        {
+            uiScripts[currentMenu].SendMenuNewInfo(passInfo);
+        }
     }
 
-    private void UnloadMenu(object sender, object e)
+    private void UnloadMenu(object sender, (object passInfo, bool resetParentMenu) e)
     {
-        UnloadMenu(e);
+        UnloadMenu(e.passInfo, e.resetParentMenu);
     }
 
     private void Update()

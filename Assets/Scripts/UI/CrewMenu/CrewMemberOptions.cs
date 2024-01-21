@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class CrewMemberOptions : IMenu
+public class CrewMemberOptions : DefaultLoadUnloadMenuBehaviour, IMenu
 {
     private Button attributesButton;
     private Button gearButton;
@@ -49,7 +49,7 @@ public class CrewMemberOptions : IMenu
         }
     }
 
-    public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
+    /*public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
 
     private void CallLoadMenu(string menuName, bool isChild, object passInfo)
     {
@@ -61,7 +61,7 @@ public class CrewMemberOptions : IMenu
     private void CallUnloadMenu(object passInfo)
     {
         UnloadMenu.Invoke(this, passInfo);
-    }
+    }*/
 
     public void UnregisterCallbacks()
     {

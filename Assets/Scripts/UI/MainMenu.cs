@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class MainMenu : IMenu
+public class MainMenu : DefaultLoadUnloadMenuBehaviour, IMenu
 {
     private VisualElement startButton;
 
@@ -40,7 +40,7 @@ public class MainMenu : IMenu
         }
     }
 
-    public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
+    /*public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
 
     private void CallLoadMenu(string menuName, bool isChild, object passInfo)
     {
@@ -52,7 +52,7 @@ public class MainMenu : IMenu
     private void CallUnloadMenu(object passInfo)
     {
         UnloadMenu.Invoke(this, passInfo);
-    }
+    }*/
 
     public void Update() { }
 }

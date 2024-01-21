@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class CrewMenu : IMenu
+public class CrewMenu : DefaultLoadUnloadMenuBehaviour, IMenu
 {
     private VisualElement crewMember1, crewMember2, crewMember3;
     private Button doneButton;
@@ -123,7 +123,7 @@ public class CrewMenu : IMenu
         }
     }
 
-    public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
+    /*public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
 
     private void CallLoadMenu(string menuName, bool isChild, object passInfo)
     {
@@ -135,7 +135,7 @@ public class CrewMenu : IMenu
     private void CallUnloadMenu(object passInfo)
     {
         UnloadMenu.Invoke(this, passInfo);
-    }
+    }*/
 
     public void UnregisterCallbacks()
     {

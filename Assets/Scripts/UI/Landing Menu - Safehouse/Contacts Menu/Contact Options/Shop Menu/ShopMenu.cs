@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class ShopMenu : IMenu
+public class ShopMenu : DefaultLoadUnloadMenuBehaviour, IMenu
 {
     private string contactName;
     private Shop shop;
@@ -116,7 +116,7 @@ public class ShopMenu : IMenu
         }
     }
 
-    public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
+    /*public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
 
     private void CallLoadMenu(string menuName, bool isChild, object passInfo)
     {
@@ -128,7 +128,7 @@ public class ShopMenu : IMenu
     private void CallUnloadMenu(object passInfo)
     {
         UnloadMenu.Invoke(this, passInfo);
-    }
+    }*/
 
     public void Update() { }
 }

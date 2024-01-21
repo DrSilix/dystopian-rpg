@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public abstract class MenuOptionsBase : IMenu
+public abstract class MenuOptionsBase : DefaultLoadUnloadMenuBehaviour, IMenu
 {
     public List<VisualElement> Buttons { get; set; }
 
@@ -42,7 +42,7 @@ public abstract class MenuOptionsBase : IMenu
         CallLoadMenu(targetName, true, PassInfo);
     }
 
-    public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
+    /*public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
 
     public void CallLoadMenu(string menuName, bool isChild, object passInfo)
     {
@@ -54,8 +54,8 @@ public abstract class MenuOptionsBase : IMenu
     public void CallUnloadMenu(object passInfo)
     {
         UnloadMenu.Invoke(this, passInfo);
-    }
-
+    }*/
+    
     public virtual void UnregisterCallbacks()
     {
         foreach (var button in Buttons)

@@ -6,7 +6,7 @@ using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class GearMenu : IMenu
+public class GearMenu : DefaultLoadUnloadMenuBehaviour, IMenu
 {
     private int crewMemberId;
     private CrewMemberController crewMember;
@@ -86,7 +86,7 @@ public class GearMenu : IMenu
         doneButton.UnregisterCallback<ClickEvent>(OnClick);
     }
 
-    public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
+    /*public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
 
     private void CallLoadMenu(string menuName, bool isChild, object passInfo)
     {
@@ -98,7 +98,7 @@ public class GearMenu : IMenu
     private void CallUnloadMenu(object passInfo)
     {
         UnloadMenu.Invoke(this, passInfo);
-    }
+    }*/
 
     public void Update() { }
 }

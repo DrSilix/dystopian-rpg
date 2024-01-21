@@ -18,7 +18,7 @@ public interface IMenu
     
     public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
 
-    public event EventHandler<object> UnloadMenu;
+    public event EventHandler<(object passInfo, bool resetParentMenu)> UnloadMenu;
 
     public void UnregisterCallbacks();
 

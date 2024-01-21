@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class SafehouseMenu : IMenu
+public class SafehouseMenu : DefaultLoadUnloadMenuBehaviour, IMenu
 {
     public EventSystem eventSystem;
     public GameObject hideoutImage;
@@ -103,7 +103,7 @@ public class SafehouseMenu : IMenu
         }
     }
 
-    public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
+    /*public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
 
     private void CallLoadMenu(string menuName, bool isChild, object passInfo)
     {
@@ -115,7 +115,7 @@ public class SafehouseMenu : IMenu
     private void CallUnloadMenu(object passInfo)
     {
         UnloadMenu.Invoke(this, passInfo);
-    }
+    }*/
 
     public void Update() { }
 

@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEditor.Progress;
 
-public class CrewInventoryMenu : IMenu
+public class CrewInventoryMenu : DefaultLoadUnloadMenuBehaviour, IMenu
 {
     private CrewController crewController;
     private Inventory inventory;
@@ -103,7 +104,7 @@ public class CrewInventoryMenu : IMenu
         switch (target.name)
         {
             case "item-container":
-                CallLoadMenu("InventoryItemOptions", true, (target.tooltip, inventory));
+                CallLoadMenu("InventoryItemOptions", true, inventory.GetItemByInventoryItemId(int.Parse(target.tooltip)));
                 break;
             case "confirm":
                 CallUnloadMenu(null);
@@ -111,7 +112,7 @@ public class CrewInventoryMenu : IMenu
         }
     }
 
-    public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
+    /*public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
 
     private void CallLoadMenu(string menuName, bool isChild, object passInfo)
     {
@@ -123,7 +124,7 @@ public class CrewInventoryMenu : IMenu
     private void CallUnloadMenu(object passInfo)
     {
         UnloadMenu.Invoke(this, passInfo);
-    }
+    }*/
 
     public void Update() { }
 }

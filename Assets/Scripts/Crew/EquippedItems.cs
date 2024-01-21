@@ -64,6 +64,24 @@ public class EquippedItems
         item.CurrentlyEquippedBy = linkedCrewMemberController;
     }
 
+    //TODO: this needs to go away or a solution to multiple type slots need to be found
+    public void Equip(InventoryItem item)
+    {
+        ItemSlot slot;
+        switch(item.Item)
+        {
+            case Weapon e:
+                slot = ItemSlot.MainWeapon;
+                break;
+            case Armor e:
+                slot = ItemSlot.MainArmor;
+                break;
+            default:
+                return;
+        }
+        Equip(slot, item);
+    }
+
     public InventoryItem Unequip(ItemSlot slot)
     {
         InventoryItem result = equipment[slot];

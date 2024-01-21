@@ -11,11 +11,8 @@ public class InventoryItemOptions : MenuOptionsBase, IMenu
     public override void InitializeMenu(UIDocument uiDoc, object passInfo)
     {
         base.InitializeMenu(uiDoc, passInfo);
-        Nullable <(string, Inventory)> temp = passInfo as Nullable<(string, Inventory)>;
-        string itemId = temp?.Item1 ?? string.Empty;
-        Inventory inventory = temp?.Item2;
 
-        item = inventory.GetItemByInventoryItemId(int.Parse(itemId));
+        item = (InventoryItem)passInfo;
 
         if (item.CurrentlyEquippedBy != null)
         {
@@ -35,7 +32,7 @@ public class InventoryItemOptions : MenuOptionsBase, IMenu
         switch (targetName)
         {
             case "equip":
-                CallLoadMenu("CrewMemberListOptions", true, null);
+                CallLoadMenu("ChooseCrewMemberOptions", true, null);
                 break;
             case "unequip":
                 item.CurrentlyEquippedBy.EquippedItems.Unequip(item);
@@ -48,5 +45,14 @@ public class InventoryItemOptions : MenuOptionsBase, IMenu
                 CallLoadMenu(targetName, true, PassInfo);
                 break;
         }
+    }
+
+    public override void SendMenuNewInfo(object info)
+    {
+        //Handle equipping
+        if (info.GetType() != typeof(CrewMemberController)) return;
+        CrewMemberController crewMemberController = (CrewMemberController)info;
+        crewMemberController.EquippedItems.Equip(item);
+        CallUnloadMenu(null);
     }
 }

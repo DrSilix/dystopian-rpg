@@ -5,7 +5,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class HeistHUD : IMenu
+public class HeistHUD : DefaultLoadUnloadMenuBehaviour, IMenu
 {
     private Label logDisplay;
     private Label statusDisplay;
@@ -89,7 +89,7 @@ public class HeistHUD : IMenu
         }
     }
 
-    public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
+    /*public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
 
     private void CallLoadMenu(string menuName, bool isChild, object passInfo)
     {
@@ -101,7 +101,7 @@ public class HeistHUD : IMenu
     private void CallUnloadMenu(object passInfo)
     {
         UnloadMenu.Invoke(this, passInfo);
-    }
+    }*/
 
     public void UnregisterCallbacks()
     {
