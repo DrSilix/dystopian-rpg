@@ -111,15 +111,15 @@ public class Storyteller : MonoBehaviour
             GameObject crewMember = Instantiate(enemyCrewMember1Prefab, crewGO.transform);
             char letter = 'A';
             CrewMemberController enemy = crewMember.GetComponent<CrewMemberController>();
+            crew.AddCrewMember(crewMember);
             enemy.alias = $"Guard {(char)(letter + i)}";
             int temp = enemy.attributes.Set(Attribute.body, Random.Range(4, 7));
             enemy.attributes.Set(Attribute.agility, 6 - temp + 4);
             enemy.tempWeaponSkillValue = Random.Range(8, 13);
             Weapon weapon = (Random.Range(1, 3) == 1) ? new Weapon(WeaponSOs["Vyner S-12"]) : new Weapon(WeaponSOs["Cobalt Defender"]);
-            enemy.EquippedItems.Equip(weapon);
+            enemy.AddToInventoryAndEquipItem(EquippedItems.ItemSlot.MainWeapon, weapon);
             Armor armor = (Random.Range(1, 3) == 1) ? new Armor(ArmorSOs["Guard Outfit"]) : new Armor(ArmorSOs["Bullet Proof Vest"]);
-            enemy.EquippedItems.Equip(armor);
-            crew.AddCrewMember(crewMember);
+            enemy.AddToInventoryAndEquipItem(EquippedItems.ItemSlot.MainArmor, armor);
         }
         return crew;
     }

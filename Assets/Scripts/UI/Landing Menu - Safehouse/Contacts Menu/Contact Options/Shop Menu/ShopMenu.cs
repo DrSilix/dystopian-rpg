@@ -35,11 +35,11 @@ public class ShopMenu : IMenu
         foreach (InventoryItem inventoryItem in shop.Inventory.GetAllItems())
         {
             VisualElement[] itemElement = GetBlankItemTemplate();
-            itemElement[0].tooltip = inventoryItem.item.DisplayName;
-            if (inventoryItem.item.Sprite != null) itemElement[1].style.backgroundImage = new StyleBackground(inventoryItem.item.Sprite);
-            ((Label)itemElement[2]).text = inventoryItem.item.DisplayName;
-            ((Label)itemElement[3]).text = $"${inventoryItem.item.Cost}";
-            ((Label)itemElement[4]).text = inventoryItem.item.ToInventoryString();
+            itemElement[0].tooltip = inventoryItem.Item.DisplayName;
+            if (inventoryItem.Item.Sprite != null) itemElement[1].style.backgroundImage = new StyleBackground(inventoryItem.Item.Sprite);
+            ((Label)itemElement[2]).text = inventoryItem.Item.DisplayName;
+            ((Label)itemElement[3]).text = $"${inventoryItem.Item.Cost}";
+            ((Label)itemElement[4]).text = inventoryItem.Item.ToInventoryString();
 
             scrollableContentContainer.Add(itemElement[0]);
             itemVisualElements[i] = itemElement[0];

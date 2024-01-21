@@ -6,8 +6,8 @@ using Utils;
 
 public class Weapon : IInventoryItem
 {
+    public int Id { get; private set; }
     public WeaponSO WeaponBase { get; private set; }
-    
     public InventoryItemType InventoryItemType { get; } = InventoryItemType.Weapon;
     public WeaponType WeaponType { get; private set; }
     public bool CanStack { get; } = false;
@@ -63,6 +63,8 @@ public class Weapon : IInventoryItem
         HasBarrelAttachPoint = weaponSO.hasBarrelAttachPoint;
 
         LoadAmmunition(Storyteller.Instance.AmmunitionSOs["Regular Ammunition"], AmmoCapacity);
+
+        Id = this.GetHashCode();
     }
 
     public override string ToString()
@@ -103,6 +105,15 @@ public class Weapon : IInventoryItem
     public void Reload()
     {
         LoadAmmunition(Storyteller.Instance.AmmunitionSOs["Regular Ammunition"], AmmoCapacity - CurrentAmmoCount);
+    }
+
+    public override int GetHashCode()
+    {
+        int hash = base.GetHashCode();
+        hash = hash * 31 + DisplayName.GetHashCode();
+        hash = hash * 31 + WeaponBase.GetHashCode();
+        // TODO: add potential modifications here
+        return hash;
     }
 
 }

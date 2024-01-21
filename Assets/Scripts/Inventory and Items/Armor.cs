@@ -7,6 +7,7 @@ using static UnityEngine.InputSystem.LowLevel.InputStateHistory;
 
 public class Armor : IInventoryItem
 {
+    public int Id {  get; private set; }
     public ArmorSO ArmorBase { get; private set; }
     public InventoryItemType InventoryItemType { get; } = InventoryItemType.Armor;
     public bool CanStack { get; } = false;
@@ -56,6 +57,8 @@ public class Armor : IInventoryItem
         Cost = armorSO.baseCost;
         Availability = armorSO.availability;
         Illegal = armorSO.illegal;
+
+        Id = this.GetHashCode();
     }
 
     public override string ToString()
@@ -77,5 +80,14 @@ public class Armor : IInventoryItem
         StringBuilder sb = new();
         sb.Append($"<b>Armor Rating:</b> {ArmorRating}");
         return sb.ToString();
+    }
+
+    public override int GetHashCode()
+    {
+        int hash = base.GetHashCode();
+        hash = hash * 31 + DisplayName.GetHashCode();
+        hash = hash * 31 + ArmorBase.GetHashCode();
+        // TODO: add potential modifications here
+        return hash;
     }
 }

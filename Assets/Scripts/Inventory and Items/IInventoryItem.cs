@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IInventoryItem
 {
+    public int Id {  get; }
     public InventoryItemType InventoryItemType { get; }
     public bool CanStack { get; }
     public string DisplayName { get; }

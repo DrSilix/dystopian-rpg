@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Ammunition : IInventoryItem
 {
+    public int Id { get; private set; }
     public AmmunitionSO AmmunitionBase { get; private set; }
-
     public InventoryItemType InventoryItemType { get; } = InventoryItemType.Ammunition;
     public WeaponType WeaponType { get; private set; }
     public bool CanStack { get; } = true;
@@ -32,6 +32,8 @@ public class Ammunition : IInventoryItem
         Cost = ammunitionSO.baseCost; //TODO: update
         Availability = ammunitionSO.availability;
         Illegal = ammunitionSO.illegal;
+
+        Id = this.GetHashCode();
     }
 
     public string ToInventoryString()
@@ -39,5 +41,14 @@ public class Ammunition : IInventoryItem
         StringBuilder sb = new();
         sb.Append($"<b>Weapon Type:</b> {WeaponType}\t<b>Dmg Modifier:</b>{AmmunitionBase.damageModifier}");
         return sb.ToString();
+    }
+
+    public override int GetHashCode()
+    {
+        int hash = base.GetHashCode();
+        hash = hash * 31 + DisplayName.GetHashCode();
+        hash = hash * 31 + AmmunitionBase.GetHashCode();
+        // TODO: add potential modifications here
+        return hash;
     }
 }

@@ -25,10 +25,15 @@ public enum Aggregate { min, max, avg, sum }
 public class CrewController : MonoBehaviour
 {
     public List<CrewMemberController> CrewMembers { get; private set; } = new();
+    public Inventory CrewInventory { get; private set; }
 
-    public void AddCrewMember(CrewMemberController member) { CrewMembers.Add(member); }
+    public void AddCrewMember(CrewMemberController member) {
+        CrewMembers.Add(member);
+        member.SetConnectedCrew(this);
+        member.Initialize();
+    }
     public void AddCrewMembers(params CrewMemberController[] members) { foreach(CrewMemberController c in members) AddCrewMember(c); }
-    public void AddCrewMember(GameObject member) { CrewMembers.Add(member.GetComponent<CrewMemberController>()); }
+    public void AddCrewMember(GameObject member) { AddCrewMember(member.GetComponent<CrewMemberController>()); }
     public void AddCrewMembers(params GameObject[] members)
     {
         foreach (GameObject c in members) AddCrewMember(c.GetComponent<CrewMemberController>());

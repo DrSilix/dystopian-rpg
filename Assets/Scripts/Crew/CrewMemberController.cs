@@ -1,4 +1,3 @@
-using Assets.Data;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,8 +7,10 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using Random = UnityEngine.Random;
 
-public class CrewMemberController : MonoBehaviour
+public partial class CrewMemberController : MonoBehaviour
 {
+    private CrewController crewController;
+    
     public string alias;
     [field: SerializeField] public Sprite Icon {  get; set; }
     [field: SerializeField] public int MaxDamage { get; private set; }
@@ -21,7 +22,7 @@ public class CrewMemberController : MonoBehaviour
     public WeaponSO defaultWeapon;
     public ArmorSO defaultArmor;
 
-    public Equipped EquippedItems { get; private set; }
+    public EquippedItems EquippedItems { get; private set; }
     public bool IsEnemy { get { return isEnemy; } private set { isEnemy = value; } }
 
     public int tempWeaponSkillValue;
@@ -36,12 +37,23 @@ public class CrewMemberController : MonoBehaviour
     // TODO: fix just leaving values in here
     private List<object> combatStoredValues;
 
-    void OnEnable()
+    public void Initialize()
     {
-        EquippedItems = new Equipped(new Weapon(defaultWeapon), new Armor(defaultArmor));
+        Inventory inv = crewController.CrewInventory;
+        InventoryItem w = inv.Add(new Weapon(defaultWeapon));
+        InventoryItem a = inv.Add(new Armor(defaultArmor));
+        EquippedItems = new EquippedItems(w, a, this);
         InitiativeModifier = attributes.intuition + attributes.reaction;
         MaxDamage = 8 + Mathf.CeilToInt((float)attributes.body / 2);
     }
+
+    public void AddToInventoryAndEquipItem(EquippedItems.ItemSlot slot, IInventoryItem item)
+    {
+        InventoryItem invItem = crewController.CrewInventory.Add(item);
+        EquippedItems.Equip(slot, invItem);
+    }
+
+    public void SetConnectedCrew(CrewController controller) { crewController = controller; }
 
     public override string ToString()
     {
@@ -82,6 +94,7 @@ public class CrewMemberController : MonoBehaviour
         return InitiativeModifier + Roll.Initiative(InitiativeDice);
     }
 
+    // TODO: move this to a separate class, that this inherits??
     #region Combat
     public void CreateCombatState()
     {
@@ -251,22 +264,6 @@ public class CrewMemberController : MonoBehaviour
         public int ActionCount { get; set; } = 0;
 
     }
+
     #endregion
-
-    [System.Serializable]
-    public class Equipped
-    {
-        public Weapon EquippedWeapon { get; private set; }
-        public Armor EquippedArmor { get; private set; }
-
-        public Equipped(Weapon weapon, Armor armor)
-        {
-            EquippedWeapon = weapon;
-            EquippedArmor = armor;
-        }
-
-        public void Equip(Weapon newArmor) { EquippedWeapon = newArmor; }
-
-        public void Equip(Armor newArmor) { EquippedArmor = newArmor; }
-    }
 }
