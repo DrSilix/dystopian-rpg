@@ -12,11 +12,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
   m_Name: Menus
   m_EditorClassIdentifier: 
-  m_GroupName: Packed Assets
+  m_GroupName: Menus
   m_Data:
     m_SerializedData: []
   m_GUID: da1d884fb93e6f046ba29bd0810db2e8
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 6c51eca918cdc5e4bac13c6f01785214
+    m_Address: Assets/UI Toolkit/Landing Menu - Safehouse/BottomNavMenu.uxml
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MenuDoc
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1457b6b353d34fa43bb26b3d4ca6e321
+    m_Address: Assets/UI Toolkit/Landing Menu - Safehouse/Crew Options/Inventory/CrewInventoryMenu.uxml
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MenuDoc
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2d4d72b58b983e54e8cce3998f92ce2a
+    m_Address: Assets/UI Toolkit/Landing Menu - Safehouse/Contacts Menu/Contact Options/ContactOptions.uxml
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MenuDoc
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a02a89fbe07c9624c977438256d45f9d
+    m_Address: Assets/UI Toolkit/Landing Menu - Safehouse/CrewMember Options/CrewMemberOptions.uxml
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MenuDoc
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bc4a40367cbe46640b05c1de8777cc20
+    m_Address: Assets/UI Toolkit/Landing Menu - Safehouse/Contacts Menu/ContactsMenu.uxml
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MenuDoc
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f83fc3212bf72574284f3d65a0303c54
+    m_Address: Assets/UI Toolkit/Landing Menu - Safehouse/Crew Options/CrewOptions.uxml
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MenuDoc
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a40cab7a93eb7845b26d7052d889d05
+    m_Address: Assets/UI Toolkit/Landing Menu - Safehouse/CrewMember Options/Gear
+      Options/GearOptions.uxml
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MenuDoc
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bcdc0929348fa93479cf318481edb339
+    m_Address: Assets/UI Toolkit/Landing Menu - Safehouse/Crew Options/Inventory/Inventory
+      Item Options/InventoryItemOptions.uxml
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MenuDoc
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7b7e131bdb593474888edd61f6513949
+    m_Address: Assets/UI Toolkit/Landing Menu - Safehouse/SafehouseMenu.uxml
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MenuDoc
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe91ed7737ac9044aaed93439a3b1bc5
+    m_Address: Assets/UI Toolkit/Landing Menu - Safehouse/Contacts Menu/Contact Options/Shop
+      Menu/ShopMenu.uxml
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MenuDoc
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e5c3509057ec7824c911d02e413653d2, type: 2}
   m_SchemaSet:

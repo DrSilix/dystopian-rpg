@@ -1990,19 +1990,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panelSettings: {fileID: 11400000, guid: b0a8b2adc7e6f0945b9b06026562455f, type: 2}
-  uiAssetsList:
-  - name: SafehouseMenu
-    asset: {fileID: 9197481963319205126, guid: 7b7e131bdb593474888edd61f6513949, type: 3}
-  - name: MainMenu
-    asset: {fileID: 9197481963319205126, guid: 1823ee64eae1cc54b9dd7fe8f5eb05f2, type: 3}
-  - name: ContactsMenu
-    asset: {fileID: 9197481963319205126, guid: bc4a40367cbe46640b05c1de8777cc20, type: 3}
-  - name: ContactOptions
-    asset: {fileID: 9197481963319205126, guid: 2d4d72b58b983e54e8cce3998f92ce2a, type: 3}
-  - name: ShopMenu
-    asset: {fileID: 9197481963319205126, guid: fe91ed7737ac9044aaed93439a3b1bc5, type: 3}
-  - name: HeistHUD
-    asset: {fileID: 9197481963319205126, guid: 343c627e557e2424ea3e0dc97ebd293a, type: 3}
+  mainMenu: {fileID: 9197481963319205126, guid: 1823ee64eae1cc54b9dd7fe8f5eb05f2, type: 3}
+  assetLabelRef:
+    m_LabelString: MenuDoc
 --- !u!4 &2110539168
 Transform:
   m_ObjectHideFlags: 0

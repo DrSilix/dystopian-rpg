@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: f075cfee55e6a7545aec3a83f3c7b339
   m_currentHash:
     serializedVersion: 2
-    Hash: 00000000000000000000000000000000
+    Hash: 7023c84d7778b7e75386f85402355c52
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
@@ -97,6 +97,7 @@ MonoBehaviour:
     - Armor
     - Contacts
     - Shops
+    - MenuDoc
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: fbaea7a7e0e6d814b98257843e74d74c, type: 2}

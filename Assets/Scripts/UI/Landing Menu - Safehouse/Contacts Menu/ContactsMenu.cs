@@ -99,7 +99,7 @@ public class ContactsMenu : IMenu
             case "contact-container":
                 CallLoadMenu("ContactOptions", true, target.tooltip);
                 break;
-            case "safe-house-button":
+            case "safehouse":
                 CallLoadMenu("SafehouseMenu", false, null);
                 break;
         }
