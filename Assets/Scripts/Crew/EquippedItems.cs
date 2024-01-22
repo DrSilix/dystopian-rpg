@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 
 [System.Serializable]
@@ -42,11 +43,11 @@ public class EquippedItems
         private set { equippedArmor = value; }
     }
 
-    /*public Equipped(Weapon weapon, Armor armor)
+    public Dictionary<ItemSlot, InventoryItem> GetEquipment()
     {
-        EquippedWeapon = weapon;
-        EquippedArmor = armor;
-    }*/
+        var result = equipment.ToDictionary(entry => entry.Key, entry => entry.Value);
+        return result;
+    }
 
     public EquippedItems(InventoryItem weapon, InventoryItem armor, CrewMemberController crewMemberController)
     {
@@ -60,26 +61,9 @@ public class EquippedItems
     }
 
     public void Equip(ItemSlot slot, InventoryItem item) {
+        if (equipment.ContainsKey(slot) && equipment[slot] != null) Unequip(slot);
         equipment[slot] = item;
         item.CurrentlyEquippedBy = linkedCrewMemberController;
-    }
-
-    //TODO: this needs to go away or a solution to multiple type slots need to be found
-    public void Equip(InventoryItem item)
-    {
-        ItemSlot slot;
-        switch(item.Item)
-        {
-            case Weapon e:
-                slot = ItemSlot.MainWeapon;
-                break;
-            case Armor e:
-                slot = ItemSlot.MainArmor;
-                break;
-            default:
-                return;
-        }
-        Equip(slot, item);
     }
 
     public InventoryItem Unequip(ItemSlot slot)

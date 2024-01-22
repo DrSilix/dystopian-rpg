@@ -53,9 +53,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - MenuDoc
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4a40cab7a93eb7845b26d7052d889d05
-    m_Address: Assets/UI Toolkit/Landing Menu - Safehouse/CrewMember Options/Gear
-      Options/GearOptions.uxml
+  - m_GUID: 0140a5887368e4f46ab435f3c6d71d49
+    m_Address: Assets/UI Toolkit/GearSlotOptions.uxml
     m_ReadOnly: 0
     m_SerializedLabels:
     - MenuDoc
@@ -82,6 +81,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 343c627e557e2424ea3e0dc97ebd293a
     m_Address: Assets/UI Toolkit/Heist Job UI/HeistHUD.uxml
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MenuDoc
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d592689eb3237574e97b331feef04a2b
+    m_Address: Assets/UI Toolkit/ChooseCrewMemberOptions.uxml
     m_ReadOnly: 0
     m_SerializedLabels:
     - MenuDoc

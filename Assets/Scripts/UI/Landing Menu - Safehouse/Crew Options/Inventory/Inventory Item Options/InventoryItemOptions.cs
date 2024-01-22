@@ -8,10 +8,12 @@ using static UnityEngine.GraphicsBuffer;
 public class InventoryItemOptions : MenuOptionsBase, IMenu
 {
     private InventoryItem item;
+    private CrewMemberController crewMember;
     public override void InitializeMenu(UIDocument uiDoc, object passInfo)
     {
         base.InitializeMenu(uiDoc, passInfo);
 
+        if (passInfo?.GetType() != typeof(InventoryItem)) return;
         item = (InventoryItem)passInfo;
 
         if (item.CurrentlyEquippedBy != null)
@@ -50,9 +52,16 @@ public class InventoryItemOptions : MenuOptionsBase, IMenu
     public override void SendMenuNewInfo(object info)
     {
         //Handle equipping
-        if (info.GetType() != typeof(CrewMemberController)) return;
-        CrewMemberController crewMemberController = (CrewMemberController)info;
-        crewMemberController.EquippedItems.Equip(item);
-        CallUnloadMenu(null);
+        switch (info)
+        {
+            case CrewMemberController e:
+                crewMember = e;
+                CallLoadMenu("GearSlotOptions", true, (crewMember, item));
+                break;
+            case EquippedItems.ItemSlot e:
+                crewMember.EquippedItems.Equip(e, item);
+                CallUnloadMenu(null);
+                break;
+        }
     }
 }
