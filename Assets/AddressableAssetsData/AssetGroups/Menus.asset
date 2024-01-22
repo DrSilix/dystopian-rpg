@@ -91,6 +91,13 @@ MonoBehaviour:
     m_SerializedLabels:
     - MenuDoc
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c2cb053322d9dc429b869b1ed340d71
+    m_Address: Assets/UI Toolkit/Landing Menu - Safehouse/Contacts Menu/Contact Options/Shop
+      Menu/PurchaseConfirmOptions.uxml
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MenuDoc
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e5c3509057ec7824c911d02e413653d2, type: 2}
   m_SchemaSet:

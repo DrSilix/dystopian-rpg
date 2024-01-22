@@ -9,9 +9,14 @@ public class ShopMenu : DefaultLoadUnloadMenuBehaviour, IMenu
     private string contactName;
     private Shop shop;
     private Inventory inventory;
+    private Inventory crewInventory;
 
     private VisualElement scrollableContentContainer;
-    private VisualElement[] itemVisualElements;
+    private List<VisualElement> itemVisualElements;
+
+    private Label contactNameElem, shopInfo1, shopInfo2;
+
+    private VisualElement tempStoreElement;
 
     private Button confirmButton;
     public void InitializeMenu(UIDocument uiDoc, object passInfo)
@@ -24,27 +29,34 @@ public class ShopMenu : DefaultLoadUnloadMenuBehaviour, IMenu
         VisualElement rootElem = uiDoc.rootVisualElement;
 
         confirmButton = rootElem.Q("confirm") as Button;
+        contactNameElem = rootElem.Q("contact-name") as Label;
+        shopInfo1 = rootElem.Q("shop-info-1") as Label;
+        shopInfo2 = rootElem.Q("shop-info-2") as Label;
 
         scrollableContentContainer = rootElem.Q("unity-content-container");
 
         scrollableContentContainer.Clear();
 
+        crewInventory = Storyteller.Instance.Crew.CrewInventory;
+
         inventory = shop.Inventory;
-        itemVisualElements = new VisualElement[shop.Inventory.Size];
+        inventory.Cash = contact.cashOnHand;
+        itemVisualElements = new List<VisualElement>(shop.Inventory.Size);
         var i = 0;
         foreach (InventoryItem inventoryItem in shop.Inventory.GetAllItems())
         {
             VisualElement[] itemElement = GetBlankItemTemplate();
-            itemElement[0].tooltip = inventoryItem.Item.DisplayName;
+            itemElement[0].tooltip = inventoryItem.Id.ToString();
             if (inventoryItem.Item.Sprite != null) itemElement[1].style.backgroundImage = new StyleBackground(inventoryItem.Item.Sprite);
             ((Label)itemElement[2]).text = inventoryItem.Item.DisplayName;
             ((Label)itemElement[3]).text = $"${inventoryItem.Item.Cost}";
             ((Label)itemElement[4]).text = inventoryItem.Item.ToInventoryString();
 
             scrollableContentContainer.Add(itemElement[0]);
-            itemVisualElements[i] = itemElement[0];
+            itemVisualElements.Add(itemElement[0]);
             i++;
         }
+        UpdateTopBarInfo();
     }
 
     public VisualElement[] GetBlankItemTemplate()
@@ -81,6 +93,13 @@ public class ShopMenu : DefaultLoadUnloadMenuBehaviour, IMenu
         return new VisualElement[] { root, itemIcon, name, price, info };
     }
 
+    public void UpdateTopBarInfo()
+    {
+        contactNameElem.text = contactName;
+        shopInfo1.text = $"Contact Cash\n${inventory.Cash}";
+        shopInfo2.text = $"Crew Cash\n${crewInventory.Cash}";
+    }
+
     public void RegisterCallbacks()
     {
         foreach (VisualElement element in itemVisualElements)
@@ -89,8 +108,6 @@ public class ShopMenu : DefaultLoadUnloadMenuBehaviour, IMenu
         }
         confirmButton.RegisterCallback<ClickEvent>(OnClick);
     }
-
-    public void SendMenuNewInfo(object info) { }
 
     public void UnregisterCallbacks()
     {
@@ -108,27 +125,27 @@ public class ShopMenu : DefaultLoadUnloadMenuBehaviour, IMenu
         switch (target.name)
         {
             case "item-container":
-                Debug.Log(target.tooltip);
+                InventoryItem clickedItem = inventory.GetItemByInventoryItemId(int.Parse(target.tooltip));
+                if (clickedItem.Item.Cost > crewInventory.Cash) break;
+                CallLoadMenu("PurchaseConfirmOptions", true, clickedItem);
+                tempStoreElement = target;
                 break;
             case "confirm":
                 CallUnloadMenu(contactName);
                 break;
         }
     }
-
-    /*public event EventHandler<(string menuName, bool isChild, object passInfo)> LoadMenu;
-
-    private void CallLoadMenu(string menuName, bool isChild, object passInfo)
-    {
-        LoadMenu.Invoke(this, (menuName, isChild, passInfo));
+    public void SendMenuNewInfo(object info) {
+        switch (info)
+        {
+            case InventoryItem e:
+                shop.PurchaseItem(e, e.Item.Cost);
+                tempStoreElement.parent.Remove(tempStoreElement);
+                itemVisualElements.Remove(tempStoreElement);
+                UpdateTopBarInfo();
+                break;
+        }
     }
-
-    public event EventHandler<object> UnloadMenu;
-
-    private void CallUnloadMenu(object passInfo)
-    {
-        UnloadMenu.Invoke(this, passInfo);
-    }*/
 
     public void Update() { }
 }

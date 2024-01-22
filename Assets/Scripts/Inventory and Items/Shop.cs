@@ -34,4 +34,12 @@ public class Shop
             Inventory.Add(new Ammunition(item.item), item.quantity);
         }
     }
+
+    public void PurchaseItem(InventoryItem item, int price)
+    {
+        Inventory.Remove(item);
+        Inventory crewInventory = Storyteller.Instance.Crew.CrewInventory;
+        crewInventory.Add(item);
+        crewInventory.Cash -= price;
+    }
 }

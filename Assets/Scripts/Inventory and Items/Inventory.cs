@@ -18,8 +18,8 @@ public enum InventoryItemType
 
 public class Inventory
 {    
+    public int Cash {  get; set; }
     private List<InventoryItem> items;
-    
     
     public Inventory(List<IInventoryItem> items)
     {
@@ -36,6 +36,11 @@ public class Inventory
         InventoryItem result = new InventoryItem(item, 1, this);
         items.Add(result);
         return result;
+    }
+    public InventoryItem Add(InventoryItem item)
+    {
+        items.Add(item);
+        return item;
     }
 
     public InventoryItem Add(IInventoryItem item, int quantity)

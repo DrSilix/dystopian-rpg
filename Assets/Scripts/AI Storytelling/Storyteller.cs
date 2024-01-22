@@ -97,6 +97,7 @@ public class Storyteller : MonoBehaviour
     {
         GameObject crewGO = Instantiate(crewPrefab, Vector3.zero, Quaternion.identity);
         Crew = crewGO.GetComponent<CrewController>();
+        Crew.Initialize();
         GameObject crewMember1 = Instantiate(crewMember1Prefab, crewGO.transform);
         GameObject crewMember2 = Instantiate(crewMember2Prefab, crewGO.transform);
         GameObject crewMember3 = Instantiate(crewMember3Prefab, crewGO.transform);

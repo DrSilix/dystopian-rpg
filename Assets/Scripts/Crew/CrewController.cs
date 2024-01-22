@@ -27,6 +27,11 @@ public class CrewController : MonoBehaviour
     public List<CrewMemberController> CrewMembers { get; private set; } = new();
     public Inventory CrewInventory { get; private set; } = new();
 
+    public void Initialize()
+    {
+        CrewInventory.Cash = 5000;
+    }
+
     public void AddCrewMember(CrewMemberController member) {
         CrewMembers.Add(member);
         member.SetConnectedCrew(this);
