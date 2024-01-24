@@ -5,6 +5,11 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+/// <summary>
+/// A combat round consists of Individuals in order by their rolled initiative taking turns until everyones initiative
+/// is at 0 (-10 from individual after a turn) This class handles interfacing with the CrewMember class to perform a turn as
+/// part of the round
+/// </summary>
 public class CombatRound
 {
     private readonly CombatInitiative combatInitiative;
@@ -18,6 +23,7 @@ public class CombatRound
 
     private readonly int roundNumber;
 
+    // turns consist of two actions broken into 3 substeps each
     public enum TurnState
     {
         FirstActionReadying,
@@ -32,6 +38,14 @@ public class CombatRound
     private TurnState turnState;
 
     // TODO: handle no enemies or dead enemies
+    /// <summary>
+    /// Initializes a combat round which can be stepped to advance initiative and progress towards event success or failure
+    /// by neutralizing either half of the player crew or all of the enemies
+    /// </summary>
+    /// <param name="crew">Player crew participant</param>
+    /// <param name="enemyCrew">Enemy crew participant</param>
+    /// <param name="roundNumber">The round number</param>
+    /// <exception cref="ArgumentException">Throws exception if there are no InitiativeIndividuals to start the first turn</exception>
     public CombatRound(CrewController crew, CrewController enemyCrew, int roundNumber)
     {
         this.roundNumber = roundNumber;
@@ -65,23 +79,30 @@ public class CombatRound
         return sb.ToString();
     }
 
+    /// <summary>
+    /// The primary means by which the round is "completed". Each actor takes their turn in sub-steps until no one is left
+    /// as next in initiative
+    /// </summary>
+    /// <returns>true ... don't ask me why</returns>
     public bool StepRound()
     {
-        if (currentActor.CurrentDamagedState == DamagedState.BleedingOut)
+        // if the current actor is bleeding out they take 1 damage and pass turn
+        if (currentActor.CurrentDamagedState >= DamagedState.BleedingOut)
         {
             currentActor.TakeDamage(1);
             if (currentActor.CurrentDamagedState != DamagedState.Dead)
             {
                 GameLog.Instance.PostMessageToLog($"{currentActor.alias} is bleeding out. {3 - (currentActor.DamageTaken - currentActor.MaxDamage)} turns left");
             }
+            // if they are dead (either before or as a result of the 1 damage) then post message saying so (note: they are removed from combat on next round)
             else
             {
                 GameLog.Instance.PostMessageToLog($"{currentActor.alias} has died.");
             }
             turnState = TurnState.EndTurn;
         }
-        if (currentActor.CurrentDamagedState == DamagedState.Dead) turnState = TurnState.EndTurn;
         
+        // note a combat turn should be generic (not necessarily attacking)
         bool isEnemyValue;
         switch (turnState)
         {
@@ -117,18 +138,15 @@ public class CombatRound
                 Debug.Log(combatTarget.ToString());
                 break;
             case TurnState.EndTurn:
-                // add to initiative end
+                // add to initiative end. This also essentially removes them from the rest of the turn if they are bleeding out or dead
                 if (currentActor.CurrentDamagedState < DamagedState.BleedingOut) combatInitiative.SubtractInitiativeAndAddToEnd(10);
                 FinishedTurnNextInitiative();
                 Debug.Log(combatInitiative.ToString());
-                /*foreach (var target in AllCombatActors)
-                {
-                    Debug.Log(target.ToString());
-                }*/
                 break;
         }
         return true;
     }
+
 
     private void FinishedTurnNextInitiative()
     {
@@ -141,8 +159,18 @@ public class CombatRound
         turnState = TurnState.FirstActionReadying;
     }
 
+    /// <summary>
+    /// Checks if round is complete by checking if there is someone next to take a turn
+    /// </summary>
+    /// <returns>Is round complete</returns>
     public bool RoundComplete() { return !combatInitiative.HasNextInitiative(); }
 
+    /// <summary>
+    /// Checks if someone won by checking if either all of the enemies are
+    /// dead or dying, or if over half the players are dead or dying
+    /// If for some reason both crews lost at the same time, the enemies lose
+    /// </summary>
+    /// <returns>1 if players have won, 2 if the enemies have won and 0 if no one has won</returns>
     public int HasSomeoneWon()
     {
         int numberOfPlayersLeft = 0;

@@ -6,10 +6,6 @@
  * is this the protagonist director?
  * or does it control the protagonist and antagonist directors?
  * 
- * 
- * player director (watches over players and decides next steps on paradigm change)
- * enemy director (oblivious, gets fed events (alarms, etc.) triggers reactions)
- * 
  */
 
 using System.Collections;
@@ -21,6 +17,9 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
 using UnityEngine.UIElements;
 
+/// <summary>
+/// Handles high-level game management and stores information relating to the game
+/// </summary>
 public class Storyteller : MonoBehaviour
 {
     [SerializeField] private GameObject crewPrefab;
@@ -54,6 +53,9 @@ public class Storyteller : MonoBehaviour
         InitializeInstance();
     }
 
+    /// <summary>
+    /// Load Addressable assets asyncronously and then call generate crew and world controller generate level
+    /// </summary>
     private async void InitializeInstance()
     {
         await Addressables.LoadAssetsAsync<object>(assetLabelRef, (a) =>
@@ -82,6 +84,7 @@ public class Storyteller : MonoBehaviour
         worldController.GenerateLevel();
     }
 
+
     public void StartHeist()
     {
         worldController.StartLevel();
@@ -93,17 +96,24 @@ public class Storyteller : MonoBehaviour
     public delegate void HeistEventStateChanged(EventController baseEvent);
     public HeistEventStateChanged heistEventStateChanged;
 
+    /// <summary>
+    /// Instantiates a crew prefab and does the same for the 3 crewmembers as children. Mostly for debug ATM
+    /// </summary>
     private void GenerateCrew()
     {
         GameObject crewGO = Instantiate(crewPrefab, Vector3.zero, Quaternion.identity);
         Crew = crewGO.GetComponent<CrewController>();
-        Crew.Initialize();
         GameObject crewMember1 = Instantiate(crewMember1Prefab, crewGO.transform);
         GameObject crewMember2 = Instantiate(crewMember2Prefab, crewGO.transform);
         GameObject crewMember3 = Instantiate(crewMember3Prefab, crewGO.transform);
         Crew.AddCrewMembers(crewMember1, crewMember2, crewMember3);
     }
 
+    /// <summary>
+    /// Given a number of enemies it will instantiate a crew GO and members GO and give them a little randomness. Mostly for debug ATM
+    /// </summary>
+    /// <param name="numberOfEnemies">Number of Enemies to add to returned crew</param>
+    /// <returns>CrewController with CrewMembers equal to numberOfEnemies</returns>
     public CrewController GenerateEnemies(int numberOfEnemies)
     {
         GameObject crewGO = Instantiate(enemyCrewPrefab, Vector3.zero, Quaternion.identity);

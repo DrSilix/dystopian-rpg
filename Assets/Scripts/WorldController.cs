@@ -28,6 +28,10 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// Handles generation of the world space entities that make up the game world
+/// This is generally the "game board"
+/// </summary>
 public class WorldController : MonoBehaviour
 {
     public GameObject nodePrefab;
@@ -37,6 +41,10 @@ public class WorldController : MonoBehaviour
     private EventController InitialEvent;
 
     // TODO: remove - replace functionality with a subscribable world gen finished method
+    /// <summary>
+    /// Starts the level by placing the crew in the first event node, and
+    /// calling its BeginHeistEvent method
+    /// </summary>
     public void StartLevel()
     {
         PlaceCrew();
@@ -46,6 +54,9 @@ public class WorldController : MonoBehaviour
     }
 
     // TODO: remove - separate out into a separate class that handles only this type of stuff
+    /// <summary>
+    /// moves the crew game object to the first event (this has the camera as child which moves with it)
+    /// </summary>
     void PlaceCrew()
     {
         GameObject crewGO = Storyteller.Instance.Crew.gameObject;
@@ -53,6 +64,10 @@ public class WorldController : MonoBehaviour
     }
 
     // TODO: remove - separate out to a level gen class
+    /// <summary>
+    /// Temporary first pass at generating a set of N nodes on a grid from point a to b using only right angles
+    /// This also associates events and creates enemies to place in them at the moment
+    /// </summary>
     public void GenerateLevel()
     {
         GameObject previousNode = null;
@@ -95,6 +110,9 @@ public class WorldController : MonoBehaviour
             if (i > 0) alternate = !alternate;
         }
 
+        // This is from my backburner'ed idea of using an A* algorithm with decreasingly random
+        // priorities to generate a more interesting level
+
         /*Vector2Int[] test = new Vector2Int[numNodes];
         test[0] = new Vector2Int(0, 5);
         test[1] = new Vector2Int(3, 5);
@@ -131,12 +149,14 @@ public class WorldController : MonoBehaviour
         EventController eventController = node.GetComponent<EventController>();
         eventController.enabled = false;
 
+        // first event is navigation
         if (nodeNumber == 0)
         {
             eventController.AssociateEvent(eTypes[0]);
             return;
         }
 
+        // last event is return home
         if (nodeNumber == numNodes - 1)
         {
             eventController.AssociateEvent(eTypes[6]);
@@ -145,6 +165,7 @@ public class WorldController : MonoBehaviour
 
         CrewController enemies;
 
+        // third from last is the objective event
         if (nodeNumber == numNodes - 3)
         {
             eventController.AssociateEvent(eTypes[5]);
@@ -154,6 +175,7 @@ public class WorldController : MonoBehaviour
             return;
         }
 
+        // everything in-between is a random other event (no longer random, cycles through list)
         //eventController.AssociateEvent(eTypes[Random.Range(1,5)]);
         eventController.AssociateEvent(eTypes[(nodeNumber % 4 + 1)]);
         enemies = Storyteller.Instance.GenerateEnemies(Random.Range(1, 3));
@@ -162,6 +184,7 @@ public class WorldController : MonoBehaviour
     }
 
     // TODO: remove - separate out to the level gen class
+    // connects two nodes together building a bi-directional linked list
     void ConnectNodes(GameObject prev, GameObject curr)
     {
         Node currentNode = curr.GetComponent<Node>();

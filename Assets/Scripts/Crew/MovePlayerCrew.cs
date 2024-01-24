@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
+/// <summary>
+/// Currently the crew is moved from node to node to complete each and finish the heist
+/// with the camera attached. One of the few scene interacting scripts.
+/// </summary>
 public class MovePlayerCrew : MonoBehaviour
 {
     private bool isMoving = false;

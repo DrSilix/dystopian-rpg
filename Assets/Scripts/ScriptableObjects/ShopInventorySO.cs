@@ -10,5 +10,5 @@ public class ShopInventorySO : ScriptableObject
     //public Contact Contact { get; private set; }
     public List<WeaponSO> weapons;
     public List<ArmorSO> armors;
-    public List<ShopItemWithQuantity<AmmunitionSO>> ammuntion;
+    public List<ShopItemSOWithQuantity<AmmunitionSO>> ammuntion;
 }

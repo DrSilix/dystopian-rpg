@@ -25,6 +25,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// Handles overall administration of an individual event. requires an event type along with event script component for that type.
+/// Is attached to a physical node in the game world
+/// Also handles taking in a player crew and passing that crew along to the next event at the next node.
+/// </summary>
 public class EventController : MonoBehaviour
 {
     [SerializeField]
@@ -42,6 +47,10 @@ public class EventController : MonoBehaviour
     
     public Node node;
 
+    /// <summary>
+    /// Attaches an event to the parent game object given an Heist Event Type
+    /// </summary>
+    /// <param name="eventType">Heist Event Type to use here</param>
     public void AssociateEvent(HEventType.HType eventType)
     {
         this.eventType = eventType;
@@ -49,6 +58,10 @@ public class EventController : MonoBehaviour
         eventState = HEventState.IdleUnfinished;
     }
 
+    /// <summary>
+    /// Transforms the current event to a different (or I guess same) event type, resets progress and restarts
+    /// </summary>
+    /// <param name="eventType">The event type to mutate into</param>
     public void MutateEvent(HEventType.HType eventType)
     {
         Destroy(BaseEvent);
@@ -59,22 +72,37 @@ public class EventController : MonoBehaviour
         Invoke(nameof(BeginHeistEvent), 3f);
     }
 
+    /// <summary>
+    /// Used to update the state of the event (unfinished, running, finished, ...) and notifying the storyteller
+    /// Notify's the storyteller even if the state is "changed" to the same state
+    /// (this can be used as a sort of game loop)
+    /// </summary>
+    /// <param name="state">Heist Event State to change to</param>
     public void ChangeHeistEventState(HEventState state)
     {
         //if (eventState == state) return; //I don't actually want to do this, Event though the state isn't changing the properties are
         eventState = state;
         Storyteller.Instance.heistEventStateChanged.Invoke(this);
     }
-
+    
     public BaseEvent GetBaseEvent() { return BaseEvent; }
     public HEventType.HType GetEventType() { return eventType; }
     public HEventState GetEventState() {  return eventState; }
 
+    /// <summary>
+    /// Associates an enemy crew with this eventcontroller, to presumably be used
+    /// for combat events (or regular events in the future)
+    /// </summary>
+    /// <param name="enemyCrew">CrewController to associate as enemies</param>
     public void EnemyIntake(CrewController enemyCrew)
     {
         possesedEnemies = enemyCrew;
     }
 
+    /// <summary>
+    /// Associates a crew with this EventController
+    /// </summary>
+    /// <param name="crew"></param>
     public void CrewIntake(CrewController crew)
     {
         Debug.Log("Taking in Crew");
@@ -83,6 +111,10 @@ public class EventController : MonoBehaviour
         node.SetColor(Color.cyan);
     }
 
+    /// <summary>
+    /// Works in tandem with MovePlayerCrew to physically (in game world) move the player crew to the next node
+    /// It also invokes asyncronously but simultaneously to the physical movement passing the crew to the next node
+    /// </summary>
     public void TransportCrewToNextNode()
     {
         Debug.Log("Crew Moving To Next Node");
@@ -90,6 +122,9 @@ public class EventController : MonoBehaviour
         Invoke(nameof(CrewPassToNext), 3.0f * node.GetLineLength());
     }
 
+    /// <summary>
+    /// Hands off the crew to the next node, disables this game object, and starts the next node
+    /// </summary>
     public void CrewPassToNext()
     {
         Debug.Log("Crew Moved To Next Node");
@@ -101,6 +136,9 @@ public class EventController : MonoBehaviour
         nextNode.BeginHeistEvent();
     }
 
+    /// <summary>
+    /// Primarily performs the events (BaseEvent) EventStart method and then invokes the loop on a delay
+    /// </summary>
     public void BeginHeistEvent()
     {
         ChangeHeistEventState(HEventState.Begin);
@@ -114,6 +152,11 @@ public class EventController : MonoBehaviour
         Invoke(nameof(HeistEventLoop), 7f);
     }
 
+    /// <summary>
+    /// Main game loop, this steps the event and relies on the invariant that the event will
+    /// eventually return true for HasSucceeded or HasFailed. Invokes next step on a delay
+    /// Once success or failure, calls to end the event
+    /// </summary>
     public void HeistEventLoop()
     {
         ChangeHeistEventState(HEventState.Running);
@@ -123,13 +166,17 @@ public class EventController : MonoBehaviour
         else { Invoke(nameof(HeistEventLoop), StepDelayTime);  }
     }
 
-
+    /// <summary>
+    /// Cleans up the event by cancelling any open invokes, calling the EventEnd method
+    /// And then reacting to whether the event succeeded or failed
+    /// </summary>
     public void EndHeistEvent()
     {
         Debug.Log("End Heist Event");
         // skyscraperBG.SetActive(false);
         CancelInvoke();
         BaseEvent.EventEnd();
+        // The rest of this could possibly be put inside the base event
         if (BaseEvent.HasFailed())
         {
             // TODO: FIX event node with no enemies, ?get lucky? phew

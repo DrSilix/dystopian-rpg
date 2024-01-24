@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Interface for generalizing all items in the game for inventory interaciton
+/// </summary>
 public interface IInventoryItem
 {
     public int Id {  get; }

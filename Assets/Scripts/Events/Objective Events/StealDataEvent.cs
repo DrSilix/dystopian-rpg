@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This is an objective event and a case study for a more complex event
+/// </summary>
 public class StealDataEvent : BaseEvent
 {
     public enum StepNumber
@@ -37,6 +40,7 @@ public class StealDataEvent : BaseEvent
         DifficultyRating = 3;
         roundNumber = 0;
         stepNumber = StepNumber.One;
+        // used for the person keeping watch, they are only ever able to fail on this round
         randomEventRound = Random.Range(3, TargetSuccesses);
         string msg = "\"Finally!! Get the data smarty pants and let's jolt\" \"Alright I'm on it but it's going to take me about 10 minutes. Big guy stand watch over there. Slick can you help me with this\"";
         Debug.Log(msg);
@@ -45,6 +49,8 @@ public class StealDataEvent : BaseEvent
 
     public override bool StepEvent()
     {
+        // instead of using the step one, two, and three methods I ended up (after completing the combat event) using a switch/case state machine
+        // to create a sub-step for events. (a sub-step I'm defining as a step that does not result in a success or failure but is a sub part of a full step)
         switch (stepNumber)
         {
             case StepNumber.One:
@@ -76,6 +82,7 @@ public class StealDataEvent : BaseEvent
                 Debug.Log(msg);
                 GameLog.Instance.PostMessageToLog(msg);
 
+                // state machine must be switched before any returns
                 stepNumber = StepNumber.One;
 
                 if (hackerRoll >= DifficultyRating)

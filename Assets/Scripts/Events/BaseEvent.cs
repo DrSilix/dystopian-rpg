@@ -72,6 +72,11 @@ using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// Handles performing a skill based (attributes and skills) event for the crew, testing them, with a possiblity for success or failure.
+/// This is a base abstract class which is to be inherited by more specific events and overridden where needed
+/// This class is used and puppeted by the event controller class
+/// </summary>
 public abstract class BaseEvent : MonoBehaviour
 {
     
@@ -93,6 +98,11 @@ public abstract class BaseEvent : MonoBehaviour
     public CrewController Crew { get; set; }
     public CrewController EnemyCrew { get; set; }
 
+    /// <summary>
+    /// Calling this initializes the event and must be called before the other methods.
+    /// This handles defining the attributes&aggregate along with the difficulty including target successes and max fails
+    /// </summary>
+    /// <param name="crew">The crew that will be performing in the event</param>
     public virtual void EventStart(CrewController crew)
     {
         TargetAttribute1 = Attribute.luck;
@@ -109,8 +119,15 @@ public abstract class BaseEvent : MonoBehaviour
         this.Crew = crew;
     }
 
+    /// <summary>
+    /// Called at the end of the event by the event controller
+    /// </summary>
     public virtual void EventEnd() { }
     
+    /// <summary>
+    /// This is called to step forward the progress/failure of the event pushing the event towards either success or failure
+    /// </summary>
+    /// <returns>The status of whether the step was a success or failure</returns>
     public virtual bool StepEvent()
     {
         int crewRoll;

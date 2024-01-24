@@ -88,6 +88,13 @@ public class Weapon : IInventoryItem
         return sb.ToString();
     }
 
+    /// <summary>
+    /// Loads an ammunition type and amount into the weapon
+    /// Will only load ammo until weapon is full, will take remaining
+    /// ammo and add to AmmoHeld which is currently unimplemented
+    /// </summary>
+    /// <param name="ammunitionSO">Ammunition scriptable object to load</param>
+    /// <param name="amount">Amount to load</param>
     public void LoadAmmunition(AmmunitionSO ammunitionSO, int amount)
     {
         AmmunitionSO = ammunitionSO;
@@ -100,8 +107,16 @@ public class Weapon : IInventoryItem
         }
     }
 
+    /// <summary>
+    /// Simply removes the amount of ammo specified. "Fires the weapon"
+    /// Does not check if the amount is available
+    /// </summary>
+    /// <param name="amount">Amount of ammo to remove</param>
     public void FireRounds(int amount) { CurrentAmmoCount -= amount; }
 
+    /// <summary>
+    /// Loads exactly to correct amount of ammo to fill the capacity
+    /// </summary>
     public void Reload()
     {
         LoadAmmunition(Storyteller.Instance.AmmunitionSOs["Regular Ammunition"], AmmoCapacity - CurrentAmmoCount);

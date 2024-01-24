@@ -17,7 +17,10 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
 using UnityEngine;
 
-
+// fairly certain in the future I will have sub event flavoring (e.g. sneak event: cameras, guards, motion detector, employees, robots/animals, etc)
+/// <summary>
+/// Contains a list of all base event types
+/// </summary>
 public static class HEventType
 {
     //TODO: should probably figure out a better way to do this enum but with a method thing
@@ -55,6 +58,12 @@ public static class HEventType
         Pst_ReturnHome
     }
 
+    /// <summary>
+    /// Allows retrieval of the class/script associated with each event type enum
+    /// </summary>
+    /// <param name="type">Event Type to get</param>
+    /// <returns>The Type or class/script</returns>
+    /// <exception cref="System.Exception">If that event type isn't setup yet</exception>
     public static Type GetEventComponentType (HType type)
     {
         switch (type)

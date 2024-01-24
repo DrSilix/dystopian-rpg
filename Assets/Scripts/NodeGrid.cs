@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Utility class which is able to build an abstract grid of points associated with the screen or world
+/// and provides methods to query this grid and gain information relative to the world
+/// </summary>
 public class NodeGrid
 {
     private static Vector3 worldOrigin = Vector3.zero;
@@ -12,6 +16,12 @@ public class NodeGrid
     private float distanceBetweenPoints;
     private float worldWidth, worldHeight;
 
+    /// <summary>
+    /// Initializes a node grid with n-by-m number of nodes
+    /// Uses a set 0.5f world distance between nodes (only used when getting nodes in world space)
+    /// </summary>
+    /// <param name="width">Number of nodes wide or across the screen</param>
+    /// <param name="height">Number of nodes high or up and down the screen</param>
     public NodeGrid(int width, int height)
     {
         gridWidth = width;
@@ -21,6 +31,12 @@ public class NodeGrid
         distanceBetweenPoints = 0.5f;
     }
 
+    /// <summary>
+    /// Initializes a node grid with n-by-m number of nodes
+    /// </summary>
+    /// <param name="width">Number of nodes wide or across the screen</param>
+    /// <param name="height">Number of nodes high or up and down the screen</param>
+    /// <param name="worldDistanceBetweenPoints">Distance between points when working in world space</param>
     public NodeGrid(int width, int height, float worldDistanceBetweenPoints)
     {
         gridWidth = width;

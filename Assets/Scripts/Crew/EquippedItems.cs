@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-
+/// <summary>
+/// Contains the equipment associated with a crew member along with methods/data related to that
+/// </summary>
 [System.Serializable]
 public class EquippedItems
 {
@@ -43,6 +45,10 @@ public class EquippedItems
         private set { equippedArmor = value; }
     }
 
+    /// <summary>
+    /// Gets the dictionary storing the equipment by a key of equip slot
+    /// </summary>
+    /// <returns>dictionary containing equipment (ItemSlot, InventoryItem)</returns>
     public Dictionary<ItemSlot, InventoryItem> GetEquipment()
     {
         var result = equipment.ToDictionary(entry => entry.Key, entry => entry.Value);
@@ -60,12 +66,23 @@ public class EquippedItems
         linkedCrewMemberController = crewMemberController;
     }
 
+    /// <summary>
+    /// Handles equipping an item to a slot
+    /// </summary>
+    /// <param name="slot">equip slot to put item in</param>
+    /// <param name="item">item to put in slot</param>
     public void Equip(ItemSlot slot, InventoryItem item) {
         if (equipment.ContainsKey(slot) && equipment[slot] != null) Unequip(slot);
         equipment[slot] = item;
         item.CurrentlyEquippedBy = linkedCrewMemberController;
     }
 
+    /// <summary>
+    /// Removes Item from equip slot and if applicable assigns a default base weapon or armor.
+    /// Weapons and armor are required to be available
+    /// </summary>
+    /// <param name="slot">Slot to unequip the item that's in it</param>
+    /// <returns>InventoryItem that was in the slot</returns>
     public InventoryItem Unequip(ItemSlot slot)
     {
         InventoryItem result = equipment[slot];
@@ -74,6 +91,12 @@ public class EquippedItems
         return result;
     }
 
+    /// <summary>
+    /// Removes Item from equip slot and if applicable assigns a default base weapon or armor.
+    /// Weapons and armor are required to be available
+    /// </summary>
+    /// <param name="item">equipped item to unequip</param>
+    /// <returns>InventoryItem that was unequipped, null if item not found</returns>
     public InventoryItem Unequip(InventoryItem item)
     {
         ItemSlot slot;

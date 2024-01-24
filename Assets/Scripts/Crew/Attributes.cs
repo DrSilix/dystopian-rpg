@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// The 8 core attributes plus the generated luck attribute
+/// </summary>
 public enum Attribute
 {
     body,
@@ -17,7 +20,9 @@ public enum Attribute
 }
 
 
-
+/// <summary>
+/// Contains attribute values for crew members and handles management of them
+/// </summary>
 [System.Serializable]
 public class Attributes : IEnumerable
 {
@@ -64,6 +69,10 @@ public class Attributes : IEnumerable
         return GetEnumerable();
     }
 
+    /// <summary>
+    /// attributes in simple string form, mostly for debug.
+    /// </summary>
+    /// <returns>string in the format #/#/#/#/#/#/#/#</returns>
     public override string ToString()
     {
         string result = new(
@@ -78,8 +87,16 @@ public class Attributes : IEnumerable
         return result;
     }
 
+    /// <summary>
+    /// Luck is a factor of the speed of movement(agility), reaction to a situation, and the ability to know or sense an outcome beforehand(intuition)
+    /// </summary>
     private void CalculateLuck() { luck = Mathf.CeilToInt(((float)(agility + reaction + intuition)) / 3); }
 
+    /// <summary>
+    /// Gets the value of the attribute requested
+    /// </summary>
+    /// <param name="attribute">Attribute enum representing attribute value to return</param>
+    /// <returns>the attribute value or 0 if for some reason an invalid parameter gets through</returns>
     public int Get(Attribute attribute)
     {
         switch (attribute)
@@ -97,6 +114,11 @@ public class Attributes : IEnumerable
         }
     }
 
+    /// <summary>
+    /// Gets the value of the attribute requested
+    /// </summary>
+    /// <param name="attribute">String representing attribute to return</param>
+    /// <returns>the attribute value or 0 if for some reason an invalid parameter gets through</returns>
     public int Get(string attribute)
     {
         switch (attribute)
@@ -114,10 +136,17 @@ public class Attributes : IEnumerable
         }
     }
 
+    /// <summary>
+    /// Sets attribute to value. Also handles recalculating luck if needed
+    /// </summary>
+    /// <param name="attribute">attribute to set</param>
+    /// <param name="value">value to set attribute to</param>
+    /// <returns>the value the attribute was set to</returns>
     public int Set(Attribute attribute, int value)
     {
         switch (attribute)
         {
+            // TODO: need to handle recalculating health on change of body
             case Attribute.body:
                 body = value;
                 break;

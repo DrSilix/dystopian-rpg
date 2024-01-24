@@ -1,6 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
+/***************************************************************************************
+*    Author: Positive7 (discussions.unity username), xjcl (stackoverflow username)
+*    Date: 01/23/2024
+*    Availability: https://stackoverflow.com/questions/67704820/how-do-i-print-unitys-debug-log-to-the-screen-gui
+*    
+***************************************************************************************/
 public class ZzzLog : MonoBehaviour
 {
     uint qsize = 15;  // number of messages to keep

@@ -1,5 +1,5 @@
 /*
- * woa boy here we go, this is gonna be a doozy...
+ * woa boy here we go, this is gonna be a doozy... It kinda was
  */
 
 using System;
@@ -9,6 +9,10 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// Combat event, either triggered directly or on the failure of any non-combat event.
+/// This doesn't follow most of the typical base event API
+/// </summary>
 public class CombatEvent : BaseEvent
 {
     public CombatRound CombatRound { get; private set; }
@@ -56,6 +60,7 @@ public class CombatEvent : BaseEvent
             CombatRound = new CombatRound(Crew, EnemyCrew, roundNumber);
         }
         CombatRound.StepRound();
+        // a 1 is a yes and 2 a no, 0 is null
         int status = CombatRound.HasSomeoneWon();
         if (status == 1) {
             //GameLog.Instance.PostMessageToLog($"Any remaining enemies are fleeing");
