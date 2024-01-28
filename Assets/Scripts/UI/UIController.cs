@@ -17,7 +17,6 @@ public class UIController : MonoBehaviour
 
     private List<IMenu> uiScripts;
     private int currentMenu;
-    private int currentMenuContainerSize;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +35,6 @@ public class UIController : MonoBehaviour
             BuildMenuGameObject(i);
         }
         currentMenu = 0;
-        currentMenuContainerSize = 3;
 
         Storyteller.Instance.heistEventStateChanged += HeistEventStateChange;
         
@@ -89,7 +87,7 @@ public class UIController : MonoBehaviour
             uiScripts[currentMenu].UnloadMenu -= UnloadMenu;
         }
         if (isChild) currentMenu++;
-        if (currentMenu >= currentMenuContainerSize) BuildMenuGameObject(currentMenu);
+        if (currentMenu >= uiDocs.Count) BuildMenuGameObject(currentMenu);
         uiDocs[currentMenu].visualTreeAsset = uiAssets[menuName];
         Type script = Type.GetType(menuName);
         IMenu menu = Activator.CreateInstance(script) as IMenu;
