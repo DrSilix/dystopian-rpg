@@ -37,6 +37,14 @@ public class CrewController : MonoBehaviour
         CrewInventory.Cash = 5000;
     }
 
+    public void ResetToFull()
+    {
+        foreach(CrewMemberController item in CrewMembers)
+        {
+            item.ResetToFull();
+        }
+    }
+
     /// <summary>
     /// Add a crew member to the crew. contains overload for using a game object as well as
     /// </summary>

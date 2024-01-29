@@ -25,6 +25,7 @@
  */
 
 
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -38,7 +39,7 @@ public class WorldController : MonoBehaviour
     public int numNodes;
     public int gridWidth = 16, gridHeight = 9;
 
-    private EventController InitialEvent;
+    private List<EventController> eventControllers;
 
     // TODO: remove - replace functionality with a subscribable world gen finished method
     /// <summary>
@@ -48,9 +49,9 @@ public class WorldController : MonoBehaviour
     public void StartLevel()
     {
         PlaceCrew();
-        InitialEvent.enabled = true;
-        InitialEvent.CrewIntake(Storyteller.Instance.Crew);
-        InitialEvent.BeginHeistEvent();
+        eventControllers[0].enabled = true;
+        eventControllers[0].CrewIntake(Storyteller.Instance.Crew);
+        eventControllers[0].BeginHeistEvent();
     }
 
     // TODO: remove - separate out into a separate class that handles only this type of stuff
@@ -60,7 +61,7 @@ public class WorldController : MonoBehaviour
     void PlaceCrew()
     {
         GameObject crewGO = Storyteller.Instance.Crew.gameObject;
-        crewGO.transform.position = InitialEvent.gameObject.transform.position;
+        crewGO.transform.position = eventControllers[0].gameObject.transform.position;
     }
 
     // TODO: remove - separate out to a level gen class
@@ -68,8 +69,9 @@ public class WorldController : MonoBehaviour
     /// Temporary first pass at generating a set of N nodes on a grid from point a to b using only right angles
     /// This also associates events and creates enemies to place in them at the moment
     /// </summary>
-    public void GenerateLevel()
+    public List<EventController> GenerateLevel()
     {
+        eventControllers = new List<EventController>();
         GameObject previousNode = null;
         int[] prevGridPoints = new int[2];
         int gridX, gridY;
@@ -96,9 +98,9 @@ public class WorldController : MonoBehaviour
             if (i == numNodes - 1) gridX = gridWidth - 1;
 
             Vector3 spawnPos = grid.getGridPointToWorldSpace(gridX, gridY);
-            GameObject node = Instantiate(nodePrefab, spawnPos, Quaternion.identity);
+            GameObject node = Instantiate(nodePrefab, spawnPos, Quaternion.identity, this.transform);
             AssignEvent(node, i, numNodes);
-            if (i == 0) { InitialEvent = node.GetComponent<EventController>(); }
+            eventControllers.Add(node.GetComponent<EventController>());
             node.name += i;
             if (i > 0)
             {
@@ -109,6 +111,8 @@ public class WorldController : MonoBehaviour
             prevGridPoints[1] = gridY;
             if (i > 0) alternate = !alternate;
         }
+
+        return eventControllers;
 
         // This is from my backburner'ed idea of using an A* algorithm with decreasingly random
         // priorities to generate a more interesting level

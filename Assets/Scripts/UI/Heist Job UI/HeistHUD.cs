@@ -141,11 +141,23 @@ public class HeistHUD : DefaultLoadUnloadMenuBehaviour, IMenu
                         break;
                     case HEventState.DoneFailure:
                     case HEventState.DoneSuccess:
-                        CallLoadMenu("SafeHouseMenu", false, heistEvent.GetEventState());
+                        CallLoadMenu("SafehouseMenu", false, heistEvent.GetEventState());
                         break;
                 }
                 break;
             case HEventType.HType.Cmbt_Combat:
+                // TODO: if this HeistHUD is going to handle returning to SafehouseMenu then it needs to be more robust
+                switch (heistEvent.GetEventState())
+                {
+                    case HEventState.Begin:
+                        break;
+                    case HEventState.DoneFailure:
+                        CallLoadMenu("SafehouseMenu", false, heistEvent.GetEventState());
+                        break;
+                    case HEventState.DoneSuccess:
+                        break;
+                }
+
                 CombatEvent e = heistEvent.BaseEvent as CombatEvent;
                 if (e.CombatRound == null) break;
                 if (e.CombatRound.AllCombatActors == null) break;

@@ -22,11 +22,12 @@ using UnityEngine.UIElements;
 /// </summary>
 public class Storyteller : MonoBehaviour
 {
+    public int seed;
     [SerializeField] private GameObject crewPrefab;
     [SerializeField] private GameObject crewMember1Prefab, crewMember2Prefab, crewMember3Prefab;
     [SerializeField] private GameObject enemyCrewPrefab;
     [SerializeField] private GameObject enemyCrewMember1Prefab, enemyCrewMember2Prefab;
-    [SerializeField] private WorldController worldController;
+    [SerializeField] private HeistController heistController;
     [SerializeField] private AssetLabelReference assetLabelRef;
 
     public Dictionary<string, WeaponSO> WeaponSOs {  get; private set; } = new Dictionary<string, WeaponSO>();
@@ -42,7 +43,6 @@ public class Storyteller : MonoBehaviour
 
     private void Awake()
     {
-
         if (Instance != null && Instance != this)
         {
             Destroy(this);
@@ -81,13 +81,19 @@ public class Storyteller : MonoBehaviour
         }).Task;
         Debug.Log("Items Loaded");
         GenerateCrew();
-        worldController.GenerateLevel();
+    }
+
+    public int CountHeistStep()
+    {
+        return heistController.CountHeistStep();
     }
 
 
     public void StartHeist()
     {
-        worldController.StartLevel();
+        heistController.Initialize();
+        heistController.GenerateHeist(seed);
+        heistController.StartHeist();
     }
 
     // TODO: subscribable event HeistEventStateChange

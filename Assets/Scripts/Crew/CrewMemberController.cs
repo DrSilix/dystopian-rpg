@@ -56,6 +56,26 @@ public partial class CrewMemberController : MonoBehaviour
         MaxDamage = 8 + Mathf.CeilToInt((float)attributes.body / 2);
     }
 
+    public void ResetToFull()
+    {
+        DamageTaken = 0;
+        EquippedItems.EquippedWeapon.Reload();
+    }
+
+    public void GetCrewMemberState(ref int ammoUsed, ref int damageTaken, ref List<EquippedItems.ItemSlot> itemSlotsUsed)
+    {
+        Weapon weapon = EquippedItems.EquippedWeapon;
+        ammoUsed = (weapon.AmmoCapacity - weapon.CurrentAmmoCount);
+        damageTaken = DamageTaken;
+        itemSlotsUsed = new List<EquippedItems.ItemSlot>();
+    }
+
+    public void SetCrewMemberState(int ammoUsed, int damageTaken, List<EquippedItems.ItemSlot> itemSlotsUsed)
+    {
+        EquippedItems.EquippedWeapon.FireRounds(ammoUsed);
+        DamageTaken = damageTaken;
+    }
+
     /// <summary>
     /// Addes IInventoryItem such as Weapon/Armor to inventory and equips it to slot
     /// </summary>

@@ -11,6 +11,7 @@ public enum HEventState
     IdleUnfinished,
     Begin,
     Running,
+    Ending,
     DoneSuccess,
     DoneFailure
 }
