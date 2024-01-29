@@ -141,8 +141,11 @@ public class HeistHUD : DefaultLoadUnloadMenuBehaviour, IMenu
                         break;
                     case HEventState.DoneFailure:
                     case HEventState.DoneSuccess:
-                        CallLoadMenu("SafehouseMenu", false, heistEvent.GetEventState());
+                        //CallLoadMenu("SafehouseMenu", false, heistEvent.GetEventState());
                         break;
+                    case HEventState.HeistFinished:
+                        CallLoadMenu("SafehouseMenu", false, heistEvent.GetEventState());
+                        return;
                 }
                 break;
             case HEventType.HType.Cmbt_Combat:
@@ -152,10 +155,13 @@ public class HeistHUD : DefaultLoadUnloadMenuBehaviour, IMenu
                     case HEventState.Begin:
                         break;
                     case HEventState.DoneFailure:
-                        CallLoadMenu("SafehouseMenu", false, heistEvent.GetEventState());
+                        //CallLoadMenu("SafehouseMenu", false, heistEvent.GetEventState());
                         break;
                     case HEventState.DoneSuccess:
                         break;
+                    case HEventState.HeistFinished:
+                        CallLoadMenu("SafehouseMenu", false, heistEvent.GetEventState());
+                        return;
                 }
 
                 CombatEvent e = heistEvent.BaseEvent as CombatEvent;

@@ -13,5 +13,6 @@ public enum HEventState
     Running,
     Ending,
     DoneSuccess,
-    DoneFailure
+    DoneFailure,
+    HeistFinished
 }

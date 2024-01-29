@@ -41,14 +41,17 @@ public class EventController : MonoBehaviour
     [SerializeField]
     private HEventState eventState;
 
+    public HeistController HeistController { get; private set; }
+
     public float StepDelayTime = 3f;
 
     public BaseEvent BaseEvent { get; private set; }
     
     public Node node;
 
-    public HEventState StepEventController()
+    /*public HEventState StepEventController()
     {
+        Debug.Log($"Step event with state: {eventState}");
         switch (eventState)
         {
             case HEventState.IdleUnfinished:
@@ -62,7 +65,7 @@ public class EventController : MonoBehaviour
                 break;
             case HEventState.Ending:
                 EndHeistEvent();
-                return HEventState.Ending;
+                break;
             case HEventState.DoneSuccess:
                 if (node.GetDownstreamNode() != null) CrewPassToNext();
                 break;
@@ -70,7 +73,7 @@ public class EventController : MonoBehaviour
                 break;
         }
         return GetEventState();
-    }
+    }*/
 
     /// <summary>
     /// Attaches an event to the parent game object given an Heist Event Type
@@ -105,7 +108,7 @@ public class EventController : MonoBehaviour
     /// <param name="state">Heist Event State to change to</param>
     public void ChangeHeistEventState(HEventState state)
     {
-        //if (eventState == state) return; //I don't actually want to do this, Event though the state isn't changing the properties are
+        // TODO: I may want this to be handled by the HeistController
         eventState = state;
         Storyteller.Instance.heistEventStateChanged.Invoke(this);
     }
@@ -149,7 +152,7 @@ public class EventController : MonoBehaviour
     }*/
 
     /// <summary>
-    /// Hands off the crew to the next node, disables this game object, and starts the next node
+    /// Hands off the crew to the next node and disables this game object
     /// </summary>
     public EventController CrewPassToNext()
     {
@@ -160,43 +163,43 @@ public class EventController : MonoBehaviour
         nextNode.enabled = true;
         this.enabled = false;
         return nextNode;
-        //nextNode.BeginHeistEvent();
     }
 
     /// <summary>
-    /// Primarily performs the events (BaseEvent) EventStart method and then invokes the loop on a delay
+    /// Primarily performs the events (BaseEvent) EventStart method
     /// </summary>
     public void BeginHeistEvent()
     {
         ChangeHeistEventState(HEventState.Begin);
         Debug.Log("-----------------------");
         Debug.Log("Begin Heist Event");
-        // skyscraperBG = Camera.main.transform.GetChild(1).gameObject;
-        // skyscraperBG.SetActive(true);
         BaseEvent.EventStart(possesedCrew);
         BaseEvent.MyNameIs();
         Debug.Log($"Event Progress: {BaseEvent.GetProgress()}%");
     }
+    public void BeginHeistEvent(HeistController heistController)
+    {
+        HeistController = heistController;
+        BeginHeistEvent();
+    }
 
     /// <summary>
     /// Main game loop, this steps the event and relies on the invariant that the event will
-    /// eventually return true for HasSucceeded or HasFailed. Invokes next step on a delay
-    /// Once success or failure, calls to end the event
+    /// eventually return true for HasSucceeded or HasFailed.
+    /// Once success or failure, changes state
     /// </summary>
-    /// <returns>has the event finished</returns>
     public void HeistEventLoop()
     {
         ChangeHeistEventState(HEventState.Running);
         BaseEvent.StepEvent();
-        //Debug.Log($"Event Progress: {baseEvent.GetProgress()}%");
         if (BaseEvent.HasSucceeded() || BaseEvent.HasFailed()) ChangeHeistEventState(HEventState.Ending);
     }
 
     /// <summary>
-    /// Cleans up the event by cancelling any open invokes, calling the EventEnd method
-    /// And then reacting to whether the event succeeded or failed
+    /// Cleans up the event and calls the EventEnd method
+    /// And then changes state to whether the event succeeded or failed
     /// </summary>
-    public bool EndHeistEvent()
+    public void EndHeistEvent()
     {
         Debug.Log("End Heist Event");
         BaseEvent.EventEnd();
@@ -211,14 +214,13 @@ public class EventController : MonoBehaviour
                 ChangeHeistEventState(HEventState.DoneFailure);
                 node.SetColor(Color.red);
                 MutateEvent(HEventType.HType.Cmbt_Combat);
-                //Debug.Log("Curiously the mutated event has ended now.");
-                return true;
+                return;
             }
             Debug.Log("Heist FAILED!!");
             GameLog.Instance.PostMessageToLog("You're crew is dead or captured. Failed!");
             ChangeHeistEventState(HEventState.DoneFailure);
             node.SetColor(Color.red);
-            return false;
+            return;
         }
         if (node.GetDownstreamNode() == null)
         {
@@ -226,12 +228,10 @@ public class EventController : MonoBehaviour
             node.SetColor(Color.green);
             GameLog.Instance.PostMessageToLog("Finished Heist");
             ChangeHeistEventState(HEventState.DoneSuccess);
-            return false;
+            return;
         }
         ChangeHeistEventState(HEventState.DoneSuccess);
         node.SetColor(Color.grey);
-
-        return false;
-        //TransportCrewToNextNode();
+        return;
     }
 }

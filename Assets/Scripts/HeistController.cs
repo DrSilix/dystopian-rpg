@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 
 public class HeistController : MonoBehaviour
 {
+    public float stepDelay = 2f;
+    public int testCounterStop = 0;
     [field: SerializeField] public GameObject WorldControllerPrefab { get; set; }
 
     private WorldController worldController;
@@ -43,7 +45,7 @@ public class HeistController : MonoBehaviour
         StepHeist();
     }
 
-    public void StepHeist()
+    /*public void StepHeist()
     {
         CountHeistStep();
         HEventState state = events[currentEventPointer].StepEventController();
@@ -58,7 +60,45 @@ public class HeistController : MonoBehaviour
             StepHeist();
             return;
         }
-        Invoke("StepHeist", 1f);
+        Invoke("StepHeist", stepDelay);
+    }**/
+
+    public void StepHeist()
+    {
+        CountHeistStep();
+        EventController currentEvent = events[currentEventPointer];
+        HEventState currentState = currentEvent.GetEventState();
+        switch (currentState)
+        {
+            case HEventState.IdleUnfinished:
+                currentEvent.BeginHeistEvent(this);
+                break;
+            case HEventState.Begin:
+            case HEventState.Running:
+                currentEvent.HeistEventLoop();
+                break;
+            case HEventState.Ending:
+                currentEvent.EndHeistEvent();
+                break;
+            case HEventState.DoneSuccess:
+                if (currentEventPointer >= events.Count - 1)
+                {
+                    // TODO: HeistHUD should call main menu differently instead of this
+                    currentEvent.ChangeHeistEventState(HEventState.HeistFinished);
+                    EndHeist(true);
+                    return;
+                }
+                // call local method to interpolate distance travelled to next node
+                currentEvent.CrewPassToNext();
+                currentEventPointer++;
+                break;
+            case HEventState.DoneFailure:
+                currentEvent.ChangeHeistEventState(HEventState.HeistFinished);
+                EndHeist(false);
+                return;
+        }
+        if (stepCounter.Count < testCounterStop) StepHeist();
+        else Invoke(nameof(StepHeist), stepDelay);
     }
 
     public bool AdvanceHeistOrFinish(HEventState state)
@@ -82,7 +122,7 @@ public class HeistController : MonoBehaviour
         return stepCounter.Count;
     }
 
-    public void EndHeist()
+    public void EndHeist(bool isSuccess)
     {
         CancelInvoke();
         DestroyWorldController();
