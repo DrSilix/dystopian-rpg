@@ -62,20 +62,6 @@ public partial class CrewMemberController : MonoBehaviour
         EquippedItems.EquippedWeapon.Reload();
     }
 
-    public void GetCrewMemberState(ref int ammoUsed, ref int damageTaken, ref List<EquippedItems.ItemSlot> itemSlotsUsed)
-    {
-        Weapon weapon = EquippedItems.EquippedWeapon;
-        ammoUsed = (weapon.AmmoCapacity - weapon.CurrentAmmoCount);
-        damageTaken = DamageTaken;
-        itemSlotsUsed = new List<EquippedItems.ItemSlot>();
-    }
-
-    public void SetCrewMemberState(int ammoUsed, int damageTaken, List<EquippedItems.ItemSlot> itemSlotsUsed)
-    {
-        EquippedItems.EquippedWeapon.FireRounds(ammoUsed);
-        DamageTaken = damageTaken;
-    }
-
     /// <summary>
     /// Addes IInventoryItem such as Weapon/Armor to inventory and equips it to slot
     /// </summary>
