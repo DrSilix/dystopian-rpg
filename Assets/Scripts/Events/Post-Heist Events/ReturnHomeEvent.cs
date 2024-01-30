@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ReturnHomeEvent : BaseEvent
 {
-    public override void EventStart(CrewController crew)
+    public override void EventStart(CrewController crew, HeistLog log)
     {
-        base.EventStart(crew);
+        base.EventStart(crew, log);
 
         TargetAttribute1 = Attribute.reaction;
         TargetAttribute2 = Attribute.agility;
@@ -14,8 +14,10 @@ public class ReturnHomeEvent : BaseEvent
         DifficultyRating = 1;
         TargetSuccesses = 6;
         MaxFails = 12;
-        Debug.Log("\"We have the package, let's hit the road boys!!\"");
-        GameLog.Instance.PostMessageToLog("\"We have the package, let's hit the road boys!!\"");
+        Message = "\"We have the package, let's hit the road boys!!\"";
+        Debug.Log(Message);
+        GameLog.Instance.PostMessageToLog(Message);
+        base.EventStartFollowup();
     }
 
     public override string MyNameIs()

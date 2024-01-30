@@ -97,14 +97,18 @@ public abstract class BaseEvent : MonoBehaviour
 
     public CrewController Crew { get; set; }
     public CrewController EnemyCrew { get; set; }
+    public HeistLog Log { get; set; }
+    public HeistLogEntry RootLogEntry { get; set; }
+    public String Message { get; set; }
 
     /// <summary>
     /// Calling this initializes the event and must be called before the other methods.
     /// This handles defining the attributes&aggregate along with the difficulty including target successes and max fails
     /// </summary>
     /// <param name="crew">The crew that will be performing in the event</param>
-    public virtual void EventStart(CrewController crew)
+    public virtual void EventStart(CrewController crew, HeistLog log)
     {
+        Log = log;
         TargetAttribute1 = Attribute.luck;
         TargetAttribute2 = Attribute.luck;
         Modifier = 0;
@@ -119,6 +123,36 @@ public abstract class BaseEvent : MonoBehaviour
         this.Crew = crew;
     }
 
+    public void EventStartFollowup()
+    {
+        HeistLogEntry entry = Log.GetCurrent();
+        RootLogEntry = entry;
+        entry.EntryColor = Color.blue;
+        entry.Duration = 7f;
+        entry.ShortDescription = Message;
+        List<CrewMemberController> crewMembers = Crew.CrewMembers;
+
+        switch (RollAggregate)
+        {
+            case Aggregate.min:
+                break;
+            case Aggregate.max:
+                entry.Body = $"Best of {TargetAttribute1} + {TargetAttribute2}\n" +
+                $"{crewMembers[0].alias}:\t{crewMembers[0].GetAttribute(TargetAttribute1)} + {crewMembers[0].GetAttribute(TargetAttribute2)}\n" +
+                $"{crewMembers[1].alias}:\t{crewMembers[1].GetAttribute(TargetAttribute1)} + {crewMembers[1].GetAttribute(TargetAttribute2)}\n" +
+                $"{crewMembers[2].alias}:\t{crewMembers[2].GetAttribute(TargetAttribute1)} + {crewMembers[2].GetAttribute(TargetAttribute2)}";
+                break;
+            case Aggregate.avg:
+                entry.Body = $"Crew average of {TargetAttribute1} + {TargetAttribute2}\n" +
+                $"{crewMembers[0].alias}:\t{crewMembers[0].GetAttribute(TargetAttribute1)} + {crewMembers[0].GetAttribute(TargetAttribute2)}\n" +
+                $"{crewMembers[1].alias}:\t{crewMembers[1].GetAttribute(TargetAttribute1)} + {crewMembers[1].GetAttribute(TargetAttribute2)}\n" +
+                $"{crewMembers[2].alias}:\t{crewMembers[2].GetAttribute(TargetAttribute1)} + {crewMembers[2].GetAttribute(TargetAttribute2)}";
+                break;
+            case Aggregate.sum:
+                break;
+        }
+    }
+
     /// <summary>
     /// Called at the end of the event by the event controller
     /// </summary>
@@ -130,31 +164,38 @@ public abstract class BaseEvent : MonoBehaviour
     /// <returns>The status of whether the step was a success or failure</returns>
     public virtual bool StepEvent()
     {
+        HeistLogEntry entry = Log.GetCurrent();
         int crewRoll;
         StringBuilder logMessage = new();
         CrewMemberController responsibleCrew;
         (responsibleCrew, crewRoll) = Crew.GetCrewRoll(TargetAttribute1, TargetAttribute2, Modifier, RollAggregate);
         if (responsibleCrew != null) {
-            Debug.Log($"{responsibleCrew.alias} is taking action! Their stats are {TargetAttribute1}:{responsibleCrew.GetAttribute(TargetAttribute1)} and {TargetAttribute2}:{responsibleCrew.GetAttribute(TargetAttribute2)}");
             logMessage.Append($"{responsibleCrew.alias} acts {TargetAttribute1.ToString()[..3]}:{responsibleCrew.GetAttribute(TargetAttribute1)} and {TargetAttribute2.ToString()[..3]}:{responsibleCrew.GetAttribute(TargetAttribute2)} | ");
         } else
         {
             logMessage.Append("The crew makes an attempt - ");
         }
-        Debug.Log($"{crewRoll} Successes, DR: {DifficultyRating} - {((crewRoll>=DifficultyRating) ? "SUCCESS!" : "FAILURE!!!")}");
         logMessage.Append($"{crewRoll} Vs. {DifficultyRating} - {((crewRoll >= DifficultyRating) ? "WIN!" : "LOSS!")}");
         if (crewRoll >= DifficultyRating)
         {
             Successes++;
-            Debug.Log($" #{Successes} out of {TargetSuccesses}");
             logMessage.Append($" {Successes}/{TargetSuccesses}");
             GameLog.Instance.PostMessageToLog(logMessage.ToString());
             Progress = Mathf.RoundToInt((float)(Successes * 100) / TargetSuccesses);
-            return true;
+            entry.EntryColor = Color.green;
         }
-        Fails++;
-        Debug.Log($" #{Fails} out of {MaxFails}");
-        logMessage.Append($" {Fails}/{MaxFails}");
+        else
+        {
+            Fails++;
+            logMessage.Append($" {Fails}/{MaxFails}");
+            entry.EntryColor = Color.red;
+
+        }
+
+        entry.ShortDescription = logMessage.ToString();
+        entry.ParentEntry = RootLogEntry;
+
+        Debug.Log(logMessage.ToString());
         GameLog.Instance.PostMessageToLog(logMessage.ToString());
         return false;
     }

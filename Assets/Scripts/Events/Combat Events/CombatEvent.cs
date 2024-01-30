@@ -24,9 +24,10 @@ public class CombatEvent : BaseEvent
         base.EventEnd();
     }
 
-    public override void EventStart(CrewController crew)
+    public override void EventStart(CrewController crew, HeistLog log)
     {
         Crew = crew;
+        Log = log;
         roundNumber = 1;
         CombatRound = new CombatRound(Crew, EnemyCrew, roundNumber);
 

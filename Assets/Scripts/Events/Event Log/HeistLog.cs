@@ -1,18 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeistLog : MonoBehaviour
+public class HeistLog
 {
-    // Start is called before the first frame update
-    void Start()
+    public List<HeistLogEntry> Log;
+
+    public HeistLog()
     {
-        
+        Log = new List<HeistLogEntry>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Add(HeistLogEntry entry)
     {
-        
+        Log.Add(entry);
+    }
+
+    public HeistLogEntry GetCurrent() { return Log[Log.Count - 1]; }
+    public HeistLogEntry GetPrevious() { return Log[Log.Count - 2]; }
+    public DateTime GetNextTime()
+    {
+        HeistLogEntry previous = GetPrevious();
+        return previous.EntryStartTime.AddSeconds(previous.Duration);
     }
 }

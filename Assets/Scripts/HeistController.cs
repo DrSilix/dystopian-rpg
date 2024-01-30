@@ -11,17 +11,21 @@ public class HeistController : MonoBehaviour
     public int testCounterStop = 0;
     [field: SerializeField] public GameObject WorldControllerPrefab { get; set; }
 
+    public HeistLog Log { get; set; }
+
     private WorldController worldController;
     private List<EventController> events;
     private Storyteller storyteller;
+    private DateTime heistStartTime;
+    private DateTime lastLogEntryTime;
     private HeistStepCounter stepCounter;
     private int currentEventPointer;
-    private int testCounterStop = 480;
 
     public void Initialize()
     {
         storyteller = Storyteller.Instance;
         stepCounter = new HeistStepCounter();
+        Log = new HeistLog();
         storyteller.Crew.ResetToFull();
         currentEventPointer = 0;
     }
@@ -42,6 +46,18 @@ public class HeistController : MonoBehaviour
     {
         events[0].enabled = true;
         events[0].CrewIntake(storyteller.Crew);
+        heistStartTime = DateTime.Now;
+        HeistLogEntry startingLogEntry = new HeistLogEntry();
+        startingLogEntry.ParentEntry = null;
+        startingLogEntry.EntryStartTime = heistStartTime;
+        startingLogEntry.Duration = 0;
+        startingLogEntry.ShortDescription = "Texico Water Plant - Retrieve the black box";
+        startingLogEntry.Body = "The crew was hired by an unkown entity through their contact Jezzabelle Lightning. "
+                                     + "A 3 man job they said. Well, the pay is good and how much trouble can a water plant be";
+        startingLogEntry.EntryColor = Color.yellow;
+        startingLogEntry.PlayerCrewLocation = Storyteller.Instance.Crew.gameObject.transform.position;
+        startingLogEntry.StepNumber = 0;
+        Log.Add(startingLogEntry);
         StepHeist();
     }
 
@@ -65,13 +81,19 @@ public class HeistController : MonoBehaviour
 
     public void StepHeist()
     {
+        HeistLogEntry currentLogEntry = new HeistLogEntry();
+        Log.Add(currentLogEntry);
+        currentLogEntry.EntryStartTime = Log.GetNextTime();
+        currentLogEntry.Duration = 2f;
+        currentLogEntry.MarkCrewLocation();
         CountHeistStep();
+        currentLogEntry.StepNumber = stepCounter.Count;
         EventController currentEvent = events[currentEventPointer];
         HEventState currentState = currentEvent.GetEventState();
         switch (currentState)
         {
             case HEventState.IdleUnfinished:
-                currentEvent.BeginHeistEvent(this);
+                currentEvent.BeginHeistEvent(this, Log);
                 break;
             case HEventState.Begin:
             case HEventState.Running:
@@ -124,6 +146,17 @@ public class HeistController : MonoBehaviour
 
     public void EndHeist(bool isSuccess)
     {
+        HeistLogEntry finalLogEntry = new HeistLogEntry();
+        finalLogEntry.ParentEntry = null;
+        finalLogEntry.EntryStartTime = Log.GetNextTime();
+        finalLogEntry.Duration = 0;
+        finalLogEntry.ShortDescription = "Texico Water Plant - Retrieve the black box";
+        finalLogEntry.Body = "The crew was hired by an unkown entity through their contact Jezzabelle Lightning. "
+                                     + "A 3 man job they said. Well, the pay is good and how much trouble can a water plant be";
+        finalLogEntry.EntryColor = Color.green;
+        finalLogEntry.PlayerCrewLocation = Storyteller.Instance.Crew.gameObject.transform.position;
+        finalLogEntry.StepNumber = 0;
+        Log.Add(finalLogEntry);
         CancelInvoke();
         DestroyWorldController();
     }

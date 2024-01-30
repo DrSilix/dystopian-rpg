@@ -46,6 +46,7 @@ public class EventController : MonoBehaviour
     public float StepDelayTime = 3f;
 
     public BaseEvent BaseEvent { get; private set; }
+    public HeistLog Log { get; private set; }
     
     public Node node;
 
@@ -157,6 +158,8 @@ public class EventController : MonoBehaviour
     public EventController CrewPassToNext()
     {
         Debug.Log("Crew Moved To Next Node");
+        Log.GetCurrent().ShortDescription = "The crew moves deeper into the plant..";
+        Log.GetCurrent().Duration = node.GetLineLength() * 10f;
         EventController nextNode = node.GetDownstreamNode().eventController;
         nextNode.CrewIntake(possesedCrew);
         possesedCrew = null;
@@ -173,12 +176,13 @@ public class EventController : MonoBehaviour
         ChangeHeistEventState(HEventState.Begin);
         Debug.Log("-----------------------");
         Debug.Log("Begin Heist Event");
-        BaseEvent.EventStart(possesedCrew);
+        BaseEvent.EventStart(possesedCrew, Log);
         BaseEvent.MyNameIs();
         Debug.Log($"Event Progress: {BaseEvent.GetProgress()}%");
     }
-    public void BeginHeistEvent(HeistController heistController)
+    public void BeginHeistEvent(HeistController heistController, HeistLog log)
     {
+        Log = log;
         HeistController = heistController;
         BeginHeistEvent();
     }
@@ -201,6 +205,8 @@ public class EventController : MonoBehaviour
     /// </summary>
     public void EndHeistEvent()
     {
+        HeistLogEntry entry = Log.GetCurrent();
+
         Debug.Log("End Heist Event");
         BaseEvent.EventEnd();
         // The rest of this could possibly be put inside the base event
@@ -211,27 +217,35 @@ public class EventController : MonoBehaviour
             {
                 Debug.Log("Enemy Spotted!!");
                 GameLog.Instance.PostMessageToLog("You've been spotted! Get ready for combat!");
+                entry.ShortDescription = "You've been spotted! Get ready for combat!";
                 ChangeHeistEventState(HEventState.DoneFailure);
                 node.SetColor(Color.red);
+                entry.EntryColor = Color.red;
                 MutateEvent(HEventType.HType.Cmbt_Combat);
                 return;
             }
             Debug.Log("Heist FAILED!!");
             GameLog.Instance.PostMessageToLog("You're crew is dead or captured. Failed!");
+            entry.ShortDescription = "Your crew is dead or captured. Heist Failed!";
             ChangeHeistEventState(HEventState.DoneFailure);
             node.SetColor(Color.red);
+            entry.EntryColor = Color.red;
             return;
         }
         if (node.GetDownstreamNode() == null)
         {
             Debug.Log("Finished Heist");
             node.SetColor(Color.green);
+            entry.EntryColor = Color.green;
+            entry.ShortDescription = "Your crew has successfully retrieved the package";
             GameLog.Instance.PostMessageToLog("Finished Heist");
             ChangeHeistEventState(HEventState.DoneSuccess);
             return;
         }
         ChangeHeistEventState(HEventState.DoneSuccess);
         node.SetColor(Color.grey);
+        entry.EntryColor = Color.green;
+        entry.ShortDescription = "Your crew has succeeded.";
         return;
     }
 }

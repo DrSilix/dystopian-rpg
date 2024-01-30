@@ -1592,6 +1592,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7a78d79f2a9df4c94d9e95b042c8d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stepDelay: 2
+  testCounterStop: 465
   <WorldControllerPrefab>k__BackingField: {fileID: 4128607691574317174, guid: 3ca4a2acafb6ccd41a9a7790ab6b1724, type: 3}
 --- !u!4 &1628370620
 Transform:
@@ -1779,6 +1781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9fba29471a3e524296f23078452c177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seed: 123457
   crewPrefab: {fileID: 2710483946860328104, guid: 39930a5d6a6e3554fbfc45e71ec12dd8, type: 3}
   crewMember1Prefab: {fileID: 8464694986278701474, guid: eec6391fb6d9d1244af2bcbeea196300, type: 3}
   crewMember2Prefab: {fileID: 8512946586223883271, guid: 6fc43b9a84b2d1041824caa8e6081914, type: 3}

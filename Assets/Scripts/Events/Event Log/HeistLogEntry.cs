@@ -11,7 +11,12 @@ public class HeistLogEntry
     public float Duration { get; set; }
     public Vector3 PlayerCrewLocation { get; set; }
     public LogEntryType LogEntryType { get; set; }
-    public Color EntryColor { get; set; }
-    public string EntryName { get; set; }
-    public string EntryBody { get; set; }
+    public Color EntryColor { get; set; } = Color.gray;
+    public string ShortDescription { get; set; }
+    public string Body { get; set; }
+
+    public void MarkCrewLocation()
+    {
+        PlayerCrewLocation = Storyteller.Instance.Crew.transform.position;
+    }
 }

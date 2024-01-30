@@ -5,17 +5,19 @@ using UnityEngine;
 
 public class NavigationEvent : BaseEvent
 {
-    public override void EventStart(CrewController crew)
+    public override void EventStart(CrewController crew, HeistLog log)
     {
-        base.EventStart(crew);
+        base.EventStart(crew, log);
         TargetAttribute1 = Attribute.reaction;
         TargetAttribute2 = Attribute.agility;
         RollAggregate = Aggregate.max;
         DifficultyRating = 1;
         TargetSuccesses = 6;
         MaxFails = 16;
-        Debug.Log("\"We have the destination in navigation, let's hit the road boys!!\"");
-        GameLog.Instance.PostMessageToLog("\"We have the destination in navigation, let's hit the road boys!!\"");
+        Message = "\"We have the destination in navigation, let's hit the road boys!!\"";
+        Debug.Log(Message);
+        GameLog.Instance.PostMessageToLog(Message);
+        base.EventStartFollowup();
     }
 
     public override string MyNameIs()
@@ -29,5 +31,6 @@ public class NavigationEvent : BaseEvent
         base.EventEnd();
         Debug.Log("\"We've arrived at Texico plant. We'll go in, brains here will steal the who-sa-ma-what-sit, and we'll get out. Quick and clean\"");
         GameLog.Instance.PostMessageToLog("\"We've arrived at Texico plant. We'll go in, brains here will steal the who-sa-ma-what-sit, and we'll get out. Quick and clean\"");
+        Log.GetCurrent().Body = "\"We've arrived at Texico plant. We'll go in, brains here will steal the who-sa-ma-what-sit, and we'll get out. Quick and clean\"";
     }
 }

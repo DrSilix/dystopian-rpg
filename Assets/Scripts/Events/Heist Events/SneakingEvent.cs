@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SneakingEvent : BaseEvent
 {
-    public override void EventStart(CrewController crew)
+    public override void EventStart(CrewController crew, HeistLog log)
     {
-        base.EventStart(crew);
+        base.EventStart(crew, log);
         TargetAttribute1 = Attribute.agility;
         TargetAttribute2 = Attribute.luck;
         RollAggregate = Aggregate.avg;
@@ -14,12 +14,12 @@ public class SneakingEvent : BaseEvent
         TargetSuccesses = (9 - DifficultyRating);
         MaxFails = DifficultyRating + 2;
         int rand = Random.Range(0, 2);
-        string msg;
-        if (rand == 0) msg = "\"A guard is patrolling, keep quiet.\"";
-        else msg = "A camera is watching this hall, stick to the shadows";
+        if (rand == 0) Message = "\"A guard is patrolling, keep quiet.\"";
+        else Message = "A camera is watching this hall, stick to the shadows";
 
-        Debug.Log(msg);
-        GameLog.Instance.PostMessageToLog(msg);
+        Debug.Log(Message);
+        GameLog.Instance.PostMessageToLog(Message);
+        base.EventStartFollowup();
     }
 
     public override string MyNameIs()

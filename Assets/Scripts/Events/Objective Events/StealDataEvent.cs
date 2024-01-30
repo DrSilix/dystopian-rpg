@@ -26,9 +26,10 @@ public class StealDataEvent : BaseEvent
     private CrewMemberController hacker;
     private CrewMemberController face;
     private CrewMemberController enforcer;
-    public override void EventStart(CrewController crew)
+    public override void EventStart(CrewController crew, HeistLog log)
     {
         this.Crew = crew;
+        Log = log;
 
         hacker = Crew.GetCrewMember(1);
         face = Crew.GetCrewMember(2);
@@ -42,13 +43,25 @@ public class StealDataEvent : BaseEvent
         stepNumber = StepNumber.One;
         // used for the person keeping watch, they are only ever able to fail on this round
         randomEventRound = Random.Range(3, TargetSuccesses);
-        string msg = "\"Finally!! Get the data smarty pants and let's jolt\" \"Alright I'm on it but it's going to take me about 10 minutes. Big guy stand watch over there. Slick can you help me with this\"";
-        Debug.Log(msg);
-        GameLog.Instance.PostMessageToLog(msg);
+        Message = "\"Finally!! Get the data smarty pants and let's jolt\" \"Alright I'm on it but it's going to take me about 10 minutes. Big guy stand watch over there. Slick can you help me with this\"";
+        Debug.Log(Message);
+        GameLog.Instance.PostMessageToLog(Message);
+
+        HeistLogEntry entry = Log.GetCurrent();
+        RootLogEntry = entry;
+        entry.EntryColor = Color.blue;
+        entry.Duration = 7f;
+        entry.ShortDescription = base.Message;
+        List<CrewMemberController> crewMembers = Crew.CrewMembers;
+        entry.Body = $"{crewMembers[0].alias} keeps watch:\t{crewMembers[0].GetAttribute(Attribute.intuition)} + {crewMembers[0].GetAttribute(Attribute.luck)}\n" +
+                $"{crewMembers[1].alias} hacks in:\t{crewMembers[1].GetAttribute(Attribute.logic)} + {crewMembers[1].GetAttribute(Attribute.logic)}\n" +
+                $"{crewMembers[2].alias} helps {crewMembers[1].alias}:\t{crewMembers[2].GetAttribute(Attribute.logic)} + {crewMembers[2].GetAttribute(Attribute.charisma)}";
     }
 
     public override bool StepEvent()
     {
+        HeistLogEntry entry = Log.GetCurrent();
+
         // instead of using the step one, two, and three methods I ended up (after completing the combat event) using a switch/case state machine
         // to create a sub-step for events. (a sub-step I'm defining as a step that does not result in a success or failure but is a sub part of a full step)
         switch (stepNumber)
@@ -56,31 +69,27 @@ public class StealDataEvent : BaseEvent
             case StepNumber.One:
                 roundNumber++;
                 (faceRoll, faceCrit) = face.GetAttributeAdvancedRoll(Attribute.logic, Attribute.charisma, 0);
-                Debug.Log($"{face.alias} rolls {faceRoll} successes to help {hacker.alias}{CriticalMessage(faceCrit)}");
-                GameLog.Instance.PostMessageToLog($"{face.alias} rolls {faceRoll} successes to help {hacker.alias} find the data {CriticalMessage(faceCrit)}");
                 if (faceCrit == 1) faceRoll += faceRoll;
                 if (faceCrit == -1) { Successes--; faceRoll = -1; }
+                Message = $"{face.alias} rolls {faceRoll} successes to help {hacker.alias} find the data {CriticalMessage(faceCrit)}";
+                entry.Duration = 10f;
                 stepNumber = StepNumber.Two;
-                return false;
+                break;
             case StepNumber.Two:
                 (enforcerRoll, _) = enforcer.GetAttributeAdvancedRoll(Attribute.intuition, Attribute.luck, 2);
-                Debug.Log($"{enforcer.alias} keeps watch with {enforcerRoll} successes - \"Everythings clear, no one in sight.\"");
-                GameLog.Instance.PostMessageToLog($"{enforcer.alias} keeps watch with {enforcerRoll} successes - \"Everythings clear, no one in sight.\"");
-
                 if (roundNumber == randomEventRound && enforcerRoll< 7)
                 {
-                    Debug.Log("\"INTRUDER!!! OVER THERE!\" \"Shit! we've been spotted, let's jolt!\"");
-                    GameLog.Instance.PostMessageToLog("\"INTRUDER!!! OVER THERE!\" \"Shit! we've been spotted, let's jolt!\"");
+                    Message = "\"INTRUDER!!! OVER THERE!\" \"Shit! we've been spotted, let's jolt!\"";
                     Fails = MaxFails;
-                    return false;
+                    break;
                 }
+                Message = $"{enforcer.alias} keeps watch with {enforcerRoll} successes - \"Everythings clear, no one in sight.\"";
+                entry.Duration = 10f;
                 stepNumber = StepNumber.Three;
-                return false;
+                break;
             case StepNumber.Three:
                 (int hackerRoll, int hackerCrit) = hacker.GetAttributeAdvancedRoll(Attribute.logic, Attribute.logic, faceRoll);
-                string msg = $"With the {face.alias}'s help {hacker.alias} rolls {hackerRoll} DR: {DifficultyRating} - {((hackerRoll >= DifficultyRating) ? "SUCCESS!" : "FAILURE!!!")}{CriticalMessage(hackerRoll)}";
-                Debug.Log(msg);
-                GameLog.Instance.PostMessageToLog(msg);
+                Message = $"With the {face.alias}'s help {hacker.alias} rolls {hackerRoll} DR:{DifficultyRating} - {((hackerRoll >= DifficultyRating) ? "WIN!" : "LOSS!")}{CriticalMessage(hackerCrit)}";
 
                 // state machine must be switched before any returns
                 stepNumber = StepNumber.One;
@@ -89,18 +98,27 @@ public class StealDataEvent : BaseEvent
                 {
                     Successes++;
                     if (hackerCrit == 1) { Successes++; }
-                    Debug.Log($"\"Okay {Successes} down {TargetSuccesses - Successes} to go.\"");
-                    GameLog.Instance.PostMessageToLog($"\"Okay {Successes} down {TargetSuccesses - Successes} to go.\"");
-                    Debug.Log($"Success #{Successes} out of {TargetSuccesses}");
+                    Message += $" {Successes}/{TargetSuccesses}";
                     Progress = Mathf.RoundToInt((float)(Successes * 100) / TargetSuccesses);
-                    return true;
+                    entry.Duration = 10f;
+                    entry.EntryColor = Color.green;
                 }
-                Fails++;
-                Debug.Log("\"Shit!...\"");
-                GameLog.Instance.PostMessageToLog($"\"Shit!... I've only got {Fails} out of {MaxFails} tries left before the alarms trigger");
-                Debug.Log($"FAILURE! #{Fails} out of {MaxFails}");
-                return false;
+                else
+                {
+                    Fails++;
+                    Message += $" {Fails}/{MaxFails}";
+                    entry.Duration = 30f;
+                    entry.EntryColor = Color.red;
+
+                }
+                break;
         }
+
+        entry.ShortDescription = Message;
+        entry.ParentEntry = RootLogEntry;
+
+        Debug.Log(Message);
+        GameLog.Instance.PostMessageToLog(Message);
         return false;
     }
 

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BreachingEvent : BaseEvent
 {
-    public override void EventStart(CrewController crew)
+    public override void EventStart(CrewController crew, HeistLog log)
     {
-        base.EventStart(crew);
+        base.EventStart(crew, log);
         TargetAttribute1 = Attribute.body;
         TargetAttribute2 = Attribute.strength;
         RollAggregate = Aggregate.max;
@@ -14,9 +14,10 @@ public class BreachingEvent : BaseEvent
         TargetSuccesses = DifficultyRating;
         MaxFails = DifficultyRating+2;
 
-        string msg = "\"Maybe if I can spike into the finger print sensor I can ... \" \"Step aside I'll clober this door off it's hinges!\" \"Won't that attract attention .. \" *SMASH*";
-        Debug.Log(msg);
-        GameLog.Instance.PostMessageToLog(msg);
+        Message = "\"Step aside I'll clober this door off it's hinges!\" *SMASH*";
+        Debug.Log(Message);
+        GameLog.Instance.PostMessageToLog(Message);
+        base.EventStartFollowup();
     }
     public override string MyNameIs()
     {
