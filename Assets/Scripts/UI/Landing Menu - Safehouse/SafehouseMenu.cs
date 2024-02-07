@@ -16,6 +16,7 @@ public class SafehouseMenu : DefaultLoadUnloadMenuBehaviour, IMenu
 
     private VisualElement crewStatusButton;
     private Button planJobButton;
+    private Button travelButton;
     private Button contactsButton;
 
     public void InitializeMenu(UIDocument uiDoc, object passInfo)
@@ -24,6 +25,7 @@ public class SafehouseMenu : DefaultLoadUnloadMenuBehaviour, IMenu
 
         crewStatusButton = rootElem.Q("crewstatus");
         planJobButton = rootElem.Q("planjob") as Button;
+        travelButton = rootElem.Q("travel") as Button;
         contactsButton = rootElem.Q("contacts") as Button;
 
         crewController = Storyteller.Instance.Crew;
@@ -75,6 +77,7 @@ public class SafehouseMenu : DefaultLoadUnloadMenuBehaviour, IMenu
     {
         crewStatusButton.RegisterCallback<ClickEvent>(OnClick);
         planJobButton.RegisterCallback<ClickEvent>(OnClick);
+        travelButton.RegisterCallback<ClickEvent>(OnClick);
         contactsButton.RegisterCallback<ClickEvent>(OnClick);
     }
 
@@ -82,6 +85,7 @@ public class SafehouseMenu : DefaultLoadUnloadMenuBehaviour, IMenu
     {
         crewStatusButton.UnregisterCallback<ClickEvent>(OnClick);
         planJobButton.UnregisterCallback<ClickEvent>(OnClick);
+        travelButton.UnregisterCallback<ClickEvent>(OnClick);
         contactsButton.UnregisterCallback<ClickEvent>(OnClick);
     }
 
@@ -96,6 +100,9 @@ public class SafehouseMenu : DefaultLoadUnloadMenuBehaviour, IMenu
             case "planjob":
                 CallLoadMenu("HeistHUD", false, null);
                 Storyteller.Instance.StartHeist();
+                break;
+            case "travel":
+                CallLoadMenu("HeistLogMenu", true, null);
                 break;
             case "contacts":
                 CallLoadMenu("ContactsMenu", false, null);

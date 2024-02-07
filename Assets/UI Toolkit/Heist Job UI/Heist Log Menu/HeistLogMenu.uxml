@@ -1,0 +1,47 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:Template name="EventLogEntryPanel" src="project://database/Assets/UI%20Toolkit/Heist%20Job%20UI/Event%20Log%20Menu/EventLogEntryPanel.uxml?fileID=9197481963319205126&amp;guid=345b4931c9ac39a43ae2275339777281&amp;type=3#EventLogEntryPanel" />
+    <Style src="project://database/Assets/UI%20Toolkit/DarkBoxSimpleMenu.uss?fileID=7433441132597879392&amp;guid=428d266981b529f4ba5b44ddd9095d83&amp;type=3#DarkBoxSimpleMenu" />
+    <Style src="project://database/Assets/UI%20Toolkit/Heist%20Job%20UI/Event%20Log%20Menu/EventLogStyle.uss?fileID=7433441132597879392&amp;guid=f2a4cb3626bda9740bcf6cf7206db5b9&amp;type=3#EventLogStyle" />
+    <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/Art/purple_background.psd?fileID=2800000&amp;guid=6b500c6761573134782b16c5c99db476&amp;type=3#purple_background&apos;);">
+        <ui:VisualElement style="flex-grow: 0; height: 15%; flex-shrink: 0; background-color: rgba(108, 33, 100, 0.8);">
+            <ui:VisualElement style="flex-grow: 1; margin-top: 98px; padding-left: 25px; padding-right: 25px; padding-bottom: 10px;">
+                <ui:Label tabindex="-1" text="Jezzabelle Lightning" parse-escape-sequences="true" display-tooltip-when-elided="true" name="contact-name" style="font-size: 50px; -unity-font: url(&apos;project://database/Assets/Art/BebasNeue-Regular.ttf?fileID=12800000&amp;guid=43d81a96ae3b98041a9be49bf3a3d641&amp;type=3#BebasNeue-Regular&apos;); -unity-font-definition: url(&apos;project://database/Assets/Art/BebasNeue-Regular%20SDF.asset?fileID=11400000&amp;guid=4d325f0aea308394f9d47df33fadc3e9&amp;type=2#BebasNeue-Regular SDF&apos;); margin-bottom: 0; padding-bottom: 0;" />
+                <ui:Label tabindex="-1" text="Shop" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 24px; -unity-font: url(&apos;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=3119d17813b452a4595c8d77181c6d7f&amp;type=3#NotInter-Regular&apos;); -unity-font-definition: initial; padding-top: 0; margin-top: 0;" />
+                <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+                    <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" enable-rich-text="true" name="shop-info-1" text="Contact Cash Available&#10;$4800" style="width: 50%; -unity-text-align: lower-left;" />
+                    <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="shop-info-2" text="Crew Cash&#10;$5200" style="padding-left: 25px; white-space: normal; width: 50%; -unity-text-align: lower-left;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 0; height: 77%; flex-shrink: 0; padding-top: 35px; padding-right: 35px; padding-bottom: 35px; padding-left: 35px;">
+            <ui:ScrollView touch-scroll-type="Unrestricted">
+                <ui:Instance template="EventLogEntryPanel" name="EventLogEntryPanel" />
+                <ui:VisualElement name="item-container" class="item-container">
+                    <ui:VisualElement name="icon" class="icon" style="background-image: url(&apos;project://database/Assets/Art/Sprite%20Tile%20Packs/ghetto-tileset-pixel-art/3%20Objects/Box2.png?fileID=21300000&amp;guid=a7544d49565b9f649ad3ea1d9b61ecfb&amp;type=3#Box2&apos;);" />
+                    <ui:VisualElement class="info-container">
+                        <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo" parse-escape-sequences="true" display-tooltip-when-elided="true" name="text" class="text" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:Instance template="EventLogEntryPanel" name="EventLogEntryPanel" />
+                <ui:Instance template="EventLogEntryPanel" name="EventLogEntryPanel" />
+                <ui:Instance template="EventLogEntryPanel" name="EventLogEntryPanel" />
+                <ui:Instance template="EventLogEntryPanel" name="EventLogEntryPanel" />
+                <ui:Instance template="EventLogEntryPanel" name="EventLogEntryPanel" />
+                <ui:Instance template="EventLogEntryPanel" name="EventLogEntryPanel" />
+                <ui:Instance template="EventLogEntryPanel" name="EventLogEntryPanel" />
+                <ui:Instance template="EventLogEntryPanel" name="EventLogEntryPanel" />
+                <ui:Instance template="EventLogEntryPanel" name="EventLogEntryPanel" />
+                <ui:Instance template="EventLogEntryPanel" name="EventLogEntryPanel" />
+                <ui:Instance template="EventLogEntryPanel" name="EventLogEntryPanel" />
+                <ui:Instance template="EventLogEntryPanel" name="EventLogEntryPanel" />
+                <ui:Instance template="EventLogEntryPanel" name="EventLogEntryPanel" />
+                <ui:Instance template="EventLogEntryPanel" name="EventLogEntryPanel" />
+                <ui:Instance template="EventLogEntryPanel" name="EventLogEntryPanel" />
+            </ui:ScrollView>
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; height: 188px; flex-shrink: 0; background-color: rgb(108, 33, 100); flex-direction: row;">
+            <ui:Button text="Confirm" parse-escape-sequences="true" display-tooltip-when-elided="true" name="confirm" />
+            <ui:Button text="Return" parse-escape-sequences="true" display-tooltip-when-elided="true" name="return" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

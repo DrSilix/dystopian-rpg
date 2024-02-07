@@ -27,9 +27,10 @@ public class Storyteller : MonoBehaviour
     [SerializeField] private GameObject crewMember1Prefab, crewMember2Prefab, crewMember3Prefab;
     [SerializeField] private GameObject enemyCrewPrefab;
     [SerializeField] private GameObject enemyCrewMember1Prefab, enemyCrewMember2Prefab;
-    [SerializeField] private HeistController heistController;
     [SerializeField] private AssetLabelReference assetLabelRef;
 
+    [SerializeField] public HeistController HeistController;
+    [SerializeField] public UIController UIController;
     public Dictionary<string, WeaponSO> WeaponSOs {  get; private set; } = new Dictionary<string, WeaponSO>();
     public Dictionary<string, ArmorSO> ArmorSOs { get; private set; } = new Dictionary<string, ArmorSO>();
     public Dictionary<string, AmmunitionSO> AmmunitionSOs { get; private set; } = new Dictionary<string, AmmunitionSO>();
@@ -85,15 +86,15 @@ public class Storyteller : MonoBehaviour
 
     public int CountHeistStep()
     {
-        return heistController.CountHeistStep();
+        return HeistController.CountHeistStep();
     }
 
 
     public void StartHeist()
     {
-        heistController.Initialize();
-        heistController.GenerateHeist(seed);
-        heistController.StartHeist();
+        HeistController.Initialize();
+        HeistController.GenerateHeist(seed);
+        HeistController.StartHeist();
     }
 
     // TODO: subscribable event HeistEventStateChange

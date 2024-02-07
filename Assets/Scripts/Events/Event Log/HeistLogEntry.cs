@@ -15,6 +15,17 @@ public class HeistLogEntry
     public string ShortDescription { get; set; }
     public string Body { get; set; }
 
+    public int GetHierarchyLevel()
+    {
+        int level = 0;
+        HeistLogEntry pointer = this;
+        while (pointer.ParentEntry != null)
+        {
+            level++;
+            pointer = pointer.ParentEntry;
+        }
+        return level;
+    }
     public void MarkCrewLocation()
     {
         PlayerCrewLocation = Storyteller.Instance.Crew.transform.position;

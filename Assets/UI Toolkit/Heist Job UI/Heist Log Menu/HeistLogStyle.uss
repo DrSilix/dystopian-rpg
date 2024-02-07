@@ -1,0 +1,63 @@
+VisualElement {
+}
+
+.item-container {
+    flex-grow: 1;
+    height: 182px;
+    flex-direction: row;
+    border-left-color: rgb(204, 204, 204);
+    border-right-color: rgb(204, 204, 204);
+    border-top-color: rgb(204, 204, 204);
+    border-bottom-color: rgb(204, 204, 204);
+    border-top-width: 0;
+    border-bottom-width: 2px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: rgb(77, 77, 77);
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.icon {
+    height: 152px;
+    width: 152px;
+    justify-content: center;
+    align-items: center;
+    -unity-background-scale-mode: scale-to-fit;
+    flex-shrink: 0;
+}
+
+.info-container {
+    flex-grow: 1;
+    padding-left: 56px;
+    justify-content: flex-start;
+}
+
+.text {
+    -unity-text-align: upper-left;
+    font-size: 28px;
+    white-space: normal;
+}
+
+#unity-low-button {
+    visibility: hidden;
+}
+
+#unity-high-button {
+    visibility: hidden;
+}
+
+#unity-slider {
+    margin-bottom: 0;
+    margin-top: 0;
+    width: 36px;
+}
+
+#unity-dragger {
+    width: 32px;
+    background-color: rgb(51, 51, 51);
+}
+
+#unity-tracker {
+    background-color: rgb(102, 102, 102);
+}

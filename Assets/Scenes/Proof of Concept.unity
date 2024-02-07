@@ -1789,9 +1789,10 @@ MonoBehaviour:
   enemyCrewPrefab: {fileID: 6338637185380700622, guid: 4350e227306ed3a47814ac841fc22204, type: 3}
   enemyCrewMember1Prefab: {fileID: 6712304376985699709, guid: 39801a396bac8a34d8708b09e20d4a18, type: 3}
   enemyCrewMember2Prefab: {fileID: 6712304376985699709, guid: d07c95449b58a24459abb9328d87edd9, type: 3}
-  heistController: {fileID: 1628370619}
   assetLabelRef:
     m_LabelString: default
+  HeistController: {fileID: 1628370619}
+  UIController: {fileID: 2110539167}
 --- !u!4 &1899153410
 Transform:
   m_ObjectHideFlags: 0

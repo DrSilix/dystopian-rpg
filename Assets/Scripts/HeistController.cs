@@ -144,6 +144,7 @@ public class HeistController : MonoBehaviour
         return stepCounter.Count;
     }
 
+    // TODO: instead of ending the heist, we should go to a replay.
     public void EndHeist(bool isSuccess)
     {
         HeistLogEntry finalLogEntry = new HeistLogEntry();
@@ -151,11 +152,10 @@ public class HeistController : MonoBehaviour
         finalLogEntry.EntryStartTime = Log.GetNextTime();
         finalLogEntry.Duration = 0;
         finalLogEntry.ShortDescription = "Texico Water Plant - Retrieve the black box";
-        finalLogEntry.Body = "The crew was hired by an unkown entity through their contact Jezzabelle Lightning. "
-                                     + "A 3 man job they said. Well, the pay is good and how much trouble can a water plant be";
+        finalLogEntry.Body = "The crew was successful. Time to get paid!";
         finalLogEntry.EntryColor = Color.green;
         finalLogEntry.PlayerCrewLocation = Storyteller.Instance.Crew.gameObject.transform.position;
-        finalLogEntry.StepNumber = 0;
+        finalLogEntry.StepNumber = stepCounter.Count + 1;
         Log.Add(finalLogEntry);
         CancelInvoke();
         DestroyWorldController();

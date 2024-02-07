@@ -98,6 +98,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - MenuDoc
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 345b4931c9ac39a43ae2275339777281
+    m_Address: Assets/UI Toolkit/Heist Job UI/Event Log Menu/EventLogEntryPanel.uxml
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MenuDoc
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a4b141510468a4e42b2027f69f333810
+    m_Address: Assets/UI Toolkit/Heist Job UI/Event Log Menu/EventLogMenu.uxml
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - MenuDoc
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e5c3509057ec7824c911d02e413653d2, type: 2}
   m_SchemaSet:

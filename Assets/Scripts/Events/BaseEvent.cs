@@ -138,15 +138,15 @@ public abstract class BaseEvent : MonoBehaviour
                 break;
             case Aggregate.max:
                 entry.Body = $"Best of {TargetAttribute1} + {TargetAttribute2}\n" +
-                $"{crewMembers[0].alias}:\t{crewMembers[0].GetAttribute(TargetAttribute1)} + {crewMembers[0].GetAttribute(TargetAttribute2)}\n" +
-                $"{crewMembers[1].alias}:\t{crewMembers[1].GetAttribute(TargetAttribute1)} + {crewMembers[1].GetAttribute(TargetAttribute2)}\n" +
-                $"{crewMembers[2].alias}:\t{crewMembers[2].GetAttribute(TargetAttribute1)} + {crewMembers[2].GetAttribute(TargetAttribute2)}";
+                $"{crewMembers[0].alias}: {crewMembers[0].GetAttribute(TargetAttribute1)} + {crewMembers[0].GetAttribute(TargetAttribute2)}\t" +
+                $"{crewMembers[1].alias}: {crewMembers[1].GetAttribute(TargetAttribute1)} + {crewMembers[1].GetAttribute(TargetAttribute2)}\t" +
+                $"{crewMembers[2].alias}: {crewMembers[2].GetAttribute(TargetAttribute1)} + {crewMembers[2].GetAttribute(TargetAttribute2)}";
                 break;
             case Aggregate.avg:
                 entry.Body = $"Crew average of {TargetAttribute1} + {TargetAttribute2}\n" +
-                $"{crewMembers[0].alias}:\t{crewMembers[0].GetAttribute(TargetAttribute1)} + {crewMembers[0].GetAttribute(TargetAttribute2)}\n" +
-                $"{crewMembers[1].alias}:\t{crewMembers[1].GetAttribute(TargetAttribute1)} + {crewMembers[1].GetAttribute(TargetAttribute2)}\n" +
-                $"{crewMembers[2].alias}:\t{crewMembers[2].GetAttribute(TargetAttribute1)} + {crewMembers[2].GetAttribute(TargetAttribute2)}";
+                $"{crewMembers[0].alias}: {crewMembers[0].GetAttribute(TargetAttribute1)} + {crewMembers[0].GetAttribute(TargetAttribute2)}\t" +
+                $"{crewMembers[1].alias}: {crewMembers[1].GetAttribute(TargetAttribute1)} + {crewMembers[1].GetAttribute(TargetAttribute2)}\t" +
+                $"{crewMembers[2].alias}: {crewMembers[2].GetAttribute(TargetAttribute1)} + {crewMembers[2].GetAttribute(TargetAttribute2)}";
                 break;
             case Aggregate.sum:
                 break;
@@ -180,7 +180,6 @@ public abstract class BaseEvent : MonoBehaviour
         {
             Successes++;
             logMessage.Append($" {Successes}/{TargetSuccesses}");
-            GameLog.Instance.PostMessageToLog(logMessage.ToString());
             Progress = Mathf.RoundToInt((float)(Successes * 100) / TargetSuccesses);
             entry.EntryColor = Color.green;
         }

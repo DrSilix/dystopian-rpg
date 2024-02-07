@@ -136,6 +136,11 @@ public class UIController : MonoBehaviour
         uiScripts[currentMenu].Update();
     }
 
+    public VisualTreeAsset GetVisualTreeAssetByName(string name)
+    {
+        return uiAssets[name];
+    }
+
     [Serializable]
     public class uiAsset
     {
