@@ -1,0 +1,3 @@
+"GUID","AssetName","weapons","armors","ammuntion"
+"30410","James Shop","System.Collections.Generic.List`1[WeaponSO]","System.Collections.Generic.List`1[ArmorSO]","System.Collections.Generic.List`1[ShopItemSOWithQuantity`1[AmmunitionSO]]"
+"30486","Jezz Shop","System.Collections.Generic.List`1[WeaponSO]","System.Collections.Generic.List`1[ArmorSO]","System.Collections.Generic.List`1[ShopItemSOWithQuantity`1[AmmunitionSO]]"

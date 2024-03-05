@@ -77,7 +77,7 @@ using Random = UnityEngine.Random;
 /// This is a base abstract class which is to be inherited by more specific events and overridden where needed
 /// This class is used and puppeted by the event controller class
 /// </summary>
-public abstract class BaseEvent : MonoBehaviour
+public abstract class BaseEvent
 {
     
     private int difficultyRating;

@@ -55,7 +55,9 @@ public static class HEventType
         Cmbt_Chase,
         //Post-Heist Events
         Pst_Escape,
-        Pst_ReturnHome
+        Pst_ReturnHome,
+        //Special
+        Spe_Completed
     }
 
     /// <summary>
@@ -120,6 +122,8 @@ public static class HEventType
                 break;
             case HType.Pst_ReturnHome:
                 return Type.GetType("ReturnHomeEvent");
+            case HType.Spe_Completed:
+                return Type.GetType("CompletedEvent");
             default:
                 break;
         }

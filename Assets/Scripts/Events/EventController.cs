@@ -20,9 +20,11 @@
  * 
  */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 /// <summary>
@@ -30,7 +32,7 @@ using UnityEngine;
 /// Is attached to a physical node in the game world
 /// Also handles taking in a player crew and passing that crew along to the next event at the next node.
 /// </summary>
-public class EventController : MonoBehaviour
+public class EventController
 {
     [SerializeField]
     private HEventType.HType eventType;
@@ -41,40 +43,12 @@ public class EventController : MonoBehaviour
     [SerializeField]
     private HEventState eventState;
 
-    public HeistController HeistController { get; private set; }
+    //public HeistController HeistController { get; private set; }
 
     public float StepDelayTime = 3f;
 
     public BaseEvent BaseEvent { get; private set; }
     public HeistLog Log { get; private set; }
-    
-    public Node node;
-
-    /*public HEventState StepEventController()
-    {
-        Debug.Log($"Step event with state: {eventState}");
-        switch (eventState)
-        {
-            case HEventState.IdleUnfinished:
-                BeginHeistEvent();
-                break;
-            case HEventState.Begin:
-                HeistEventLoop();
-                break;
-            case HEventState.Running:
-                HeistEventLoop();
-                break;
-            case HEventState.Ending:
-                EndHeistEvent();
-                break;
-            case HEventState.DoneSuccess:
-                if (node.GetDownstreamNode() != null) CrewPassToNext();
-                break;
-            case HEventState.DoneFailure:
-                break;
-        }
-        return GetEventState();
-    }*/
 
     /// <summary>
     /// Attaches an event to the parent game object given an Heist Event Type
@@ -83,7 +57,9 @@ public class EventController : MonoBehaviour
     public void AssociateEvent(HEventType.HType eventType)
     {
         this.eventType = eventType;
-        BaseEvent = this.gameObject.AddComponent(HEventType.GetEventComponentType(eventType)) as BaseEvent;
+        // BaseEvent = this.gameObject.AddComponent(HEventType.GetEventComponentType(eventType)) as BaseEvent;
+        var type = HEventType.GetEventComponentType(eventType);
+        BaseEvent = Activator.CreateInstance(type) as BaseEvent;
         eventState = HEventState.IdleUnfinished;
     }
 
@@ -93,11 +69,10 @@ public class EventController : MonoBehaviour
     /// <param name="eventType">The event type to mutate into</param>
     public void MutateEvent(HEventType.HType eventType)
     {
-        Destroy(BaseEvent);
-        this.eventType = eventType;
-        BaseEvent = this.gameObject.AddComponent(HEventType.GetEventComponentType(eventType)) as BaseEvent;
+        // Destroy(BaseEvent);
+        AssociateEvent(eventType);
+        // BaseEvent = this.gameObject.AddComponent(HEventType.GetEventComponentType(eventType)) as BaseEvent;
         BaseEvent.EnemyCrew = possesedEnemies;
-        eventState = HEventState.IdleUnfinished;
         BeginHeistEvent();
     }
 
@@ -136,35 +111,22 @@ public class EventController : MonoBehaviour
     {
         Debug.Log("Taking in Crew");
         possesedCrew = crew;
-        crew.transform.position = this.gameObject.transform.position;
-        node.SetColor(Color.cyan);
     }
-
-    /// <summary>
-    /// Works in tandem with MovePlayerCrew to physically (in game world) move the player crew to the next node
-    /// It also invokes asyncronously but simultaneously to the physical movement passing the crew to the next node
-    /// </summary>
-    /*public void TransportCrewToNextNode()
-    {
-        Storyteller.Instance.CountHeistStep();
-        Debug.Log("Crew Moving To Next Node");
-        possesedCrew.GetComponentInParent<MovePlayerCrew>().MoveTo(node.GetDownstreamNode().transform.position, 0f);
-        CrewPassToNext();
-    }*/
 
     /// <summary>
     /// Hands off the crew to the next node and disables this game object
     /// </summary>
-    public EventController CrewPassToNext()
+    public EventController CrewPassToNext(EventController nextNode)
     {
         Debug.Log("Crew Moved To Next Node");
         Log.GetCurrent().ShortDescription = "The crew moves deeper into the plant..";
-        Log.GetCurrent().Duration = node.GetLineLength() * 10f;
-        EventController nextNode = node.GetDownstreamNode().eventController;
+        //Log.GetCurrent().Duration = node.GetLineLength() * 10f;
+        Log.GetCurrent().Duration = 30f;
+        //EventController nextNode = node.GetDownstreamNode().eventController;
         nextNode.CrewIntake(possesedCrew);
         possesedCrew = null;
-        nextNode.enabled = true;
-        this.enabled = false;
+        // nextNode.enabled = true;
+        // this.enabled = false;
         return nextNode;
     }
 
@@ -180,10 +142,10 @@ public class EventController : MonoBehaviour
         BaseEvent.MyNameIs();
         Debug.Log($"Event Progress: {BaseEvent.GetProgress()}%");
     }
-    public void BeginHeistEvent(HeistController heistController, HeistLog log)
+    public void BeginHeistEvent(HeistLog log)
     {
         Log = log;
-        HeistController = heistController;
+        //HeistController = heistController;
         BeginHeistEvent();
     }
 
@@ -215,37 +177,30 @@ public class EventController : MonoBehaviour
             // TODO: FIX event node with no enemies, ?get lucky? phew
             if (eventType != HEventType.HType.Cmbt_Combat)
             {
-                Debug.Log("Enemy Spotted!!");
-                GameLog.Instance.PostMessageToLog("You've been spotted! Get ready for combat!");
-                entry.ShortDescription = "You've been spotted! Get ready for combat!";
+                //Debug.Log("Enemy Spotted!!");
+                //entry.ShortDescription = "You've been spotted! Get ready for combat!";
                 ChangeHeistEventState(HEventState.DoneFailure);
-                node.SetColor(Color.red);
-                entry.EntryColor = Color.red;
+                //entry.EntryColor = Color.red;
                 MutateEvent(HEventType.HType.Cmbt_Combat);
                 return;
             }
-            Debug.Log("Heist FAILED!!");
-            GameLog.Instance.PostMessageToLog("You're crew is dead or captured. Failed!");
-            entry.ShortDescription = "Your crew is dead or captured. Heist Failed!";
+            //Debug.Log("Heist FAILED!!");
+            //entry.ShortDescription = "Your crew is dead or captured. Heist Failed!";
             ChangeHeistEventState(HEventState.DoneFailure);
-            node.SetColor(Color.red);
-            entry.EntryColor = Color.red;
+            //entry.EntryColor = Color.red;
             return;
         }
-        if (node.GetDownstreamNode() == null)
+        /*if (node.GetDownstreamNode() == null)
         {
             Debug.Log("Finished Heist");
-            node.SetColor(Color.green);
             entry.EntryColor = Color.green;
             entry.ShortDescription = "Your crew has successfully retrieved the package";
-            GameLog.Instance.PostMessageToLog("Finished Heist");
             ChangeHeistEventState(HEventState.DoneSuccess);
             return;
-        }
+        }*/
         ChangeHeistEventState(HEventState.DoneSuccess);
-        node.SetColor(Color.grey);
-        entry.EntryColor = Color.green;
-        entry.ShortDescription = "Your crew has succeeded.";
+        //entry.EntryColor = Color.green;
+        //entry.ShortDescription = "Your crew has succeeded.";
         return;
     }
 }

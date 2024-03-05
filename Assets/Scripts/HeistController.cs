@@ -10,10 +10,12 @@ public class HeistController : MonoBehaviour
     public float stepDelay = 2f;
     public int testCounterStop = 0;
     [field: SerializeField] public GameObject WorldControllerPrefab { get; set; }
+    [field: SerializeField] public LevelPathNodeList LevelOnePathNodeList { get; set; }
 
     public HeistLog Log { get; set; }
 
     private WorldController worldController;
+    private LevelPathNodeDetailsSO levelPathNodeDetailsSO;
     private List<EventController> events;
     private Storyteller storyteller;
     private DateTime heistStartTime;
@@ -24,7 +26,9 @@ public class HeistController : MonoBehaviour
     public void Initialize()
     {
         storyteller = Storyteller.Instance;
+        levelPathNodeDetailsSO = LevelOnePathNodeList.DetailsSO;
         stepCounter = new HeistStepCounter();
+        events = new List<EventController>();
         Log = new HeistLog();
         storyteller.Crew.ResetToFull();
         currentEventPointer = 0;
@@ -32,8 +36,26 @@ public class HeistController : MonoBehaviour
     public void GenerateHeist(int seed)
     {
         Random.InitState(seed);
-        CreateWorldController();
-        events = worldController.GenerateLevel();
+
+        foreach (LevelPathNodeDetailsSO.PathNodeDetails detail in levelPathNodeDetailsSO.LevelPathNodeDetails)
+        {
+            EventController temp = new();
+            temp.AssociateEvent(detail.EventType);
+            temp.EnemyIntake(storyteller.GenerateEnemies(1));
+            events.Add(temp);
+        }
+
+        foreach (LevelPathNodeDetailsSO.PathNodeDetails detail in levelPathNodeDetailsSO.ReturnLevelPathNodeDetails)
+        {
+            EventController temp = new();
+            temp.AssociateEvent(detail.EventType);
+            temp.EnemyIntake(storyteller.GenerateEnemies(1));
+            events.Add(temp);
+        }
+
+        //CreateWorldController();
+        // assign a list of event controllers to this
+        //events = worldController.GenerateLevel();
     }
 
     private void CreateWorldController()
@@ -44,7 +66,7 @@ public class HeistController : MonoBehaviour
 
     public void StartHeist()
     {
-        events[0].enabled = true;
+        //events[0].enabled = true;
         events[0].CrewIntake(storyteller.Crew);
         heistStartTime = DateTime.Now;
         HeistLogEntry startingLogEntry = new HeistLogEntry();
@@ -55,29 +77,11 @@ public class HeistController : MonoBehaviour
         startingLogEntry.Body = "The crew was hired by an unkown entity through their contact Jezzabelle Lightning. "
                                      + "A 3 man job they said. Well, the pay is good and how much trouble can a water plant be";
         startingLogEntry.EntryColor = Color.yellow;
-        startingLogEntry.PlayerCrewLocation = Storyteller.Instance.Crew.gameObject.transform.position;
+        startingLogEntry.CurrentLocation = Storyteller.Instance.Crew.gameObject.transform.position;
         startingLogEntry.StepNumber = 0;
         Log.Add(startingLogEntry);
         StepHeist();
     }
-
-    /*public void StepHeist()
-    {
-        CountHeistStep();
-        HEventState state = events[currentEventPointer].StepEventController();
-        bool heistIsFinished = AdvanceHeistOrFinish(state);
-        if (heistIsFinished)
-        {
-            EndHeist();
-            return;
-        }
-        if (stepCounter.Count < testCounterStop)
-        {
-            StepHeist();
-            return;
-        }
-        Invoke("StepHeist", stepDelay);
-    }**/
 
     public void StepHeist()
     {
@@ -93,7 +97,7 @@ public class HeistController : MonoBehaviour
         switch (currentState)
         {
             case HEventState.IdleUnfinished:
-                currentEvent.BeginHeistEvent(this, Log);
+                currentEvent.BeginHeistEvent(Log);
                 break;
             case HEventState.Begin:
             case HEventState.Running:
@@ -105,36 +109,23 @@ public class HeistController : MonoBehaviour
             case HEventState.DoneSuccess:
                 if (currentEventPointer >= events.Count - 1)
                 {
-                    // TODO: HeistHUD should call main menu differently instead of this
+                    // this hack ties back into the system for eventcontroller to pass a message to the UI
+                    // HACK: HeistHUD should call main menu differently instead of this
                     currentEvent.ChangeHeistEventState(HEventState.HeistFinished);
                     EndHeist(true);
                     return;
                 }
                 // call local method to interpolate distance travelled to next node
-                currentEvent.CrewPassToNext();
-                currentEventPointer++;
+                currentEvent.CrewPassToNext(events[++currentEventPointer]);
                 break;
             case HEventState.DoneFailure:
+                // HACK: same as above
                 currentEvent.ChangeHeistEventState(HEventState.HeistFinished);
                 EndHeist(false);
                 return;
         }
         if (stepCounter.Count < testCounterStop) StepHeist();
         else Invoke(nameof(StepHeist), stepDelay);
-    }
-
-    public bool AdvanceHeistOrFinish(HEventState state)
-    {
-        switch (state)
-        {
-            case HEventState.DoneSuccess:
-                if (currentEventPointer >= events.Count - 1) return true;
-                currentEventPointer++;
-                break;
-            case HEventState.DoneFailure:
-                return true;
-        }
-        return false;
     }
 
     public int CountHeistStep()
@@ -154,11 +145,11 @@ public class HeistController : MonoBehaviour
         finalLogEntry.ShortDescription = "Texico Water Plant - Retrieve the black box";
         finalLogEntry.Body = "The crew was successful. Time to get paid!";
         finalLogEntry.EntryColor = Color.green;
-        finalLogEntry.PlayerCrewLocation = Storyteller.Instance.Crew.gameObject.transform.position;
+        finalLogEntry.CurrentLocation = Storyteller.Instance.Crew.gameObject.transform.position;
         finalLogEntry.StepNumber = stepCounter.Count + 1;
         Log.Add(finalLogEntry);
         CancelInvoke();
-        DestroyWorldController();
+        //DestroyWorldController();
     }
 
     public void DestroyWorldController()

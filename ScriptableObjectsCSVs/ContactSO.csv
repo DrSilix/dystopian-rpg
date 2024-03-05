@@ -1,0 +1,3 @@
+"GUID","AssetName","displayName","relation","favors","influence","isKnown","shopInventorySO","buyMultiplier","sellMultiplier","cashOnHand"
+"30360","James","James Gunnerson","2","0","2","True","James Shop (ShopInventorySO)","1.2","0.1","4300"
+"30400","Jezz","Jezzabelle Lightning","3","1","1","True","Jezz Shop (ShopInventorySO)","1","0.2","1200"

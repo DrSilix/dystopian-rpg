@@ -9,10 +9,12 @@ public class HeistLogEntry
     public int StepNumber { get; set; }
     public DateTime EntryStartTime { get; set; }
     public float Duration { get; set; }
-    public Vector3 PlayerCrewLocation { get; set; }
+    public Vector3 CurrentLocation { get; set; }
     public LogEntryType LogEntryType { get; set; }
     public Color EntryColor { get; set; } = Color.gray;
     public string ShortDescription { get; set; }
+    // TODO: this should be a visual element instead of a string
+    // could possibly have a default simple text visual element that can be overwritten
     public string Body { get; set; }
 
     public int GetHierarchyLevel()
@@ -28,6 +30,6 @@ public class HeistLogEntry
     }
     public void MarkCrewLocation()
     {
-        PlayerCrewLocation = Storyteller.Instance.Crew.transform.position;
+        CurrentLocation = Storyteller.Instance.Crew.transform.position;
     }
 }

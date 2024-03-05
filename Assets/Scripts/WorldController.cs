@@ -49,7 +49,7 @@ public class WorldController : MonoBehaviour
     public void StartLevel()
     {
         PlaceCrew();
-        eventControllers[0].enabled = true;
+        //eventControllers[0].enabled = true;
         eventControllers[0].CrewIntake(Storyteller.Instance.Crew);
         eventControllers[0].BeginHeistEvent();
     }
@@ -61,7 +61,7 @@ public class WorldController : MonoBehaviour
     void PlaceCrew()
     {
         GameObject crewGO = Storyteller.Instance.Crew.gameObject;
-        crewGO.transform.position = eventControllers[0].gameObject.transform.position;
+        //crewGO.transform.position = eventControllers[0].gameObject.transform.position;
     }
 
     // TODO: remove - separate out to a level gen class
@@ -151,7 +151,7 @@ public class WorldController : MonoBehaviour
             HEventType.HType.Pst_ReturnHome};
 
         EventController eventController = node.GetComponent<EventController>();
-        eventController.enabled = false;
+        //eventController.enabled = false;
 
         // first event is navigation
         if (nodeNumber == 0)
