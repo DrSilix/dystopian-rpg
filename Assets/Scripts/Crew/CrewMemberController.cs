@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using Random = UnityEngine.Random;
 
 /// <summary>
@@ -13,9 +10,9 @@ using Random = UnityEngine.Random;
 public partial class CrewMemberController : MonoBehaviour
 {
     private CrewController crewController;
-    
+
     public string alias;
-    [field: SerializeField] public Sprite Icon {  get; set; }
+    [field: SerializeField] public Sprite Icon { get; set; }
     [field: SerializeField] public int MaxDamage { get; private set; }
     public Attributes attributes;
     [field: SerializeField] public int InitiativeModifier { get; private set; }
@@ -56,6 +53,7 @@ public partial class CrewMemberController : MonoBehaviour
         MaxDamage = 8 + Mathf.CeilToInt((float)attributes.body / 2);
     }
 
+    // DEBUG: this will reset the crewmember to initial state to allow repeated heist runs
     public void ResetToFull()
     {
         DamageTaken = 0;
@@ -209,7 +207,7 @@ public partial class CrewMemberController : MonoBehaviour
     /// </summary>
     /// <param name="combatAction">Action to take</param>
     /// <param name="target">Target to take action on</param>
-    public void BeginPerformCombatActionOnTarget (CombatAction combatAction, object target)
+    public void BeginPerformCombatActionOnTarget(CombatAction combatAction, object target)
     {
         switch (combatAction)
         {
@@ -264,7 +262,8 @@ public partial class CrewMemberController : MonoBehaviour
                     GameLog.Instance.PostMessageToLog($"{this.alias} hit with {modifiedDamageValue} dmg. {combatTarget.alias} takes {enemyDamageToTake} dmg!");
                     if (combatTarget.CurrentDamagedState >= DamagedState.BleedingOut) GameLog.Instance.PostMessageToLog($"{combatTarget.alias} is down!");
                     combatTarget.TakeDamage(enemyDamageToTake);
-                } else
+                }
+                else
                 {
                     GameLog.Instance.PostMessageToLog($"{this.alias} hit with {modifiedDamageValue} dmg. {combatTarget.alias} resisted all damage!");
                 }

@@ -51,7 +51,7 @@ public class WorldController : MonoBehaviour
         PlaceCrew();
         //eventControllers[0].enabled = true;
         eventControllers[0].CrewIntake(Storyteller.Instance.Crew);
-        eventControllers[0].BeginHeistEvent();
+        //eventControllers[0].BeginHeistEvent();
     }
 
     // TODO: remove - separate out into a separate class that handles only this type of stuff

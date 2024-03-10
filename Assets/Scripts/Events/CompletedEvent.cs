@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+// This is essentially a blank event, used for when a node is revisited and no action by the crew is necessary.
 public class CompletedEvent : BaseEvent
 {
     public override void EventStart(CrewController crew, HeistLog log)

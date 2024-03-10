@@ -1,47 +1,64 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+
+/// <summary>
+/// Sits at the top level of the individual Heist (quest/mission) and interfaces with the event controllers to drive the heist forward
+/// </summary>
 public class HeistController : MonoBehaviour
 {
     public float stepDelay = 2f;
     public int testCounterStop = 0;
     [field: SerializeField] public GameObject WorldControllerPrefab { get; set; }
     [field: SerializeField] public LevelPathNodeList LevelOnePathNodeList { get; set; }
+    public Material playerMaterial;
+    public Material zoneMaterial;
 
     public HeistLog Log { get; set; }
 
     private WorldController worldController;
     private LevelPathNodeDetailsSO levelPathNodeDetailsSO;
     private List<EventController> events;
+    private List<GameObject> nodes;
     private Storyteller storyteller;
     private DateTime heistStartTime;
     private DateTime lastLogEntryTime;
     private HeistStepCounter stepCounter;
     private int currentEventPointer;
 
+    /// <summary>
+    /// Initializes the heist
+    /// can be called to reset an already progressed/completed heist
+    /// </summary>
     public void Initialize()
     {
         storyteller = Storyteller.Instance;
         levelPathNodeDetailsSO = LevelOnePathNodeList.DetailsSO;
         stepCounter = new HeistStepCounter();
         events = new List<EventController>();
+        nodes = new List<GameObject>();
         Log = new HeistLog();
         storyteller.Crew.ResetToFull();
         currentEventPointer = 0;
     }
+
+    /// <summary>
+    /// In a debug state ATM. This sets the unity random engine seed and simply copies the unity editor configured list of nodes and their metadata
+    /// Building the eventcontrollers
+    /// </summary>
+    /// <param name="seed">The seed to initialize the unity random engine with</param>
     public void GenerateHeist(int seed)
     {
         Random.InitState(seed);
 
+        // the path to object and return are just concatenated for now
         foreach (LevelPathNodeDetailsSO.PathNodeDetails detail in levelPathNodeDetailsSO.LevelPathNodeDetails)
         {
             EventController temp = new();
             temp.AssociateEvent(detail.EventType);
-            temp.EnemyIntake(storyteller.GenerateEnemies(1));
+            temp.EnemyIntake(storyteller.GenerateEnemies(3));
             events.Add(temp);
         }
 
@@ -49,8 +66,18 @@ public class HeistController : MonoBehaviour
         {
             EventController temp = new();
             temp.AssociateEvent(detail.EventType);
-            temp.EnemyIntake(storyteller.GenerateEnemies(1));
+            temp.EnemyIntake(storyteller.GenerateEnemies(2));
             events.Add(temp);
+        }
+
+        foreach (GameObject go in LevelOnePathNodeList.LevelPathNodes)
+        {
+            nodes.Add(go);
+        }
+
+        foreach (GameObject go in LevelOnePathNodeList.ReturnLevelPathNodes)
+        {
+            nodes.Add(go);
         }
 
         //CreateWorldController();
@@ -58,16 +85,23 @@ public class HeistController : MonoBehaviour
         //events = worldController.GenerateLevel();
     }
 
+    //unused, moving away from a fully generated world
     private void CreateWorldController()
     {
         var temp = Instantiate(WorldControllerPrefab);
         worldController = temp.GetComponent<WorldController>();
     }
 
+    /// <summary>
+    /// Kicks off the heist game loop after setting up the initial state and first log entry
+    /// </summary>
     public void StartHeist()
     {
         //events[0].enabled = true;
         events[0].CrewIntake(storyteller.Crew);
+        Debug.Log(nodes[0].transform.position);
+        storyteller.Crew.transform.position = nodes[0].transform.position;
+        UpdateNodeDisplay(nodes[0], true);
         heistStartTime = DateTime.Now;
         HeistLogEntry startingLogEntry = new HeistLogEntry();
         startingLogEntry.ParentEntry = null;
@@ -83,7 +117,12 @@ public class HeistController : MonoBehaviour
         StepHeist();
     }
 
-    public void StepHeist()
+    /// <summary>
+    /// Main game loop
+    /// This is invoked on a stepDelay second delay to produce a game loop
+    /// Primarily sets up a new log entry and then calls the current eventcontroller methods based on the state machine
+    /// </summary>
+    private void StepHeist()
     {
         HeistLogEntry currentLogEntry = new HeistLogEntry();
         Log.Add(currentLogEntry);
@@ -115,8 +154,12 @@ public class HeistController : MonoBehaviour
                     EndHeist(true);
                     return;
                 }
-                // call local method to interpolate distance travelled to next node
+                UpdateNodeDisplay(nodes[currentEventPointer], false);
                 currentEvent.CrewPassToNext(events[++currentEventPointer]);
+                //storyteller.Crew.transform.position = nodes[currentEventPointer].transform.position;
+                // HACK: this makes the current level transition between nodes smoothly. This may be final but probably not
+                storyteller.Crew.GetComponent<MovePlayerCrew>().MoveTo(nodes[currentEventPointer].transform.position, stepDelay / 3);
+                UpdateNodeDisplay(nodes[currentEventPointer], true);
                 break;
             case HEventState.DoneFailure:
                 // HACK: same as above
@@ -128,15 +171,39 @@ public class HeistController : MonoBehaviour
         else Invoke(nameof(StepHeist), stepDelay);
     }
 
-    public int CountHeistStep()
+    //In the current neon wireframe office layout version this highlights the current room/area and leaves
+    //visited areas slighty greyed
+    private void UpdateNodeDisplay(GameObject node, bool isActive)
+    {
+        MeshRenderer meshRenderer = node.GetComponent<MeshRenderer>();
+        List<Material> newMaterials = new List<Material>();
+        if (isActive)
+        {
+            newMaterials.Add(zoneMaterial);
+            newMaterials.Add(playerMaterial);
+        }
+        else
+        {
+            newMaterials.Add(zoneMaterial);
+            newMaterials.Add(zoneMaterial);
+        }
+        meshRenderer.SetMaterials(newMaterials);
+    }
+
+    //This is the important heist step counter. the count can be used to simulate to any point during a heist repeatedly, reproducably, effciently
+    private int CountHeistStep()
     {
 
         Debug.Log($"Heist step: {++stepCounter.Count}");
         return stepCounter.Count;
     }
 
-    // TODO: instead of ending the heist, we should go to a replay.
-    public void EndHeist(bool isSuccess)
+    // (T-O-D-O-: instead of ending the heist, we should go to a replay.) I think I'm leaning towards not presimulating, only ever simulating up to current
+    /// <summary>
+    /// Crafts the final log entry and stops the game loop
+    /// </summary>
+    /// <param name="isSuccess">is the heist successful</param>
+    private void EndHeist(bool isSuccess)
     {
         HeistLogEntry finalLogEntry = new HeistLogEntry();
         finalLogEntry.ParentEntry = null;
@@ -152,6 +219,7 @@ public class HeistController : MonoBehaviour
         //DestroyWorldController();
     }
 
+    //unused
     public void DestroyWorldController()
     {
         Destroy(worldController.gameObject);

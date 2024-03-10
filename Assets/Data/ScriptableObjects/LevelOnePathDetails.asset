@@ -12,5 +12,346 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e396f962480d7cb4a8f5e0a91bddf903, type: 3}
   m_Name: LevelOnePathDetails
   m_EditorClassIdentifier: 
-  LevelPathNodeDetails: []
-  ReturnLevelPathNodeDetails: []
+  LevelPathNodeDetails:
+  - EventType: 2
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 5
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 7
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 6
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 8
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 8
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 6
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 6
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 6
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 7
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 5
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 8
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 5
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 5
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 7
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 12
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  ReturnLevelPathNodeDetails:
+  - EventType: 26
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 5
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 5
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 26
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 5
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 26
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 6
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 5
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 6
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 26
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 26
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 7
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 26
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 5
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0
+  - EventType: 25
+    StartEventTextOverride: 
+    FinishEventTextOverride: 
+    AuxiliaryEventText: []
+    EventNameOverride: 
+    EventVerbOverride: 
+    EventSubjectOverride: 
+    Difficulty: 0
+    GuaranteeFail: 0
+    IsExtractionNode: 0
+    NumEnemies: 0

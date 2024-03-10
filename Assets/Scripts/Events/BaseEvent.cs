@@ -65,10 +65,8 @@
  */
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -79,7 +77,7 @@ using Random = UnityEngine.Random;
 /// </summary>
 public abstract class BaseEvent
 {
-    
+
     private int difficultyRating;
     private int maxFails;
 
@@ -106,6 +104,7 @@ public abstract class BaseEvent
     /// This handles defining the attributes&aggregate along with the difficulty including target successes and max fails
     /// </summary>
     /// <param name="crew">The crew that will be performing in the event</param>
+    /// <param name="log">The heist event log object to be updated</param>
     public virtual void EventStart(CrewController crew, HeistLog log)
     {
         Log = log;
@@ -113,7 +112,7 @@ public abstract class BaseEvent
         TargetAttribute2 = Attribute.luck;
         Modifier = 0;
         RollAggregate = Aggregate.avg;
-        DifficultyRating = Random.Range(1, (crew.GetCrewAttribute(TargetAttribute1) * 2)/4);
+        DifficultyRating = Random.Range(1, (crew.GetCrewAttribute(TargetAttribute1) * 2) / 4);
         TargetSuccesses = Random.Range(1, 7);
         if (TargetSuccesses == 1) TargetSuccesses = Random.Range(1, 7);
         if (TargetSuccesses > 1) { DifficultyRating -= 2; }
@@ -123,6 +122,9 @@ public abstract class BaseEvent
         this.Crew = crew;
     }
 
+    /// <summary>
+    /// Defines a generic heist event log entry and populates it. Made to be called by overridden EventStart method.
+    /// </summary>
     public void EventStartFollowup()
     {
         HeistLogEntry entry = Log.GetCurrent();
@@ -157,7 +159,7 @@ public abstract class BaseEvent
     /// Called at the end of the event by the event controller
     /// </summary>
     public virtual void EventEnd() { }
-    
+
     /// <summary>
     /// This is called to step forward the progress/failure of the event pushing the event towards either success or failure
     /// </summary>
@@ -169,9 +171,11 @@ public abstract class BaseEvent
         StringBuilder logMessage = new();
         CrewMemberController responsibleCrew;
         (responsibleCrew, crewRoll) = Crew.GetCrewRoll(TargetAttribute1, TargetAttribute2, Modifier, RollAggregate);
-        if (responsibleCrew != null) {
+        if (responsibleCrew != null)
+        {
             logMessage.Append($"{responsibleCrew.alias} acts {TargetAttribute1.ToString()[..3]}:{responsibleCrew.GetAttribute(TargetAttribute1)} and {TargetAttribute2.ToString()[..3]}:{responsibleCrew.GetAttribute(TargetAttribute2)} | ");
-        } else
+        }
+        else
         {
             logMessage.Append("The crew makes an attempt - ");
         }

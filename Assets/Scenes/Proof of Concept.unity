@@ -557,7 +557,6 @@ MonoBehaviour:
   lineWidth: 0.01
   lineMaterial: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  eventController: {fileID: 0}
 --- !u!1 &403204042
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,7 +675,6 @@ MonoBehaviour:
   lineWidth: 0.01
   lineMaterial: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  eventController: {fileID: 0}
 --- !u!1 &618792690
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,7 +877,6 @@ MonoBehaviour:
   lineWidth: 0.01
   lineMaterial: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  eventController: {fileID: 0}
 --- !u!114 &724848017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -900,7 +897,6 @@ MonoBehaviour:
   lineWidth: 0.01
   lineMaterial: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  eventController: {fileID: 0}
 --- !u!114 &828167874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -921,7 +917,6 @@ MonoBehaviour:
   lineWidth: 0.01
   lineMaterial: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  eventController: {fileID: 0}
 --- !u!1 &844052103
 GameObject:
   m_ObjectHideFlags: 0
@@ -1059,7 +1054,6 @@ MonoBehaviour:
   lineWidth: 0.01
   lineMaterial: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  eventController: {fileID: 0}
 --- !u!1 &943138768
 GameObject:
   m_ObjectHideFlags: 0
@@ -1516,57 +1510,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1341806863 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5567824178172104171, guid: bc8d804ea525be343bdd5e413199105e, type: 3}
+--- !u!114 &1341806866 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2041028060587821507, guid: bc8d804ea525be343bdd5e413199105e, type: 3}
   m_PrefabInstance: {fileID: 6028269012591843877}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1341806865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1341806863}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f26e107c1bfd2d409ffe97eb42996ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DetailsSO: {fileID: 11400000, guid: f51662fd3092ff3449f6572d1f5d6ba8, type: 2}
-  LevelPathNodes:
-  - {fileID: 2024463049}
-  - {fileID: 1854365149}
-  - {fileID: 902390882}
-  - {fileID: 6028269012591843896}
-  - {fileID: 1728578781}
-  - {fileID: 1351736512}
-  - {fileID: 1497389756}
-  - {fileID: 565077937}
-  - {fileID: 2080990451}
-  - {fileID: 724848017}
-  - {fileID: 6028269012591843895}
-  - {fileID: 212768535}
-  - {fileID: 6028269012591843894}
-  - {fileID: 655314597}
-  - {fileID: 6028269012591843893}
-  - {fileID: 828167874}
-  ReturnLevelPathNodes:
-  - {fileID: 6028269012591843893}
-  - {fileID: 655314597}
-  - {fileID: 6028269012591843894}
-  - {fileID: 212768535}
-  - {fileID: 6028269012591843895}
-  - {fileID: 724848017}
-  - {fileID: 2080990451}
-  - {fileID: 565077937}
-  - {fileID: 1497389756}
-  - {fileID: 1351736512}
-  - {fileID: 1728578781}
-  - {fileID: 6028269012591843896}
-  - {fileID: 902390882}
-  - {fileID: 1854365149}
-  - {fileID: 2024463049}
 --- !u!114 &1351736512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1587,7 +1541,6 @@ MonoBehaviour:
   lineWidth: 0.01
   lineMaterial: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  eventController: {fileID: 0}
 --- !u!1 &1379770866
 GameObject:
   m_ObjectHideFlags: 0
@@ -1871,7 +1824,6 @@ MonoBehaviour:
   lineWidth: 0.01
   lineMaterial: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  eventController: {fileID: 0}
 --- !u!1 &1509438388
 GameObject:
   m_ObjectHideFlags: 0
@@ -2002,6 +1954,9 @@ MonoBehaviour:
   stepDelay: 2
   testCounterStop: 0
   <WorldControllerPrefab>k__BackingField: {fileID: 4128607691574317174, guid: 3ca4a2acafb6ccd41a9a7790ab6b1724, type: 3}
+  <LevelOnePathNodeList>k__BackingField: {fileID: 1341806866}
+  playerMaterial: {fileID: 2100000, guid: 83bc2b9886a84a8448374797e60d96da, type: 2}
+  zoneMaterial: {fileID: 2100000, guid: 04a128f70a39d784eafd6a1c05a5c5f8, type: 2}
 --- !u!4 &1628370620
 Transform:
   m_ObjectHideFlags: 0
@@ -2081,7 +2036,6 @@ MonoBehaviour:
   lineWidth: 0.01
   lineMaterial: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  eventController: {fileID: 0}
 --- !u!1 &1821045669
 GameObject:
   m_ObjectHideFlags: 0
@@ -2200,7 +2154,6 @@ MonoBehaviour:
   lineWidth: 0.01
   lineMaterial: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  eventController: {fileID: 0}
 --- !u!1 &1899153408
 GameObject:
   m_ObjectHideFlags: 0
@@ -2472,7 +2425,6 @@ MonoBehaviour:
   lineWidth: 0.01
   lineMaterial: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  eventController: {fileID: 0}
 --- !u!114 &2080990451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2493,7 +2445,6 @@ MonoBehaviour:
   lineWidth: 0.01
   lineMaterial: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  eventController: {fileID: 0}
 --- !u!1 &2110539166
 GameObject:
   m_ObjectHideFlags: 0
@@ -2632,9 +2583,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5567824178172104171, guid: bc8d804ea525be343bdd5e413199105e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1341806865}
     - targetCorrespondingSourceObject: {fileID: 6454275785538883721, guid: bc8d804ea525be343bdd5e413199105e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6028269012591843896}
@@ -2779,7 +2727,6 @@ MonoBehaviour:
   lineWidth: 0.01
   lineMaterial: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  eventController: {fileID: 0}
 --- !u!114 &6028269012591843894
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2800,7 +2747,6 @@ MonoBehaviour:
   lineWidth: 0.01
   lineMaterial: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  eventController: {fileID: 0}
 --- !u!114 &6028269012591843895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2821,7 +2767,6 @@ MonoBehaviour:
   lineWidth: 0.01
   lineMaterial: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  eventController: {fileID: 0}
 --- !u!114 &6028269012591843896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2842,7 +2787,6 @@ MonoBehaviour:
   lineWidth: 0.01
   lineMaterial: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  eventController: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

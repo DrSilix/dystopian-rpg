@@ -8,16 +8,9 @@
  * holds inventory type things for movement between events
  */
 
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem.Controls;
-using UnityEngine.UIElements;
-using static Unity.Collections.AllocatorManager;
-using Random = UnityEngine.Random;
 
 /// <summary>
 /// Different ways to summarize crew members when rolling or retrieving attributes
@@ -37,9 +30,10 @@ public class CrewController : MonoBehaviour
         CrewInventory.Cash = 5000;
     }
 
+    // DEBUG: this will reset the crew to initial state to allow repeated heist runs
     public void ResetToFull()
     {
-        foreach(CrewMemberController item in CrewMembers)
+        foreach (CrewMemberController item in CrewMembers)
         {
             item.ResetToFull();
         }
@@ -49,12 +43,13 @@ public class CrewController : MonoBehaviour
     /// Add a crew member to the crew. contains overload for using a game object as well as
     /// </summary>
     /// <param name="member">CrewMemberController representing the crew member</param>
-    public void AddCrewMember(CrewMemberController member) {
+    public void AddCrewMember(CrewMemberController member)
+    {
         CrewMembers.Add(member);
         member.SetConnectedCrew(this);
         member.Initialize();
     }
-    public void AddCrewMembers(params CrewMemberController[] members) { foreach(CrewMemberController c in members) AddCrewMember(c); }
+    public void AddCrewMembers(params CrewMemberController[] members) { foreach (CrewMemberController c in members) AddCrewMember(c); }
     public void AddCrewMember(GameObject member) { AddCrewMember(member.GetComponent<CrewMemberController>()); }
     public void AddCrewMembers(params GameObject[] members)
     {
@@ -69,7 +64,8 @@ public class CrewController : MonoBehaviour
     /// <returns>the aggregate of the attribute or -1 if the aggregate is invalid</returns>
     public int GetCrewAttribute(Attribute attribute, Aggregate aggregate = Aggregate.max)
     {
-        switch (aggregate) {
+        switch (aggregate)
+        {
             case Aggregate.max:
                 return CrewMembers.Select(m => m.GetAttribute(attribute)).ToArray().Max();
             case Aggregate.min:
@@ -108,9 +104,9 @@ public class CrewController : MonoBehaviour
         if (aggregate == Aggregate.sum || aggregate == Aggregate.avg) return -1;
 
         int[] crewAttributes = CrewMembers.Select(m => m.GetAttribute(attribute1) + m.GetAttribute(attribute2)).ToArray();
-        
+
         int max = -1, min = -1;
-        for (int i = 0; i < crewAttributes.Length; i++ )
+        for (int i = 0; i < crewAttributes.Length; i++)
         {
             if (max == -1 || crewAttributes[i] > crewAttributes[max]) max = i;
             if (min == -1 || crewAttributes[i] < crewAttributes[min]) min = i;
@@ -131,7 +127,8 @@ public class CrewController : MonoBehaviour
     /// <param name="aggregate">How to aggregate the roll. Sum/Avg will roll on all crew members,
     /// Min/Max will roll on the highest performing crew member (default: average)</param>
     /// <returns>A tuple containing the highest performing crew member if applicable (otherwise null) and the result of the roll</returns>
-    public (CrewMemberController crewMember, int result) GetCrewRoll (Attribute attribute1, Attribute attribute2, int modifier = 0, Aggregate aggregate = Aggregate.avg) {
+    public (CrewMemberController crewMember, int result) GetCrewRoll(Attribute attribute1, Attribute attribute2, int modifier = 0, Aggregate aggregate = Aggregate.avg)
+    {
         if (aggregate == Aggregate.avg || aggregate == Aggregate.sum)
         {
             return (null, Roll.Basic(GetCrewAttribute(attribute1, aggregate) + GetCrewAttribute(attribute2, aggregate) + modifier));

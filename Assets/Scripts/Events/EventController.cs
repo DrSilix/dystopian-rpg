@@ -21,16 +21,14 @@
  */
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 /// <summary>
-/// Handles overall administration of an individual event. requires an event type along with event script component for that type.
-/// Is attached to a physical node in the game world
-/// Also handles taking in a player crew and passing that crew along to the next event at the next node.
+/// Handles overall administration of an individual event.
+/// NO LONGER THE CASE (requires an event type along with event script component for that type.)
+/// Expects associateEvent be called before manipulating the object
+/// NO LONGER THE CASE (Is attached to a physical node in the game world)
+/// Also handles taking in a player crew -object instance- and passing that crew along to the next event at the next node.
 /// </summary>
 public class EventController
 {
@@ -51,7 +49,7 @@ public class EventController
     public HeistLog Log { get; private set; }
 
     /// <summary>
-    /// Attaches an event to the parent game object given an Heist Event Type
+    /// Instanciates an event type dynamically based on argument.
     /// </summary>
     /// <param name="eventType">Heist Event Type to use here</param>
     public void AssociateEvent(HEventType.HType eventType)
@@ -88,10 +86,10 @@ public class EventController
         eventState = state;
         Storyteller.Instance.heistEventStateChanged.Invoke(this);
     }
-    
+
     public BaseEvent GetBaseEvent() { return BaseEvent; }
     public HEventType.HType GetEventType() { return eventType; }
-    public HEventState GetEventState() {  return eventState; }
+    public HEventState GetEventState() { return eventState; }
 
     /// <summary>
     /// Associates an enemy crew with this eventcontroller, to presumably be used
@@ -106,7 +104,7 @@ public class EventController
     /// <summary>
     /// Associates a crew with this EventController
     /// </summary>
-    /// <param name="crew"></param>
+    /// <param name="crew">CrewController to associate as player crew</param>
     public void CrewIntake(CrewController crew)
     {
         Debug.Log("Taking in Crew");
@@ -114,8 +112,10 @@ public class EventController
     }
 
     /// <summary>
-    /// Hands off the crew to the next node and disables this game object
+    /// Hands off the crew to the next node
     /// </summary>
+    /// <param name="nextNode">EventController of the node to pass the crew off to</param>
+    /// <returns>The provided argument, nextNode</returns>
     public EventController CrewPassToNext(EventController nextNode)
     {
         Debug.Log("Crew Moved To Next Node");
@@ -130,10 +130,8 @@ public class EventController
         return nextNode;
     }
 
-    /// <summary>
-    /// Primarily performs the events (BaseEvent) EventStart method
-    /// </summary>
-    public void BeginHeistEvent()
+
+    private void BeginHeistEvent()
     {
         ChangeHeistEventState(HEventState.Begin);
         Debug.Log("-----------------------");
@@ -142,6 +140,11 @@ public class EventController
         BaseEvent.MyNameIs();
         Debug.Log($"Event Progress: {BaseEvent.GetProgress()}%");
     }
+    /// <summary>
+    /// Primarily performs the events (BaseEvent) EventStart method
+    /// Accepts in the HeistLog to allow the current entry to be modified
+    /// </summary>
+    /// <param name="log">The heist event log</param>
     public void BeginHeistEvent(HeistLog log)
     {
         Log = log;
@@ -161,8 +164,9 @@ public class EventController
         if (BaseEvent.HasSucceeded() || BaseEvent.HasFailed()) ChangeHeistEventState(HEventState.Ending);
     }
 
+    // this is under reconstruction as the functionality needs to be moved to the heist controller
     /// <summary>
-    /// Cleans up the event and calls the EventEnd method
+    /// Cleans up the event and calls the BaseEvent type EventEnd method
     /// And then changes state to whether the event succeeded or failed
     /// </summary>
     public void EndHeistEvent()

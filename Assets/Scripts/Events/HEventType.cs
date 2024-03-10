@@ -11,11 +11,6 @@
  */
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.VisualScripting;
-using UnityEngine;
 
 // fairly certain in the future I will have sub event flavoring (e.g. sneak event: cameras, guards, motion detector, employees, robots/animals, etc)
 /// <summary>
@@ -24,7 +19,8 @@ using UnityEngine;
 public static class HEventType
 {
     //TODO: should probably figure out a better way to do this enum but with a method thing
-    public enum HType {
+    public enum HType
+    {
         //Pre-Heist Events
         Pre_InfoGathering,
         Pre_Planning,
@@ -66,7 +62,7 @@ public static class HEventType
     /// <param name="type">Event Type to get</param>
     /// <returns>The Type or class/script</returns>
     /// <exception cref="System.Exception">If that event type isn't setup yet</exception>
-    public static Type GetEventComponentType (HType type)
+    public static Type GetEventComponentType(HType type)
     {
         switch (type)
         {

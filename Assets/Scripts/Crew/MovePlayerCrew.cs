@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.UI.Image;
 
 /// <summary>
 /// Currently the crew is moved from node to node to complete each and finish the heist

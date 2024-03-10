@@ -8,14 +8,9 @@
  * 
  */
 
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.ResourceManagement.ResourceLocations;
-using UnityEngine.UIElements;
 
 /// <summary>
 /// Handles high-level game management and stores information relating to the game
@@ -31,15 +26,15 @@ public class Storyteller : MonoBehaviour
 
     [SerializeField] public HeistController HeistController;
     [SerializeField] public UIController UIController;
-    public Dictionary<string, WeaponSO> WeaponSOs {  get; private set; } = new Dictionary<string, WeaponSO>();
+    public Dictionary<string, WeaponSO> WeaponSOs { get; private set; } = new Dictionary<string, WeaponSO>();
     public Dictionary<string, ArmorSO> ArmorSOs { get; private set; } = new Dictionary<string, ArmorSO>();
     public Dictionary<string, AmmunitionSO> AmmunitionSOs { get; private set; } = new Dictionary<string, AmmunitionSO>();
     public List<ContactSO> ContactSOs { get; private set; } = new List<ContactSO>();
     public List<ShopInventorySO> ShopInventorySOs { get; private set; } = new List<ShopInventorySO>();
-    
-    public CrewController Crew {  get; private set; }
-    
-    
+
+    public CrewController Crew { get; private set; }
+
+
     public static Storyteller Instance { get; private set; }
 
     private void Awake()
@@ -55,7 +50,7 @@ public class Storyteller : MonoBehaviour
     }
 
     /// <summary>
-    /// Load Addressable assets asyncronously and then call generate crew and world controller generate level
+    /// Load Addressable assets asyncronously and then call generate crew
     /// </summary>
     private async void InitializeInstance()
     {
@@ -84,21 +79,16 @@ public class Storyteller : MonoBehaviour
         GenerateCrew();
     }
 
-    public int CountHeistStep()
-    {
-        return HeistController.CountHeistStep();
-    }
-
-
+    /// <summary>
+    /// Kicks off heist controller, starting the heist game loop.
+    /// DEV: this is implemented for testing purposes
+    /// </summary>
     public void StartHeist()
     {
         HeistController.Initialize();
         HeistController.GenerateHeist(seed);
         HeistController.StartHeist();
     }
-
-    // TODO: subscribable event HeistEventStateChange
-    // TODO: public get for current running event name
 
     public delegate void HeistEventStateChanged(EventController baseEvent);
     public HeistEventStateChanged heistEventStateChanged;
